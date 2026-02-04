@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marki | LuxArte - Fashion for Home</title>
+  <meta name="description" content="Odkryj kolekcję luksusowych marek mebli i oświetlenia. Versace Home, Bentley Home, Flos, SCIC i wiele innych. Autoryzowany dealer w Polsce.">
+  <link rel="canonical" href="https://www.luxarte.pl/brands">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="../styles/design-system.css">
+  <link rel="stylesheet" href="../styles/brands.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" sizes="32x32" href="https://www.luxarte.pl/wp-content/uploads/2024/02/cropped-LuxArte_Icon_RGB-32x32.jpg">
+  
+  <style>
+    /* Preview-specific header stub */
+    .preview-header {
+      height: 80px;
+      background: #fff;
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      display: flex;
+      align-items: center;
+      padding: 0 var(--space-6);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .preview-header__logo {
+      height: 40px;
+      width: auto;
+    }
+    .preview-header__nav {
+      margin-left: auto;
+      display: flex;
+      gap: var(--space-6);
+    }
+    .preview-header__link {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-text);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: var(--tracking-wide);
+    }
+    .preview-header__link:hover {
+      color: var(--color-primary);
+    }
+  </style>
+</head>
+<body>
+  <!-- Skip Link -->
+  <a href="#main-content" class="visually-hidden">Przejdź do treści głównej</a>
+  
+  <!-- Header Stub -->
+  <header class="preview-header">
+    <a href="/">
+      <img 
+        src="https://www.luxarte.pl/wp-content/uploads/2021/11/Lux-Arte-Logo-2021-2.png" 
+        alt="LuxArte - Fashion for Home"
+        class="preview-header__logo"
+      >
+    </a>
+    <nav class="preview-header__nav">
+      <a href="/" class="preview-header__link">Strona główna</a>
+      <a href="/brands" class="preview-header__link" aria-current="page">Marki</a>
+      <a href="/showroom" class="preview-header__link">Showroom</a>
+      <a href="/kontakt" class="preview-header__link">Kontakt</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main id="main-content" class="brands-page">
+    <!-- Hero Section -->
+    <section class="brands-hero" aria-labelledby="brands-title">
+      <div class="brands-hero__container">
+        <nav class="brands-hero__breadcrumb" aria-label="Ścieżka nawigacji">
+          <ol class="breadcrumb">
+            <li class="breadcrumb__item">
+              <a href="/" class="breadcrumb__link">Strona główna</a>
+            </li>
+            <li class="breadcrumb__separator" aria-hidden="true">/</li>
+            <li class="breadcrumb__item breadcrumb__item--current">
+              <span aria-current="page">Marki</span>
+            </li>
+          </ol>
+        </nav>
+
+        <h1 id="brands-title" class="brands-hero__title">Marki</h1>
+        <p class="brands-hero__subtitle">Odkryj kolekcję luksusowych marek mebli i oświetlenia dostępnych w showroomie LuxArte.</p>
+      </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="brands-filter" aria-label="Filtrowanie marek">
+      <div class="brands-filter__container">
+        <div class="brands-filter__group brands-filter__group--search">
+          <label for="brand-search" class="brands-filter__label visually-hidden">
+            Szukaj marki
+          </label>
+          <div class="brands-filter__search-wrapper">
+            <svg class="brands-filter__search-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M13.5 13.5L17 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <input
+              type="search"
+              id="brand-search"
+              class="brands-filter__search"
+              placeholder="Szukaj marki..."
+              aria-label="Wyszukaj markę"
+              data-brand-search
+            />
+          </div>
+        </div>
+
+        <div class="brands-filter__group brands-filter__group--categories">
+          <span class="brands-filter__label">Kategoria:</span>
+          <div class="brands-filter__buttons" role="group" aria-label="Filtruj według kategorii">
+            <button type="button" class="brands-filter__btn brands-filter__btn--active" data-filter-category="all" aria-pressed="true">Wszystkie</button>
+            <button type="button" class="brands-filter__btn" data-filter-category="meble" aria-pressed="false">Meble</button>
+            <button type="button" class="brands-filter__btn" data-filter-category="oswietlenie" aria-pressed="false">Oświetlenie</button>
+            <button type="button" class="brands-filter__btn" data-filter-category="kuchnie" aria-pressed="false">Kuchnie</button>
+            <button type="button" class="brands-filter__btn" data-filter-category="garderoby" aria-pressed="false">Garderoby</button>
+            <button type="button" class="brands-filter__btn" data-filter-category="meble-ogrodowe" aria-pressed="false">Meble ogrodowe</button>
+          </div>
+        </div>
+
+        <div class="brands-filter__group brands-filter__group--alpha">
+          <span class="brands-filter__label">A-Z:</span>
+          <div class="brands-filter__buttons brands-filter__buttons--alpha" role="group" aria-label="Filtruj według litery">
+            <button type="button" class="brands-filter__btn brands-filter__btn--alpha brands-filter__btn--active" data-filter-letter="all" aria-pressed="true">Wszystkie</button>
+            <button type="button" class="brands-filter__btn brands-filter__btn--alpha" data-filter-letter="B" aria-pressed="false">B</button>
+            <button type="button" class="brands-filter__btn brands-filter__btn--alpha" data-filter-letter="D" aria-pressed="false">D</button>
+            <button type="button" class="brands-filter__btn brands-filter__btn--alpha" data-filter-letter="E" aria-pressed="false">E</button>
+            <button type="button" class="brands-filter__btn brands-filter__btn--alpha" data-filter-letter="F" aria-pressed="false">F</button>
+            <button type="button" class="brands-filter__btn brands-filter__btn--alpha" data-filter-letter="G" aria-pressed="false">G</button>
+            <button type="button" class="brands-filter__btn brands-filter__btn--alpha" data-filter-letter="M" aria-pressed="false">M</button>
+            <button type="button" class="brands-filter__btn brands-filter__btn--alpha" data-filter-letter="R" aria-pressed="false">R</button>
+            <button type="button" class="brands-filter__btn brands-filter__btn--alpha" data-filter-letter="S" aria-pressed="false">S</button>
+            <button type="button" class="brands-filter__btn brands-filter__btn--alpha" data-filter-letter="T" aria-pressed="false">T</button>
+            <button type="button" class="brands-filter__btn brands-filter__btn--alpha" data-filter-letter="V" aria-pressed="false">V</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Brands Grid -->
+    <section class="brands-grid-section" aria-label="Lista marek">
+      <div class="brands-grid-section__container">
+        <div class="brands-grid-section__count" aria-live="polite" data-brand-count>
+          Wyświetlamy <strong>15</strong> marek
+        </div>
+        
+        <div id="brands-grid" class="brand-grid" data-brands-container>
+          <!-- Versace Home -->
+          <article class="brand-card" itemscope itemtype="https://schema.org/Brand">
+            <a href="/brands/versace-home" class="brand-card__link" aria-label="Zobacz markę Versace Home">
+              <figure class="brand-card__media">
+                <img
+                  src="https://www.luxarte.pl/wp-content/uploads/2025/05/meble-versace-home_zensational-sofa-luxarte-luksusowe-meble-do-salonu-1024x718.webp"
+                  alt="Versace Home - luksusowe meble"
+                  class="brand-card__image"
+                  width="600"
+                  height="400"
+                  fetchpriority="high"
+                />
+                <div class="brand-card__overlay" aria-hidden="true"></div>
+              </figure>
+              <div class="brand-card__content">
+                <div class="brand-card__badges" aria-label="Kategorie">
+                  <span class="brand-card__badge">Meble</span>
+                  <span class="brand-card__badge">Ogród</span>
+                </div>
+                <h3 class="brand-card__title" itemprop="name">Versace Home</h3>
+                <p class="brand-card__description" itemprop="description">
+                  Ikoniczna włoska marka łącząca odważny design z luksusem haute couture.
+                </p>
+                <span class="brand-card__cta">
+                  Poznaj markę
+                  <svg class="brand-card__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </div>
+            </a>
+          </article>
+
+          <!-- Bentley Home -->
+          <article class="brand-card" itemscope itemtype="https://schema.org/Brand">
+            <a href="/brands/bentley-home" class="brand-card__link" aria-label="Zobacz markę Bentley Home">
+              <figure class="brand-card__media">
+                <img
+                  src="https://www.luxarte.pl/wp-content/uploads/2025/01/BENTLEY_HOME_CINEMA_LUXARTE.jpg"
+                  alt="Bentley Home - luksusowe meble"
+                  class="brand-card__image"
+                  width="600"
+                  height="400"
+                  fetchpriority="high"
+                />
+                <div class="brand-card__overlay" aria-hidden="true"></div>
+              </figure>
+              <div class="brand-card__content">
+                <div class="brand-card__badges" aria-label="Kategorie">
+                  <span class="brand-card__badge">Meble</span>
+                </div>
+                <h3 class="brand-card__title" itemprop="name">Bentley Home</h3>
+                <p class="brand-card__description" itemprop="description">
+                  Brytyjski luksus i rzemiosło motoryzacyjne w kolekcji mebli Bentley Home.
+                </p>
+                <span class="brand-card__cta">
+                  Poznaj markę
+                  <svg class="brand-card__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </div>
+            </a>
+          </article>
+
+          <!-- SCIC Italia -->
+          <article class="brand-card" itemscope itemtype="https://schema.org/Brand">
+            <a href="/brands/scic" class="brand-card__link" aria-label="Zobacz markę SCIC Italia">
+              <figure class="brand-card__media">
+                <img
+                  src="https://www.luxarte.pl/wp-content/uploads/2025/06/NicoAbbruzzese_210417_SCiC3495.jpeg"
+                  alt="SCIC Italia - luksusowe kuchnie"
+                  class="brand-card__image"
+                  width="600"
+                  height="400"
+                  fetchpriority="high"
+                />
+                <div class="brand-card__overlay" aria-hidden="true"></div>
+              </figure>
+              <div class="brand-card__content">
+                <div class="brand-card__badges" aria-label="Kategorie">
+                  <span class="brand-card__badge">Kuchnie</span>
+                </div>
+                <h3 class="brand-card__title" itemprop="name">SCIC Italia</h3>
+                <p class="brand-card__description" itemprop="description">
+                  Włoskie kuchnie premium łączące tradycję z innowacją.
+                </p>
+                <span class="brand-card__cta">
+                  Poznaj markę
+                  <svg class="brand-card__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </div>
+            </a>
+          </article>
+
+          <!-- Flos -->
+          <article class="brand-card" itemscope itemtype="https://schema.org/Brand">
+            <a href="/brands/flos" class="brand-card__link" aria-label="Zobacz markę Flos">
+              <figure class="brand-card__media">
+                <img
+                  src="https://www.luxarte.pl/wp-content/uploads/2023/03/Wireline-flos-luxarte.jpg"
+                  alt="Flos - luksusowe oświetlenie"
+                  class="brand-card__image"
+                  width="600"
+                  height="400"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div class="brand-card__overlay" aria-hidden="true"></div>
+              </figure>
+              <div class="brand-card__content">
+                <div class="brand-card__badges" aria-label="Kategorie">
+                  <span class="brand-card__badge">Oświetlenie</span>
+                </div>
+                <h3 class="brand-card__title" itemprop="name">Flos</h3>
+                <p class="brand-card__description" itemprop="description">
+                  Ikony włoskiego designu oświetleniowego od 1962 roku.
+                </p>
+                <span class="brand-card__cta">
+                  Poznaj markę
+                  <svg class="brand-card__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </div>
+            </a>
+          </article>
+
+          <!-- Visionnaire -->
+          <article class="brand-card" itemscope itemtype="https://schema.org/Brand">
+            <a href="/brands/visionnaire" class="brand-card__link" aria-label="Zobacz markę Visionnaire">
+              <figure class="brand-card__media">
+                <img
+                  src="https://www.luxarte.pl/wp-content/uploads/2025/10/sofa-visionnaire-loving-frank-luxarte-ekskluzywne-meble-do-salonu.webp"
+                  alt="Visionnaire - luksusowe meble"
+                  class="brand-card__image"
+                  width="600"
+                  height="400"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div class="brand-card__overlay" aria-hidden="true"></div>
+              </figure>
+              <div class="brand-card__content">
+                <div class="brand-card__badges" aria-label="Kategorie">
+                  <span class="brand-card__badge">Meble</span>
+                  <span class="brand-card__badge">Oświetlenie</span>
+                </div>
+                <h3 class="brand-card__title" itemprop="name">Visionnaire</h3>
+                <p class="brand-card__description" itemprop="description">
+                  Włoska awangarda i artystyczny design w kolekcji Visionnaire.
+                </p>
+                <span class="brand-card__cta">
+                  Poznaj markę
+                  <svg class="brand-card__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </div>
+            </a>
+          </article>
+
+          <!-- Exteta -->
+          <article class="brand-card" itemscope itemtype="https://schema.org/Brand">
+            <a href="/brands/exteta" class="brand-card__link" aria-label="Zobacz markę Exteta">
+              <figure class="brand-card__media">
+                <img
+                  src="https://www.luxarte.pl/wp-content/uploads/2023/06/exteta-luksusowe-meble-ogrodow-luxarte.webp"
+                  alt="Exteta - luksusowe meble ogrodowe"
+                  class="brand-card__image"
+                  width="600"
+                  height="400"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div class="brand-card__overlay" aria-hidden="true"></div>
+              </figure>
+              <div class="brand-card__content">
+                <div class="brand-card__badges" aria-label="Kategorie">
+                  <span class="brand-card__badge">Meble ogrodowe</span>
+                </div>
+                <h3 class="brand-card__title" itemprop="name">Exteta</h3>
+                <p class="brand-card__description" itemprop="description">
+                  Luksusowe włoskie meble ogrodowe dla najwyższej klasy przestrzeni zewnętrznych.
+                </p>
+                <span class="brand-card__cta">
+                  Poznaj markę
+                  <svg class="brand-card__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              </div>
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEO Intro Section -->
+    <section class="brands-intro" aria-labelledby="brands-intro-title">
+      <div class="brands-intro__container">
+        <h2 id="brands-intro-title" class="brands-intro__title">
+          Luksusowe marki mebli w LuxArte
+        </h2>
+        <div class="brands-intro__content">
+          <p>
+            LuxArte jest autoryzowanym dealerem najbardziej prestiżowych marek mebli i oświetlenia 
+            na świecie. Nasza kolekcja obejmuje ikoniczne włoskie domy mody jak 
+            <a href="/brands/versace-home">Versace Home</a> i 
+            <a href="/brands/dolce-gabbana-casa">Dolce & Gabbana Casa</a>, 
+            legendarne marki motoryzacyjne jak 
+            <a href="/brands/bentley-home">Bentley Home</a>, 
+            a także wiodących producentów luksusowych kuchni i garderobian.
+          </p>
+          <p>
+            Każda marka w naszym portfolio reprezentuje najwyższe standardy jakości, 
+            rzemiosła i designu. W naszym <a href="/showroom">showroomie w Warszawie</a> 
+            możesz doświadczyć tych wyjątkowych kolekcji osobiście i skorzystać 
+            z profesjonalnego doradztwa naszych konsultantów.
+          </p>
+        </div>
+        <div class="brands-intro__cta">
+          <a href="/showroom" class="brands-intro__link brands-intro__link--primary">
+            Odwiedź showroom
+          </a>
+          <a href="/kontakt" class="brands-intro__link brands-intro__link--secondary">
+            Skontaktuj się z nami
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Marki | LuxArte",
+    "description": "Odkryj kolekcję luksusowych marek mebli i oświetlenia. Versace Home, Bentley Home, Flos, SCIC i wiele innych. Autoryzowany dealer w Polsce.",
+    "url": "https://www.luxarte.pl/brands",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "LuxArte",
+      "url": "https://www.luxarte.pl"
+    }
+  }
+  </script>
+
+  <!-- Filter Script -->
+  <script>
+  (function() {
+    'use strict';
+
+    let currentCategory = 'all';
+    let currentLetter = 'all';
+    let searchQuery = '';
+
+    function filterBrands() {
+      const cards = document.querySelectorAll('.brand-card');
+      let visibleCount = 0;
+
+      cards.forEach(function(card) {
+        const title = card.querySelector('.brand-card__title')?.textContent || '';
+        const badges = Array.from(card.querySelectorAll('.brand-card__badge')).map(b => b.textContent);
+        const letter = title.charAt(0).toUpperCase();
+
+        const categoryMap = {
+          'Meble': 'meble',
+          'Oświetlenie': 'oswietlenie',
+          'Kuchnie': 'kuchnie',
+          'Garderoby': 'garderoby',
+          'Meble ogrodowe': 'meble-ogrodowe',
+          'Ogród': 'meble-ogrodowe'
+        };
+
+        const cardCategories = badges.map(b => categoryMap[b] || b.toLowerCase());
+
+        const matchesCategory = currentCategory === 'all' || cardCategories.includes(currentCategory);
+        const matchesLetter = currentLetter === 'all' || letter === currentLetter;
+        const matchesSearch = !searchQuery || title.toLowerCase().includes(searchQuery.toLowerCase());
+
+        const isVisible = matchesCategory && matchesLetter && matchesSearch;
+        card.style.display = isVisible ? '' : 'none';
+        
+        if (isVisible) visibleCount++;
+      });
+
+      const countEl = document.querySelector('[data-brand-count]');
+      if (countEl) {
+        countEl.innerHTML = 'Wyświetlamy <strong>' + visibleCount + '</strong> marek';
+      }
+    }
+
+    function initFilters() {
+      document.querySelectorAll('[data-filter-category]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          currentCategory = this.dataset.filterCategory;
+          document.querySelectorAll('[data-filter-category]').forEach(function(b) {
+            b.classList.remove('brands-filter__btn--active');
+            b.setAttribute('aria-pressed', 'false');
+          });
+          this.classList.add('brands-filter__btn--active');
+          this.setAttribute('aria-pressed', 'true');
+          filterBrands();
+        });
+      });
+
+      document.querySelectorAll('[data-filter-letter]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          currentLetter = this.dataset.filterLetter;
+          document.querySelectorAll('[data-filter-letter]').forEach(function(b) {
+            b.classList.remove('brands-filter__btn--active');
+            b.setAttribute('aria-pressed', 'false');
+          });
+          this.classList.add('brands-filter__btn--active');
+          this.setAttribute('aria-pressed', 'true');
+          filterBrands();
+        });
+      });
+
+      const searchInput = document.querySelector('[data-brand-search]');
+      if (searchInput) {
+        let debounceTimer;
+        searchInput.addEventListener('input', function() {
+          clearTimeout(debounceTimer);
+          debounceTimer = setTimeout(function() {
+            searchQuery = searchInput.value;
+            filterBrands();
+          }, 200);
+        });
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initFilters);
+    } else {
+      initFilters();
+    }
+  })();
+  </script>
+</body>
+</html>

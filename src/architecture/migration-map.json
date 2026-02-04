@@ -1,0 +1,231 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "meta": {
+    "version": "1.0.0",
+    "generated": "2025-01-01",
+    "description": "URL migration map from legacy WordPress site to new LuxArte architecture",
+    "legacyDomain": "https://www.luxarte.pl",
+    "newDomain": "https://www.luxarte.pl"
+  },
+  "redirects": {
+    "permanent": [
+      {
+        "from": "/",
+        "to": "/",
+        "status": 200,
+        "type": "homepage",
+        "notes": "Homepage - no redirect needed"
+      },
+      {
+        "from": "/marki/",
+        "to": "/brands",
+        "status": 301,
+        "type": "collection",
+        "notes": "Brands index page"
+      },
+      {
+        "from": "/nasze-marki/",
+        "to": "/brands",
+        "status": 301,
+        "type": "collection",
+        "notes": "Alternative brands URL"
+      },
+      {
+        "from": "/bentley_home_cinema/",
+        "to": "/brands/bentley-home-cinema",
+        "status": 301,
+        "type": "brand",
+        "notes": "Bentley Home Cinema brand page"
+      },
+      {
+        "from": "/bentley/",
+        "to": "/brands/bentley-home",
+        "status": 301,
+        "type": "brand",
+        "notes": "Bentley Home brand page"
+      },
+      {
+        "from": "/kategoria-produktu/sofy/",
+        "to": "/categories/sofas",
+        "status": 301,
+        "type": "category",
+        "notes": "Sofas category"
+      },
+      {
+        "from": "/kategoria-produktu/kuchnie/",
+        "to": "/categories/kitchens",
+        "status": 301,
+        "type": "category",
+        "notes": "Kitchens category"
+      },
+      {
+        "from": "/kategoria-produktu/garderoby/",
+        "to": "/categories/wardrobes",
+        "status": 301,
+        "type": "category",
+        "notes": "Wardrobes category"
+      },
+      {
+        "from": "/kategoria-produktu/lazienki/",
+        "to": "/categories/bathrooms",
+        "status": 301,
+        "type": "category",
+        "notes": "Bathrooms category"
+      },
+      {
+        "from": "/kategoria-produktu/zyrandole/",
+        "to": "/categories/chandeliers",
+        "status": 301,
+        "type": "category",
+        "notes": "Chandeliers/Lighting category"
+      },
+      {
+        "from": "/kategoria-produktu/meble-ogrodowe/",
+        "to": "/categories/garden-furniture",
+        "status": 301,
+        "type": "category",
+        "notes": "Garden furniture category"
+      },
+      {
+        "from": "/outlet-luxarte/",
+        "to": "/outlet",
+        "status": 301,
+        "type": "page",
+        "notes": "Outlet page - discounted items"
+      },
+      {
+        "from": "/projektowanie-wnetrz/",
+        "to": "/interior-design-service",
+        "status": 301,
+        "type": "service",
+        "notes": "Interior design service page"
+      },
+      {
+        "from": "/oferta/",
+        "to": "/interior-design-service",
+        "status": 301,
+        "type": "service",
+        "notes": "Offer page - consolidate with interior design"
+      },
+      {
+        "from": "/aktualnosci/",
+        "to": "/knowledge-base",
+        "status": 301,
+        "type": "collection",
+        "notes": "News/Blog section"
+      },
+      {
+        "from": "/kontakt/",
+        "to": "/showroom",
+        "status": 301,
+        "type": "page",
+        "notes": "Contact page becomes showroom page"
+      },
+      {
+        "from": "/o-nas/",
+        "to": "/",
+        "status": 301,
+        "type": "page",
+        "notes": "About page content merged into homepage"
+      }
+    ],
+    "patterns": [
+      {
+        "pattern": "/kategoria-produktu/:slug/",
+        "replacement": "/categories/:slug",
+        "status": 301,
+        "type": "category",
+        "notes": "Catch-all for product categories"
+      },
+      {
+        "pattern": "/kategoria-produktu/:slug/page/:page/",
+        "replacement": "/categories/:slug?page=:page",
+        "status": 301,
+        "type": "category-paginated",
+        "notes": "Paginated category pages"
+      },
+      {
+        "pattern": "/product/:slug/",
+        "replacement": "/categories/:category/:slug",
+        "status": 301,
+        "type": "product",
+        "notes": "Individual product pages - needs category lookup"
+      },
+      {
+        "pattern": "/aktualnosci/:slug/",
+        "replacement": "/knowledge-base/:slug",
+        "status": 301,
+        "type": "article",
+        "notes": "Individual blog/news articles"
+      },
+      {
+        "pattern": "/author/:author/",
+        "replacement": "/knowledge-base",
+        "status": 301,
+        "type": "archive",
+        "notes": "Author archives redirect to knowledge base"
+      },
+      {
+        "pattern": "/tag/:tag/",
+        "replacement": "/knowledge-base?tag=:tag",
+        "status": 301,
+        "type": "archive",
+        "notes": "Tag archives with query parameter"
+      }
+    ],
+    "gone": [
+      {
+        "from": "/wp-admin/",
+        "status": 410,
+        "notes": "WordPress admin - no longer applicable"
+      },
+      {
+        "from": "/wp-login.php",
+        "status": 410,
+        "notes": "WordPress login - no longer applicable"
+      },
+      {
+        "from": "/feed/",
+        "status": 410,
+        "notes": "RSS feed - will be replaced with new endpoint"
+      },
+      {
+        "from": "/comments/feed/",
+        "status": 410,
+        "notes": "Comments feed - not applicable"
+      }
+    ]
+  },
+  "slugMigration": {
+    "categories": {
+      "sofy": "sofas",
+      "kuchnie": "kitchens",
+      "garderoby": "wardrobes",
+      "lazienki": "bathrooms",
+      "zyrandole": "chandeliers",
+      "meble-ogrodowe": "garden-furniture",
+      "oswietlenie": "chandeliers"
+    },
+    "brands": {
+      "versace-home": "versace-home",
+      "bentley-home": "bentley-home",
+      "bentley_home_cinema": "bentley-home-cinema",
+      "fendi-casa": "fendi-casa",
+      "armani-casa": "armani-casa",
+      "minotti": "minotti"
+    }
+  },
+  "canonicalUrls": {
+    "forceTrailingSlash": false,
+    "forceLowercase": true,
+    "forceHttps": true,
+    "forceWww": true
+  },
+  "seoPreservation": {
+    "preserveMetaDescriptions": true,
+    "preserveOpenGraph": true,
+    "preserveCanonicalTags": true,
+    "implementHreflang": false,
+    "notes": "Single locale (pl-PL) - no hreflang needed initially"
+  }
+}

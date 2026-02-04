@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LuxArte - Shell Preview</title>
+  
+  <!-- Preload Logo for Performance -->
+  <link 
+    rel="preload" 
+    href="https://www.luxarte.pl/wp-content/uploads/2021/11/Lux-Arte-Logo-2021-2.png" 
+    as="image" 
+    type="image/png"
+  >
+  
+  <!-- Preconnect to fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Google Fonts: Jost (Headings) + Literata (Body) -->
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Literata:opsz,wght@7..72,400;7..72,500;7..72,600&display=swap" rel="stylesheet">
+  
+  <!-- Inline styles from design system for preview -->
+  <style>
+    /* Import design system */
+    /* NOTE: In production, use build tools to import CSS files */
+    
+    /* ===== CSS RESET ===== */
+    *, *::before, *::after { box-sizing: border-box; }
+    * { margin: 0; }
+    html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body { line-height: 1.5; }
+    img, picture, video, canvas, svg { display: block; max-width: 100%; }
+    input, button, textarea, select { font: inherit; }
+    p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word; }
+    
+    /* ===== DESIGN TOKENS ===== */
+    :root {
+      /* Colors */
+      --color-accent: #967f65;
+      --color-accent-light: #b8a48d;
+      --color-accent-dark: #6b5a48;
+      --color-bg-primary: #f4f1ef;
+      --color-bg-secondary: #faf8f7;
+      --color-bg-tertiary: #e8e4e0;
+      --color-bg-dark: #2a2522;
+      --color-bg-overlay: rgba(0, 0, 0, 0.5);
+      --color-text-primary: #4a4642;
+      --color-text-secondary: #7a7572;
+      --color-text-heading: #2a2522;
+      --color-text-inverse: #faf8f7;
+      --color-border-dark: rgba(255, 255, 255, 0.1);
+      
+      /* Typography */
+      --font-family-heading: 'Jost', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-family-body: 'Literata', Georgia, serif;
+      --font-size-xs: 0.75rem;
+      --font-size-sm: 0.875rem;
+      --font-size-base: 1rem;
+      --font-size-lg: 1.125rem;
+      --font-size-xl: 1.25rem;
+      --font-size-h6: 1rem;
+      --font-size-h5: 1.125rem;
+      --font-size-h4: 1.25rem;
+      --font-size-h3: 1.5rem;
+      --font-size-h2: 2rem;
+      --font-size-h1: 2.5rem;
+      --font-size-display: 3.5rem;
+      --font-weight-light: 300;
+      --font-weight-normal: 400;
+      --font-weight-medium: 500;
+      --font-weight-semibold: 600;
+      --letter-spacing-tight: -0.025em;
+      --letter-spacing-wide: 0.05em;
+      --line-height-tight: 1.2;
+      --line-height-relaxed: 1.7;
+      
+      /* Spacing */
+      --space-1: 0.25rem;
+      --space-2: 0.5rem;
+      --space-3: 0.75rem;
+      --space-4: 1rem;
+      --space-5: 1.3125rem;
+      --space-6: 1.5rem;
+      --space-8: 2rem;
+      --space-10: 2.5rem;
+      --space-12: 3rem;
+      --space-16: 5.5625rem;
+      
+      /* Container */
+      --container-xl: 1300px;
+      --container-md: 900px;
+      --container-padding-x: 1.5rem;
+      
+      /* Grid */
+      --grid-columns: 12;
+      --grid-gap: 2rem;
+      --grid-gap-sm: 1rem;
+      --grid-gap-lg: 3rem;
+      
+      /* Section Padding */
+      --section-padding-sm: 2rem;
+      --section-padding-md: 4rem;
+      --section-padding-lg: 6rem;
+      
+      /* Radius */
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-full: 9999px;
+      
+      /* Shadows */
+      --shadow-header: 0 3px 45px rgba(0, 0, 0, 0.15);
+      --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);
+      
+      /* Transitions */
+      --duration-fast: 150ms;
+      --duration-normal: 250ms;
+      --duration-slow: 350ms;
+      --ease-default: cubic-bezier(0.4, 0, 0.2, 1);
+      --ease-out: cubic-bezier(0, 0, 0.2, 1);
+      --transition-all: all var(--duration-normal) var(--ease-default);
+      --transition-colors: color var(--duration-normal) var(--ease-default), background-color var(--duration-normal) var(--ease-default);
+      
+      /* Z-index */
+      --z-header: 300;
+      --z-overlay: 400;
+      --z-modal: 500;
+      
+      /* Logo */
+      --logo-width-sm: 180px;
+      --logo-width-md: 250px;
+      --logo-width-lg: 346px;
+    }
+    
+    /* ===== BASE STYLES ===== */
+    body {
+      font-family: var(--font-family-body);
+      font-size: var(--font-size-base);
+      color: var(--color-text-primary);
+      background-color: var(--color-bg-primary);
+    }
+    
+    .container {
+      width: 100%;
+      max-width: var(--container-xl);
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: var(--container-padding-x);
+      padding-right: var(--container-padding-x);
+    }
+    
+    /* ===== APP SHELL ===== */
+    .app-shell {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    
+    .app-shell__main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    /* ===== HEADER ===== */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: var(--z-header);
+      background-color: var(--color-bg-secondary);
+      transition: var(--transition-all);
+    }
+    
+    .header--scrolled {
+      box-shadow: var(--shadow-header);
+    }
+    
+    .header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 100px;
+      transition: height var(--duration-normal) var(--ease-default);
+    }
+    
+    .header--compact .header__inner {
+      height: 70px;
+    }
+    
+    .header__logo-link {
+      display: block;
+      line-height: 0;
+    }
+    
+    .header__logo-image {
+      width: var(--logo-width-md);
+      height: auto;
+      transition: width var(--duration-normal) var(--ease-default);
+    }
+    
+    .header--compact .header__logo-image {
+      width: var(--logo-width-sm);
+    }
+    
+    @media screen and (min-width: 1000px) {
+      .header__logo-image {
+        width: var(--logo-width-lg);
+      }
+      
+      .header--compact .header__logo-image {
+        width: var(--logo-width-md);
+      }
+    }
+    
+    .header__nav {
+      display: none;
+    }
+    
+    @media screen and (min-width: 1000px) {
+      .header__nav {
+        display: flex;
+        align-items: center;
+        gap: var(--space-8);
+      }
+    }
+    
+    .header__mobile-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      padding: 0;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+    
+    @media screen and (min-width: 1000px) {
+      .header__mobile-toggle {
+        display: none;
+      }
+    }
+    
+    .header__hamburger {
+      position: relative;
+      width: 24px;
+      height: 16px;
+    }
+    
+    .header__hamburger-line {
+      position: absolute;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background-color: var(--color-text-heading);
+      transition: var(--transition-all);
+    }
+    
+    .header__hamburger-line:nth-child(1) { top: 0; }
+    .header__hamburger-line:nth-child(2) { top: 50%; transform: translateY(-50%); }
+    .header__hamburger-line:nth-child(3) { bottom: 0; }
+    
+    /* ===== PRIMARY NAVIGATION ===== */
+    .nav-primary {
+      display: flex;
+      align-items: center;
+      gap: var(--space-6);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    
+    .nav-primary__link {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+      padding: var(--space-2) 0;
+      font-family: var(--font-family-heading);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-text-heading);
+      text-transform: uppercase;
+      letter-spacing: var(--letter-spacing-wide);
+      text-decoration: none;
+      transition: var(--transition-colors);
+    }
+    
+    .nav-primary__link:hover {
+      color: var(--color-accent);
+    }
+    
+    .nav-primary__link--has-dropdown::after {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-right: 1.5px solid currentColor;
+      border-bottom: 1.5px solid currentColor;
+      transform: rotate(45deg);
+      transition: transform var(--duration-fast) var(--ease-default);
+    }
+    
+    /* ===== MOBILE MENU ===== */
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      max-width: 400px;
+      background-color: var(--color-bg-secondary);
+      transform: translateX(100%);
+      transition: transform var(--duration-slow) var(--ease-out);
+      z-index: var(--z-modal);
+      overflow-y: auto;
+    }
+    
+    .mobile-menu--open {
+      transform: translateX(0);
+    }
+    
+    .mobile-menu__overlay {
+      position: fixed;
+      inset: 0;
+      background-color: var(--color-bg-overlay);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity var(--duration-normal) var(--ease-default);
+      z-index: calc(var(--z-modal) - 1);
+    }
+    
+    .mobile-menu__overlay--visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .mobile-menu__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-4) var(--space-6);
+      border-bottom: 1px solid var(--color-bg-tertiary);
+    }
+    
+    .mobile-menu__close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .mobile-menu__close-icon {
+      width: 24px;
+      height: 24px;
+      stroke: var(--color-text-heading);
+      stroke-width: 2;
+    }
+    
+    .mobile-menu__nav {
+      padding: var(--space-6);
+    }
+    
+    .mobile-menu__list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    
+    .mobile-menu__item {
+      border-bottom: 1px solid var(--color-bg-tertiary);
+    }
+    
+    .mobile-menu__link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: var(--space-4) 0;
+      font-family: var(--font-family-heading);
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-text-heading);
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+    }
+    
+    .mobile-menu__link:hover {
+      color: var(--color-accent);
+    }
+    
+    /* ===== FOOTER ===== */
+    .footer {
+      background-color: var(--color-bg-dark);
+      color: var(--color-text-inverse);
+    }
+    
+    .footer__inner {
+      padding: var(--space-16) 0;
+    }
+    
+    .footer__grid {
+      display: grid;
+      gap: var(--space-10);
+    }
+    
+    @media screen and (min-width: 768px) {
+      .footer__grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    
+    @media screen and (min-width: 1000px) {
+      .footer__grid {
+        grid-template-columns: 2fr repeat(3, 1fr);
+        gap: var(--space-12);
+      }
+    }
+    
+    .footer__brand {
+      max-width: 300px;
+    }
+    
+    .footer__logo {
+      margin-bottom: var(--space-6);
+    }
+    
+    .footer__logo-image {
+      width: var(--logo-width-md);
+      height: auto;
+      filter: brightness(0) invert(1);
+    }
+    
+    .footer__tagline {
+      font-family: var(--font-family-body);
+      font-size: var(--font-size-base);
+      color: var(--color-text-secondary);
+      margin: 0 0 var(--space-6);
+    }
+    
+    .footer__contact-info {
+      font-style: normal;
+    }
+    
+    .footer__contact-line {
+      display: block;
+      margin-bottom: var(--space-1);
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+    }
+    
+    .footer__contact-link {
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      transition: var(--transition-colors);
+    }
+    
+    .footer__contact-link:hover {
+      color: var(--color-accent);
+    }
+    
+    .footer__nav-title {
+      font-family: var(--font-family-heading);
+      font-size: var(--font-size-md);
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-accent);
+      margin: 0 0 var(--space-5);
+    }
+    
+    .footer__nav-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    
+    .footer__nav-item {
+      margin-bottom: var(--space-2);
+    }
+    
+    .footer__nav-link {
+      font-family: var(--font-family-body);
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+      text-decoration: none;
+      transition: var(--transition-colors);
+    }
+    
+    .footer__nav-link:hover {
+      color: var(--color-accent);
+    }
+    
+    .footer__copyright {
+      padding: var(--space-5) 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      text-align: center;
+    }
+    
+    .footer__copyright-text {
+      font-size: var(--font-size-sm);
+      color: var(--color-text-secondary);
+      margin: 0;
+    }
+    
+    /* ===== SECTION ===== */
+    .section {
+      padding-top: var(--section-padding-md);
+      padding-bottom: var(--section-padding-md);
+    }
+    
+    .section--bg-secondary {
+      background-color: var(--color-bg-secondary);
+    }
+    
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.875rem 2rem;
+      font-family: var(--font-family-heading);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      text-transform: uppercase;
+      letter-spacing: var(--letter-spacing-wide);
+      text-decoration: none;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: var(--transition-all);
+    }
+    
+    .btn-primary {
+      background-color: var(--color-accent);
+      color: white;
+      border-color: var(--color-accent);
+    }
+    
+    .btn-primary:hover {
+      background-color: var(--color-accent-dark);
+      border-color: var(--color-accent-dark);
+    }
+    
+    .btn-outline {
+      background-color: transparent;
+      color: var(--color-text-heading);
+      border-color: var(--color-text-heading);
+    }
+    
+    .btn-outline:hover {
+      background-color: var(--color-text-heading);
+      color: white;
+    }
+    
+    /* ===== DEMO CONTENT STYLES ===== */
+    .demo-section {
+      text-align: center;
+    }
+    
+    .demo-section h1 {
+      font-family: var(--font-family-heading);
+      font-size: var(--font-size-h1);
+      font-weight: var(--font-weight-light);
+      color: var(--color-text-heading);
+      margin-bottom: var(--space-4);
+    }
+    
+    .demo-section p {
+      font-size: var(--font-size-lg);
+      color: var(--color-text-secondary);
+      max-width: 600px;
+      margin: 0 auto var(--space-8);
+    }
+    
+    .demo-buttons {
+      display: flex;
+      gap: var(--space-4);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    /* ===== SR ONLY ===== */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <!-- Skip Link -->
+    <a href="#main-content" class="sr-only">Przejdź do treści</a>
+
+    <!-- Header -->
+    <header class="header" role="banner" id="header">
+      <div class="container">
+        <div class="header__inner">
+          <!-- Logo -->
+          <div class="header__logo">
+            <a href="/" class="header__logo-link" aria-label="LuxArte - Strona główna">
+              <img
+                src="https://www.luxarte.pl/wp-content/uploads/2021/11/Lux-Arte-Logo-2021-2.png"
+                alt="LuxArte - Fashion for Home"
+                width="346"
+                height="120"
+                class="header__logo-image"
+                loading="eager"
+                decoding="async"
+              >
+            </a>
+          </div>
+
+          <!-- Desktop Navigation -->
+          <nav class="header__nav" aria-label="Główna nawigacja">
+            <ul class="nav-primary" role="menubar">
+              <li class="nav-primary__item">
+                <a href="/brands" class="nav-primary__link nav-primary__link--has-dropdown">Marki</a>
+              </li>
+              <li class="nav-primary__item">
+                <a href="/categories" class="nav-primary__link nav-primary__link--has-dropdown">Kategorie</a>
+              </li>
+              <li class="nav-primary__item">
+                <a href="/interior-design-service" class="nav-primary__link">Projektowanie Wnętrz</a>
+              </li>
+              <li class="nav-primary__item">
+                <a href="/projects" class="nav-primary__link">Realizacje</a>
+              </li>
+              <li class="nav-primary__item">
+                <a href="/outlet" class="nav-primary__link">Outlet</a>
+              </li>
+              <li class="nav-primary__item">
+                <a href="/showroom" class="nav-primary__link">Showroom</a>
+              </li>
+            </ul>
+          </nav>
+
+          <!-- Mobile Menu Toggle -->
+          <button
+            type="button"
+            class="header__mobile-toggle"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+            aria-label="Otwórz menu"
+            onclick="toggleMobileMenu()"
+          >
+            <span class="header__hamburger" aria-hidden="true">
+              <span class="header__hamburger-line"></span>
+              <span class="header__hamburger-line"></span>
+              <span class="header__hamburger-line"></span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu__overlay" id="mobile-overlay" onclick="closeMobileMenu()"></div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu nawigacji" aria-hidden="true">
+      <div class="mobile-menu__header">
+        <a href="/" class="header__logo-link">
+          <img
+            src="https://www.luxarte.pl/wp-content/uploads/2021/11/Lux-Arte-Logo-2021-2.png"
+            alt="LuxArte"
+            width="180"
+            height="62"
+            class="header__logo-image"
+            loading="lazy"
+          >
+        </a>
+        <button type="button" class="mobile-menu__close" onclick="closeMobileMenu()" aria-label="Zamknij menu">
+          <svg class="mobile-menu__close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <nav class="mobile-menu__nav" aria-label="Menu mobilne">
+        <ul class="mobile-menu__list">
+          <li class="mobile-menu__item">
+            <a href="/brands" class="mobile-menu__link">Marki</a>
+          </li>
+          <li class="mobile-menu__item">
+            <a href="/categories" class="mobile-menu__link">Kategorie</a>
+          </li>
+          <li class="mobile-menu__item">
+            <a href="/interior-design-service" class="mobile-menu__link">Projektowanie Wnętrz</a>
+          </li>
+          <li class="mobile-menu__item">
+            <a href="/projects" class="mobile-menu__link">Realizacje</a>
+          </li>
+          <li class="mobile-menu__item">
+            <a href="/outlet" class="mobile-menu__link">Outlet</a>
+          </li>
+          <li class="mobile-menu__item">
+            <a href="/showroom" class="mobile-menu__link">Showroom</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Main Content -->
+    <main id="main-content" class="app-shell__main" role="main">
+      <section class="section section--bg-secondary">
+        <div class="container">
+          <div class="demo-section">
+            <h1>Shell Preview</h1>
+            <p>
+              This is a static preview of the LuxArte shell layout. 
+              Scroll down to see header compact mode. Resize to see mobile navigation.
+            </p>
+            <div class="demo-buttons">
+              <a href="#" class="btn btn-primary">Primary Button</a>
+              <a href="#" class="btn btn-outline">Outline Button</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Spacer content to test scroll -->
+      <section class="section">
+        <div class="container">
+          <div style="height: 400px; display: flex; align-items: center; justify-content: center;">
+            <p style="color: var(--color-text-secondary);">Scroll to see sticky header behavior...</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--bg-secondary">
+        <div class="container">
+          <div style="height: 400px; display: flex; align-items: center; justify-content: center;">
+            <p style="color: var(--color-text-secondary);">More content area...</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div style="height: 400px; display: flex; align-items: center; justify-content: center;">
+            <p style="color: var(--color-text-secondary);">Footer is below...</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+      <div class="container">
+        <div class="footer__inner">
+          <div class="footer__grid">
+            <!-- Brand Block -->
+            <div class="footer__brand">
+              <div class="footer__logo">
+                <a href="/" aria-label="LuxArte - Strona główna">
+                  <img
+                    src="https://www.luxarte.pl/wp-content/uploads/2021/11/Lux-Arte-Logo-2021-2.png"
+                    alt="LuxArte"
+                    class="footer__logo-image"
+                    width="346"
+                    height="120"
+                    loading="lazy"
+                  >
+                </a>
+              </div>
+              <p class="footer__tagline">Fashion for Home</p>
+              <address class="footer__contact-info">
+                <span class="footer__contact-line">ul. Przykładowa 123</span>
+                <span class="footer__contact-line">00-001 Warszawa</span>
+                <span class="footer__contact-line">
+                  <a href="tel:+48221234567" class="footer__contact-link">+48 22 123 45 67</a>
+                </span>
+                <span class="footer__contact-line">
+                  <a href="mailto:kontakt@luxarte.pl" class="footer__contact-link">kontakt@luxarte.pl</a>
+                </span>
+              </address>
+            </div>
+
+            <!-- Categories Column -->
+            <nav class="footer__nav-column" aria-label="Kategorie">
+              <h3 class="footer__nav-title">Kategorie</h3>
+              <ul class="footer__nav-list">
+                <li class="footer__nav-item"><a href="/categories/sofas" class="footer__nav-link">Sofy</a></li>
+                <li class="footer__nav-item"><a href="/categories/kitchens" class="footer__nav-link">Kuchnie</a></li>
+                <li class="footer__nav-item"><a href="/categories/wardrobes" class="footer__nav-link">Garderoby</a></li>
+                <li class="footer__nav-item"><a href="/categories/bathrooms" class="footer__nav-link">Łazienki</a></li>
+                <li class="footer__nav-item"><a href="/categories/chandeliers" class="footer__nav-link">Żyrandole</a></li>
+              </ul>
+            </nav>
+
+            <!-- Company Column -->
+            <nav class="footer__nav-column" aria-label="Firma">
+              <h3 class="footer__nav-title">Firma</h3>
+              <ul class="footer__nav-list">
+                <li class="footer__nav-item"><a href="/#about" class="footer__nav-link">O nas</a></li>
+                <li class="footer__nav-item"><a href="/showroom" class="footer__nav-link">Showroom</a></li>
+                <li class="footer__nav-item"><a href="/projects" class="footer__nav-link">Realizacje</a></li>
+                <li class="footer__nav-item"><a href="/knowledge-base" class="footer__nav-link">Baza Wiedzy</a></li>
+              </ul>
+            </nav>
+
+            <!-- Showroom Hours Column -->
+            <div class="footer__nav-column">
+              <h3 class="footer__nav-title">Showroom</h3>
+              <ul class="footer__nav-list">
+                <li class="footer__nav-item"><span class="footer__nav-link">Pon-Pt: 10:00 - 18:00</span></li>
+                <li class="footer__nav-item"><span class="footer__nav-link">Sob: 10:00 - 14:00</span></li>
+                <li class="footer__nav-item"><span class="footer__nav-link">Nd: Zamknięte</span></li>
+              </ul>
+              <nav aria-label="Linki prawne" style="margin-top: var(--space-8);">
+                <ul class="footer__nav-list">
+                  <li class="footer__nav-item"><a href="/privacy-policy" class="footer__nav-link">Polityka Prywatności</a></li>
+                  <li class="footer__nav-item"><a href="/terms-of-service" class="footer__nav-link">Regulamin</a></li>
+                  <li class="footer__nav-item"><a href="/cookie-policy" class="footer__nav-link">Polityka Cookies</a></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer__copyright">
+          <p class="footer__copyright-text">© 2025 LuxArte. Wszelkie prawa zastrzeżone.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Minimal JavaScript for interactions -->
+  <script>
+    // Scroll handling for header
+    const header = document.getElementById('header');
+    const SCROLL_THRESHOLD = 50;
+
+    function handleScroll() {
+      const scrollY = window.scrollY;
+      
+      if (scrollY > 0) {
+        header.classList.add('header--scrolled');
+      } else {
+        header.classList.remove('header--scrolled');
+      }
+      
+      if (scrollY > SCROLL_THRESHOLD) {
+        header.classList.add('header--compact');
+      } else {
+        header.classList.remove('header--compact');
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    // Mobile menu
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileOverlay = document.getElementById('mobile-overlay');
+    const mobileToggle = document.querySelector('.header__mobile-toggle');
+
+    function toggleMobileMenu() {
+      const isOpen = mobileMenu.classList.contains('mobile-menu--open');
+      
+      if (isOpen) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
+    }
+
+    function openMobileMenu() {
+      mobileMenu.classList.add('mobile-menu--open');
+      mobileOverlay.classList.add('mobile-menu__overlay--visible');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+      mobileToggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('mobile-menu--open');
+      mobileOverlay.classList.remove('mobile-menu__overlay--visible');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+      mobileToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    // Close on escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('mobile-menu--open')) {
+        closeMobileMenu();
+      }
+    });
+  </script>
+</body>
+</html>

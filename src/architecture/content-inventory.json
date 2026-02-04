@@ -1,0 +1,352 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "meta": {
+    "version": "1.0.0",
+    "generated": "2025-01-01",
+    "description": "Content inventory for LuxArte website migration - all content grouped by type",
+    "sourceUrl": "https://www.luxarte.pl",
+    "platform": {
+      "cms": "WordPress 6.7.4",
+      "ecommerce": "WooCommerce 9.7.2",
+      "theme": "Salient 17.1.0",
+      "seo": "Rank Math"
+    }
+  },
+  "content": {
+    "brands": {
+      "description": "Luxury furniture brand pages",
+      "newRoute": "/brands/:slug",
+      "schemaType": "Brand",
+      "items": [
+        {
+          "id": "brand-versace-home",
+          "legacyUrl": null,
+          "newSlug": "versace-home",
+          "title": "Versace Home",
+          "description": "Kolekcja mebli Versace Home",
+          "status": "placeholder",
+          "featuredImage": "https://www.luxarte.pl/wp-content/uploads/2025/05/meble-versace-home_zensational-sofa-luxarte-luksusowe-meble-do-salonu-1024x718.webp",
+          "notes": "Featured on /marki/ page - needs dedicated page content"
+        },
+        {
+          "id": "brand-bentley-home-cinema",
+          "legacyUrl": "/bentley_home_cinema/",
+          "newSlug": "bentley-home-cinema",
+          "title": "Bentley Home Cinema",
+          "description": "Ekskluzywne kino domowe - Prywatna sala kinowa",
+          "status": "active",
+          "publishedDate": "2024-09-24T10:57:10+02:00",
+          "modifiedDate": "2025-08-19T17:55:31+02:00",
+          "schemaType": "Article",
+          "notes": "Complete brand page with home cinema focus"
+        },
+        {
+          "id": "brand-bentley-home",
+          "legacyUrl": "/bentley/",
+          "newSlug": "bentley-home",
+          "title": "Bentley Home",
+          "description": "Kolekcja mebli Bentley Home",
+          "status": "redirect",
+          "notes": "May redirect to bentley-home-cinema or be separate page"
+        },
+        {
+          "id": "brand-fendi-casa",
+          "legacyUrl": null,
+          "newSlug": "fendi-casa",
+          "title": "Fendi Casa",
+          "status": "placeholder",
+          "notes": "Mentioned in branding - needs content creation"
+        },
+        {
+          "id": "brand-armani-casa",
+          "legacyUrl": null,
+          "newSlug": "armani-casa",
+          "title": "Armani Casa",
+          "status": "placeholder",
+          "notes": "Mentioned in branding - needs content creation"
+        },
+        {
+          "id": "brand-minotti",
+          "legacyUrl": null,
+          "newSlug": "minotti",
+          "title": "Minotti",
+          "status": "placeholder",
+          "notes": "Mentioned in branding - needs content creation"
+        }
+      ]
+    },
+    "categories": {
+      "description": "Product category pages (WooCommerce product_cat)",
+      "newRoute": "/categories/:slug",
+      "schemaType": "CollectionPage",
+      "items": [
+        {
+          "id": "cat-sofas",
+          "legacyUrl": "/kategoria-produktu/sofy/",
+          "newSlug": "sofas",
+          "title": "Sofy",
+          "titleEn": "Sofas",
+          "description": "Luksusowe sofy i narożniki",
+          "status": "active",
+          "hasPagination": true,
+          "productCount": "unknown",
+          "schemaType": "CollectionPage"
+        },
+        {
+          "id": "cat-kitchens",
+          "legacyUrl": "/kategoria-produktu/kuchnie/",
+          "newSlug": "kitchens",
+          "title": "Kuchnie",
+          "titleEn": "Kitchens",
+          "description": "Ekskluzywne kuchnie na wymiar",
+          "status": "active",
+          "hasPagination": true,
+          "productCount": "unknown",
+          "schemaType": "CollectionPage"
+        },
+        {
+          "id": "cat-wardrobes",
+          "legacyUrl": "/kategoria-produktu/garderoby/",
+          "newSlug": "wardrobes",
+          "title": "Garderoby",
+          "titleEn": "Wardrobes",
+          "description": "Luksusowe garderoby i szafy",
+          "status": "active",
+          "hasPagination": true,
+          "productCount": "unknown",
+          "schemaType": "CollectionPage"
+        },
+        {
+          "id": "cat-bathrooms",
+          "legacyUrl": "/kategoria-produktu/lazienki/",
+          "newSlug": "bathrooms",
+          "title": "Łazienki",
+          "titleEn": "Bathrooms",
+          "description": "Ekskluzywne meble łazienkowe",
+          "status": "active",
+          "hasPagination": true,
+          "productCount": "unknown",
+          "schemaType": "CollectionPage"
+        },
+        {
+          "id": "cat-chandeliers",
+          "legacyUrl": "/kategoria-produktu/zyrandole/",
+          "newSlug": "chandeliers",
+          "title": "Żyrandole",
+          "titleEn": "Chandeliers",
+          "description": "Luksusowe oświetlenie i żyrandole",
+          "status": "active",
+          "hasPagination": true,
+          "productCount": "unknown",
+          "schemaType": "CollectionPage"
+        },
+        {
+          "id": "cat-garden-furniture",
+          "legacyUrl": "/kategoria-produktu/meble-ogrodowe/",
+          "newSlug": "garden-furniture",
+          "title": "Meble ogrodowe",
+          "titleEn": "Garden Furniture",
+          "description": "Ekskluzywne meble ogrodowe i tarasowe",
+          "status": "active",
+          "hasPagination": true,
+          "productCount": "unknown",
+          "schemaType": "CollectionPage",
+          "notes": "Legacy file named spa.txt but contains garden furniture"
+        }
+      ]
+    },
+    "products": {
+      "description": "Individual product pages",
+      "newRoute": "/categories/:category/:slug",
+      "schemaType": "Product",
+      "items": [],
+      "notes": "Product list to be extracted from WooCommerce database or API"
+    },
+    "services": {
+      "description": "Service pages",
+      "newRoute": "/:slug",
+      "schemaType": "Service",
+      "items": [
+        {
+          "id": "service-interior-design",
+          "legacyUrl": "/projektowanie-wnetrz/",
+          "newSlug": "interior-design-service",
+          "title": "Projektowanie Wnętrz",
+          "titleEn": "Interior Design Service",
+          "description": "LuxArte zaczynało działalność jako studio projektowe. Dzisiaj projektujemy ekskluzywne wnętrza.",
+          "status": "active",
+          "publishedDate": "2025-06-12",
+          "schemaType": "Article",
+          "keywords": ["projektowanie wnętrz warszawa", "luksusowe meble warszawa"]
+        },
+        {
+          "id": "service-offer",
+          "legacyUrl": "/oferta/",
+          "newSlug": null,
+          "title": "Oferta",
+          "description": "Usługi doradcze",
+          "status": "consolidate",
+          "targetPage": "interior-design-service",
+          "publishedDate": "2025-05-27",
+          "notes": "Content to be merged into interior-design-service page"
+        }
+      ]
+    },
+    "articles": {
+      "description": "Blog/News articles",
+      "newRoute": "/knowledge-base/:slug",
+      "schemaType": "Article",
+      "items": [],
+      "indexPage": {
+        "id": "knowledge-base-index",
+        "legacyUrl": "/aktualnosci/",
+        "newSlug": "knowledge-base",
+        "title": "Aktualności",
+        "titleEn": "Knowledge Base",
+        "description": "CO NOWEGO",
+        "status": "active",
+        "publishedDate": "2021-08-05"
+      },
+      "notes": "Individual articles to be extracted from WordPress posts"
+    },
+    "pages": {
+      "description": "Static pages",
+      "newRoute": "/:slug",
+      "schemaType": "WebPage",
+      "items": [
+        {
+          "id": "page-homepage",
+          "legacyUrl": "/",
+          "newSlug": "",
+          "title": "LuxArte - Fashion for Home",
+          "description": "Ekskluzywne meble, kuchnie i garderoby najlepszych włoskich marek. Doradztwo i wsparcie w projektowaniu wnętrz.",
+          "status": "active",
+          "publishedDate": "2025-03-31T14:33:15+02:00",
+          "modifiedDate": "2025-08-01T16:33:43+02:00",
+          "keywords": ["Ekskluzywne meble", "Projektowanie wnętrz Warszawa"]
+        },
+        {
+          "id": "page-outlet",
+          "legacyUrl": "/outlet-luxarte/",
+          "newSlug": "outlet",
+          "title": "OUTLET",
+          "description": "Meble w promocyjnych cenach do -60%",
+          "status": "active",
+          "publishedDate": "2023-09-11",
+          "modifiedDate": "2025-05-27",
+          "features": ["Discounted items", "Immediate availability"]
+        },
+        {
+          "id": "page-showroom",
+          "legacyUrl": "/kontakt/",
+          "newSlug": "showroom",
+          "title": "Kontakt",
+          "titleNew": "Showroom",
+          "description": "Odwiedź nasz salon w Warszawie",
+          "status": "active",
+          "publishedDate": "2021-08-03T15:58:20+02:00",
+          "modifiedDate": "2025-12-17T13:56:48+01:00",
+          "notes": "Rebranded from Contact to Showroom for luxury positioning"
+        },
+        {
+          "id": "page-brands-index",
+          "legacyUrl": "/marki/",
+          "newSlug": "brands",
+          "title": "MARKI",
+          "description": "Kolekcje luksusowych marek meblarskich",
+          "status": "active",
+          "publishedDate": "2025-05-27T20:01:43+02:00",
+          "modifiedDate": "2025-08-01T17:52:45+02:00",
+          "featuredBrand": "Versace Home"
+        },
+        {
+          "id": "page-about",
+          "legacyUrl": "/o-nas/",
+          "newSlug": null,
+          "title": "O nas",
+          "status": "merge",
+          "targetPage": "homepage",
+          "notes": "About content to be integrated into homepage sections"
+        }
+      ]
+    },
+    "projects": {
+      "description": "Project portfolio pages (realizacje)",
+      "newRoute": "/projects/:slug",
+      "schemaType": "CreativeWork",
+      "items": [],
+      "notes": "Project/portfolio pages to be identified - may need content creation"
+    },
+    "legal": {
+      "description": "Legal and policy pages",
+      "newRoute": "/:slug",
+      "schemaType": "WebPage",
+      "items": [
+        {
+          "id": "legal-privacy",
+          "legacyUrl": null,
+          "newSlug": "privacy-policy",
+          "title": "Polityka Prywatności",
+          "status": "create",
+          "notes": "Required for GDPR compliance"
+        },
+        {
+          "id": "legal-terms",
+          "legacyUrl": null,
+          "newSlug": "terms-of-service",
+          "title": "Regulamin",
+          "status": "create",
+          "notes": "Terms of service for e-commerce"
+        },
+        {
+          "id": "legal-cookies",
+          "legacyUrl": null,
+          "newSlug": "cookie-policy",
+          "title": "Polityka Cookies",
+          "status": "create",
+          "notes": "Cookie policy - currently handled by Cookie Law Info plugin"
+        }
+      ]
+    }
+  },
+  "media": {
+    "images": {
+      "sourceDirectory": "https://www.luxarte.pl/wp-content/uploads/",
+      "formats": ["webp", "jpg", "png"],
+      "lazyLoading": true,
+      "notes": "All images to be migrated with new optimization pipeline"
+    },
+    "documents": {
+      "sourceDirectory": "https://www.luxarte.pl/wp-content/uploads/",
+      "formats": ["pdf"],
+      "notes": "Product catalogs and brochures"
+    }
+  },
+  "seo": {
+    "existingSchema": {
+      "organization": {
+        "name": "Lux Arte - Fashion for Home",
+        "url": "https://www.luxarte.pl"
+      },
+      "socialProfiles": [
+        "https://www.facebook.com/Luxarte1/",
+        "https://www.instagram.com/luxarte/"
+      ]
+    },
+    "existingKeywords": [
+      "Ekskluzywne meble",
+      "Projektowanie wnętrz Warszawa",
+      "luksusowe meble warszawa",
+      "prywatna sala kinowa"
+    ],
+    "googleVerification": "Xnsft2M953yB1t3f3xmVYQnpnTe4azw7AVtUCuuu0l8"
+  },
+  "migrationStatus": {
+    "totalPages": 15,
+    "activePages": 11,
+    "placeholderPages": 4,
+    "redirectsNeeded": 16,
+    "contentToCreate": 3,
+    "contentToMerge": 2
+  }
+}

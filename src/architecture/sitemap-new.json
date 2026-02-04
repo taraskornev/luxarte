@@ -1,0 +1,259 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "meta": {
+    "version": "1.0.0",
+    "generated": "2025-01-01",
+    "description": "New sitemap structure for LuxArte luxury furniture website",
+    "locale": "pl-PL",
+    "baseUrl": "https://www.luxarte.pl"
+  },
+  "sitemap": {
+    "homepage": {
+      "path": "/",
+      "title": "LuxArte - Fashion for Home",
+      "titleEn": "LuxArte - Fashion for Home",
+      "description": "Ekskluzywne meble, kuchnie i garderoby najlepszych włoskich marek",
+      "type": "homepage",
+      "priority": 1.0,
+      "changefreq": "weekly"
+    },
+    "brands": {
+      "index": {
+        "path": "/brands",
+        "title": "Marki",
+        "titleEn": "Brands",
+        "description": "Kolekcje luksusowych marek meblarskich",
+        "type": "collection",
+        "priority": 0.9,
+        "changefreq": "monthly"
+      },
+      "items": [
+        {
+          "path": "/brands/versace-home",
+          "slug": "versace-home",
+          "title": "Versace Home",
+          "type": "brand",
+          "priority": 0.8,
+          "changefreq": "monthly"
+        },
+        {
+          "path": "/brands/bentley-home",
+          "slug": "bentley-home",
+          "title": "Bentley Home",
+          "type": "brand",
+          "priority": 0.8,
+          "changefreq": "monthly"
+        },
+        {
+          "path": "/brands/bentley-home-cinema",
+          "slug": "bentley-home-cinema",
+          "title": "Bentley Home Cinema",
+          "description": "Ekskluzywne kino domowe - Prywatna sala kinowa",
+          "type": "brand",
+          "priority": 0.8,
+          "changefreq": "monthly"
+        },
+        {
+          "path": "/brands/fendi-casa",
+          "slug": "fendi-casa",
+          "title": "Fendi Casa",
+          "type": "brand",
+          "priority": 0.8,
+          "changefreq": "monthly",
+          "status": "placeholder"
+        },
+        {
+          "path": "/brands/armani-casa",
+          "slug": "armani-casa",
+          "title": "Armani Casa",
+          "type": "brand",
+          "priority": 0.8,
+          "changefreq": "monthly",
+          "status": "placeholder"
+        },
+        {
+          "path": "/brands/minotti",
+          "slug": "minotti",
+          "title": "Minotti",
+          "type": "brand",
+          "priority": 0.8,
+          "changefreq": "monthly",
+          "status": "placeholder"
+        }
+      ]
+    },
+    "categories": {
+      "index": {
+        "path": "/categories",
+        "title": "Kategorie",
+        "titleEn": "Categories",
+        "description": "Wszystkie kategorie produktów luksusowych",
+        "type": "collection",
+        "priority": 0.9,
+        "changefreq": "monthly"
+      },
+      "items": [
+        {
+          "path": "/categories/sofas",
+          "slug": "sofas",
+          "title": "Sofy",
+          "titleEn": "Sofas",
+          "description": "Luksusowe sofy i narożniki",
+          "type": "category",
+          "priority": 0.8,
+          "changefreq": "weekly"
+        },
+        {
+          "path": "/categories/kitchens",
+          "slug": "kitchens",
+          "title": "Kuchnie",
+          "titleEn": "Kitchens",
+          "description": "Ekskluzywne kuchnie na wymiar",
+          "type": "category",
+          "priority": 0.8,
+          "changefreq": "weekly"
+        },
+        {
+          "path": "/categories/wardrobes",
+          "slug": "wardrobes",
+          "title": "Garderoby",
+          "titleEn": "Wardrobes",
+          "description": "Luksusowe garderoby i szafy",
+          "type": "category",
+          "priority": 0.8,
+          "changefreq": "weekly"
+        },
+        {
+          "path": "/categories/bathrooms",
+          "slug": "bathrooms",
+          "title": "Łazienki",
+          "titleEn": "Bathrooms",
+          "description": "Ekskluzywne meble łazienkowe",
+          "type": "category",
+          "priority": 0.8,
+          "changefreq": "weekly"
+        },
+        {
+          "path": "/categories/chandeliers",
+          "slug": "chandeliers",
+          "title": "Żyrandole",
+          "titleEn": "Chandeliers",
+          "description": "Luksusowe oświetlenie i żyrandole",
+          "type": "category",
+          "priority": 0.8,
+          "changefreq": "weekly"
+        },
+        {
+          "path": "/categories/garden-furniture",
+          "slug": "garden-furniture",
+          "title": "Meble ogrodowe",
+          "titleEn": "Garden Furniture",
+          "description": "Ekskluzywne meble ogrodowe i tarasowe",
+          "type": "category",
+          "priority": 0.8,
+          "changefreq": "weekly"
+        }
+      ]
+    },
+    "services": {
+      "interiorDesign": {
+        "path": "/interior-design-service",
+        "title": "Projektowanie Wnętrz",
+        "titleEn": "Interior Design Service",
+        "description": "Profesjonalne usługi projektowania wnętrz luksusowych",
+        "type": "service",
+        "priority": 0.9,
+        "changefreq": "monthly"
+      }
+    },
+    "projects": {
+      "index": {
+        "path": "/projects",
+        "title": "Realizacje",
+        "titleEn": "Projects",
+        "description": "Nasze realizacje projektów wnętrzarskich",
+        "type": "collection",
+        "priority": 0.8,
+        "changefreq": "monthly"
+      },
+      "items": []
+    },
+    "outlet": {
+      "path": "/outlet",
+      "title": "Outlet",
+      "titleEn": "Outlet",
+      "description": "Meble w promocyjnych cenach do -60%",
+      "type": "page",
+      "priority": 0.7,
+      "changefreq": "weekly"
+    },
+    "showroom": {
+      "path": "/showroom",
+      "title": "Showroom",
+      "titleEn": "Showroom",
+      "description": "Odwiedź nasz salon w Warszawie",
+      "type": "page",
+      "priority": 0.8,
+      "changefreq": "monthly"
+    },
+    "knowledgeBase": {
+      "index": {
+        "path": "/knowledge-base",
+        "title": "Baza Wiedzy",
+        "titleEn": "Knowledge Base",
+        "description": "Aktualności i porady dotyczące luksusowych wnętrz",
+        "type": "collection",
+        "priority": 0.7,
+        "changefreq": "weekly"
+      },
+      "items": []
+    },
+    "legal": {
+      "privacy": {
+        "path": "/privacy-policy",
+        "title": "Polityka Prywatności",
+        "type": "legal",
+        "priority": 0.3,
+        "changefreq": "yearly"
+      },
+      "terms": {
+        "path": "/terms-of-service",
+        "title": "Regulamin",
+        "type": "legal",
+        "priority": 0.3,
+        "changefreq": "yearly"
+      },
+      "cookies": {
+        "path": "/cookie-policy",
+        "title": "Polityka Cookies",
+        "type": "legal",
+        "priority": 0.3,
+        "changefreq": "yearly"
+      }
+    }
+  },
+  "navigation": {
+    "primary": [
+      { "label": "Marki", "path": "/brands" },
+      { "label": "Kategorie", "path": "/categories" },
+      { "label": "Projektowanie Wnętrz", "path": "/interior-design-service" },
+      { "label": "Realizacje", "path": "/projects" },
+      { "label": "Outlet", "path": "/outlet" },
+      { "label": "Showroom", "path": "/showroom" }
+    ],
+    "footer": [
+      { "label": "Baza Wiedzy", "path": "/knowledge-base" },
+      { "label": "Showroom", "path": "/showroom" },
+      { "label": "Polityka Prywatności", "path": "/privacy-policy" },
+      { "label": "Regulamin", "path": "/terms-of-service" }
+    ],
+    "categories": [
+      { "label": "Sofy", "path": "/categories/sofas" },
+      { "label": "Kuchnie", "path": "/categories/kitchens" },
+      { "label": "Garderoby", "path": "/categories/wardrobes" },
+      { "label": "Łazienki", "path": "/categories/bathrooms" },
+      { "label": "Żyrandole", "path": "/categories/chandeliers" },
+      { "label": "Meble ogrodowe", "path": "/categories/garden-furniture" }
+    ]
+  }
+}

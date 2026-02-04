@@ -1,0 +1,162 @@
+/**
+ * ============================================================================
+ * LUXARTE HEADING STYLES
+ * ============================================================================
+ * 
+ * Additional typography utility classes for heading and text components.
+ * Extends the base design-system.css.
+ * 
+ * @version 1.0.0
+ */
+
+
+/* ============================================================================
+   HEADING VARIANTS
+   ============================================================================ */
+
+.heading {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-heading);
+  margin: 0;
+}
+
+.heading--display {
+  font-size: var(--font-size-display);
+  font-weight: var(--font-weight-light);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.heading--1 {
+  font-size: var(--font-size-h1);
+}
+
+.heading--2 {
+  font-size: var(--font-size-h2);
+}
+
+.heading--3 {
+  font-size: var(--font-size-h3);
+}
+
+.heading--4 {
+  font-size: var(--font-size-h4);
+}
+
+.heading--5 {
+  font-size: var(--font-size-h5);
+}
+
+.heading--6 {
+  font-size: var(--font-size-h6);
+}
+
+
+/* ============================================================================
+   TEXT VARIANTS
+   ============================================================================ */
+
+.text {
+  font-family: var(--font-family-body);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.text--xs {
+  font-size: var(--font-size-xs);
+}
+
+.text--sm {
+  font-size: var(--font-size-sm);
+}
+
+.text--lg {
+  font-size: var(--font-size-lg);
+}
+
+.text--xl {
+  font-size: var(--font-size-xl);
+}
+
+/* Text Weights */
+.text--weight-normal {
+  font-weight: var(--font-weight-normal);
+}
+
+.text--weight-medium {
+  font-weight: var(--font-weight-medium);
+}
+
+.text--weight-semibold {
+  font-weight: var(--font-weight-semibold);
+}
+
+.text--weight-bold {
+  font-weight: var(--font-weight-bold);
+}
+
+/* Text Colors */
+.text--secondary {
+  color: var(--color-text-secondary);
+}
+
+.text--accent {
+  color: var(--color-accent);
+}
+
+.text--inverse {
+  color: var(--color-text-inverse);
+}
+
+.text--inherit {
+  color: inherit;
+}
+
+
+/* ============================================================================
+   RESPONSIVE TYPOGRAPHY
+   ============================================================================ */
+
+@media screen and (max-width: 999px) {
+  .heading--display {
+    font-size: calc(var(--font-size-display) * 0.75);
+  }
+  
+  .heading--1 {
+    font-size: calc(var(--font-size-h1) * 0.85);
+  }
+  
+  .heading--2 {
+    font-size: calc(var(--font-size-h2) * 0.9);
+  }
+}
+
+@media screen and (max-width: 689px) {
+  .heading--display {
+    font-size: calc(var(--font-size-display) * 0.6);
+  }
+  
+  .heading--1 {
+    font-size: calc(var(--font-size-h1) * 0.7);
+  }
+  
+  .heading--2 {
+    font-size: calc(var(--font-size-h2) * 0.8);
+  }
+  
+  .heading--3 {
+    font-size: calc(var(--font-size-h3) * 0.9);
+  }
+}
+
+
+/* ============================================================================
+   UTILITY - FULL WIDTH
+   ============================================================================ */
+
+.w-full {
+  width: 100%;
+}
