@@ -1,821 +1,213 @@
-/**
- * ============================================================================
- * LUXARTE DESIGN SYSTEM
- * Premium Interior / Luxury Furniture Brand
- * ============================================================================
- * 
- * This design system has been extracted and refined from the existing 
- * luxarte.pl website to maintain brand consistency while enabling a modern,
- * high-performance rebuild.
- * 
- * Target: Premium, minimal, editorial, high-end interior/design brand
- * Performance: Green Core Web Vitals
- * 
- * Version: 1.0.0
- * Last Updated: 2026-02-03
- * ============================================================================
- */
-
-
-/* ============================================================================
-   1. COLOR TOKENS
-   ============================================================================
-   
-   The LuxArte brand uses a sophisticated neutral palette with warm undertones.
-   Primary accent is a refined bronze/gold (#967f65) that conveys luxury.
-   
-   Color Philosophy:
-   - Backgrounds: Warm neutrals with subtle cream undertones
-   - Text: Sophisticated grays, never pure black for body copy
-   - Accent: Bronze/gold for CTAs, highlights, and brand moments
-   - Contrast: Pure black/white reserved for high-impact elements
-   
-   ---------------------------------------------------------------------------- */
+/* ============================================
+   LUXARTE DESIGN SYSTEM - TOKENS ONLY
+   Step 9: UI Cohesion Pass
+   ============================================
+   This file contains ONLY CSS custom properties (tokens).
+   All selectors live in core.css.
+   ============================================ */
 
 :root {
-  /* -------------------------------------------------------------------------
-     1.1 Brand Colors
-     ------------------------------------------------------------------------- */
+  /* ========================================
+     TYPOGRAPHY
+     ======================================== */
+  /* Font loaded via next/font in layout.tsx, CSS var as fallback */
+  --font-family: var(--font-jost, 'Jost'), sans-serif;
+  --font-sans: var(--font-jost, 'Jost'), sans-serif;
   
-  /* Primary Accent - Bronze/Gold (Signature brand color) */
-  --color-accent:          #967f65;
-  --color-accent-hover:    #786651;
-  --color-accent-light:    #b8a088;
-  --color-accent-dark:     #6b5a47;
+  /* Font Weights - ONLY use via tokens, no raw numbers */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
   
+  /* Semantic Weight Aliases */
+  --font-weight-body: var(--font-weight-normal);
+  --font-weight-heading: var(--font-weight-medium);
+  --font-weight-nav: var(--font-weight-normal);
+  --font-weight-label: var(--font-weight-medium);
   
-  /* -------------------------------------------------------------------------
-     1.2 Neutral Palette
-     ------------------------------------------------------------------------- */
+  /* Font Sizes */
+  --font-size-xs: 11px;
+  --font-size-sm: 13px;
+  --font-size-base: 14px;
+  --font-size-md: 15px;
+  --font-size-lg: 16px;
+  --font-size-xl: 18px;
+  --font-size-2xl: 20px;
+  --font-size-3xl: 24px;
+  --font-size-4xl: 28px;
+  --font-size-5xl: 36px;
+  --font-size-6xl: 42px;
+  --font-size-7xl: 48px;
+
+  /* Line Heights */
+  --line-height-tight: 1.2;
+  --line-height-snug: 1.3;
+  --line-height-normal: 1.4;
+  --line-height-relaxed: 1.7;
+  --line-height-loose: 1.8;
+
+  /* Letter Spacing */
+  --letter-spacing-tight: 0.5px;
+  --letter-spacing-normal: 1px;
+  --letter-spacing-wide: 1.5px;
+  --letter-spacing-wider: 2px;
+
+  /* ========================================
+     COLORS
+     ======================================== */
+  /* Brand */
+  --color-brand-gold: #967f65;
+  --color-brand-gold-dark: #7d6854;
   
-  /* Backgrounds */
-  --color-bg-primary:      #f4f1ef;   /* Main page background - warm off-white */
-  --color-bg-secondary:    #ffffff;   /* Cards, containers, elevated surfaces */
-  --color-bg-tertiary:     #f6f6f6;   /* Subtle alternate sections */
-  --color-bg-dark:         #000000;   /* Dark sections, overlays */
-  --color-bg-overlay:      rgba(0, 0, 0, 0.5);  /* Video/image overlays */
+  /* Neutrals */
+  --color-black: #000;
+  --color-gray-900: #1a1a1a;
+  --color-gray-700: #333;
+  --color-gray-600: #444;
+  --color-gray-500: #555;
+  --color-gray-400: #666;
+  --color-gray-300: #888;
+  --color-gray-200: #999;
+  --color-gray-150: #ccc;
+  --color-gray-100: #e0e0e0;
+  --color-gray-75: #f0f0f0;
+  --color-gray-50: #f5f5f5;
+  --color-gray-25: #f9f9f9;
+  --color-white: #fff;
   
-  /* Text Colors */
-  --color-text-primary:    #777777;   /* Body text - sophisticated gray */
-  --color-text-secondary:  #aaaaaa;   /* Muted text, labels, captions */
-  --color-text-heading:    #333333;   /* Headings - darker for contrast */
-  --color-text-inverse:    #ffffff;   /* Text on dark backgrounds */
-  --color-text-accent:     #967f65;   /* Links, highlighted text */
+  /* Background tints */
+  --color-bg-warm: #f9f8f7;
+  --color-bg-legacy: #f4f1ef;
   
-  /* Border & Divider Colors */
-  --color-border-light:    rgba(255, 255, 255, 0.7);  /* Light borders on dark */
-  --color-border-dark:     rgba(0, 0, 0, 0.08);       /* Subtle dark borders */
-  --color-border-accent:   #967f65;                   /* Accent borders (tags) */
-  --color-border-muted:    #b1a6a6c2;                 /* Muted borders */
+  /* Global surface */
+  --color-surface-base: #f9f8f7;
   
+  /* ========================================
+     SEMANTIC COLOR TOKENS (Legacy Parity)
+     ======================================== */
+  --color-bg: #f4f1ef;
+  --color-surface: #f4f1ef;
+  --color-text: #777;
+  --color-heading: #777;
+  --color-link: #777;
+  --color-muted: #999;
   
-  /* -------------------------------------------------------------------------
-     1.3 Semantic Colors
-     ------------------------------------------------------------------------- */
+  /* Overlays */
+  --overlay-dark: rgba(0, 0, 0, 0.5);
+  --overlay-darker: rgba(0, 0, 0, 0.92);
+  --overlay-light: rgba(0, 0, 0, 0.15);
+  --overlay-menu: rgba(0, 0, 0, 0.5);
   
-  /* Status Colors */
-  --color-success:         #a0cf67;   /* Success messages, validations */
-  --color-error:           #cf1522;   /* Error messages, validations */
-  --color-warning:         #fcb900;   /* Warnings, alerts */
-  --color-info:            #0693e3;   /* Informational messages */
+  /* ========================================
+     SPACING
+     ======================================== */
+  --space-0: 0;
+  --space-1: 5px;
+  --space-2: 8px;
+  --space-3: 10px;
+  --space-4: 15px;
+  --space-5: 20px;
+  --space-6: 25px;
+  --space-7: 30px;
+  --space-8: 40px;
+  --space-9: 50px;
+  --space-10: 60px;
+  --space-11: 80px;
   
+  /* ========================================
+     LAYOUT
+     ======================================== */
+  --container-max: 1400px;
+  --container-content: 1300px;
+  --container-article: 900px;
+  --container-prose: 800px;
   
-  /* -------------------------------------------------------------------------
-     1.4 Gradient Definitions
-     ------------------------------------------------------------------------- */
+  --sidebar-width: 280px;
+  --mobile-drawer-width: 80vw;
+  --mobile-filter-width: 85vw;
+  --mobile-filter-max: 360px;
   
-  /* Overlay gradients for hero sections */
-  --gradient-hero-overlay: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.2) 0%,
-    rgba(0, 0, 0, 0.5) 100%
-  );
+  --header-height: 60px;
+  --sticky-top: 100px;
   
-  --gradient-card-hover: linear-gradient(
-    135deg,
-    rgba(150, 127, 101, 0.1) 0%,
-    rgba(150, 127, 101, 0.05) 100%
-  );
+  /* ========================================
+     BORDERS & RADIUS
+     ======================================== */
+  --border-light: 1px solid var(--color-gray-100);
+  --border-subtle: 1px solid var(--color-gray-75);
+  --border-dark: 1px solid var(--color-gray-700);
+  
+  /* Radius Policy - FLAT everywhere except these exceptions */
+  --radius-none: 0;
+  --radius-button-pill: 9999px;
+  --radius-input-sm: 4px;
+  
+  /* ========================================
+     SHADOWS
+     ======================================== */
+  /* Single shadow token for card hover - ONLY allowed shadow on cards */
+  --shadow-card-hover: 0 4px 16px rgba(0, 0, 0, 0.08);
+  
+  /* Functional shadows - dropdowns/drawers only */
+  --shadow-dropdown: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --shadow-drawer: -4px 0 20px rgba(0, 0, 0, 0.15);
+  --shadow-drawer-left: 4px 0 20px rgba(0, 0, 0, 0.15);
+  
+  /* ========================================
+     MOTION
+     ======================================== */
+  /* Durations */
+  --motion-fast: 0.15s;
+  --motion-normal: 0.3s;
+  --motion-slow: 0.6s;
+  
+  /* Zoom curve - venicem.com style: slow, smooth, premium */
+  --motion-zoom-curve: cubic-bezier(0.25, 0.1, 0.25, 1);
+  
+  /* Standard easings */
+  --ease-out: ease-out;
+  --ease-in-out: ease-in-out;
+  
+  /* Legacy duration aliases (for compatibility) */
+  --duration-fast: var(--motion-fast);
+  --duration-normal: var(--motion-normal);
+  --duration-slow: var(--motion-slow);
+  --ease-zoom: var(--motion-zoom-curve);
+  
+  /* Pre-composed transitions - ALLOWED animations only */
+  --transition-opacity: opacity var(--motion-normal) var(--ease-out);
+  --transition-color: color var(--motion-normal) var(--ease-out);
+  --transition-background: background var(--motion-normal) var(--ease-out);
+  --transition-transform: transform var(--motion-slow) var(--motion-zoom-curve);
+  --transition-border: border-color var(--motion-normal) var(--ease-out);
+  
+  /* ========================================
+     Z-INDEX SCALE
+     ======================================== */
+  --z-dropdown: 1000;
+  --z-sticky: 100;
+  --z-overlay: 9998;
+  --z-drawer: 9999;
+  --z-lightbox: 10000;
+  
+  /* ========================================
+     GRID
+     ======================================== */
+  --grid-gap: 20px;
+  --grid-gap-sm: 15px;
+  --grid-gap-lg: 30px;
+  
+  /* Gallery grid columns */
+  --gallery-cols: 3;
+  --gallery-cols-tablet: 2;
+  --gallery-cols-mobile: 1;
+  
+  /* ========================================
+     BREAKPOINTS (for reference in JS)
+     Values used in media queries
+     ======================================== */
+  /* Desktop: > 1024px */
+  /* Tablet: 769px - 1024px */
+  /* Mobile: <= 768px */
 }
-
-
-/* ============================================================================
-   2. TYPOGRAPHY SCALE
-   ============================================================================
-   
-   Font Stack:
-   - Headings: 'Jost' (sans-serif) - Modern, elegant, great for luxury brands
-   - Body: 'Literata' (serif) - Refined, readable, editorial feel
-   - Fallbacks: System fonts for performance
-   
-   Scale: Based on 1.25 ratio (Major Third) for harmonious sizing
-   Base: 16px (1rem)
-   
-   ---------------------------------------------------------------------------- */
-
-:root {
-  /* -------------------------------------------------------------------------
-     2.1 Font Families
-     ------------------------------------------------------------------------- */
-  
-  --font-family-heading:   'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-family-body:      'Literata', 'Georgia', 'Times New Roman', serif;
-  --font-family-mono:      'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
-  
-  
-  /* -------------------------------------------------------------------------
-     2.2 Font Weights
-     ------------------------------------------------------------------------- */
-  
-  --font-weight-light:     300;
-  --font-weight-regular:   400;
-  --font-weight-medium:    500;
-  --font-weight-semibold:  600;
-  --font-weight-bold:      700;
-  
-  
-  /* -------------------------------------------------------------------------
-     2.3 Font Sizes - Type Scale
-     Based on 1.25 ratio (Major Third)
-     ------------------------------------------------------------------------- */
-  
-  --font-size-xs:          0.75rem;    /* 12px - Fine print, badges */
-  --font-size-sm:          0.8125rem;  /* 13px - Captions, labels, meta */
-  --font-size-base:        1rem;       /* 16px - Body text base */
-  --font-size-md:          1.125rem;   /* 18px - Lead text, intro */
-  --font-size-lg:          1.25rem;    /* 20px - H6, small headings */
-  --font-size-xl:          1.5rem;     /* 24px - H5 */
-  --font-size-2xl:         1.875rem;   /* 30px - H4 */
-  --font-size-3xl:         2.25rem;    /* 36px - H3 */
-  --font-size-4xl:         2.625rem;   /* 42px - H2 */
-  --font-size-5xl:         3rem;       /* 48px - H1 */
-  --font-size-6xl:         3.75rem;    /* 60px - Hero headlines */
-  --font-size-7xl:         4.5rem;     /* 72px - Display, impact */
-  
-  
-  /* -------------------------------------------------------------------------
-     2.4 Line Heights
-     ------------------------------------------------------------------------- */
-  
-  --line-height-none:      1;
-  --line-height-tight:     1.25;
-  --line-height-snug:      1.375;
-  --line-height-normal:    1.5;
-  --line-height-relaxed:   1.625;
-  --line-height-loose:     2;
-  
-  
-  /* -------------------------------------------------------------------------
-     2.5 Letter Spacing
-     ------------------------------------------------------------------------- */
-  
-  --letter-spacing-tighter: -0.05em;
-  --letter-spacing-tight:   -0.025em;
-  --letter-spacing-normal:  0;
-  --letter-spacing-wide:    0.025em;
-  --letter-spacing-wider:   0.05em;
-  --letter-spacing-widest:  0.125em;   /* 2px at 16px - Labels, eyebrows */
-}
-
-
-/* ============================================================================
-   3. SPACING SCALE
-   ============================================================================
-   
-   8px base unit system for consistent spacing throughout the design.
-   Follows a geometric progression for natural visual rhythm.
-   
-   ---------------------------------------------------------------------------- */
-
-:root {
-  /* Base unit */
-  --space-unit:            0.5rem;     /* 8px */
-  
-  /* Spacing Scale */
-  --space-0:               0;
-  --space-1:               0.25rem;    /* 4px */
-  --space-2:               0.5rem;     /* 8px */
-  --space-3:               0.75rem;    /* 12px */
-  --space-4:               1rem;       /* 16px */
-  --space-5:               1.3125rem;  /* 21px - Common in LuxArte */
-  --space-6:               1.5rem;     /* 24px */
-  --space-7:               1.75rem;    /* 28px */
-  --space-8:               2rem;       /* 32px */
-  --space-9:               2.125rem;   /* 34px - Common in LuxArte */
-  --space-10:              2.5rem;     /* 40px */
-  --space-11:              3rem;       /* 48px */
-  --space-12:              3.4375rem;  /* 55px - Common in LuxArte */
-  --space-14:              4.6875rem;  /* 75px - Section padding tablet */
-  --space-16:              5.5625rem;  /* 89px - Section padding desktop */
-  --space-20:              7.75rem;    /* 124px - Large section gaps */
-  --space-24:              9rem;       /* 144px - Hero padding */
-  
-  
-  /* -------------------------------------------------------------------------
-     3.1 Component-Specific Spacing
-     ------------------------------------------------------------------------- */
-  
-  /* Container */
-  --container-padding-x:   1.5rem;
-  --container-max-width:   1300px;
-  
-  /* Section Spacing */
-  --section-padding-sm:    var(--space-14);   /* 75px */
-  --section-padding-md:    var(--space-16);   /* 89px */
-  --section-padding-lg:    var(--space-20);   /* 124px */
-  
-  /* Card Spacing */
-  --card-padding:          var(--space-8);    /* 32px */
-  --card-gap:              var(--space-6);    /* 24px */
-  
-  /* Form Spacing */
-  --form-field-gap:        var(--space-5);    /* 21px */
-  --form-group-gap:        var(--space-4);    /* 16px */
-}
-
-
-/* ============================================================================
-   4. BORDER RADIUS
-   ============================================================================
-   
-   LuxArte uses a predominantly square/minimal aesthetic.
-   Sharp corners = premium, architectural feel.
-   Soft radius used sparingly for specific elements.
-   
-   ---------------------------------------------------------------------------- */
-
-:root {
-  --radius-none:           0;
-  --radius-sm:             0.125rem;   /* 2px - Subtle softening */
-  --radius-md:             0.25rem;    /* 4px - Inputs, small elements */
-  --radius-lg:             0.5rem;     /* 8px - Cards, containers */
-  --radius-xl:             1rem;       /* 16px - Large containers */
-  --radius-full:           9999px;     /* Fully rounded - Buttons, pills */
-}
-
-
-/* ============================================================================
-   5. SHADOW SYSTEM
-   ============================================================================
-   
-   Shadows in LuxArte are subtle and sophisticated.
-   Used sparingly to maintain a clean, editorial aesthetic.
-   
-   ---------------------------------------------------------------------------- */
-
-:root {
-  /* Elevation Shadows */
-  --shadow-none:           none;
-  
-  --shadow-xs:             0 1px 2px rgba(0, 0, 0, 0.05);
-  
-  --shadow-sm:             0 2px 4px rgba(0, 0, 0, 0.06),
-                           0 1px 2px rgba(0, 0, 0, 0.04);
-  
-  --shadow-md:             0 4px 8px rgba(0, 0, 0, 0.08),
-                           0 2px 4px rgba(0, 0, 0, 0.04);
-  
-  --shadow-lg:             0 12px 24px rgba(0, 0, 0, 0.12),
-                           0 4px 8px rgba(0, 0, 0, 0.06);
-  
-  --shadow-xl:             0 20px 40px rgba(0, 0, 0, 0.15),
-                           0 8px 16px rgba(0, 0, 0, 0.08);
-  
-  /* Header/Navigation Shadow (extracted from LuxArte) */
-  --shadow-header:         0 3px 45px rgba(0, 0, 0, 0.15);
-  
-  /* Footer Reveal Shadow */
-  --shadow-footer:         0 3px 45px rgba(0, 0, 0, 0.15);
-}
-
-
-/* ============================================================================
-   6. BUTTON VARIANTS
-   ============================================================================
-   
-   Button design follows luxury brand principles:
-   - Clean, architectural shapes
-   - Generous padding for premium feel
-   - Subtle transitions
-   - Text transforms for authority
-   
-   ---------------------------------------------------------------------------- */
-
-:root {
-  /* Button Sizing */
-  --btn-padding-x:         2.125rem;   /* 34px */
-  --btn-padding-y:         0.8125rem;  /* 13px */
-  --btn-padding-x-lg:      3.125rem;   /* 50px */
-  --btn-padding-y-lg:      1.3125rem;  /* 21px */
-  --btn-padding-x-sm:      1.5rem;     /* 24px */
-  --btn-padding-y-sm:      0.625rem;   /* 10px */
-  
-  /* Button Typography */
-  --btn-font-size:         0.8125rem;  /* 13px */
-  --btn-font-size-lg:      1.125rem;   /* 18px */
-  --btn-font-weight:       600;
-  --btn-letter-spacing:    0.125em;    /* 2px */
-  
-  /* Button Border */
-  --btn-border-width:      2px;
-  
-  /* Button Transitions */
-  --btn-transition:        all 0.25s ease;
-}
-
-
-/* ============================================================================
-   7. GRID SYSTEM
-   ============================================================================
-   
-   12-column fluid grid with responsive breakpoints.
-   Max container width: 1300px (matches existing LuxArte)
-   
-   ---------------------------------------------------------------------------- */
-
-:root {
-  /* Grid Columns */
-  --grid-columns:          12;
-  --grid-gap:              2rem;       /* 32px - Default gap between columns */
-  --grid-gap-sm:           1rem;       /* 16px - Compact layouts */
-  --grid-gap-lg:           3rem;       /* 48px - Spacious layouts */
-  
-  /* Container Widths */
-  --container-sm:          640px;
-  --container-md:          768px;
-  --container-lg:          1024px;
-  --container-xl:          1300px;     /* Max width from LuxArte */
-  
-  /* Breakpoints */
-  --breakpoint-sm:         640px;
-  --breakpoint-md:         768px;
-  --breakpoint-lg:         1000px;     /* Matches LuxArte tablet breakpoint */
-  --breakpoint-xl:         1300px;
-  --breakpoint-2xl:        1536px;
-}
-
-
-/* ============================================================================
-   8. IMAGE ASPECT RATIOS
-   ============================================================================
-   
-   Common aspect ratios used throughout LuxArte for consistent image sizing.
-   These ratios maintain visual harmony across galleries and cards.
-   
-   ---------------------------------------------------------------------------- */
-
-:root {
-  --aspect-square:         1 / 1;
-  --aspect-video:          16 / 9;
-  --aspect-photo:          4 / 3;
-  --aspect-portrait:       3 / 4;
-  --aspect-wide:           21 / 9;
-  --aspect-editorial:      3 / 2;      /* Common for furniture photography */
-  --aspect-hero:           16 / 9;
-}
-
-
-/* ============================================================================
-   9. TRANSITIONS & ANIMATIONS
-   ============================================================================
-   
-   Smooth, premium-feeling transitions throughout the interface.
-   
-   ---------------------------------------------------------------------------- */
-
-:root {
-  /* Timing Functions */
-  --ease-default:          cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-in:               cubic-bezier(0.4, 0, 1, 1);
-  --ease-out:              cubic-bezier(0, 0, 0.2, 1);
-  --ease-in-out:           cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-spring:           cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  
-  /* Duration */
-  --duration-fast:         150ms;
-  --duration-normal:       250ms;
-  --duration-slow:         500ms;
-  --duration-slower:       700ms;
-  
-  /* Common Transitions */
-  --transition-colors:     color var(--duration-normal) var(--ease-default),
-                           background-color var(--duration-normal) var(--ease-default),
-                           border-color var(--duration-normal) var(--ease-default);
-  
-  --transition-transform:  transform var(--duration-normal) var(--ease-default);
-  
-  --transition-opacity:    opacity var(--duration-normal) var(--ease-default);
-  
-  --transition-all:        all var(--duration-normal) var(--ease-default);
-}
-
-
-/* ============================================================================
-   10. Z-INDEX SCALE
-   ============================================================================
-   
-   Layering system for consistent stacking contexts.
-   
-   ---------------------------------------------------------------------------- */
-
-:root {
-  --z-below:               -1;
-  --z-base:                0;
-  --z-raised:              10;
-  --z-dropdown:            100;
-  --z-sticky:              200;
-  --z-header:              300;
-  --z-overlay:             400;
-  --z-modal:               500;
-  --z-toast:               600;
-  --z-tooltip:             700;
-  --z-max:                 9999;
-}
-
-
-/* ============================================================================
-   11. LOGO SPECIFICATIONS
-   ============================================================================
-   
-   Logo details extracted from the existing website.
-   
-   Logo URL: https://www.luxarte.pl/wp-content/uploads/2021/11/Lux-Arte-Logo-2021-2.png
-   Dimensions: 346 x 120 pixels
-   Aspect Ratio: ~2.88:1
-   
-   ---------------------------------------------------------------------------- */
-
-:root {
-  --logo-width:            346px;
-  --logo-height:           120px;
-  --logo-aspect-ratio:     346 / 120;
-  
-  /* Responsive Logo Sizing */
-  --logo-width-sm:         180px;
-  --logo-width-md:         250px;
-  --logo-width-lg:         346px;
-}
-
-
-/* ============================================================================
-   12. BASE STYLES
-   ============================================================================
-   
-   Foundation styles implementing the design tokens.
-   
-   ---------------------------------------------------------------------------- */
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 100%; /* 16px base */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
-
-body {
-  font-family: var(--font-family-body);
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-regular);
-  line-height: var(--line-height-relaxed);
-  color: var(--color-text-primary);
-  background-color: var(--color-bg-primary);
-  margin: 0;
-  padding: 0;
-}
-
-
-/* ============================================================================
-   13. TYPOGRAPHY STYLES
-   ============================================================================ */
-
-/* Headings */
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-family-heading);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-heading);
-  line-height: var(--line-height-tight);
-  margin: 0 0 var(--space-4);
-}
-
-h1 {
-  font-size: var(--font-size-5xl);
-}
-
-h2 {
-  font-size: var(--font-size-4xl);
-}
-
-h3 {
-  font-size: var(--font-size-3xl);
-}
-
-h4 {
-  font-size: var(--font-size-2xl);
-}
-
-h5 {
-  font-size: var(--font-size-xl);
-}
-
-h6 {
-  font-size: var(--font-size-lg);
-}
-
-/* Eyebrow / Label Text */
-.eyebrow,
-.label {
-  font-family: var(--font-family-body);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-  text-transform: uppercase;
-  letter-spacing: var(--letter-spacing-widest);
-  color: var(--color-text-secondary);
-}
-
-/* Lead Paragraph */
-.lead {
-  font-size: var(--font-size-md);
-  line-height: var(--line-height-relaxed);
-}
-
-/* Links */
-a {
-  color: var(--color-text-accent);
-  text-decoration: none;
-  transition: var(--transition-colors);
-}
-
-a:hover,
-a:focus {
-  color: var(--color-accent-hover);
-}
-
-
-/* ============================================================================
-   14. BUTTON STYLES
-   ============================================================================ */
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-2);
-  padding: var(--btn-padding-y) var(--btn-padding-x);
-  font-family: var(--font-family-heading);
-  font-size: var(--btn-font-size);
-  font-weight: var(--btn-font-weight);
-  letter-spacing: var(--btn-letter-spacing);
-  text-transform: uppercase;
-  text-decoration: none;
-  border: var(--btn-border-width) solid transparent;
-  cursor: pointer;
-  transition: var(--btn-transition);
-}
-
-/* Primary Button (Filled) */
-.btn-primary {
-  background-color: var(--color-accent);
-  border-color: var(--color-accent);
-  color: var(--color-text-inverse);
-}
-
-.btn-primary:hover,
-.btn-primary:focus {
-  background-color: var(--color-accent-hover);
-  border-color: var(--color-accent-hover);
-  color: var(--color-text-inverse);
-}
-
-/* Outline Button (Transparent) */
-.btn-outline {
-  background-color: transparent;
-  border-color: var(--color-border-light);
-  color: var(--color-text-inverse);
-}
-
-.btn-outline:hover,
-.btn-outline:focus {
-  background-color: var(--color-accent);
-  border-color: var(--color-accent);
-  color: var(--color-text-inverse);
-}
-
-/* Ghost Button (Text only with subtle border) */
-.btn-ghost {
-  background-color: transparent;
-  border-color: var(--color-border-accent);
-  color: var(--color-accent);
-}
-
-.btn-ghost:hover,
-.btn-ghost:focus {
-  background-color: var(--color-accent);
-  color: var(--color-text-inverse);
-}
-
-/* Large Button */
-.btn-lg {
-  padding: var(--btn-padding-y-lg) var(--btn-padding-x-lg);
-  font-size: var(--btn-font-size-lg);
-}
-
-/* Small Button */
-.btn-sm {
-  padding: var(--btn-padding-y-sm) var(--btn-padding-x-sm);
-  font-size: var(--font-size-xs);
-}
-
-
-/* ============================================================================
-   15. UTILITY CLASSES
-   ============================================================================ */
-
-/* Text Colors */
-.text-primary { color: var(--color-text-primary); }
-.text-secondary { color: var(--color-text-secondary); }
-.text-heading { color: var(--color-text-heading); }
-.text-accent { color: var(--color-accent); }
-.text-inverse { color: var(--color-text-inverse); }
-
-/* Background Colors */
-.bg-primary { background-color: var(--color-bg-primary); }
-.bg-secondary { background-color: var(--color-bg-secondary); }
-.bg-dark { background-color: var(--color-bg-dark); }
-.bg-accent { background-color: var(--color-accent); }
-
-/* Text Alignment */
-.text-left { text-align: left; }
-.text-center { text-align: center; }
-.text-right { text-align: right; }
-
-/* Container */
-.container {
-  width: 100%;
-  max-width: var(--container-xl);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: var(--container-padding-x);
-  padding-right: var(--container-padding-x);
-}
-
-
-/* ============================================================================
-   16. ACCESSIBILITY FOCUS STYLES
-   ============================================================================
-   
-   Consistent, visible focus indicators for keyboard navigation.
-   Uses focus-visible to show only for keyboard users, not mouse clicks.
-   
-   ---------------------------------------------------------------------------- */
-
-/* Focus ring custom property */
-:root {
-  --focus-ring-color: var(--color-accent);
-  --focus-ring-offset: 2px;
-  --focus-ring-width: 2px;
-}
-
-/* Global focus-visible styles for interactive elements */
-a:focus-visible,
-button:focus-visible,
-input:focus-visible,
-select:focus-visible,
-textarea:focus-visible,
-[role="button"]:focus-visible,
-[role="link"]:focus-visible,
-[role="menuitem"]:focus-visible,
-[tabindex]:focus-visible {
-  outline: var(--focus-ring-width) solid var(--focus-ring-color);
-  outline-offset: var(--focus-ring-offset);
-}
-
-/* Remove default focus outline - use focus-visible instead */
-a:focus:not(:focus-visible),
-button:focus:not(:focus-visible),
-input:focus:not(:focus-visible),
-select:focus:not(:focus-visible),
-textarea:focus:not(:focus-visible) {
-  outline: none;
-}
-
-/* Skip link - already in layout.tsx */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-.sr-only.focus\:not-sr-only:focus,
-.sr-only:focus-visible {
-  position: fixed;
-  top: var(--space-4);
-  left: var(--space-4);
-  z-index: var(--z-max);
-  width: auto;
-  height: auto;
-  padding: var(--space-3) var(--space-4);
-  margin: 0;
-  overflow: visible;
-  clip: auto;
-  white-space: normal;
-  background-color: var(--color-accent);
-  color: var(--color-text-inverse);
-  font-weight: var(--font-weight-medium);
-  text-decoration: none;
-  border-radius: var(--radius-sm);
-}
-
-/* Reduced motion for accessibility */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-
-/* ============================================================================
-   17. MEDIA QUERIES (RESPONSIVE OVERRIDES)
-   ============================================================================ */
-
-/* Tablet (< 1000px) */
-@media screen and (max-width: 999px) {
-  :root {
-    --font-size-5xl:       2.25rem;    /* 36px */
-    --font-size-4xl:       2rem;       /* 32px */
-    --font-size-3xl:       1.75rem;    /* 28px */
-    
-    --section-padding-sm:  var(--space-9);   /* 34px */
-    --section-padding-md:  var(--space-12);  /* 55px */
-    --section-padding-lg:  var(--space-16);  /* 89px */
-  }
-}
-
-/* Mobile (< 690px) */
-@media screen and (max-width: 689px) {
-  :root {
-    --font-size-5xl:       1.875rem;   /* 30px */
-    --font-size-4xl:       1.5rem;     /* 24px */
-    --font-size-3xl:       1.25rem;    /* 20px */
-    
-    --btn-padding-x:       2rem;       /* 32px */
-    --btn-padding-y:       0.8125rem;  /* 13px */
-    --btn-font-size:       0.75rem;    /* 12px */
-  }
-}
-
-
-/* ============================================================================
-   APPENDIX: EXISTING SITE IMAGE ASSETS
-   ============================================================================
-   
-   Key image URLs from the existing LuxArte website for reference:
-   
-   Logo:
-   - https://www.luxarte.pl/wp-content/uploads/2021/11/Lux-Arte-Logo-2021-2.png (346x120)
-   
-   Image Directories:
-   - https://www.luxarte.pl/wp-content/uploads/
-   
-   Common Image Patterns:
-   - Product images: various aspect ratios, predominantly 4:3 and 3:2
-   - Hero/slider images: 16:9 or full viewport
-   - Brand logos: various, typically square or wide formats
-   
-   Video Assets:
-   - https://www.luxarte.pl/wp-content/uploads/2025/07/Bentley-SDM-2025_.mov
-   
-   Brands Featured:
-   - Versace Home
-   - Dolce & Gabbana Casa
-   - Bentley Home
-   - Bugatti Home
-   - Trussardi Casa
-   - Roberto Cavalli Home Interiors
-   - Visionnaire
-   - MisuraEmme
-   - SCIC Italia
-   - Valcucine
-   - Exteta
-   - Gaggenau
-   - Venicem
-   - Vanory
-   - FLOS
-   
-   ============================================================================ */

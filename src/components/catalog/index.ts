@@ -1,16 +1,5 @@
-/**
- * ============================================================================
- * CATALOG COMPONENTS INDEX
- * ============================================================================
- *
- * Export all catalog components from a single entry point.
- *
- * @version 1.0.0
- */
-
-export { 
-  CatalogSidebar, 
-  MobileFilterDrawer,
-  type FilterOption,
-  type FilterSection,
-} from './CatalogSidebar';
+export { ProductCard } from './ProductCard';
+export { ProductGrid } from './ProductGrid';
+export { GalleryFilter } from './GalleryFilter';
+export { GalleryClient } from './GalleryClient';
+export { GallerySidebar } from './GallerySidebar';

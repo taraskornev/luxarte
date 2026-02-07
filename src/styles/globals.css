@@ -1,0 +1,17 @@
+/**
+ * LuxArte Global Styles
+ * Step 9: UI Cohesion Pass
+ * 
+ * This file imports the unified CSS architecture:
+ * - design-system.css: CSS custom properties (tokens only)
+ * - core.css: All selectors and rules
+ * 
+ * Do NOT add rules directly here. Edit design-system.css or core.css.
+ * Font loaded via next/font in layout.tsx
+ */
+
+/* Design tokens */
+@import './design-system.css';
+
+/* All selectors */
+@import './core.css';

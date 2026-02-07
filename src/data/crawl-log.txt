@@ -1,0 +1,44 @@
+﻿ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+  FULL CATALOG CRAWLER - LUXARTE
+  NO LIMITS ΓÇó EXHAUSTIVE CRAWL
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+  Started: 2026-02-04T15:06:16.374Z
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+
+≡ƒôü PHASE 1: Discovering all categories...
+
+node.exe : (node:8052) Warning: Setting the 
+NODE_TLS_REJECT_UNAUTHORIZED environment variable 
+to '0' makes TLS connections and HTTPS requests 
+insecure by disabling certificate verification.
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" 
+"C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ((nod 
+   e:8052) War...e verification.:String) [], Rem  
+  oteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+(Use `node --trace-warnings ...` to show where 
+the warning was created)
+Γ£à Found 0 categories:
+
+≡ƒôè Total expected products: 0
+
+≡ƒôü PHASE 2: Crawling all category pages...
+
+
+Γ£à Total unique product URLs: 0
+
+≡ƒôü PHASE 3: Crawling main /produkty/ pages (catch-all)...
+
+   ≡ƒôä Page 1... found 27 URLs (27 new)
+   ≡ƒôä Page 2... found 27 URLs (12 new)
+   ≡ƒôä Page 3... found 27 URLs (12 new)
+   ≡ƒôä Page 4... found 27 URLs (12 new)
+   ≡ƒôä Page 5... found 27 URLs (12 new)
+   ≡ƒôä Page 6... found 27 URLs (12 new)
+   ≡ƒôä Page 7... found 27 URLs (12 new)
+   ≡ƒôä Page 8... found 27 URLs (12 new)

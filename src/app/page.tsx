@@ -1,70 +1,18 @@
 /**
- * ============================================================================
- * HOMEPAGE - LUXARTE
- * ============================================================================
- *
- * Next.js App Router homepage route.
- *
- * @version 1.0.0
+ * Homepage — Legacy Parity Rebuild (STEP 23)
+ * 
+ * Structure:
+ * - Hero video with 3 entry blocks at bottom (OFERTA, DESIGN, MARKI)
+ * 
+ * Matches legacy luxarte.pl homepage exactly
  */
 
-import type { Metadata } from 'next';
-import { AppShell } from '@/components/layout';
-import { HomePage as HomePageContent } from '@/components/homepage';
-import { homepageMeta, websiteSchema, localBusinessSchema } from '@/config/seo';
-
-// ============================================================================
-// Metadata
-// ============================================================================
-
-export const metadata: Metadata = {
-  title: homepageMeta.title,
-  description: homepageMeta.description,
-  alternates: {
-    canonical: homepageMeta.canonical,
-  },
-  openGraph: {
-    type: 'website',
-    title: homepageMeta.openGraph.title,
-    description: homepageMeta.openGraph.description,
-    images: [
-      {
-        url: homepageMeta.openGraph.image,
-        width: homepageMeta.openGraph.imageWidth,
-        height: homepageMeta.openGraph.imageHeight,
-        alt: homepageMeta.openGraph.imageAlt,
-      },
-    ],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: homepageMeta.twitter.title,
-    description: homepageMeta.twitter.description,
-  },
-};
-
-// ============================================================================
-// Page Component
-// ============================================================================
+import { HomeHeroVideo } from '@/components/hero';
 
 export default function HomePage() {
   return (
-    <AppShell>
-      <HomePageContent />
-      
-      {/* Homepage Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(websiteSchema),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(localBusinessSchema),
-        }}
-      />
-    </AppShell>
+    <div className="home-page">
+      <HomeHeroVideo />
+    </div>
   );
 }

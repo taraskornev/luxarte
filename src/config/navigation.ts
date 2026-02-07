@@ -6,13 +6,10 @@
  * Single source of truth for all navigation throughout the site.
  * This config drives header, footer, and mobile navigation components.
  * 
- * Features:
- * - Dropdown capability for Brands and Categories
- * - Config-driven navigation items
- * - Social links placeholders
- * - Contact/showroom data
+ * MENU ORDER (per spec):
+ * MARKI | KATEGORIE | BENTLEY HOME CINEMA | OUTLET | AKTUALNOŚCI | O NAS | KONTAKT | EN | PL
  * 
- * @version 1.0.0
+ * @version 2.0.0
  */
 
 // ============================================================================
@@ -56,48 +53,54 @@ export interface ContactInfo {
 }
 
 // ============================================================================
-// Primary Navigation
+// Primary Navigation — exact order per spec
 // ============================================================================
 
 export const PRIMARY_NAV: NavItem[] = [
   {
     id: 'brands',
-    label: 'Marki',
-    labelEn: 'Brands',
-    href: '/brands',
+    label: 'MARKI',
+    labelEn: 'BRANDS',
+    href: '/gallery?mode=brands',
     hasDropdown: true,
-    children: [], // Populated dynamically from CMS/API
+    children: [],
   },
   {
     id: 'categories',
-    label: 'Kategorie',
-    labelEn: 'Categories',
-    href: '/categories',
+    label: 'KATEGORIE',
+    labelEn: 'CATEGORIES',
+    href: '/gallery?mode=categories',
     hasDropdown: true,
-    children: [], // Populated dynamically from CMS/API
+    children: [],
   },
   {
-    id: 'interior-design',
-    label: 'Projektowanie Wnętrz',
-    labelEn: 'Interior Design',
-    href: '/interior-design-service',
-  },
-  {
-    id: 'projects',
-    label: 'Realizacje',
-    labelEn: 'Projects',
-    href: '/projects',
+    id: 'bentley-home-cinema',
+    label: 'BENTLEY HOME CINEMA',
+    labelEn: 'BENTLEY HOME CINEMA',
+    href: '/bentley-home-cinema',
   },
   {
     id: 'outlet',
-    label: 'Outlet',
-    labelEn: 'Outlet',
+    label: 'OUTLET',
+    labelEn: 'OUTLET',
     href: '/outlet',
   },
   {
-    id: 'showroom',
-    label: 'Showroom',
-    labelEn: 'Showroom',
+    id: 'aktualnosci',
+    label: 'AKTUALNOŚCI',
+    labelEn: 'NEWS',
+    href: '/aktualnosci',
+  },
+  {
+    id: 'o-nas',
+    label: 'O NAS',
+    labelEn: 'ABOUT US',
+    href: '/o-nas',
+  },
+  {
+    id: 'kontakt',
+    label: 'KONTAKT',
+    labelEn: 'CONTACT',
     href: '/showroom',
   },
 ];
@@ -198,12 +201,12 @@ export const CONTACT_INFO: ContactInfo = {
 };
 
 // ============================================================================
-// Brand Assets
+// Brand Assets — LOCAL images only
 // ============================================================================
 
 export const BRAND_ASSETS = {
   logo: {
-    src: 'https://www.luxarte.pl/wp-content/uploads/2021/11/Lux-Arte-Logo-2021-2.png',
+    src: '/media/luxarte-logo.png',
     alt: 'LuxArte - Fashion for Home',
     width: 346,
     height: 120,
