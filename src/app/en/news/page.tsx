@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { articles } from '@/data/articles';
+import { articles, localizeArticle } from '@/data/articles';
 
 export const metadata = {
   title: 'News - LuxArte - Fashion for Home',
@@ -8,13 +8,15 @@ export const metadata = {
 };
 
 export default function NewsPageEN() {
+  const enArticles = articles.map(a => localizeArticle(a, 'en'));
+
   return (
     <main className="content-page content-page--wide">
       <div className="content-page-container">
         <h1 className="content-page-title">NEWS</h1>
 
         <div className="news-grid">
-          {articles.map((article, index) => (
+          {enArticles.map((article, index) => (
             <article key={index} className="news-card">
               <Link href={`/en/news/${article.slug}`} className="news-card-link">
                 <div className="news-card-image">

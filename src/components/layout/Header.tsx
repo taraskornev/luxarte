@@ -26,9 +26,11 @@ const navItems = {
   ],
 };
 
-export function Header({ locale = 'pl' }: { locale?: Locale }) {
+export function Header({ locale: _serverLocale = 'pl' }: { locale?: Locale }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  // Derive locale from pathname for reliable SSG hydration
+  const locale: Locale = pathname.startsWith('/en') ? 'en' : 'pl';
   const items = navItems[locale];
   const homeHref = locale === 'en' ? '/en' : '/';
 

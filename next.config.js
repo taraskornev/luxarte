@@ -64,6 +64,16 @@ const nextConfig = {
     NEXT_PUBLIC_PREVIEW_BUILD: process.env.NEXT_PUBLIC_PREVIEW_BUILD || 'false',
   },
 
+  // Proxy media through Vercel HTTPS to avoid mixed-content blocking
+  async rewrites() {
+    return [
+      { source: '/media/:path*', destination: 'http://95.216.162.38/media/:path*' },
+      { source: '/catalog/:path*', destination: 'http://95.216.162.38/catalog/:path*' },
+      { source: '/brands/:path*', destination: 'http://95.216.162.38/brands/:path*' },
+      { source: '/preview/:path*', destination: 'http://95.216.162.38/preview/:path*' },
+    ];
+  },
+
   // Preview mode logging
   ...(isPreviewBuild && {
     onDemandEntries: {

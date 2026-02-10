@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { articles, getArticleBySlug, getAllArticleSlugs } from '@/data/articles';
+import { articles, getArticleBySlug, getAllArticleSlugs, localizeArticle } from '@/data/articles';
 import type { Metadata } from 'next';
 
 interface ArticlePageProps {
@@ -32,21 +32,24 @@ export function generateStaticParams() {
 
 export default async function ArticlePageEN({ params }: ArticlePageProps) {
   const { slug } = await params;
-  const article = getArticleBySlug(slug);
+  const rawArticle = getArticleBySlug(slug);
 
-  if (!article) {
+  if (!rawArticle) {
     notFound();
   }
+
+  const article = localizeArticle(rawArticle, 'en');
 
   // Get related articles (same category or different articles, max 3)
   const relatedArticles = articles
     .filter(a => a.slug !== slug)
     .sort((a, b) => {
-      const aMatch = a.category === article.category ? 1 : 0;
-      const bMatch = b.category === article.category ? 1 : 0;
+      const aMatch = a.category === rawArticle.category ? 1 : 0;
+      const bMatch = b.category === rawArticle.category ? 1 : 0;
       return bMatch - aMatch;
     })
-    .slice(0, 3);
+    .slice(0, 3)
+    .map(a => localizeArticle(a, 'en'));
 
   return (
     <main className="article-page">

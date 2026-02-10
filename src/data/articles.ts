@@ -324,3 +324,29 @@ export function getArticleBySlug(slug: string): Article | undefined {
 export function getAllArticleSlugs(): string[] {
   return articles.map(article => article.slug);
 }
+
+/* ── Locale helpers for EN pages ─────────────────────────────── */
+
+const categoryMap: Record<string, string> = {
+  'AKTUALNOŚCI': 'NEWS',
+  'NOWA KOLEKCJA': 'NEW COLLECTION',
+};
+
+const monthMap: Record<string, string> = {
+  'STYCZNIA': 'JANUARY', 'LUTEGO': 'FEBRUARY', 'MARCA': 'MARCH',
+  'KWIETNIA': 'APRIL', 'MAJA': 'MAY', 'CZERWCA': 'JUNE',
+  'LIPCA': 'JULY', 'SIERPNIA': 'AUGUST', 'WRZEŚNIA': 'SEPTEMBER',
+  'PAŹDZIERNIKA': 'OCTOBER', 'LISTOPADA': 'NOVEMBER', 'GRUDNIA': 'DECEMBER',
+};
+
+/** Translate article metadata (category + date) to English */
+export function localizeArticle(article: Article, locale: 'pl' | 'en'): Article {
+  if (locale === 'pl') return article;
+  return {
+    ...article,
+    category: categoryMap[article.category] ?? article.category,
+    date: Object.entries(monthMap).reduce(
+      (d, [pl, en]) => d.replace(pl, en), article.date
+    ),
+  };
+}
