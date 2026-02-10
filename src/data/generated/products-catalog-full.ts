@@ -1,13 +1,13 @@
 // Auto-generated from disk scan with canonical mapping - 2026-02-06T11:19:36.735Z
 // Source: public/catalog/products/ + canonical mappings
 // Total products: 814
-// Brands: 18 canonical + unknown
+// Brands: 15 canonical + unknown
 // Categories: 30 canonical + unknown
 
 /**
- * Brand Slug Type (canonical 18 + unknown)
+ * Brand Slug Type (canonical 15 + legacy + unknown)
  */
-export type BrandSlug = 'versace-home' | 'trussardi-casa' | 'bentley-home' | 'bugatti-home' | 'dolce-gabbana-casa' | 'visionnaire' | 'roberto-cavalli-home-interiors' | 'misuraemme' | 'scic-italia' | 'valcucine' | 'exteta' | 'gaggenau' | 'venicem' | 'vanory' | 'noorth' | 'vitage' | 'longhi' | 'dv-home' | 'unknown';
+export type BrandSlug = 'versace-home' | 'trussardi-casa' | 'bentley-home' | 'bugatti-home' | 'dolce-gabbana-casa' | 'visionnaire' | 'roberto-cavalli-home-interiors' | 'misuraemme' | 'scic-italia' | 'valcucine' | 'exteta' | 'gaggenau' | 'venicem' | 'vanory' | 'flos' | 'dv-home' | 'noorth' | 'vitage' | 'unknown';
 
 /**
  * Category Slug Type (canonical 30 + unknown)
@@ -32,10 +32,10 @@ export const brandNames: Record<BrandSlug, string> = {
   "gaggenau": "Gaggenau",
   "venicem": "Venicem",
   "vanory": "Vanory",
+  "flos": "Flos",
+  "dv-home": "DV Home",
   "noorth": "Noorth",
   "vitage": "Vitage",
-  "longhi": "Longhi",
-  "dv-home": "DV Home",
   "unknown": "Marka nieznana"
 };
 
@@ -620,48 +620,6 @@ export const catalogProducts: readonly CatalogProduct[] = [
     ],
     "imageCount": 16,
     "legacyUrl": "https://www.luxarte.pl/produkty/biurko-trussardi-casa-wady/"
-  },
-  {
-    "id": "donica-godwin-longhi",
-    "name": "Donica Godwin Longhi",
-    "slug": "donica-godwin-longhi",
-    "brandSlug": "longhi",
-    "categorySlug": "donice",
-    "mainImage": "/catalog/products/donica-godwin-longhi/01-card.webp",
-    "gallery": [
-      "/catalog/products/donica-godwin-longhi/01-card.webp",
-      "/catalog/products/donica-godwin-longhi/01-gallery.webp",
-      "/catalog/products/donica-godwin-longhi/02-gallery.webp",
-      "/catalog/products/donica-godwin-longhi/03-gallery.webp",
-      "/catalog/products/donica-godwin-longhi/04-gallery.webp",
-      "/catalog/products/donica-godwin-longhi/05-gallery.webp",
-      "/catalog/products/donica-godwin-longhi/06-gallery.webp",
-      "/catalog/products/donica-godwin-longhi/07-gallery.webp",
-      "/catalog/products/donica-godwin-longhi/08-gallery.webp",
-      "/catalog/products/donica-godwin-longhi/09-gallery.webp"
-    ],
-    "images": [
-      "/catalog/products/donica-godwin-longhi/01-card.webp",
-      "/catalog/products/donica-godwin-longhi/01-gallery.webp",
-      "/catalog/products/donica-godwin-longhi/02-gallery.webp",
-      "/catalog/products/donica-godwin-longhi/02-lightbox.webp",
-      "/catalog/products/donica-godwin-longhi/03-gallery.webp",
-      "/catalog/products/donica-godwin-longhi/03-lightbox.webp",
-      "/catalog/products/donica-godwin-longhi/04-gallery.webp",
-      "/catalog/products/donica-godwin-longhi/04-lightbox.webp",
-      "/catalog/products/donica-godwin-longhi/05-gallery.webp",
-      "/catalog/products/donica-godwin-longhi/05-lightbox.webp",
-      "/catalog/products/donica-godwin-longhi/06-gallery.webp",
-      "/catalog/products/donica-godwin-longhi/06-lightbox.webp",
-      "/catalog/products/donica-godwin-longhi/07-gallery.webp",
-      "/catalog/products/donica-godwin-longhi/07-lightbox.webp",
-      "/catalog/products/donica-godwin-longhi/08-gallery.webp",
-      "/catalog/products/donica-godwin-longhi/08-lightbox.webp",
-      "/catalog/products/donica-godwin-longhi/09-gallery.webp",
-      "/catalog/products/donica-godwin-longhi/09-lightbox.webp"
-    ],
-    "imageCount": 18,
-    "legacyUrl": "https://www.luxarte.pl/produkty/donica-godwin-longhi/"
   },
   {
     "id": "donica-hollywood-dv-home",

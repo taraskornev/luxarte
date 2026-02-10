@@ -1,53 +1,75 @@
 import Link from 'next/link';
+import Image from 'next/image';
+import { getFooterBrands } from '@/canonical/legacyBrands';
+import { getDictionary, type Locale } from '@/i18n';
+import { mediaUrl } from '@/lib/buildMode';
 
-export function Footer() {
+export function Footer({ locale = 'pl' }: { locale?: Locale }) {
+  const footerBrands = getFooterBrands();
+  const t = getDictionary(locale);
+  const brandPrefix = locale === 'en' ? '/en/brand' : '/brand';
+  const homeHref = locale === 'en' ? '/en' : '/';
+  
   return (
     <footer className="site-footer">
+      <div className="footer-logo-container">
+        <Link href={homeHref} className="footer-logo">
+          <Image
+            src={mediaUrl('/media/luxarte-logo.png')}
+            alt="LuxArte"
+            width={150}
+            height={50}
+            sizes="150px"
+          />
+        </Link>
+      </div>
       <div className="footer-container">
-        <div className="footer-section">
-          <h3>LUXARTE WARSZAWA SHOWROOM</h3>
-          <address>
-            Budynek Opery Narodowej<br />
-            Plac Piłsudskiego 9<br />
-            00-078 Warszawa
-          </address>
-          <p>
+        <div className="footer-section footer-location">
+          <h3>{t.footer.warsawTitle}</h3>
+          <div className="footer-address-block">
+            <a href="https://www.google.pl/maps/place/LuxArte+-+Showroom+Fendi+Casa,+Bentley+Home/@52.2427796,21.0100078,17z/data=!3m1!4b1!4m5!3m4!1s0x471ecc6132585dfd:0xdf9cec83a602e200!8m2!3d52.2427796!4d21.0121966" target="_blank" rel="noopener noreferrer" className="footer-address-link">
+              <address>
+                {t.footer.buildingName}<br />
+                Plac Piłsudskiego 9<br />
+                00-078 Warszawa
+              </address>
+            </a>
+          </div>
+          <div className="footer-contact-block">
             <a href="tel:+48226290458">+48 22 629 04 58</a><br />
             <a href="mailto:warszawa@luxarte.pl">warszawa@luxarte.pl</a>
-          </p>
+          </div>
         </div>
 
-        <div className="footer-section">
-          <h3>LUXARTE WROCŁAW PROJECT DEPARTMENT</h3>
-          <address>
-            ul. Księcia Witolda 42/1<br />
-            50-202 Wrocław
-          </address>
-          <p>
+        <div className="footer-section footer-location">
+          <h3>{t.footer.wroclawTitle}</h3>
+          <div className="footer-address-block">
+            <a href="https://www.google.com/maps/place/Ksi%C4%99cia+Witolda+42,+50-202+Wroc%C5%82aw/@51.1151795,17.0235576,17z/data=!4m5!3m4!1s0x470fe9e1aedd02f1:0x75ad56f8c158d9de!8m2!3d51.1151795!4d17.0257418" target="_blank" rel="noopener noreferrer" className="footer-address-link">
+              <address>
+                ul. Księcia Witolda 42/1<br />
+                50-202 Wrocław
+              </address>
+            </a>
+          </div>
+          <div className="footer-contact-block">
             <a href="tel:+48507047399">+48 507 047 399</a><br />
             <a href="mailto:wroclaw@luxarte.pl">wroclaw@luxarte.pl</a>
-          </p>
+          </div>
         </div>
 
         <div className="footer-section">
-          <h3>NASZE MARKI</h3>
+          <h3>{t.footer.brandsTitle}</h3>
           <ul className="footer-brands-list">
-            <li><Link href="/brand/dolce-gabbana">Dolce &amp; Gabbana</Link></li>
-            <li><Link href="/brand/versace-home">Versace Home</Link></li>
-            <li><Link href="/brand/roberto-cavalli">Roberto Cavalli Home Interiors</Link></li>
-            <li><Link href="/brand/trussardi-casa">Trussardi Casa</Link></li>
-            <li><Link href="/brand/bentley-home">Bentley Home</Link></li>
-            <li><Link href="/brand/bugatti-home">Bugatti Home</Link></li>
-            <li><Link href="/brand/visionnaire">Visionnaire</Link></li>
-            <li><Link href="/brand/valcucine">Valcucine</Link></li>
-            <li><Link href="/brand/gaggenau">Gaggenau</Link></li>
-            <li><Link href="/brand/scic">SCIC Italia</Link></li>
-            <li><Link href="/brand/vanory">Vanory</Link></li>
+            {footerBrands.map((brand) => (
+              <li key={brand.slug}>
+                <Link href={`${brandPrefix}/${brand.slug}`}>{brand.label}</Link>
+              </li>
+            ))}
           </ul>
         </div>
 
         <div className="footer-section">
-          <h3>MEDIA SPOŁECZNOŚCIOWE</h3>
+          <h3>{t.footer.socialTitle}</h3>
           <div className="footer-social">
             <a 
               href="https://www.facebook.com/Luxarte1" 
@@ -78,8 +100,7 @@ export function Footer() {
       </div>
 
       <div className="footer-bottom">
-        <p>&copy; {new Date().getFullYear()} LuxArte - Fashion for Home. Wszystkie prawa zastrzeżone.</p>
-        <p className="footer-credits">Projekt i realizacja: <a href="https://alpacastudio.pl/" target="_blank" rel="noopener noreferrer">Alpaca Studio - Agencja Marketingowa Warszawa</a></p>
+        <p>&copy; {new Date().getFullYear()} LuxArte - Fashion for Home. {t.footer.copyright}</p>
       </div>
     </footer>
   );

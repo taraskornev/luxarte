@@ -12,6 +12,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
+import { mediaUrl } from '@/lib/buildMode';
 
 interface CTATile {
   id: string;
@@ -29,7 +30,7 @@ const CTA_TILES: CTATile[] = [
     text: 'Kompleksowe wyposażenie wnętrz premium. Luksusowe meble, oświetlenie, kuchnie, garderoby i łazienki od najlepszych włoskich marek.',
     buttonLabel: 'Zobacz ofertę',
     href: '/oferta',
-    image: '/media/design/villa-01-hero.webp',
+    image: mediaUrl('/media/design/villa-01-hero.webp'),
   },
   {
     id: 'design',
@@ -37,7 +38,7 @@ const CTA_TILES: CTATile[] = [
     text: 'Autorskie projekty wnętrz i współpraca z architektami. Indywidualne realizacje dla klientów prywatnych i projektów komercyjnych.',
     buttonLabel: 'Projektowanie',
     href: '/design',
-    image: '/media/design/projektowanie-luxarte-hero.webp',
+    image: mediaUrl('/media/design/projektowanie-luxarte-hero.webp'),
   },
   {
     id: 'nasze-marki',
@@ -45,7 +46,7 @@ const CTA_TILES: CTATile[] = [
     text: 'Oficjalny przedstawiciel w Polsce: Versace Home, Bentley Home, Dolce&Gabbana Casa, Trussardi Casa, Visionnaire i więcej.',
     buttonLabel: 'Poznaj marki',
     href: '/nasze-marki',
-    image: '/media/brands/visionnaire-hero.webp',
+    image: mediaUrl('/media/brands/visionnaire-hero.webp'),
   },
 ];
 

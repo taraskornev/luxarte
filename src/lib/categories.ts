@@ -1,11 +1,11 @@
 /**
  * Categories Data Layer
  * 
- * Reads from: data/legacy-categories.json
+ * Reads from: canonical/legacyCategories.ts
  * This is the single source of truth for category data.
  */
 
-import legacyCategories from '@/data/legacy-categories.json';
+import { LEGACY_CATEGORIES, type LegacyCategory } from '@/canonical/legacyCategories';
 
 export interface Category {
   slug: string;
@@ -14,40 +14,43 @@ export interface Category {
 }
 
 /**
+ * Convert LegacyCategory to Category interface
+ */
+function toCategory(item: LegacyCategory): Category {
+  return {
+    slug: item.slug,
+    name: item.label,
+    productCount: item.productCount || 0,
+  };
+}
+
+/**
  * Get all categories
  */
 export function getAllCategories(): Category[] {
-  return legacyCategories.map((item) => ({
-    slug: item.slug,
-    name: item.name,
-    productCount: item.productCount || 0,
-  }));
+  return LEGACY_CATEGORIES.map(toCategory);
 }
 
 /**
  * Get category by slug
  */
 export function getCategoryBySlug(slug: string): Category | undefined {
-  const item = legacyCategories.find((c) => c.slug === slug);
+  const item = LEGACY_CATEGORIES.find((c) => c.slug === slug);
   if (!item) return undefined;
   
-  return {
-    slug: item.slug,
-    name: item.name,
-    productCount: item.productCount || 0,
-  };
+  return toCategory(item);
 }
 
 /**
  * Get category count
  */
 export function getCategoryCount(): number {
-  return legacyCategories.length;
+  return LEGACY_CATEGORIES.length;
 }
 
 /**
  * Get all category slugs (for static generation)
  */
 export function getAllCategorySlugs(): string[] {
-  return legacyCategories.map((c) => c.slug);
+  return LEGACY_CATEGORIES.map((c) => c.slug);
 }

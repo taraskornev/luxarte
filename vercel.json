@@ -48,13 +48,293 @@
     }
   ],
   "images": {
-    "remotePatterns": [
-      {
-        "protocol": "https",
-        "hostname": "www.luxarte.pl",
-        "pathname": "/wp-content/uploads/**"
-      }
-    ],
     "sizes": [640, 750, 828, 1080, 1200, 1920, 2048]
-  }
+  },
+  "redirects": [
+    {
+      "source": "/marki/",
+      "destination": "/nasze-marki",
+      "permanent": true
+    },
+    {
+      "source": "/marki",
+      "destination": "/nasze-marki",
+      "permanent": true
+    },
+    {
+      "source": "/projektowanie-wnetrz/",
+      "destination": "/design",
+      "permanent": true
+    },
+    {
+      "source": "/projektowanie-wnetrz",
+      "destination": "/design",
+      "permanent": true
+    },
+    {
+      "source": "/bentley_home_cinema/",
+      "destination": "/bentley-home-cinema",
+      "permanent": true
+    },
+    {
+      "source": "/bentley_home_cinema",
+      "destination": "/bentley-home-cinema",
+      "permanent": true
+    },
+    {
+      "source": "/zarezerwuj-termin-bentley-home-cinema/",
+      "destination": "/bentley-home-cinema/rezerwacja",
+      "permanent": true
+    },
+    {
+      "source": "/zarezerwuj-termin-bentley-home-cinema",
+      "destination": "/bentley-home-cinema/rezerwacja",
+      "permanent": true
+    },
+    {
+      "source": "/zarezerwuj-termin/",
+      "destination": "/bentley-home-cinema/rezerwacja",
+      "permanent": true
+    },
+    {
+      "source": "/zarezerwuj-termin",
+      "destination": "/bentley-home-cinema/rezerwacja",
+      "permanent": true
+    },
+    {
+      "source": "/outlet-luxarte/",
+      "destination": "/outlet",
+      "permanent": true
+    },
+    {
+      "source": "/outlet-luxarte",
+      "destination": "/outlet",
+      "permanent": true
+    },
+    {
+      "source": "/showroom-warszawa/",
+      "destination": "/kontakt",
+      "permanent": true
+    },
+    {
+      "source": "/showroom-warszawa",
+      "destination": "/kontakt",
+      "permanent": true
+    },
+    {
+      "source": "/showroom-wroclaw/",
+      "destination": "/kontakt",
+      "permanent": true
+    },
+    {
+      "source": "/showroom-wroclaw",
+      "destination": "/kontakt",
+      "permanent": true
+    },
+    {
+      "source": "/interior-design-s/",
+      "destination": "/design",
+      "permanent": true
+    },
+    {
+      "source": "/interior-design-s",
+      "destination": "/design",
+      "permanent": true
+    },
+    {
+      "source": "/produkty/",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/produkty",
+      "destination": "/gallery",
+      "permanent": true
+    },
+    {
+      "source": "/strona-glowna/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/strona-glowna",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/meble-dolcegabbana-casa/",
+      "destination": "/brand/dolce-gabbana-casa",
+      "permanent": true
+    },
+    {
+      "source": "/meble-dolcegabbana-casa",
+      "destination": "/brand/dolce-gabbana-casa",
+      "permanent": true
+    },
+    {
+      "source": "/versace-home/",
+      "destination": "/brand/versace-home",
+      "permanent": true
+    },
+    {
+      "source": "/versace-home",
+      "destination": "/brand/versace-home",
+      "permanent": true
+    },
+    {
+      "source": "/roberto-cavalli-home-interiors/",
+      "destination": "/brand/roberto-cavalli-home-interiors",
+      "permanent": true
+    },
+    {
+      "source": "/roberto-cavalli-home-interiors",
+      "destination": "/brand/roberto-cavalli-home-interiors",
+      "permanent": true
+    },
+    {
+      "source": "/trussardi-casa/",
+      "destination": "/brand/trussardi-casa",
+      "permanent": true
+    },
+    {
+      "source": "/trussardi-casa",
+      "destination": "/brand/trussardi-casa",
+      "permanent": true
+    },
+    {
+      "source": "/bentley-home/",
+      "destination": "/brand/bentley-home",
+      "permanent": true
+    },
+    {
+      "source": "/bentley-home",
+      "destination": "/brand/bentley-home",
+      "permanent": true
+    },
+    {
+      "source": "/bugatti_home/",
+      "destination": "/brand/bugatti-home",
+      "permanent": true
+    },
+    {
+      "source": "/bugatti_home",
+      "destination": "/brand/bugatti-home",
+      "permanent": true
+    },
+    {
+      "source": "/visionnaire/",
+      "destination": "/brand/visionnaire",
+      "permanent": true
+    },
+    {
+      "source": "/visionnaire",
+      "destination": "/brand/visionnaire",
+      "permanent": true
+    },
+    {
+      "source": "/valcucine-luksusowe-kuchnie/",
+      "destination": "/brand/valcucine",
+      "permanent": true
+    },
+    {
+      "source": "/valcucine-luksusowe-kuchnie",
+      "destination": "/brand/valcucine",
+      "permanent": true
+    },
+    {
+      "source": "/gaggenau/",
+      "destination": "/brand/gaggenau",
+      "permanent": true
+    },
+    {
+      "source": "/gaggenau",
+      "destination": "/brand/gaggenau",
+      "permanent": true
+    },
+    {
+      "source": "/scic/",
+      "destination": "/brand/scic-italia",
+      "permanent": true
+    },
+    {
+      "source": "/scic",
+      "destination": "/brand/scic-italia",
+      "permanent": true
+    },
+    {
+      "source": "/vanory/",
+      "destination": "/brand/vanory",
+      "permanent": true
+    },
+    {
+      "source": "/vanory",
+      "destination": "/brand/vanory",
+      "permanent": true
+    },
+    {
+      "source": "/venicem/",
+      "destination": "/brand/venicem",
+      "permanent": true
+    },
+    {
+      "source": "/venicem",
+      "destination": "/brand/venicem",
+      "permanent": true
+    },
+    {
+      "source": "/misura-emme/",
+      "destination": "/brand/misuraemme",
+      "permanent": true
+    },
+    {
+      "source": "/misura-emme",
+      "destination": "/brand/misuraemme",
+      "permanent": true
+    },
+    {
+      "source": "/flos/",
+      "destination": "/brand/flos",
+      "permanent": true
+    },
+    {
+      "source": "/flos",
+      "destination": "/brand/flos",
+      "permanent": true
+    },
+    {
+      "source": "/exteta/",
+      "destination": "/brand/exteta",
+      "permanent": true
+    },
+    {
+      "source": "/exteta",
+      "destination": "/brand/exteta",
+      "permanent": true
+    },
+    {
+      "source": "/kolekcja-dolce-gabbana/",
+      "destination": "/brand/dolce-gabbana-casa",
+      "permanent": true
+    },
+    {
+      "source": "/kolekcja-versace-home/",
+      "destination": "/brand/versace-home",
+      "permanent": true
+    },
+    {
+      "source": "/o-nas-b/",
+      "destination": "/o-nas",
+      "permanent": true
+    },
+    {
+      "source": "/versace-home-b/",
+      "destination": "/brand/versace-home",
+      "permanent": true
+    },
+    {
+      "source": "/akcesoria_oferta_specjalna/",
+      "destination": "/outlet",
+      "permanent": true
+    }
+  ]
 }

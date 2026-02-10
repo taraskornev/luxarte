@@ -1,88 +1,143 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { mediaUrl } from '@/lib/buildMode';
 
 export const metadata = {
-  title: 'BENTLEY HOME CINEMA - PREMIERA - LuxArte - Fashion for Home',
-  description: 'Cieszymy się, że możemy podzielić się z Wami projektem, nad którym pracowaliśmy przez ostatnie miesiące. Nasz warszawski showroom poszerzył ekspozycję o unikatową przestrzeń – Bentley Home Cinema.',
+  title: 'Ekskluzywne kino domowe - Prywatna sala kinowa - BENTLEY HOME CINEMA - LuxArte - Fashion for Home',
+  description: 'Ekskluzywne kino domowe - Prywatna sala kinowa - BENTLEY HOME CINEMA. Showroom wyposażony w meble Bentley Home z profesjonalnym systemem audio-video Procella Audio, Sony 4K, Screen Research.',
 };
-
-const galleryImages = [
-  { src: '/media/pages/bentley-home-cinema/image-02.jpg', alt: 'BENTLEY HOME CINEMA – PREMIERA' },
-  { src: '/media/pages/bentley-home-cinema/image-03.jpg', alt: 'Bentley Home Cinema - wnętrze showroomu' },
-  { src: '/media/pages/bentley-home-cinema/image-04.jpg', alt: 'Bentley Home Cinema - meble' },
-  { src: '/media/pages/bentley-home-cinema/image-05.jpg', alt: 'Bentley Home Cinema - detale' },
-  { src: '/media/pages/bentley-home-cinema/image-06.jpg', alt: 'Bentley Home Cinema - przestrzeń' },
-  { src: '/media/pages/bentley-home-cinema/image-07.jpg', alt: 'Bentley Home Cinema - system AV' },
-  { src: '/media/pages/bentley-home-cinema/image-08.jpg', alt: 'Bentley Home Cinema - fotele' },
-  { src: '/media/pages/bentley-home-cinema/image-09.jpg', alt: 'Bentley Home Cinema - oświetlenie' },
-  { src: '/media/pages/bentley-home-cinema/image-10.jpg', alt: 'Bentley Home Cinema - atmosfera' },
-  { src: '/media/pages/bentley-home-cinema/image-13.jpg', alt: 'Bentley Home Cinema - widok' },
-];
 
 export default function BentleyHomeCinemaPage() {
   return (
-    <main className="content-page">
-      <div className="content-page-container">
-        <h1 className="content-page-title">BENTLEY HOME CINEMA – PREMIERA</h1>
-
-        <div className="content-page-hero">
-          <Image
-            src="/media/pages/bentley-home-cinema/image-02.jpg"
-            alt="BENTLEY HOME CINEMA – PREMIERA"
-            fill
-            priority
-            sizes="100vw"
-            style={{ objectFit: 'cover' }}
-          />
+    <main className="content-page bentley-cinema-page">
+      {/* Hero Section with Video Background */}
+      <div className="bentley-cinema-hero">
+        <video
+          className="bentley-cinema-hero-video"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+        >
+          <source src={mediaUrl('/media/pages/bentley-home-cinema/baner_short2.mp4')} type="video/mp4" />
+        </video>
+        <div className="bentley-cinema-hero-overlay" />
+        <div className="bentley-cinema-hero-content">
+          <span className="bentley-cinema-showroom-label">SHOWROOM WARSZAWA</span>
+          <h1 className="bentley-cinema-hero-title">BENTLEY HOME CINEMA</h1>
+          <Link href="/bentley-home-cinema/rezerwacja" className="bentley-cinema-cta-btn">
+            ZAREZERWUJ TERMIN
+          </Link>
         </div>
-
-        <article className="content-page-body">
-          <p>
-            Cieszymy się, że możemy podzielić się z Wami projektem, nad którym pracowaliśmy przez ostatnie miesiące. Nasz warszawski showroom poszerzył ekspozycję o unikatową przestrzeń – Bentley Home Cinema.
-          </p>
-
-          <p>
-            We wrześniu miała miejsce uroczysta premiera, podczas której prezentowaliśmy naszym gościom filmy i fragmenty koncertów w najwyższej jakości Audio-Video. Prezentacjom towarzyszyła degustacja whiskey Macallan, a o lifecooaking perfekcyjnie zadbał Witek Iwański z HUB Praga. Magiczny wieczór podkreśliła również obecność partnera Bentley Motors, dzięki któremu możemy zapewnić naszym klientom pełne doświadczenie atmosfery marki.
-          </p>
-
-          <p>
-            Luxarte jako pierwszy w Polsce showroom z wyposażeniem wnętrz, przedstawia możliwości wyposażenia pomieszczeń Audio-Video najwyższej klasy.
-          </p>
-
-          <p>
-            Wnętrze zostało wyposażone w meble Bentley Home. Nawiązania do motoryzacji w kolekcji mebli pokazują detale, które zostały przeniesione z charakterystycznych wzorów i form, dobrze znanym fanom marki Bentley. Oryginalna atmosfera i najwyższy kunszt rzemiosła zrobi wrażenie również na osobach ceniących najwyższą jakość i ponadczasowy design. O stronę Audio-Video zadbał nasz partner, firma <a href="https://cinematic.pl/o-nas/" target="_blank" rel="noopener noreferrer">Cinematic</a>, z ponad 20-letnim doświadczeniem w projektowaniu systemów AV dla przestrzeni prywatnych.
-          </p>
-
-          <p>
-            Magię tego wieczoru będziemy się starać odtworzyć podczas indywidualnych prezentacji przestrzeni Bentley Home Cinema. W celu zapewnienia najwyższej jakości obsługi, wszystkie prezentacje i spotkania w naszym showroomie odbywają się wyłącznie po wcześniejszym umówieniu. Chcemy zagwarantować pełną uwagę i profesjonalne przygotowanie, dopasowane do Państwa potrzeb i oczekiwań. <a href="/kontakt">Zapraszamy do rezerwacji spotkania.</a>
-          </p>
-        </article>
-
-        <section className="content-page-gallery">
-          <div className="content-gallery-grid">
-            {galleryImages.map((img, index) => (
-              <div key={index} className="content-gallery-item">
-                <Image
-                  src={img.src}
-                  alt={img.alt}
-                  width={600}
-                  height={400}
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-                />
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="content-page-cta">
-          <h2>Umów prezentację</h2>
-          <p>
-            Zapraszamy do rezerwacji indywidualnej prezentacji przestrzeni Bentley Home Cinema.
-          </p>
-          <Link href="/kontakt" className="content-cta-button">Kontakt</Link>
-        </section>
       </div>
+
+      {/* Section 1: Image left + Text right */}
+      <section className="bentley-cinema-section">
+        <div className="bentley-cinema-row">
+          <div className="bentley-cinema-col bentley-cinema-col--image">
+            <Image
+              src={mediaUrl('/media/pages/bentley-home-cinema/image-04.jpg')}
+              alt="Bentley Home Cinema LuxArte"
+              fill
+              sizes="(max-width: 999px) 100vw, 50vw"
+              style={{ objectFit: 'cover', objectPosition: 'center' }}
+              priority
+            />
+          </div>
+          <div className="bentley-cinema-col bentley-cinema-col--text">
+            <div className="bentley-cinema-text-inner">
+              <p>
+                Nasza chęć rozwoju i dostarczania inspiracji Klientom zaowocowała nowym projektem w przestrzeni warszawskiego showroom'u LuxArte.
+              </p>
+              <p>
+                Bentley Home Cinema jest wyjątkowym miejscem na mapie Europy.
+              </p>
+              <p>
+                We współpracy z firmą Cinematic, specjalizującą się profesjonalnym wyposażeniu audio-video, podjęliśmy się wykreowania luksusowej przestrzeni wyposażonej w meble marki Bentley Home, której przeznaczenie pozwala na oglądanie filmów w najwyższej jakości dźwięku i obrazu.
+              </p>
+              <p>
+                Stworzyliśmy kameralną, ekskluzywną przestrzeń, która mówi o autentyczności marki Bentley w jej realizacji luksusu i rzemiosła, jednocześnie dostarczając wrażenia dla zmysłów. Bentley Home Cinema prezentuje niezrównaną klarowność obrazu i dźwięku, jednocześnie naturalnie włączając charakterystyczne dla marki detale projektowe. Każdy szczegół harmonijnie przyczynia się do niezapomnianych wrażeń.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 2: Text left + Image right */}
+      <section className="bentley-cinema-section">
+        <div className="bentley-cinema-row bentley-cinema-row--reverse">
+          <div className="bentley-cinema-col bentley-cinema-col--text">
+            <div className="bentley-cinema-text-inner">
+              <p>
+                W jednym pomieszczeniu mamy możliwość posłuchania aż 3 różnych systemów kinowych zbudowanych w oparciu o system nagłośnienia Procella Audio. Naszą flagową konfiguracją jest <strong>system 7.6.4 Dolby Atmos Waveforming</strong> zbudowany w oparciu o 22 głośniki.
+              </p>
+              <p>
+                Za efekty wizualne odpowiada najnowszy <strong>projektor laserowy 4K firmy Sony</strong>. Unikalną cechą projektora jest bardzo wysoka jasność wynosząca 3400 ANS Lumenów oraz procesor XR. Projektor został zamontowany w suficie dzięki systemowi <strong>DT Motorised Mirror Drop</strong> który, wyposażony w zautomatyzowane lustro, które dyskretnie ukrywa projektor, gdy nie jest używany.
+              </p>
+              <p>
+                Obraz wyświetlany jest na wielkim <strong>ekranie Screen Research serii DecorMask FDM</strong>. Ma on wymiary 355cm szerokości x 200 cm wysokości, co daje nam <strong>przekątną 160 cali</strong>. Tak duży obraz zapewnia prawdziwie immersyjny efekt, widzowie czują się „zanurzeni" w świecie prezentowanym na ekranie.
+              </p>
+            </div>
+          </div>
+          <div className="bentley-cinema-col bentley-cinema-col--image">
+            <Image
+              src={mediaUrl('/media/pages/bentley-home-cinema/image-05.jpg')}
+              alt="Bentley Home Cinema Cinematic"
+              fill
+              sizes="(max-width: 999px) 100vw, 50vw"
+              style={{ objectFit: 'cover', objectPosition: 'center' }}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Section 3: Image left + Text right */}
+      <section className="bentley-cinema-section">
+        <div className="bentley-cinema-row">
+          <div className="bentley-cinema-col bentley-cinema-col--image">
+            <Image
+              src={mediaUrl('/media/pages/bentley-home-cinema/image-06.jpg')}
+              alt="Bentley Home Cinema - wnętrze"
+              fill
+              sizes="(max-width: 999px) 100vw, 50vw"
+              style={{ objectFit: 'cover', objectPosition: 'center' }}
+            />
+          </div>
+          <div className="bentley-cinema-col bentley-cinema-col--text">
+            <div className="bentley-cinema-text-inner">
+              <p>
+                Fanów marki i designu zapraszamy do umówienia indywidualnego spotkania, podczas którego będziemy mogli zaprezentować przestrzeń Bentley Home Cinema oraz możliwości, jakie możemy zaoferować Państwu przy realizacji kin domowych w projektach indywidualnych i komercyjnych.
+              </p>
+              <p>
+                Nasz showroom mieści się w zabytkowym budynku Opery Narodowej przy Placu Piłsudskiego 9 w Warszawie. W Luxarte możesz uzyskać prawdziwe doświadczenie marki Bentley Home.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Button */}
+      <section className="bentley-cinema-cta-section">
+        <Link href="/bentley-home-cinema/rezerwacja" className="bentley-cinema-cta-btn">
+          ZAREZERWUJ TERMIN
+        </Link>
+      </section>
+
+      {/* Partner Section */}
+      <section className="bentley-cinema-partner-section">
+        <h2 className="bentley-cinema-partner-title">PARTNEREM PROJEKTU JEST FIRMA</h2>
+        <a href="https://cinematic.pl/showroom-kino/" target="_blank" rel="noopener noreferrer" className="bentley-cinema-partner-logo">
+          <Image
+            src={mediaUrl('/media/pages/bentley-home-cinema/cinematic-logo.png')}
+            alt="Cinematic"
+            width={1728}
+            height={307}
+            sizes="(max-width: 600px) 80vw, 400px"
+            style={{ width: '100%', maxWidth: '400px', height: 'auto' }}
+          />
+        </a>
+      </section>
     </main>
   );
 }

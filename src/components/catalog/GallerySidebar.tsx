@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { LegacyBrand } from '@/canonical/legacyBrands';
 import { LegacyCategory } from '@/canonical/legacyCategories';
+import { getDictionary, type Locale } from '@/i18n';
 
 interface GallerySidebarProps {
   brands: LegacyBrand[];
@@ -15,6 +16,7 @@ interface GallerySidebarProps {
   onCategoryToggle: (categorySlug: string) => void;
   onClearFilters: () => void;
   hasFilters: boolean;
+  locale?: Locale;
 }
 
 /**
@@ -29,6 +31,11 @@ interface GallerySidebarProps {
  * 2. Categories (checkbox multi-select)
  * 
  * Labels come from canonical sources - no hardcoding.
+ * 
+ * Accordion behavior matches mobile drawer:
+ * - Both expanded: 50/50 height split
+ * - One expanded: takes 100% available height
+ * - Both collapsed: headers only
  */
 export function GallerySidebar({
   brands,
@@ -41,9 +48,11 @@ export function GallerySidebar({
   onCategoryToggle,
   onClearFilters,
   hasFilters,
+  locale = 'pl',
 }: GallerySidebarProps) {
   const [brandsExpanded, setBrandsExpanded] = useState(true);
   const [categoriesExpanded, setCategoriesExpanded] = useState(true);
+  const t = getDictionary(locale);
 
   return (
     <div className="sidebar-filters">
@@ -54,21 +63,21 @@ export function GallerySidebar({
           className="sidebar-clear-all"
           onClick={onClearFilters}
         >
-          Wyczyść wszystkie filtry
+          {t.common.clearAllFilters}
         </button>
       )}
 
-      {/* Brands Section */}
-      <div className="filter-group">
+      {/* Brands Section - accordion behavior */}
+      <div className={`filter-group ${brandsExpanded ? 'expanded' : 'collapsed'}`}>
         <button
           type="button"
-          className={`filter-group-header ${brandsExpanded ? 'expanded' : ''}`}
+          className="filter-group-header"
           onClick={() => setBrandsExpanded(!brandsExpanded)}
         >
-          <span>Marki{selectedBrands.length > 0 && ` (${selectedBrands.length})`}</span>
+          <span>{t.common.brands}{selectedBrands.length > 0 && ` (${selectedBrands.length})`}</span>
           <span className="filter-group-toggle">{brandsExpanded ? '−' : '+'}</span>
         </button>
-        {brandsExpanded && (
+        <div className="filter-group-content">
           <ul className="filter-group-list">
             {brands.map((brand) => {
               const count = brandCounts.get(brand.slug) || 0;
@@ -90,20 +99,20 @@ export function GallerySidebar({
               );
             })}
           </ul>
-        )}
+        </div>
       </div>
 
-      {/* Categories Section */}
-      <div className="filter-group">
+      {/* Categories Section - accordion behavior */}
+      <div className={`filter-group ${categoriesExpanded ? 'expanded' : 'collapsed'}`}>
         <button
           type="button"
-          className={`filter-group-header ${categoriesExpanded ? 'expanded' : ''}`}
+          className="filter-group-header"
           onClick={() => setCategoriesExpanded(!categoriesExpanded)}
         >
-          <span>Kategorie{selectedCategories.length > 0 && ` (${selectedCategories.length})`}</span>
+          <span>{t.common.categories}{selectedCategories.length > 0 && ` (${selectedCategories.length})`}</span>
           <span className="filter-group-toggle">{categoriesExpanded ? '−' : '+'}</span>
         </button>
-        {categoriesExpanded && (
+        <div className="filter-group-content">
           <ul className="filter-group-list">
             {categories.map((category) => {
               const count = categoryCounts.get(category.slug) || 0;
@@ -125,7 +134,7 @@ export function GallerySidebar({
               );
             })}
           </ul>
-        )}
+        </div>
       </div>
     </div>
   );

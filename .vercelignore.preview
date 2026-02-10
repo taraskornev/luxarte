@@ -1,0 +1,64 @@
+# Preview Build - Vercel Ignore
+# Use this file for preview deployments:
+#   cp .vercelignore.preview .vercelignore
+#   vercel --prod
+
+# Git (exclude LFS data)
+.git/
+
+# Dependencies
+node_modules/
+
+# Build outputs
+.next/
+out/
+dist/
+build/
+
+# Cache
+.cache/
+
+# Large data files (not needed for deployment)
+data/
+legacy_website/
+scripts/
+
+# Docs and proofs (not needed for deployment)
+docs/
+AUDIT_REPORT/
+*.md
+!README.md
+
+# ===========================================
+# PREVIEW MODE: Exclude heavy media folders
+# ===========================================
+public/catalog/
+public/media/marki/
+
+# Keep only preview images
+!public/preview/
+
+# IDE
+.idea/
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Environment
+.env*
+!.env.example
+
+# Test coverage
+coverage/
+
+# Misc
+*.tgz
+*.tar.gz

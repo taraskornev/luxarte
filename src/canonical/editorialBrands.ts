@@ -12,6 +12,8 @@
  * @version 2.0.0 - Added cover images
  */
 
+import { mediaUrl } from '@/lib/buildMode';
+
 export interface EditorialBrand {
   readonly name: string;
   readonly slug: string;
@@ -32,8 +34,8 @@ export const editorialBrands: readonly EditorialBrand[] = [
     slug: 'versace-home',
     order: 1,
     legacyUrl: 'https://www.luxarte.pl/versace-home/',
-    logoPath: '/brands/logos-webp/versace.webp',
-    coverImage: '/media/marki/versace-home/gallery-04.jpeg',
+    logoPath: mediaUrl('/brands/logos-webp/versace.webp'),
+    coverImage: mediaUrl('/media/marki/versace-home/gallery-04.jpeg'),
     coverAlt: 'Luksusowe wnętrze Versace Home',
   },
   {
@@ -41,8 +43,8 @@ export const editorialBrands: readonly EditorialBrand[] = [
     slug: 'trussardi-casa',
     order: 2,
     legacyUrl: 'https://www.luxarte.pl/trussardi-casa/',
-    logoPath: '/brands/logos-webp/trussardi.webp',
-    coverImage: '/media/marki/trussardi-casa/gallery-04.jpg',
+    logoPath: mediaUrl('/brands/logos-webp/trussardi.webp'),
+    coverImage: mediaUrl('/media/marki/trussardi-casa/gallery-04.jpg'),
     coverAlt: 'Eleganckie meble Trussardi Casa',
   },
   {
@@ -50,8 +52,8 @@ export const editorialBrands: readonly EditorialBrand[] = [
     slug: 'bentley-home',
     order: 3,
     legacyUrl: 'https://www.luxarte.pl/bentley-home/',
-    logoPath: '/brands/logos-webp/bentley.webp',
-    coverImage: '/media/marki/bentley-home/gallery-04.png',
+    logoPath: mediaUrl('/brands/logos-webp/bentley.webp'),
+    coverImage: mediaUrl('/media/marki/bentley-home/gallery-04.png'),
     coverAlt: 'Ekskluzywne meble Bentley Home',
   },
   {
@@ -59,8 +61,8 @@ export const editorialBrands: readonly EditorialBrand[] = [
     slug: 'bugatti-home',
     order: 4,
     legacyUrl: 'https://www.luxarte.pl/bugatti_home/',
-    logoPath: '/brands/logos-webp/bugatti.webp',
-    coverImage: '/media/marki/bugatti-home/gallery-03.png',
+    logoPath: mediaUrl('/brands/logos-webp/bugatti.webp'),
+    coverImage: mediaUrl('/media/marki/bugatti-home/gallery-03.png'),
     coverAlt: 'Luksusowe wnętrze Bugatti Home',
   },
   {
@@ -68,8 +70,8 @@ export const editorialBrands: readonly EditorialBrand[] = [
     slug: 'dolce-gabbana-casa',
     order: 5,
     legacyUrl: 'https://www.luxarte.pl/meble-dolcegabbana-casa/',
-    logoPath: '/brands/logos-webp/dolce-gabbana.webp',
-    coverImage: '/media/marki/dolce-gabbana-casa/gallery-04.jpg',
+    logoPath: mediaUrl('/brands/logos-webp/dolce-gabbana.webp'),
+    coverImage: mediaUrl('/media/marki/dolce-gabbana-casa/gallery-04.jpg'),
     coverAlt: 'Włoskie meble Dolce & Gabbana Casa',
   },
   {
@@ -77,8 +79,8 @@ export const editorialBrands: readonly EditorialBrand[] = [
     slug: 'visionnaire',
     order: 6,
     legacyUrl: 'https://www.luxarte.pl/visionnaire/',
-    logoPath: '/brands/logos-webp/visionnaire.webp',
-    coverImage: '/media/marki/visionnaire/gallery-03.jpeg',
+    logoPath: mediaUrl('/brands/logos-webp/visionnaire.webp'),
+    coverImage: mediaUrl('/media/marki/visionnaire/gallery-03.jpeg'),
     coverAlt: 'Luksusowe wnętrze Visionnaire',
   },
   {
@@ -86,8 +88,8 @@ export const editorialBrands: readonly EditorialBrand[] = [
     slug: 'misuraemme',
     order: 7,
     legacyUrl: 'https://www.luxarte.pl/misura-emme/',
-    logoPath: '/brands/logos-webp/misuraemme.webp',
-    coverImage: '/media/marki/misuraemme/gallery-03.jpeg',
+    logoPath: mediaUrl('/brands/logos-webp/misuraemme.webp'),
+    coverImage: mediaUrl('/media/marki/misuraemme/gallery-03.jpeg'),
     coverAlt: 'Systemy garderobiane MisuraEmme',
   },
   {
@@ -95,8 +97,8 @@ export const editorialBrands: readonly EditorialBrand[] = [
     slug: 'scic-italia',
     order: 8,
     legacyUrl: 'https://www.luxarte.pl/scic/',
-    logoPath: '/brands/logos-webp/scic-italia.webp',
-    coverImage: '/media/marki/scic-italia/gallery-03.jpg',
+    logoPath: mediaUrl('/brands/logos-webp/scic-italia.webp'),
+    coverImage: mediaUrl('/media/marki/scic-italia/gallery-03.jpg'),
     coverAlt: 'Luksusowe kuchnie SCIC Italia',
   },
   {
@@ -104,8 +106,8 @@ export const editorialBrands: readonly EditorialBrand[] = [
     slug: 'valcucine',
     order: 9,
     legacyUrl: 'https://www.luxarte.pl/valcucine-luksusowe-kuchnie/',
-    logoPath: '/brands/logos-webp/valcucine.webp',
-    coverImage: '/media/marki/valcucine/gallery-03.webp',
+    logoPath: mediaUrl('/brands/logos-webp/valcucine.webp'),
+    coverImage: mediaUrl('/media/marki/valcucine/gallery-03.webp'),
     coverAlt: 'Nowoczesne kuchnie Valcucine',
   },
   {
@@ -113,8 +115,8 @@ export const editorialBrands: readonly EditorialBrand[] = [
     slug: 'exteta',
     order: 10,
     legacyUrl: 'https://www.luxarte.pl/exteta/',
-    logoPath: '/brands/logos-webp/exteta.webp',
-    coverImage: '/media/marki/exteta/gallery-03.webp',
+    logoPath: mediaUrl('/brands/logos-webp/exteta.webp'),
+    coverImage: mediaUrl('/media/marki/exteta/gallery-03.webp'),
     coverAlt: 'Luksusowe meble ogrodowe Exteta',
   },
   {
@@ -122,8 +124,8 @@ export const editorialBrands: readonly EditorialBrand[] = [
     slug: 'gaggenau',
     order: 11,
     legacyUrl: 'https://www.luxarte.pl/gaggenau/',
-    logoPath: '/brands/logos-webp/gaggenau.webp',
-    coverImage: '/media/marki/gaggenau/gallery-03.webp',
+    logoPath: mediaUrl('/brands/logos-webp/gaggenau.webp'),
+    coverImage: mediaUrl('/media/marki/gaggenau/gallery-03.webp'),
     coverAlt: 'Profesjonalny sprzęt AGD Gaggenau',
   },
   {
@@ -131,8 +133,8 @@ export const editorialBrands: readonly EditorialBrand[] = [
     slug: 'roberto-cavalli',
     order: 12,
     legacyUrl: 'https://www.luxarte.pl/roberto-cavalli-home-interiors/',
-    logoPath: '/brands/logos-webp/roberto-cavalli.webp',
-    coverImage: '/media/marki/roberto-cavalli/gallery-04.jpg',
+    logoPath: mediaUrl('/brands/logos-webp/roberto-cavalli.webp'),
+    coverImage: mediaUrl('/media/marki/roberto-cavalli/gallery-04.jpg'),
     coverAlt: 'Ekskluzywne meble Roberto Cavalli',
   },
   {
@@ -140,8 +142,8 @@ export const editorialBrands: readonly EditorialBrand[] = [
     slug: 'venicem',
     order: 13,
     legacyUrl: 'https://www.luxarte.pl/venicem/',
-    logoPath: '/brands/logos-webp/venicem.webp',
-    coverImage: '/media/marki/venicem/gallery-03.webp',
+    logoPath: mediaUrl('/brands/logos-webp/venicem.webp'),
+    coverImage: mediaUrl('/media/marki/venicem/gallery-03.webp'),
     coverAlt: 'Oświetlenie Murano Venicem',
   },
   {
@@ -149,8 +151,8 @@ export const editorialBrands: readonly EditorialBrand[] = [
     slug: 'vanory',
     order: 14,
     legacyUrl: 'https://www.luxarte.pl/vanory/',
-    logoPath: '/brands/logos-webp/vanroy.webp',
-    coverImage: '/media/marki/vanory/gallery-04.jpg',
+    logoPath: mediaUrl('/brands/logos-webp/vanroy.webp'),
+    coverImage: mediaUrl('/media/marki/vanory/gallery-04.jpg'),
     coverAlt: 'Lampy designerskie Vanory',
   },
   {
@@ -158,8 +160,8 @@ export const editorialBrands: readonly EditorialBrand[] = [
     slug: 'flos',
     order: 15,
     legacyUrl: 'https://www.luxarte.pl/flos/',
-    logoPath: '/brands/logos-webp/flos.webp',
-    coverImage: '/media/marki/flos/gallery-03.jpg',
+    logoPath: mediaUrl('/brands/logos-webp/flos.webp'),
+    coverImage: mediaUrl('/media/marki/flos/gallery-03.jpg'),
     coverAlt: 'Kultowe lampy Flos',
   },
 ] as const;

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { mediaUrl } from '@/lib/buildMode';
 
 export const metadata = {
   title: 'Design - LuxArte - Fashion for Home',
@@ -15,7 +16,7 @@ export default function DesignPage() {
 
         <div className="design-hero">
           <Image
-            src="/media/design/moodboard-1.webp"
+            src={mediaUrl('/media/design/moodboard-1.webp')}
             alt="Design Wears Fashion - Trussardi Casa"
             fill
             priority
@@ -40,7 +41,7 @@ export default function DesignPage() {
           <div className="design-gallery-grid">
             <div className="design-gallery-item">
               <Image
-                src="/media/design/moodboard-2.webp"
+                src={mediaUrl('/media/design/moodboard-2.webp')}
                 alt="Design Wears Fashion"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -49,7 +50,7 @@ export default function DesignPage() {
             </div>
             <div className="design-gallery-item">
               <Image
-                src="/media/design/moodboard-3.webp"
+                src={mediaUrl('/media/design/moodboard-3.webp')}
                 alt="Design Wears Fashion"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -58,7 +59,7 @@ export default function DesignPage() {
             </div>
             <div className="design-gallery-item">
               <Image
-                src="/media/design/projektowanie-1.webp"
+                src={mediaUrl('/media/design/projektowanie-1.webp')}
                 alt="Projektowanie wnętrz LuxArte"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -67,7 +68,7 @@ export default function DesignPage() {
             </div>
             <div className="design-gallery-item">
               <Image
-                src="/media/design/projektowanie-3.webp"
+                src={mediaUrl('/media/design/projektowanie-3.webp')}
                 alt="Projektowanie wnętrz LuxArte"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -76,12 +77,6 @@ export default function DesignPage() {
             </div>
           </div>
         </section>
-
-        <div className="design-tags">
-          <span className="design-tag">#MilanDesignWeek</span>
-          <span className="design-tag">#SaloneDelMobile</span>
-          <span className="design-tag">#TrussardiCasa</span>
-        </div>
 
         <section className="content-page-cta">
           <h2>Zainteresowany naszymi projektami?</h2>

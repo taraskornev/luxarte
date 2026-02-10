@@ -31,6 +31,7 @@
  */
 
 import { BRAND_IMAGES, CATEGORY_IMAGES } from '@/canonical/imageMap';
+import { mediaUrl } from './buildMode';
 
 // ============================================================================
 // Types
@@ -72,7 +73,7 @@ const CATALOG_BASE = '/catalog/products';
  */
 function getTieredImagePath(slug: string, tier: 'card' | 'gallery' | 'lightbox', index: number = 1): string {
   const paddedIndex = index.toString().padStart(2, '0');
-  return `${CATALOG_BASE}/${slug}/${paddedIndex}-${tier}.webp`;
+  return mediaUrl(`${CATALOG_BASE}/${slug}/${paddedIndex}-${tier}.webp`);
 }
 
 /**
@@ -141,7 +142,7 @@ export function getProductPrimaryImage(product: CatalogProductImageInput): strin
   }
 
   // 5. Ultimate fallback - local SVG (never empty, no network)
-  return LOCAL_FALLBACK;
+  return mediaUrl(LOCAL_FALLBACK);
 }
 
 /**

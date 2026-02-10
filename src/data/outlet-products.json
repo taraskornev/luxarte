@@ -11,10 +11,10 @@
           "quantity": "1 szt.",
           "description": "Wykończenie: VERSION LEO VELVET MAXI VOGUE 001, COMPLETE COVER LEO VELVET MAXI 001, GROSS GRAIN COLOUR BLACK, BASE IN GLOSSY QUERCIA FINISHING / COUSHIONS: 2 PCS 70X70 CM / 3 PCS 60X60CM / 4 PCS 50X50X",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/Luxarte_Dolcegabbana_casa_giglio-2024-07-19-o-09.35.50-600x400.png",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/Luxarte_Dolcegabbana_casa_giglio-2024-07-19-o-09.36.04-600x400.png",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/Luxarte_Dolcegabbana_casa_giglio-2024-07-19-o-09.36.17-600x400.png",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/Luxarte_Dolcegabbana_casa_giglio-2024-07-19-o-09.36.40-590x400.png"
+            "/media/outlet/outlet-giglio-lovebed-1.png",
+            "/media/outlet/outlet-giglio-lovebed-2.png",
+            "/media/outlet/outlet-giglio-lovebed-3.png",
+            "/media/outlet/outlet-giglio-lovebed-4.png"
           ]
         }
       ]
@@ -30,8 +30,8 @@
           "quantity": "2 szt.",
           "description": "Wykończenie: Fabric velvet Bisanzio C 421 Grey.",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/05/Zrzut-ekranu-2024-05-20-o-14.22.03-600x400.png",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/luxarte_fotel_fendi_casa_sabrina-600x400.png"
+            "/media/outlet/outlet-fotel-sabrina-1.png",
+            "/media/outlet/outlet-fotel-sabrina-2.png"
           ]
         },
         {
@@ -41,8 +41,8 @@
           "quantity": "1 szt.",
           "description": "Wykończenie: BLACK VELVET Aiace 801.",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/06/luxarte-456x400.png",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/fotel_fendi_casa_laetitia_luxarte-489x400.png"
+            "/media/outlet/outlet-fotel-laetitia-1.png",
+            "/media/outlet/outlet-fotel-laetitia-2.png"
           ]
         },
         {
@@ -52,9 +52,9 @@
           "quantity": "1 szt.",
           "description": "Wykończenie: COMPLETE COVER LEATHER NUVOLA 101 BASIC ; BASE FINISHING GOLD LOGO FINISHING GOLD.",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/10/02_VersaceHome_armchair_VersaceVenus-luxarte.jpg",
-            "https://www.luxarte.pl/wp-content/uploads/2024/10/03_VersaceHome_armchair_VersaceVenus_luxarte-600x400.jpg",
-            "https://www.luxarte.pl/wp-content/uploads/2024/10/luxarte_VERSACE-V21-SIGNATURE-SECTIONAL-SOFAVENUS-ARMSHAIR-SETUP-1-600x400.jpg"
+            "/media/outlet/outlet-fotel-venus-1.jpg",
+            "/media/outlet/outlet-fotel-venus-2.jpg",
+            "/media/outlet/outlet-fotel-venus-3.jpg"
           ]
         },
         {
@@ -64,8 +64,8 @@
           "quantity": "2 szt.",
           "description": "Wykończenie: COMPLETE COVER LEATHER NUVOLA 101 BASIC ; BASE FINISHING SATIN GREY ; LOGO FINISHING GOLD.",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/10/vercace_home_stiletto_luxarte-600x400.jpg",
-            "https://www.luxarte.pl/wp-content/uploads/2024/10/8865fabd-8344-4411-9515-f1f887c4455e-600x400.jpg"
+            "/media/outlet/outlet-fotel-stiletto-1.jpg",
+            "/media/outlet/outlet-fotel-stiletto-2.jpg"
           ]
         }
       ]
@@ -89,8 +89,8 @@
           "quantity": "1 szt.",
           "description": "Wykończenie: Murano glass in blue color, metal: polished brass.",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/05/Zrzut-ekranu-2024-05-24-o-15.28.48-600x400.png",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/anya-crystal-600x400.jpeg"
+            "/media/outlet/outlet-stolik-anya-crystal-1-1.png",
+            "/media/outlet/outlet-stolik-anya-crystal-1-2.jpeg"
           ]
         },
         {
@@ -100,8 +100,8 @@
           "quantity": "1 szt.",
           "description": "Wykończenie: Caretto. Black metal base, lacquered top.",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/1_amore_dolcegabbana_casa_luxarte-2024-07-2-o-16.41.39-600x400.png",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/1_amore_dolcegabbana_casa_luxarte-2024-07-2-o-16.41.52-600x400.png"
+            "/media/outlet/outlet-stolik-amore-caretto-1.png",
+            "/media/outlet/outlet-stolik-amore-caretto-2.png"
           ]
         },
         {
@@ -111,8 +111,8 @@
           "quantity": "1 szt.",
           "description": "Wykończenie: Zebra. Black metal base, lacquered top.",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/1_amore_dolcegabbana_casa_luxarte-2024-07-2-o-16.42.48-600x400.png",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/1_amore_dolcegabbana_casa_luxarte-2024-07-2-o-16.42.58-600x400.png"
+            "/media/outlet/outlet-stolik-amore-zebra-1.png",
+            "/media/outlet/outlet-stolik-amore-zebra-2.png"
           ]
         },
         {
@@ -122,8 +122,8 @@
           "quantity": "1 szt.",
           "description": "Wykończenie: Leopardo. Black metal base, lacquered top.",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/1_amore_dolcegabbana_casa_luxarte-2024-07-2-o-16.42.14-600x400.png",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/1_amore_dolcegabbana_casa_luxarte-2024-07-2-o-16.42.26-600x400.png"
+            "/media/outlet/outlet-stolik-amore-leopardo-1.png",
+            "/media/outlet/outlet-stolik-amore-leopardo-2.png"
           ]
         },
         {
@@ -133,8 +133,8 @@
           "quantity": "1 szt.",
           "description": "Wykończenie: MARBLE TOP CAT. A BIANCO CARRARA WITH MAT 'SCAGLIOLA' FINISHING.",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/11815-RCHI_RAGALI_side_table_RA2.232.ATX_2019_01-1-600x400.jpg",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/luxarte_mclaine_roberto_cavalli_home_interiors-522x400.png"
+            "/media/outlet/outlet-stolik-ragali-2-1.jpg",
+            "/media/outlet/outlet-stolik-ragali-2-2.png"
           ]
         },
         {
@@ -144,8 +144,8 @@
           "quantity": "1 szt.",
           "description": "Wykończenie: VERSION TOP GLASS FRAME FINISHING GOLD TOP FINISHING EXTRA CLEAR GLASS LOWER TOP FINISHING WHITE LOGO FINISHING GOLD.",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/Versace-Home-Medallion-coffee-and-side-tables-03-scaled-1-600x400.jpg",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/medallion_versace_home-600x400.jpg"
+            "/media/outlet/outlet-stolik-medallion-marble-1.jpg",
+            "/media/outlet/outlet-stolik-medallion-marble-2.jpg"
           ]
         },
         {
@@ -155,8 +155,8 @@
           "quantity": "1 szt.",
           "description": "Wykończenie: VERSION TOP MARBLE CARRARA GIOIA FRAME FINISHING GOLD TOP FINISHING EXTRA CLEAR GLASS LOWER TOP FINISHING WHITE LOGO FINISHING GOLD.",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/Versace-Home-Medallion-coffee-and-side-tables-03-scaled-1-600x400.jpg",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/medallion_versace_home-600x400.jpg"
+            "/media/outlet/outlet-stolik-medallion-marble-1.jpg",
+            "/media/outlet/outlet-stolik-medallion-marble-2.jpg"
           ]
         }
       ]
@@ -172,8 +172,8 @@
           "quantity": "1 szt.",
           "description": "Wykończenie: WOOL AND BAMBOO SILK, CASTOR GREY, HAND TUFTED",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/10/VE-Greca-Versace-rugs-detail-web-removebg-preview_700x.png-600x353.webp",
-            "https://www.luxarte.pl/wp-content/uploads/2024/10/PHOTO-2024-10-08-14-28-03-600x400.jpg"
+            "/media/outlet/outlet-greca-rug-1.webp",
+            "/media/outlet/outlet-greca-rug-2.jpg"
           ]
         },
         {
@@ -197,8 +197,8 @@
           "quantity": "2 szt.",
           "description": "Wykończenie: EXTERNAL SHADE IN SATIN GREY, INNER LAMPSHADE DECORO BAROCCO, FRAME FINISHING GOLD.",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/10/Versace-Home-Narcissus-lamps-4-600x400.jpg",
-            "https://www.luxarte.pl/wp-content/uploads/2024/10/PHOTO-2024-10-08-14-23-14-600x400.jpg"
+            "/media/outlet/outlet-lampa-narcissus-floor-1.jpg",
+            "/media/outlet/outlet-lampa-narcissus-floor-2.jpg"
           ]
         },
         {
@@ -208,8 +208,8 @@
           "quantity": "1 szt.",
           "description": "Wykończenie: EXTERNAL SHADE IN SATIN GREY, INNER LAMPSHADE DECORO BAROCCO, FRAME FINISHING GOLD.",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/10/narcissus_versace_home_table_lamp-600x400.jpg",
-            "https://www.luxarte.pl/wp-content/uploads/2024/10/versace-home-lighting-narcissus-07-min-600x400.jpg"
+            "/media/outlet/outlet-lampa-narcissus-table-1.jpg",
+            "/media/outlet/outlet-lampa-narcissus-table-2.jpg"
           ]
         },
         {
@@ -227,8 +227,8 @@
           "quantity": "1 szt.",
           "description": "Wykończenie: Champagne anodized aluminium.",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/10/Zrzut-ekranu-2024-10-8-o-17.13.11-600x400.png",
-            "https://www.luxarte.pl/wp-content/uploads/2024/10/coordinates-floor-gallery-3-600x400.jpg"
+            "/media/outlet/outlet-lampa-coordinates-floor-1.png",
+            "/media/outlet/outlet-lampa-coordinates-floor-2.jpg"
           ]
         },
         {
@@ -238,8 +238,8 @@
           "quantity": "4 szt.",
           "description": "Wykończenie: Champagne anodized aluminium.",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/10/coordinates_luxarte-599x400.png",
-            "https://www.luxarte.pl/wp-content/uploads/2024/10/Coordinates-suspension-flos-R-22-600x400.jpg"
+            "/media/outlet/outlet-lampa-coordinates-pendant-1.png",
+            "/media/outlet/outlet-lampa-coordinates-pendant-2.jpg"
           ]
         }
       ]
@@ -255,9 +255,9 @@
           "quantity": "1 szt.",
           "description": "Wykończenie: TOP FINISHING MARQUINIA BLACK MARBLE BASE COVER LEATHER NUVOLA 101 BASIC BLACK SPECIAL MANUFACTURES V SHAPE QUILTING H45 ; DETAILS FINISHING GOLD",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/10/versace-home-v-marble-table.jpg-600x400.webp",
-            "https://www.luxarte.pl/wp-content/uploads/2024/10/versace-home-v-marble-table-detail.jpg-600x400.webp",
-            "https://www.luxarte.pl/wp-content/uploads/2024/10/luxarte-VE-V-Marble-table_Medusa-Trono-chairs-scaled-1-600x400.jpg"
+            "/media/outlet/outlet-stol-v-marble-1.webp",
+            "/media/outlet/outlet-stol-v-marble-2.webp",
+            "/media/outlet/outlet-krzesla-medusa-trono-3.jpg"
           ]
         },
         {
@@ -267,9 +267,9 @@
           "quantity": "6 szt.",
           "description": "Wykończenie: COMPLETE COVER LEATHER NUVOLA 101 BASIC BLACK PADDING STANDARD LOGO FINISHING GOLD ; SPECIAL MANUFACTURES EXTERNAL FRAME MEDUSA EMBROIDERY Ø14 ; ZIPPER FINISHING GOLD",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/10/Versace-Home-Medusa-Trono-chair-01-scaled-1-600x400.jpg",
-            "https://www.luxarte.pl/wp-content/uploads/2024/10/VE-Medusa-Trono-chair-02-scaled-1-600x400.jpg",
-            "https://www.luxarte.pl/wp-content/uploads/2024/10/luxarte-VE-V-Marble-table_Medusa-Trono-chairs-scaled-1-600x400.jpg"
+            "/media/outlet/outlet-krzesla-medusa-trono-1.jpg",
+            "/media/outlet/outlet-krzesla-medusa-trono-2.jpg",
+            "/media/outlet/outlet-krzesla-medusa-trono-3.jpg"
           ]
         },
         {
@@ -279,8 +279,8 @@
           "quantity": "1 szt.",
           "description": "Wykończenie: Ebony macassar, lacquered black glass, metal bronze shadow.",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/05/Zrzut-ekranu-2024-05-20-o-16.04.50-1-600x400.png",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/luxarte_krzeslo_stiletto_stol_fendi_casa-1-600x400.png"
+            "/media/outlet/outlet-stol-infinity-1.png",
+            "/media/outlet/outlet-stol-infinity-2.png"
           ]
         },
         {
@@ -320,8 +320,8 @@
           "quantity": "1 szt.",
           "description": "Wykończenie: EXTERNAL FRAME FINISHING SATIN GREY; DOORS COVER MEDUSA AMPLIFIED TOP 002 WHITE-GOLD ; INTERNAL FRAME FINISHING SATIN GREY ; INTERNAL WITH 2 SHELVES AND 2 DRAWERS",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/10/Stiletto-Cabinet-90x53x179Hcm-StructureWood-FrameinLacqueredWoodSatinGreywithMattFinish-ExternalShuttersCoveredinMedusaAmplifiedBlackGold-VMB01-600x400.jpg",
-            "https://www.luxarte.pl/wp-content/uploads/2024/10/PHOTO-2024-10-08-13-51-36-600x400.jpg"
+            "/media/outlet/outlet-witryna-stiletto-1.jpg",
+            "/media/outlet/outlet-witryna-stiletto-2.jpg"
           ]
         }
       ]
@@ -337,10 +337,10 @@
           "quantity": "1 szt.",
           "description": "Wykończenie: Natural Leather Glove + Fox Fur.",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/luxarte_CS_418P30-600x400.jpg",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/luxarte_CS-418P30_back-600x400.jpg",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/luxarte_CS-418P30_detail-600x400.jpg",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/luxarte_CS-418P30_and_CS-48230_02-600x400.jpeg"
+            "/media/outlet/outlet-poduszka-cs418p30-1.jpg",
+            "/media/outlet/outlet-poduszka-cs418p30-2.jpg",
+            "/media/outlet/outlet-poduszka-cs418p30-3.jpg",
+            "/media/outlet/outlet-poduszka-cs418p30-4.jpeg"
           ]
         },
         {
@@ -350,10 +350,10 @@
           "quantity": "1 szt.",
           "description": "Wykończenie: Velvet Bisanzio C 212 + Velvet Bisanzio C 058 + Fox Fur.",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/luxarte_CS_418P50-600x400.jpg",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/CS-418P50-back-600x400.jpg",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/CS-418P50-detail-600x400.jpg",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/luxarte_VAP_Y19C-and_CS_418P50-502x400.jpg"
+            "/media/outlet/outlet-poduszka-cs418p50-1.jpg",
+            "/media/outlet/outlet-poduszka-cs418p50-2.jpg",
+            "/media/outlet/outlet-poduszka-cs418p50-3.jpg",
+            "/media/outlet/outlet-poduszka-cs418p50-4.jpg"
           ]
         },
         {
@@ -363,10 +363,10 @@
           "quantity": "1 szt.",
           "description": "Wykończenie: LUX Leather Maryland 351 + Leather Maryland 341.",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/luxarte_CS_41750-600x400.png",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/CS-41750-back-600x400.png",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/CS-41750-detail-600x400.png",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/luxarte_CS_41750-and_CS_41730-600x400.jpeg"
+            "/media/outlet/outlet-poduszka-cs41750-1.png",
+            "/media/outlet/outlet-poduszka-cs41750-2.png",
+            "/media/outlet/outlet-poduszka-cs41750-3.png",
+            "/media/outlet/outlet-poduszka-cs41750-4.jpeg"
           ]
         },
         {
@@ -376,10 +376,10 @@
           "quantity": "1 szt.",
           "description": "Wykończenie: LEATHER S.LUX 002 MINK/RIGA LAVA (front) VELVET LUX 002 MINK (back).",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/luxarte_CS-48340-600x400.jpg",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/CS-48340-back-600x400.jpg",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/CS-48340-detail-600x400.jpg",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/luxarte_CS-48340-1-500x400.jpg"
+            "/media/outlet/outlet-poduszka-cs48340-1.jpg",
+            "/media/outlet/outlet-poduszka-cs48340-2.jpg",
+            "/media/outlet/outlet-poduszka-cs48340-3.jpg",
+            "/media/outlet/outlet-poduszka-cs48340-4.jpg"
           ]
         },
         {
@@ -389,8 +389,8 @@
           "quantity": "1 szt.",
           "description": "Wykończenie: LEATHER VELVET LUX 017 BLUE, FF LOGO EMBOSED.",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/luxarte_CS-48230_01-600x400.jpg",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/luxarte_CS-48230_01-503x400.jpeg"
+            "/media/outlet/outlet-poduszka-cs48230-1.jpg",
+            "/media/outlet/outlet-poduszka-cs48230-2.jpeg"
           ]
         },
         {
@@ -400,11 +400,11 @@
           "quantity": "1 szt.",
           "description": "Wykończenie: Leather Utah Lux 017 + Leather 765 + Leather 763 + 766.",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/CS-48650-600x400.jpg",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/CS-48650-back-600x400.jpg",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/CS-48650-back-detail-600x400.jpg",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/CS-48650-detail-485x400.jpg",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/LUXARTE_CS_48650-600x400.jpg"
+            "/media/outlet/outlet-poduszka-cs48650-1.jpg",
+            "/media/outlet/outlet-poduszka-cs48650-2.jpg",
+            "/media/outlet/outlet-poduszka-cs48650-3.jpg",
+            "/media/outlet/outlet-poduszka-cs48650-4.jpg",
+            "/media/outlet/outlet-poduszka-cs48650-5.jpg"
           ]
         },
         {
@@ -414,9 +414,9 @@
           "quantity": "1 szt.",
           "description": "Wykończenie: Leather Glove 456.",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/CS-41730-600x400.jpg",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/CS-41730-back-600x400.jpg",
-            "https://www.luxarte.pl/wp-content/uploads/2024/07/luxarte_CS_41750_and_CS-41730-600x400.jpg"
+            "/media/outlet/outlet-poduszka-cs41730-1.jpg",
+            "/media/outlet/outlet-poduszka-cs41730-2.jpg",
+            "/media/outlet/outlet-poduszka-cs41730-3.jpg"
           ]
         }
       ]
@@ -432,8 +432,8 @@
           "quantity": "1 szt.",
           "description": "Wykończenie: ORANGE MURANO GLASS + METAL COVER IN BRONZE SHADOW FINISHING.",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/10/garden_vase_fendi_casa_luxarte-600x400.png",
-            "https://www.luxarte.pl/wp-content/uploads/2024/10/garden_vase_fendi_casa_luxarte_2-1-600x400.png"
+            "/media/outlet/outlet-waza-garden-1.png",
+            "/media/outlet/outlet-waza-garden-2.png"
           ]
         },
         {
@@ -443,8 +443,8 @@
           "quantity": "1 szt.",
           "description": "Wykończenie: ORANGE MURANO GLASS + METAL COVER IN BRONZE SHADOW FINISHING.",
           "images": [
-            "https://www.luxarte.pl/wp-content/uploads/2024/10/garden_vase_fendi_casa_square_luxarte-600x400.png",
-            "https://www.luxarte.pl/wp-content/uploads/2024/10/square_vase_fendi_casa_luxarte_2-600x400.png"
+            "/media/outlet/outlet-waza-garden-square-1.png",
+            "/media/outlet/outlet-waza-garden-square-2.png"
           ]
         },
         {

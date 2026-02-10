@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
+import { headers } from 'next/headers';
 import { Jost } from 'next/font/google';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { ScrollAnimationProvider } from '@/components/ScrollAnimationProvider';
+import { getAlternateRoute, type Locale } from '@/i18n';
 import '@/styles/globals.css';
 
 const jost = Jost({
@@ -11,22 +14,44 @@ const jost = Jost({
   variable: '--font-jost',
 });
 
-export const metadata: Metadata = {
-  title: 'LuxArte - Fashion for Home',
-  description: 'Ekskluzywne meble i akcesoria domowe od najlepszych światowych marek.',
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const headersList = await headers();
+  const locale = (headersList.get('x-locale') || 'pl') as Locale;
+  const pathname = headersList.get('x-pathname') || '/';
+  const baseUrl = 'https://www.luxarte.pl';
+  const alternate = getAlternateRoute(pathname, locale);
 
-export default function RootLayout({
+  return {
+    title: 'LuxArte - Fashion for Home',
+    description: locale === 'en'
+      ? 'Exclusive furniture and home accessories from the world\'s finest brands.'
+      : 'Ekskluzywne meble i akcesoria domowe od najlepszych światowych marek.',
+    alternates: {
+      canonical: `${baseUrl}${pathname}`,
+      languages: {
+        'pl': `${baseUrl}${locale === 'pl' ? pathname : alternate}`,
+        'en': `${baseUrl}${locale === 'en' ? pathname : alternate}`,
+      },
+    },
+  };
+}
+
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const headersList = await headers();
+  const locale = (headersList.get('x-locale') || 'pl') as Locale;
+
   return (
-    <html lang="pl" className={jost.variable}>
+    <html lang={locale} className={jost.variable}>
       <body className={jost.className}>
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <ScrollAnimationProvider>
+          <Header locale={locale} />
+          <main>{children}</main>
+          <Footer locale={locale} />
+        </ScrollAnimationProvider>
       </body>
     </html>
   );

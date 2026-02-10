@@ -2,36 +2,64 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
+import { getDictionary, type Locale } from '@/i18n';
 
 interface ProductGalleryProps {
   heroImage: string | null;
   galleryImages: string[];
   lightboxImages: string[];
   productName: string;
+  locale?: Locale;
 }
 
 /**
  * ProductGallery Component
  * 
  * Renders:
- * - Hero image (first product image, priority loading, 100vw)
- * - Gallery grid (remaining images, lazy loading, responsive sizes)
+ * - Main image with soft fade/scale animation on change
+ * - Thumbnail strip for image navigation
  * - Lightbox with fade-in, side previews, and keyboard navigation
  * 
  * Image Tier Rules (STEP 11):
  * - Hero/Gallery: uses *-gallery.webp (max 1400px)
  * - Lightbox: uses *-lightbox.webp (loaded on demand, NOT preloaded)
- * 
- * Lightbox UX Rules:
- * - No close button - click outside or ESC to close
- * - Click side previews to navigate
- * - Arrow keys navigate
- * - Fixed height viewport
- * - No zoom/scale effects
  */
-export function ProductGallery({ heroImage, galleryImages, lightboxImages, productName }: ProductGalleryProps) {
+export function ProductGallery({ heroImage, galleryImages, lightboxImages, productName, locale = 'pl' }: ProductGalleryProps) {
+  const t = getDictionary(locale);
+  // Combine all images for the carousel
+  const allImages = heroImage ? [heroImage, ...galleryImages] : galleryImages;
+  
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
+
+  // Handle image change with animation
+  const handleImageChange = useCallback((newIndex: number) => {
+    if (newIndex === selectedIndex || isAnimating) return;
+    setIsAnimating(true);
+    // Small delay to allow fade-out, then change image
+    setTimeout(() => {
+      setSelectedIndex(newIndex);
+      // Reset animation state after fade-in
+      setTimeout(() => setIsAnimating(false), 300);
+    }, 150);
+  }, [selectedIndex, isAnimating]);
+
+  // Auto-advance carousel every 5 seconds
+  useEffect(() => {
+    if (allImages.length <= 1 || lightboxOpen) return;
+    
+    const interval = setInterval(() => {
+      setIsAnimating(true);
+      setTimeout(() => {
+        setSelectedIndex((prev) => (prev + 1) % allImages.length);
+        setTimeout(() => setIsAnimating(false), 300);
+      }, 150);
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, [allImages.length, lightboxOpen]);
 
   // Keyboard navigation: ESC closes, arrows navigate
   useEffect(() => {
@@ -76,11 +104,11 @@ export function ProductGallery({ heroImage, galleryImages, lightboxImages, produ
   }, [lightboxImages.length]);
 
   // No images at all
-  if (!heroImage && galleryImages.length === 0) {
+  if (allImages.length === 0) {
     return (
       <div className="pdp-gallery">
         <div className="pdp-gallery-hero">
-          <div className="pdp-image-placeholder">Brak zdjęć</div>
+          <div className="pdp-image-placeholder">{t.common.noPhotos}</div>
         </div>
       </div>
     );
@@ -93,43 +121,42 @@ export function ProductGallery({ heroImage, galleryImages, lightboxImages, produ
   return (
     <>
       <div className="pdp-gallery">
-        {/* Hero Image (first image, priority loading, gallery-tier) */}
-        {heroImage && (
-          <div
-            className="pdp-gallery-hero"
-            onClick={() => openLightbox(0)}
-            role="button"
-            tabIndex={0}
-            onKeyDown={(e) => e.key === 'Enter' && openLightbox(0)}
-          >
-            <Image
-              src={heroImage}
-              alt={`${productName} - główne zdjęcie`}
-              width={1200}
-              height={800}
-              priority
-              sizes="(max-width: 1400px) 100vw, 1400px"
-              style={{ objectFit: 'contain', width: '100%', height: 'auto' }}
-            />
-          </div>
-        )}
+        {/* Main Image with soft transition animation */}
+        <div
+          className={`pdp-gallery-hero pdp-gallery-hero--animated ${isAnimating ? 'pdp-gallery-hero--fading' : ''}`}
+          onClick={() => openLightbox(selectedIndex)}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && openLightbox(selectedIndex)}
+        >
+          <Image
+            src={allImages[selectedIndex]}
+            alt={`${productName} - ${t.common.photoN} ${selectedIndex + 1}`}
+            width={1200}
+            height={800}
+            priority={selectedIndex === 0}
+            sizes="(max-width: 1400px) 100vw, 1400px"
+            style={{ objectFit: 'contain', width: '100%', height: 'auto' }}
+          />
+        </div>
 
-        {/* Gallery Grid (remaining images, lazy loading, gallery-tier) */}
-        {galleryImages.length > 0 && (
-          <div className="pdp-gallery-grid">
-            {galleryImages.map((img, idx) => (
+        {/* Thumbnail Strip - click to change main image */}
+        {allImages.length > 1 && (
+          <div className="pdp-thumbnails">
+            {allImages.map((img, idx) => (
               <button
                 key={img}
                 type="button"
-                className="pdp-gallery-item"
-                onClick={() => openLightbox(idx + 1)}
+                className={`pdp-thumb ${idx === selectedIndex ? 'pdp-thumb--active' : ''}`}
+                onClick={() => handleImageChange(idx)}
+                aria-label={`${t.common.photoN} ${idx + 1}`}
               >
                 <Image
                   src={img}
-                  alt={`${productName} - zdjęcie ${idx + 2}`}
-                  width={400}
-                  height={400}
-                  sizes="(max-width: 768px) 50vw, 25vw"
+                  alt={`${productName} - ${t.common.thumbnailN} ${idx + 1}`}
+                  width={80}
+                  height={60}
+                  sizes="80px"
                   loading="lazy"
                   style={{ objectFit: 'cover', width: '100%', height: '100%' }}
                 />
@@ -148,11 +175,11 @@ export function ProductGallery({ heroImage, galleryImages, lightboxImages, produ
               type="button"
               className="lightbox-preview lightbox-preview-prev"
               onClick={goToPrev}
-              aria-label="Poprzednie zdjęcie"
+              aria-label={t.common.prevPhoto}
             >
               <Image
                 src={lightboxImages[prevIdx]}
-                alt="Poprzednie"
+                alt={t.common.prevPhoto}
                 width={100}
                 height={100}
                 sizes="100px"
@@ -166,7 +193,7 @@ export function ProductGallery({ heroImage, galleryImages, lightboxImages, produ
           <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
             <Image
               src={lightboxImages[lightboxIndex]}
-              alt={`${productName} - powiększenie ${lightboxIndex + 1}`}
+              alt={`${productName} - ${t.common.photoN} ${lightboxIndex + 1}`}
               width={1600}
               height={1200}
               sizes="90vw"
@@ -181,11 +208,11 @@ export function ProductGallery({ heroImage, galleryImages, lightboxImages, produ
               type="button"
               className="lightbox-preview lightbox-preview-next"
               onClick={goToNext}
-              aria-label="Następne zdjęcie"
+              aria-label={t.common.nextPhoto}
             >
               <Image
                 src={lightboxImages[nextIdx]}
-                alt="Następne"
+                alt={t.common.nextPhoto}
                 width={100}
                 height={100}
                 sizes="100px"

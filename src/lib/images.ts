@@ -1,30 +1,37 @@
 /**
  * Images Data Layer
  * 
- * Handles local image path resolution.
- * Uses ONLY local paths - no CDN/remote URLs.
+ * Handles image path resolution.
+ * Uses MEDIA_BASE_URL for external hosting (Hetzner).
+ * Falls back to local paths if MEDIA_BASE_URL is not set.
  * 
  * Media structure:
- * - /public/catalog/products/{slug}/ - Product images
- * - /public/brands/logos-webp/ - Brand logos
- * - /public/media/brands/ - Brand hero images
- * - /public/media/marki/{brand-slug}/ - Brand gallery images
+ * - /catalog/products/{slug}/ - Product images
+ * - /brands/logos-webp/ - Brand logos
+ * - /media/brands/ - Brand hero images
+ * - /media/marki/{brand-slug}/ - Brand gallery images
+ * 
+ * In PREVIEW BUILD mode:
+ * - Uses /preview/ prefix for all paths
  * 
  * NOTE: For server-side directory scanning (gallery/lightbox images),
  * use the functions from './images-server.ts' instead.
  */
 
-const CATALOG_PATH = '/catalog/products';
-const BRAND_LOGOS_PATH = '/brands/logos-webp';
-const BRAND_HEROES_PATH = '/media/brands';
-const FALLBACK_IMAGE = '/catalog/fallback.svg';
+import { IS_PREVIEW_BUILD, mediaUrl } from './buildMode';
+
+const PREFIX = IS_PREVIEW_BUILD ? '/preview' : '';
+const CATALOG_PATH = `${PREFIX}/catalog/products`;
+const BRAND_LOGOS_PATH = `${PREFIX}/brands/logos-webp`;
+const BRAND_HEROES_PATH = `${PREFIX}/media/brands`;
+const FALLBACK_IMAGE = `${PREFIX}/catalog/fallback.svg`;
 
 /**
  * Get the primary image for a product (card view)
  * Uses 01-card.webp pattern
  */
 export function getProductImage(slug: string): string {
-  return `${CATALOG_PATH}/${slug}/01-card.webp`;
+  return mediaUrl(`${CATALOG_PATH}/${slug}/01-card.webp`);
 }
 
 /**
@@ -50,28 +57,44 @@ export function getBrandLogo(brandSlug: string): string {
   };
 
   const logoFile = logoMap[brandSlug] || `${brandSlug}.webp`;
-  return `${BRAND_LOGOS_PATH}/${logoFile}`;
+  return mediaUrl(`${BRAND_LOGOS_PATH}/${logoFile}`);
 }
 
 /**
  * Get brand hero image
  */
 export function getBrandHero(brandSlug: string): string {
-  return `${BRAND_HEROES_PATH}/${brandSlug}-hero.webp`;
+  // Map slugs to actual hero image filenames (handling mismatches and non-webp files)
+  const heroMap: Record<string, string> = {
+    'bugatti-home': 'bugatti-home-hero.jpg',
+    'dolce-gabbana-casa': 'dolce-gabbana-casa-hero.png',
+    'visionnaire': 'visionnaire-hero.jpg',
+    'roberto-cavalli-home-interiors': 'roberto-cavalli-hero.png',
+    'misuraemme': 'misura-emme-hero.jpeg',
+    'scic-italia': 'scic-hero.webp',
+    'venicem': 'venicem-hero.jpg',
+    'vanory': 'vanory-hero.jpg',
+    'flos': 'flos-hero.jpg',
+  };
+
+  const heroFile = heroMap[brandSlug] || `${brandSlug}-hero.webp`;
+  return mediaUrl(`${BRAND_HEROES_PATH}/${heroFile}`);
 }
 
 /**
  * Get brand gallery images
+ * In PREVIEW mode: returns empty array
  */
 export function getBrandGalleryImages(brandSlug: string): string[] {
-  return [`/media/marki/${brandSlug}/gallery-01.webp`];
+  if (IS_PREVIEW_BUILD) return [];
+  return [mediaUrl(`/media/marki/${brandSlug}/gallery-01.webp`)];
 }
 
 /**
  * Get fallback image path
  */
 export function getFallbackImage(): string {
-  return FALLBACK_IMAGE;
+  return mediaUrl(FALLBACK_IMAGE);
 }
 
 /**

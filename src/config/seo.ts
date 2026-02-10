@@ -43,9 +43,9 @@ export const homepageMeta = {
     title: 'LuxArte - Fashion for Home',
     description:
       'Ekskluzywne meble, kuchnie i garderoby najlepszych włoskich marek. Doradztwo i wsparcie w projektowaniu wnętrz.',
-    image: 'https://www.luxarte.pl/wp-content/uploads/2025/06/projektowanie-wnetrz-luxarte-3.webp',
-    imageWidth: 1900,
-    imageHeight: 1060,
+    image: 'https://www.luxarte.pl/media/design/projektowanie-luxarte-hero.webp',
+    imageWidth: 1200,
+    imageHeight: 630,
     imageAlt: 'LuxArte - Luksusowe wnętrza',
   },
   twitter: {
@@ -68,11 +68,11 @@ export const organizationSchema = {
   url: 'https://www.luxarte.pl',
   logo: {
     '@type': 'ImageObject',
-    url: 'https://www.luxarte.pl/wp-content/uploads/2021/11/Lux-Arte-Logo-2021-2.png',
-    width: 346,
-    height: 120,
+    url: 'https://www.luxarte.pl/media/luxarte-logo.png',
+    width: 180,
+    height: 60,
   },
-  image: 'https://www.luxarte.pl/wp-content/uploads/2025/06/projektowanie-wnetrz-luxarte-3.webp',
+  image: 'https://www.luxarte.pl/media/design/projektowanie-luxarte-hero.webp',
   description:
     'Ekskluzywne meble, kuchnie i garderoby najlepszych włoskich marek. Projektowanie wnętrz.',
   address: [
@@ -139,7 +139,7 @@ export const localBusinessSchema = {
   '@type': 'FurnitureStore',
   '@id': 'https://www.luxarte.pl/#localbusiness',
   name: 'LuxArte',
-  image: 'https://www.luxarte.pl/wp-content/uploads/2021/11/Lux-Arte-Logo-2021-2.png',
+  image: 'https://www.luxarte.pl/media/luxarte-logo.png',
   url: 'https://www.luxarte.pl',
   telephone: '+48 22 629 04 58',
   email: 'warszawa@luxarte.pl',

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { LEGACY_BRANDS } from '@/canonical/legacyBrands';
 import { getBrandLogo, getBrandHero } from '@/lib/images';
+import { getBrandPhotoSet } from '@/lib/images-server';
 
 export const metadata = {
   title: 'Nasze marki | LuxArte',
@@ -23,7 +24,10 @@ export default function NaszeMarkiPage() {
         <div className="nasze-marki-grid">
           {brands.map((brand) => {
             const logoPath = getBrandLogo(brand.slug);
-            const heroPath = getBrandHero(brand.slug);
+            // Use shared getBrandPhotoSet for card image (same source as brand page gallery)
+            // Falls back to legacy getBrandHero if no gallery photos exist
+            const photoSet = getBrandPhotoSet(brand.slug);
+            const heroPath = photoSet.hero || getBrandHero(brand.slug);
             
             return (
               <Link 

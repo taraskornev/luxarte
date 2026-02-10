@@ -12,6 +12,8 @@
  * @version 2.0.0
  */
 
+import { mediaUrl } from '@/lib/buildMode';
+
 // ============================================================================
 // Types
 // ============================================================================
@@ -58,25 +60,15 @@ export interface ContactInfo {
 
 export const PRIMARY_NAV: NavItem[] = [
   {
-    id: 'brands',
-    label: 'MARKI',
-    labelEn: 'BRANDS',
-    href: '/gallery?mode=brands',
-    hasDropdown: true,
-    children: [],
-  },
-  {
-    id: 'categories',
-    label: 'KATEGORIE',
-    labelEn: 'CATEGORIES',
-    href: '/gallery?mode=categories',
-    hasDropdown: true,
-    children: [],
+    id: 'gallery',
+    label: 'GALERIA',
+    labelEn: 'GALLERY',
+    href: '/gallery',
   },
   {
     id: 'bentley-home-cinema',
-    label: 'BENTLEY HOME CINEMA',
-    labelEn: 'BENTLEY HOME CINEMA',
+    label: 'BENTLEY\u00A0HOME CINEMA',
+    labelEn: 'BENTLEY\u00A0HOME CINEMA',
     href: '/bentley-home-cinema',
   },
   {
@@ -206,7 +198,7 @@ export const CONTACT_INFO: ContactInfo = {
 
 export const BRAND_ASSETS = {
   logo: {
-    src: '/media/luxarte-logo.png',
+    src: mediaUrl('/media/luxarte-logo.png'),
     alt: 'LuxArte - Fashion for Home',
     width: 346,
     height: 120,

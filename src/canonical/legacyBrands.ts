@@ -7,6 +7,7 @@
  * 
  * This file is the SINGLE SOURCE OF TRUTH for all brand data.
  * Extracted from: https://www.luxarte.pl/marki/ on 2026-02-04
+ * Updated: 2026-02-06 — removed noorth, vitage, longhi, dv-home; added Flos
  * 
  * ALL consumers MUST import from this file:
  * - Header dropdowns
@@ -181,40 +182,13 @@ export const LEGACY_BRANDS: LegacyBrand[] = [
     productCount: 0,
   },
   {
-    label: 'Noorth',
-    slug: 'noorth',
-    legacyUrl: 'https://www.luxarte.pl/noorth/',
+    label: 'Flos',
+    slug: 'flos',
+    legacyUrl: 'https://www.luxarte.pl/flos/',
     tier: 2,
     sortOrder: 15,
-    showInFooter: false,
-    productCount: 4,
-  },
-  {
-    label: 'Vitage',
-    slug: 'vitage',
-    legacyUrl: 'https://www.luxarte.pl/vitage/',
-    tier: 2,
-    sortOrder: 16,
-    showInFooter: false,
-    productCount: 3,
-  },
-  {
-    label: 'Longhi',
-    slug: 'longhi',
-    legacyUrl: 'https://www.luxarte.pl/longhi/',
-    tier: 2,
-    sortOrder: 17,
-    showInFooter: false,
-    productCount: 1,
-  },
-  {
-    label: 'DV Home',
-    slug: 'dv-home',
-    legacyUrl: 'https://www.luxarte.pl/dv-home/',
-    tier: 2,
-    sortOrder: 18,
-    showInFooter: false,
-    productCount: 1,
+    showInFooter: true,
+    productCount: 0,
   },
 ] as const;
 
@@ -222,8 +196,8 @@ export const LEGACY_BRANDS: LegacyBrand[] = [
 // DERIVED CONSTANTS — DO NOT MODIFY
 // ═══════════════════════════════════════════════════════════════════════════
 
-/** Total number of brands from legacy site (18 total, 15 with products) */
-export const LEGACY_BRAND_COUNT = 18;
+/** Total number of brands from legacy site (15 total) */
+export const LEGACY_BRAND_COUNT = 15;
 
 /** All brand slugs as a readonly array */
 export const ALL_BRAND_SLUGS = LEGACY_BRANDS.map(b => b.slug) as readonly string[];

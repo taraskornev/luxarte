@@ -91,8 +91,6 @@ const BRAND_IMAGES: Record<string, string> = {
   'venicem': `${CDN_BASE}/2023/05/Venicem_luxarte.jpg`,
   'vanory': `${CDN_BASE}/2023/05/vanory_Estelle-plumon-pendant-lamp_ambient.jpg`,
   'exteta': `${CDN_BASE}/2023/06/exteta-luksusowe-meble-ogrodow-luxarte.webp`,
-  'longhi': `${CDN_BASE}/2025/06/projektowanie-wnetrz-luxarte-3.webp`,
-  'dv-home': `${CDN_BASE}/2025/06/projektowanie-wnetrz-luxarte-3.webp`,
   'misuraemme': `${CDN_BASE}/2023/04/luxarte-luksusowa-garderoba-misuraemme-1536x1023.jpeg`,
 };
 

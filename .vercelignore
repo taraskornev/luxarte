@@ -15,6 +15,15 @@ data/
 legacy_website/
 scripts/
 
+# Preview build assets (not needed for production)
+public/preview/
+
+# Heavy media directories (served from Hetzner media server)
+public/catalog/
+public/media/
+public/brands/
+public/videos/
+
 # Docs and proofs (not needed for deployment)
 docs/
 AUDIT_REPORT/

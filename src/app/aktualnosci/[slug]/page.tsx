@@ -38,6 +38,17 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     notFound();
   }
 
+  // Get related articles (same category or different articles, max 3)
+  const relatedArticles = articles
+    .filter(a => a.slug !== slug)
+    .sort((a, b) => {
+      // Prioritize same category
+      const aMatch = a.category === article.category ? 1 : 0;
+      const bMatch = b.category === article.category ? 1 : 0;
+      return bMatch - aMatch;
+    })
+    .slice(0, 3);
+
   return (
     <main className="article-page">
       {/* Hero Section */}
@@ -73,18 +84,81 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                   {paragraph}
                 </p>
               ))}
+              {section.images && section.images.length > 0 && (
+                <div className={`article-section-gallery${section.images.length === 1 ? ' article-section-gallery--single' : ''}`}>
+                  {section.images.map((img, imgIndex) => (
+                    <div key={imgIndex} className="article-section-gallery-item">
+                      <Image
+                        src={img}
+                        alt={section.heading || article.title}
+                        width={800}
+                        height={600}
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
             </section>
           ))}
 
-          {/* Tags */}
-          {article.tags && article.tags.length > 0 && (
-            <div className="article-tags">
-              {article.tags.map((tag, index) => (
-                <span key={index} className="article-tag">
-                  #{tag}
-                </span>
-              ))}
-            </div>
+          {/* Article Gallery */}
+          {article.gallery && article.gallery.length > 0 && (
+            <section className="article-gallery">
+              <div className="article-gallery-grid">
+                {article.gallery.map((img, index) => (
+                  <div key={index} className="article-gallery-item">
+                    <Image
+                      src={img}
+                      alt={`${article.title} - ${index + 1}`}
+                      width={600}
+                      height={450}
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                    />
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* CTA Button */}
+          <div className="article-cta">
+            <Link href="/kontakt" className="article-cta-button">
+              Skontaktuj się z nami
+            </Link>
+          </div>
+
+          {/* Related Posts */}
+          {relatedArticles.length > 0 && (
+            <section className="article-related">
+              <h2 className="article-related-title">Powiązane posty</h2>
+              <div className="article-related-grid">
+                {relatedArticles.map((related) => (
+                  <Link 
+                    key={related.slug} 
+                    href={`/aktualnosci/${related.slug}`} 
+                    className="article-related-card"
+                  >
+                    <div className="article-related-image">
+                      <Image
+                        src={related.image}
+                        alt={related.title}
+                        width={400}
+                        height={300}
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                      />
+                    </div>
+                    <div className="article-related-content">
+                      <span className="article-related-category">{related.category}</span>
+                      <h3 className="article-related-name">{related.title}</h3>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </section>
           )}
 
           {/* Back Link */}

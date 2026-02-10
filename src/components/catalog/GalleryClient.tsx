@@ -1,12 +1,13 @@
 'use client';
 
 import { useRouter, usePathname  } from 'next/navigation';
-import { useCallback, useMemo, useState, useEffect } from 'react';
+import { useCallback, useMemo, useState, useEffect, useRef } from 'react';
 import { Product } from '@/lib/products';
 import { LegacyBrand } from '@/canonical/legacyBrands';
 import { LegacyCategory } from '@/canonical/legacyCategories';
 import { ProductGrid } from '@/components/catalog/ProductGrid';
 import { GallerySidebar } from '@/components/catalog/GallerySidebar';
+import { getDictionary, type Locale } from '@/i18n';
 import Link from 'next/link';
 
 // Items per page for pagination
@@ -18,6 +19,7 @@ interface GalleryClientProps {
   categories: LegacyCategory[];
   initialBrands: string[];
   initialCategories: string[];
+  locale?: Locale;
 }
 
 /**
@@ -38,15 +40,27 @@ export function GalleryClient({
   categories,
   initialBrands,
   initialCategories,
+  locale = 'pl',
 }: GalleryClientProps) {
   const router = useRouter();
   const pathname = usePathname();
+  const t = getDictionary(locale);
   
   // Multi-select filter state (arrays)
   const [selectedBrands, setSelectedBrands] = useState<string[]>(initialBrands);
   const [selectedCategories, setSelectedCategories] = useState<string[]>(initialCategories);
   const [currentPage, setCurrentPage] = useState(1);
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
+  
+  // Mobile drawer section expand/collapse state
+  const [mobileBrandsExpanded, setMobileBrandsExpanded] = useState(true);
+  const [mobileCategoriesExpanded, setMobileCategoriesExpanded] = useState(true);
+  
+  // Refs for drag handling
+  const drawerRef = useRef<HTMLDivElement>(null);
+  const tabRef = useRef<HTMLButtonElement>(null);
+  const dragStartX = useRef<number>(0);
+  const isDragging = useRef<boolean>(false);
 
   // Sync URL when filter state changes
   useEffect(() => {
@@ -171,16 +185,43 @@ export function GalleryClient({
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
-  // Mobile filter drawer
-  const openMobileFilter = useCallback(() => {
-    setMobileFilterOpen(true);
-    document.body.style.overflow = 'hidden';
+  // Mobile filter drawer - toggle
+  const toggleMobileFilter = useCallback(() => {
+    setMobileFilterOpen(prev => {
+      document.body.style.overflow = !prev ? 'hidden' : '';
+      return !prev;
+    });
   }, []);
 
   const closeMobileFilter = useCallback(() => {
     setMobileFilterOpen(false);
     document.body.style.overflow = '';
   }, []);
+
+  // Drag handling for edge tab
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    dragStartX.current = e.touches[0].clientX;
+    isDragging.current = false;
+  }, []);
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    const deltaX = e.touches[0].clientX - dragStartX.current;
+    // If dragging right (closing) more than 50px, mark as dragging
+    if (mobileFilterOpen && deltaX > 30) {
+      isDragging.current = true;
+    }
+    // If dragging left (opening) more than 30px, mark as dragging
+    if (!mobileFilterOpen && deltaX < -30) {
+      isDragging.current = true;
+    }
+  }, [mobileFilterOpen]);
+
+  const handleTouchEnd = useCallback(() => {
+    if (isDragging.current) {
+      toggleMobileFilter();
+    }
+    isDragging.current = false;
+  }, [toggleMobileFilter]);
 
   // Cleanup scroll lock on unmount
   useEffect(() => {
@@ -210,72 +251,76 @@ export function GalleryClient({
           onCategoryToggle={handleCategoryToggle}
           onClearFilters={handleClearFilters}
           hasFilters={hasFilters}
+          locale={locale}
         />
       </aside>
 
       {/* Main Content */}
       <main className="gallery-main">
-        {/* Mobile Filter Button */}
-        <button
-          type="button"
-          className="mobile-filter-btn"
-          onClick={openMobileFilter}
-        >
-          Filtry
-          {hasFilters && <span className="filter-badge">{filterCount}</span>}
-        </button>
-
-        {/* Results Header */}
+        {/* Results Header - count only, no clear button (clear is in sidebar) */}
         <div className="gallery-results-header">
           <span className="gallery-count">
             {hasFilters
-              ? `${filteredCount} z ${totalCount} produktów`
-              : `${totalCount} produktów`}
+              ? `${filteredCount} ${t.common.productsOf} ${totalCount} ${t.common.products}`
+              : `${totalCount} ${t.common.products}`}
           </span>
-          {hasFilters && (
-            <button
-              type="button"
-              className="clear-filters-btn"
-              onClick={handleClearFilters}
-            >
-              Wyczyść filtry
-            </button>
-          )}
         </div>
 
         {/* Product Grid or Empty State */}
         {paginatedProducts.length > 0 ? (
           <>
-            <ProductGrid products={paginatedProducts} />
+            <ProductGrid products={paginatedProducts} locale={locale} />
             {/* Pagination */}
             {totalPages > 1 && (
-              <div className="gallery-pagination">
+              <nav className="gallery-pagination" aria-label={t.common.pagination}>
                 <button
                   type="button"
+                  className="pagination-arrow"
+                  disabled={currentPage <= 1}
+                  onClick={() => handlePageChange(1)}
+                  aria-label={t.common.firstPage}
+                >
+                  «
+                </button>
+                <button
+                  type="button"
+                  className="pagination-arrow"
                   disabled={currentPage <= 1}
                   onClick={() => handlePageChange(currentPage - 1)}
+                  aria-label={t.common.prevPage}
                 >
-                  ← Poprzednia
+                  ‹
                 </button>
                 <span className="pagination-info">
-                  Strona {currentPage} z {totalPages}
+                  {currentPage} / {totalPages}
                 </span>
                 <button
                   type="button"
+                  className="pagination-arrow"
                   disabled={currentPage >= totalPages}
                   onClick={() => handlePageChange(currentPage + 1)}
+                  aria-label={t.common.nextPage}
                 >
-                  Następna →
+                  ›
                 </button>
-              </div>
+                <button
+                  type="button"
+                  className="pagination-arrow"
+                  disabled={currentPage >= totalPages}
+                  onClick={() => handlePageChange(totalPages)}
+                  aria-label={t.common.lastPage}
+                >
+                  »
+                </button>
+              </nav>
             )}
           </>
         ) : (
           <div className="gallery-empty">
             <div className="gallery-empty-icon">🔍</div>
-            <h2 className="gallery-empty-title">Brak produktów</h2>
+            <h2 className="gallery-empty-title">{t.common.noProducts}</h2>
             <p className="gallery-empty-message">
-              Nie znaleziono produktów spełniających wybrane kryteria.
+              {t.common.noProductsMessage}
             </p>
             <div className="gallery-empty-actions">
               <button
@@ -283,48 +328,124 @@ export function GalleryClient({
                 className="gallery-empty-btn"
                 onClick={handleClearFilters}
               >
-                Wyczyść filtry
+                {t.common.clearFilters}
               </button>
-              <Link href="/gallery" className="gallery-empty-link">
-                Zobacz wszystkie produkty
+              <Link href={locale === 'en' ? '/en/gallery' : '/gallery'} className="gallery-empty-link">
+                {t.common.seeAllProducts}
               </Link>
             </div>
           </div>
         )}
       </main>
 
-      {/* Mobile Filter Drawer */}
+      {/* Mobile Filter Edge Tab Handle */}
+      <button
+        ref={tabRef}
+        type="button"
+        className={`filter-edge-tab ${mobileFilterOpen ? 'drawer-open' : ''}`}
+        onClick={toggleMobileFilter}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        aria-label={t.common.openFilters}
+      >
+        {t.common.filters}
+      </button>
+
+      {/* Mobile Filter Overlay - closes drawer on tap */}
       {mobileFilterOpen && (
         <div className="mobile-filter-overlay" onClick={closeMobileFilter} />
       )}
-      <div className={`mobile-filter-drawer ${mobileFilterOpen ? 'open' : ''}`}>
-        <div className="mobile-filter-header">
-          <span className="mobile-filter-title">Filtry</span>
-          <button type="button" className="mobile-filter-close" onClick={closeMobileFilter}>×</button>
-        </div>
+
+      {/* Mobile Filter Drawer - Brands + Categories with collapsible sections */}
+      <div 
+        ref={drawerRef}
+        className={`mobile-filter-drawer ${mobileFilterOpen ? 'open' : ''}`}
+      >
         <div className="mobile-filter-content">
-          <GallerySidebar
-            brands={brands}
-            categories={categories}
-            selectedBrands={selectedBrands}
-            selectedCategories={selectedCategories}
-            brandCounts={brandCounts}
-            categoryCounts={categoryCounts}
-            onBrandToggle={handleBrandToggle}
-            onCategoryToggle={handleCategoryToggle}
-            onClearFilters={() => { handleClearFilters(); closeMobileFilter(); }}
-            hasFilters={hasFilters}
-          />
+          {/* Brands Section */}
+          <div className={`mobile-filter-section ${mobileBrandsExpanded ? 'expanded' : 'collapsed'}`}>
+            <button
+              type="button"
+              className="mobile-filter-section-header"
+              onClick={() => setMobileBrandsExpanded(!mobileBrandsExpanded)}
+            >
+              <span>{t.common.brands} {selectedBrands.length > 0 && `(${selectedBrands.length})`}</span>
+              <span className="mobile-filter-section-toggle">{mobileBrandsExpanded ? '−' : '+'}</span>
+            </button>
+            <div className="mobile-filter-section-content">
+              <ul className="mobile-filter-section-list">
+                {brands.map((brand) => {
+                  const count = brandCounts.get(brand.slug) || 0;
+                  const isSelected = selectedBrands.includes(brand.slug);
+                  return (
+                    <li key={brand.slug}>
+                      <label className={`filter-checkbox ${count === 0 && !isSelected ? 'disabled' : ''}`}>
+                        <input
+                          type="checkbox"
+                          checked={isSelected}
+                          onChange={() => handleBrandToggle(brand.slug)}
+                          disabled={count === 0 && !isSelected}
+                        />
+                        <span className="filter-checkbox-box" />
+                        <span className="filter-item-name">{brand.label}</span>
+                        <span className="filter-count">({count})</span>
+                      </label>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </div>
+
+          {/* Categories Section */}
+          <div className={`mobile-filter-section ${mobileCategoriesExpanded ? 'expanded' : 'collapsed'}`}>
+            <button
+              type="button"
+              className="mobile-filter-section-header"
+              onClick={() => setMobileCategoriesExpanded(!mobileCategoriesExpanded)}
+            >
+              <span>{t.common.categories} {selectedCategories.length > 0 && `(${selectedCategories.length})`}</span>
+              <span className="mobile-filter-section-toggle">{mobileCategoriesExpanded ? '−' : '+'}</span>
+            </button>
+            <div className="mobile-filter-section-content">
+              <ul className="mobile-filter-section-list">
+                {categories.map((category) => {
+                  const count = categoryCounts.get(category.slug) || 0;
+                  const isSelected = selectedCategories.includes(category.slug);
+                  return (
+                    <li key={category.slug}>
+                      <label className={`filter-checkbox ${count === 0 && !isSelected ? 'disabled' : ''}`}>
+                        <input
+                          type="checkbox"
+                          checked={isSelected}
+                          onChange={() => handleCategoryToggle(category.slug)}
+                          disabled={count === 0 && !isSelected}
+                        />
+                        <span className="filter-checkbox-box" />
+                        <span className="filter-item-name">{category.label}</span>
+                        <span className="filter-count">({count})</span>
+                      </label>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </div>
         </div>
-        <div className="mobile-filter-footer">
-          <button
-            type="button"
-            className="mobile-filter-apply"
-            onClick={closeMobileFilter}
-          >
-            Zastosuj ({filteredCount} produktów)
-          </button>
-        </div>
+        
+        {/* Clear filters button - sticky at bottom */}
+        {hasFilters && (
+          <div className="mobile-filter-footer">
+            <button
+              type="button"
+              className="sidebar-clear-all"
+              onClick={handleClearFilters}
+            >
+              {t.common.clearAllFilters}
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

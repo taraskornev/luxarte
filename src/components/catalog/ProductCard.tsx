@@ -5,18 +5,21 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Product } from '@/lib/products';
 import { getProductImage, warnIfBadImagePath } from '@/lib/images';
+import type { Locale } from '@/i18n';
+import { mediaUrl } from '@/lib/buildMode';
 
 interface ProductCardProps {
   product: Product;
   priority?: boolean;
+  locale?: Locale;
 }
 
 // Track logged missing images to avoid console spam
 const loggedMissing = new Set<string>();
 
-export function ProductCard({ product, priority = false }: ProductCardProps) {
+export function ProductCard({ product, priority = false, locale = 'pl' }: ProductCardProps) {
   const imagePath = getProductImage(product.slug);
-  const fallbackPath = '/catalog/fallback.svg';
+  const fallbackPath = mediaUrl('/catalog/fallback.svg');
 
   // DEV: Warn if image path is wrong tier
   useEffect(() => {
@@ -33,7 +36,7 @@ export function ProductCard({ product, priority = false }: ProductCardProps) {
   };
 
   return (
-    <Link href={`/products/${product.slug}`} className="gallery-card">
+    <Link href={`${locale === 'en' ? '/en' : ''}/products/${product.slug}`} className="gallery-card">
       <div className="gallery-card-image">
         <Image
           src={imagePath}

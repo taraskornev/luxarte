@@ -8,6 +8,7 @@
  */
 
 import Link from 'next/link';
+import { mediaUrl } from '@/lib/buildMode';
 
 const HERO_ENTRIES = [
   {
@@ -37,9 +38,9 @@ export function HomeHeroVideo() {
         loop
         playsInline
         preload="metadata"
-        poster="/media/brands/versace-home-hero.webp"
+        poster={mediaUrl('/media/brands/versace-home-hero.webp')}
       >
-        <source src="/media/hero/hero-video.mp4" type="video/mp4" />
+        <source src={mediaUrl('/media/hero/hero-video.mp4')} type="video/mp4" />
       </video>
       <div className="home-hero-overlay" />
       <div className="home-hero-entries">

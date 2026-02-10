@@ -4,8 +4,10 @@ import Image from 'next/image';
 import { LEGACY_BRANDS, getBrandBySlug as getCanonicalBrand } from '@/canonical/legacyBrands';
 import { getProductsByBrand } from '@/lib/products';
 import { getBrandBySlug as getLegacyBrandContent } from '@/lib/brands';
-import { getBrandLogo, getBrandHero } from '@/lib/images';
+import { getBrandLogo } from '@/lib/images';
+import { getBrandGalleryImages, getBrandLightboxImages } from '@/lib/images-server';
 import { ProductGrid } from '@/components/catalog/ProductGrid';
+import { BrandHeroGallery } from '@/components/brand';
 
 interface BrandPageProps {
   params: Promise<{ slug: string }>;
@@ -47,48 +49,43 @@ export default async function BrandPage({ params }: BrandPageProps) {
   
   // Get brand images
   const logoPath = getBrandLogo(slug);
-  const heroPath = getBrandHero(slug);
+  const galleryImages = getBrandGalleryImages(slug);
+  const lightboxImages = getBrandLightboxImages(slug);
 
   return (
     <div className="brand-page">
       <div className="brand-page-container">
-        {/* Breadcrumb */}
-        <nav className="brand-breadcrumb">
+        {/* Breadcrumb with H1 as last item */}
+        <nav className="brand-breadcrumb" aria-label="Breadcrumb">
           <Link href="/">Strona główna</Link>
-          <span>/</span>
+          <span aria-hidden="true">/</span>
           <Link href="/nasze-marki">Nasze marki</Link>
-          <span>/</span>
-          <span>{brand.label}</span>
+          <span aria-hidden="true">/</span>
+          <h1 className="brand-breadcrumb-title">{brand.label}</h1>
         </nav>
 
-        {/* 1 — H1 Brand Name */}
-        <h1 className="brand-page-title">{brand.label}</h1>
-
-        {/* 2 — Large Brand Logo (2× size) */}
+        {/* Large Brand Logo (centered, enlarged) */}
         <div className="brand-logo-large">
           <Image
             src={logoPath}
             alt={`${brand.label} logo`}
-            width={360}
-            height={160}
-            sizes="360px"
+            width={420}
+            height={180}
+            sizes="420px"
             style={{ objectFit: 'contain' }}
           />
         </div>
 
-        {/* 3 — Hero Image (2:1 ratio) */}
-        <div className="brand-hero">
-          <Image
-            src={heroPath}
-            alt={brand.label}
-            fill
-            sizes="(max-width: 1400px) 100vw, 1400px"
-            style={{ objectFit: 'cover' }}
-            priority
+        {/* Hero Image Gallery (2:1 ratio slider with thumbnails) */}
+        {galleryImages.length > 0 && (
+          <BrandHeroGallery 
+            images={galleryImages} 
+            brandName={brand.label}
+            lightboxImages={lightboxImages}
           />
-        </div>
+        )}
 
-        {/* 4 — Intro Text */}
+        {/* Intro Text */}
         {legacyContent?.intro && legacyContent.intro.length > 0 && (
           <div className="brand-intro">
             {legacyContent.intro.map((paragraph, index) => (
@@ -97,27 +94,20 @@ export default async function BrandPage({ params }: BrandPageProps) {
           </div>
         )}
 
-        {/* 5 — CTA Button */}
+        {/* CTA Button */}
         <div className="brand-cta">
           <Link href="/kontakt" className="brand-cta-btn">
             Zapytaj o produkty {brand.label}
           </Link>
         </div>
 
-        {/* 6 — Brand Product Gallery Grid */}
-        {products.length > 0 ? (
+        {/* Brand Product Gallery Grid - only if products exist */}
+        {products.length > 0 && (
           <section className="brand-products-section">
             <h2 className="brand-products-title">Produkty {brand.label}</h2>
             <p className="brand-product-count">{products.length} produktów</p>
             <ProductGrid products={products} />
           </section>
-        ) : (
-          <div className="brand-no-products">
-            <p>Brak produktów dla tej marki.</p>
-            <Link href="/gallery" className="brand-browse-link">
-              Przeglądaj pełny katalog
-            </Link>
-          </div>
         )}
       </div>
     </div>

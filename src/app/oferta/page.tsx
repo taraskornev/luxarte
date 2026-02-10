@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { mediaUrl } from '@/lib/buildMode';
 
 export const metadata = {
   title: 'Oferta - LuxArte - Fashion for Home',
@@ -47,7 +48,7 @@ export default function OfertaPage() {
           <div className="oferta-cta-images">
             <div className="oferta-cta-image">
               <Image
-                src="/media/oferta/warszawa-adres.jpg"
+                src={mediaUrl('/media/oferta/warszawa-adres.jpg')}
                 alt="LuxArte Warszawa Showroom"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
@@ -56,7 +57,7 @@ export default function OfertaPage() {
             </div>
             <div className="oferta-cta-image">
               <Image
-                src="/media/oferta/wroclaw-adres.jpg"
+                src={mediaUrl('/media/oferta/wroclaw-adres.jpg')}
                 alt="LuxArte Wrocław Project Department"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
