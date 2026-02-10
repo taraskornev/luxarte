@@ -11,9 +11,7 @@ build/
 .cache/
 
 # Large data files (not needed for deployment)
-data/
 legacy_website/
-scripts/
 
 # Preview build assets (not needed for production)
 public/preview/
