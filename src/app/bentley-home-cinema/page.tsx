@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function BentleyHomeCinemaPage() {
   return (
-    <main className="content-page bentley-cinema-page">
+    <main className="bentley-cinema-page">
       {/* Hero Section with Video Background */}
       <div className="bentley-cinema-hero">
         <video
