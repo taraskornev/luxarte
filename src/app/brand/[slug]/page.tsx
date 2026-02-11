@@ -69,9 +69,9 @@ export default async function BrandPage({ params }: BrandPageProps) {
           <Image
             src={logoPath}
             alt={`${brand.label} logo`}
-            width={420}
-            height={180}
-            sizes="420px"
+            width={840}
+            height={360}
+            sizes="(max-width: 768px) 420px, 840px"
             style={{ objectFit: 'contain' }}
           />
         </div>

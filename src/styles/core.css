@@ -1349,9 +1349,18 @@ button {
   gap: var(--space-2);
   margin-top: var(--space-8);
   padding-top: var(--space-6);
+  flex-wrap: wrap;
 }
 
 /* Shared pagination styles for gallery & outlet */
+.pagination-pages {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+}
+
 .pagination-page {
   display: flex;
   align-items: center;
@@ -1365,10 +1374,10 @@ button {
   border: none;
   cursor: pointer;
   transition: var(--transition-color);
-  padding: 0 var(--space-1);
+  padding: 0 2px;
 }
 
-.pagination-page:hover:not(.active) {
+.pagination-page:hover:not(.active):not(:disabled) {
   color: var(--color-text-main);
 }
 
@@ -1386,15 +1395,7 @@ button {
 .pagination-arrow {
   font-size: var(--font-size-md);
   line-height: 1;
-}
-
-.pagination-info {
-  font-family: var(--font-family);
-  font-size: var(--font-size-sm);
-  color: var(--color-text-main);
-  padding: 0 var(--space-3);
-  min-width: 60px;
-  text-align: center;
+  flex-shrink: 0;
 }
 
 /* ============================================
@@ -3850,6 +3851,7 @@ a.pdp__brand:hover {
   margin-top: var(--space-10);
   padding-top: var(--space-6);
   border-top: var(--border-light);
+  flex-wrap: wrap;
 }
 
 /* Outlet Empty State */
@@ -5274,14 +5276,12 @@ a.pdp__brand:hover {
   /* Tab stays white always - no color change on active/touch */
   .filter-edge-tab:active,
   .filter-edge-tab:focus {
-    background: var(--color-text-inverse);
     outline: none;
   }
   
-  /* Tab moves with drawer when open - stays white */
+  /* Tab moves with drawer when open */
   .filter-edge-tab.drawer-open {
     transform: translateX(calc(-1 * var(--filter-drawer-width)));
-    background: var(--color-text-inverse);
   }
   
   .gallery-grid {

@@ -301,16 +301,9 @@ export function OutletClient({ categories, initialCategory, locale = 'pl' }: Out
                 ))}
               </div>
 
-              {/* Pagination — 9 buttons: first, prev, 5 centered pages, next, last */}
+              {/* Pagination — all pages */}
               {totalPages > 1 && (
                 <nav className="outlet-pagination" aria-label={t.common.pagination}>
-                  <button
-                    type="button"
-                    className="pagination-page pagination-arrow"
-                    onClick={() => handlePageChange(1)}
-                    disabled={currentPage === 1}
-                    aria-label={t.common.firstPage}
-                  >«</button>
                   <button
                     type="button"
                     className="pagination-page pagination-arrow"
@@ -318,11 +311,8 @@ export function OutletClient({ categories, initialCategory, locale = 'pl' }: Out
                     disabled={currentPage === 1}
                     aria-label={t.common.prevPage}
                   >‹</button>
-                  {(() => {
-                    const windowSize = Math.min(5, totalPages);
-                    let start = Math.max(1, currentPage - Math.floor(windowSize / 2));
-                    if (start + windowSize - 1 > totalPages) start = totalPages - windowSize + 1;
-                    return Array.from({ length: windowSize }, (_, i) => start + i).map((page) => (
+                  <div className="pagination-pages">
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                       <button
                         key={page}
                         type="button"
@@ -332,8 +322,8 @@ export function OutletClient({ categories, initialCategory, locale = 'pl' }: Out
                       >
                         {page}
                       </button>
-                    ));
-                  })()}
+                    ))}
+                  </div>
                   <button
                     type="button"
                     className="pagination-page pagination-arrow"
@@ -341,13 +331,6 @@ export function OutletClient({ categories, initialCategory, locale = 'pl' }: Out
                     disabled={currentPage === totalPages}
                     aria-label={t.common.nextPage}
                   >›</button>
-                  <button
-                    type="button"
-                    className="pagination-page pagination-arrow"
-                    onClick={() => handlePageChange(totalPages)}
-                    disabled={currentPage === totalPages}
-                    aria-label={t.common.lastPage}
-                  >»</button>
                 </nav>
               )}
             </>
