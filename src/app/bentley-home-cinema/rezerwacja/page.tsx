@@ -42,7 +42,7 @@ export default function BentleyRezerwacjaPage() {
     }
 
     if (!formData.clientType) {
-      newErrors.clientType = 'Wybierz kim jesteś';
+      newErrors.clientType = 'Wybierz typ klienta';
     }
     
     setErrors(newErrors);

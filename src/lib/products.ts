@@ -74,15 +74,22 @@ const productNamePrefixEn: Record<string, string> = {
 };
 
 /**
- * Translate the first word of a product name to English.
+ * Translate prefix words of a product name to English.
+ * Handles multi-word prefixes like "Ekskluzywna Kuchnia" → "Exclusive Kitchen"
  */
 function translateProductName(name: string): string {
-  const spaceIdx = name.indexOf(' ');
-  if (spaceIdx === -1) return name;
-  const firstWord = name.slice(0, spaceIdx);
-  const rest = name.slice(spaceIdx);
-  const en = productNamePrefixEn[firstWord];
-  return en ? en + rest : name;
+  const words = name.split(' ');
+  let translated = 0;
+  for (let i = 0; i < words.length; i++) {
+    const en = productNamePrefixEn[words[i]];
+    if (en) {
+      words[i] = en;
+      translated++;
+    } else {
+      break; // stop at first non-translatable word (brand/model name)
+    }
+  }
+  return translated > 0 ? words.join(' ') : name;
 }
 
 /**

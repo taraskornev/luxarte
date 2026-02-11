@@ -1352,42 +1352,29 @@ button {
 }
 
 /* Shared pagination styles for gallery & outlet */
-.pagination-arrow,
 .pagination-page {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 36px;
-  height: 36px;
+  min-width: 28px;
+  height: 28px;
   font-family: var(--font-family);
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
-  background: var(--color-text-inverse);
-  border: 1px solid var(--color-text-muted);
+  background: none;
+  border: none;
   cursor: pointer;
-  transition: var(--transition-background), var(--transition-color);
+  transition: var(--transition-color);
+  padding: 0 var(--space-1);
 }
 
-.pagination-arrow:hover:not(:disabled),
 .pagination-page:hover:not(.active) {
-  border-color: var(--color-accent-main);
-  color: var(--color-accent-main);
-}
-
-.pagination-arrow:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
+  color: var(--color-text-main);
 }
 
 .pagination-page.active {
-  background: var(--color-accent-main);
-  border-color: var(--color-accent-main);
-  color: var(--color-text-inverse);
-}
-
-.pagination-ellipsis {
-  color: var(--color-text-muted);
-  padding: 0 var(--space-2);
+  color: var(--color-text-main);
+  font-weight: var(--font-weight-bold);
 }
 
 .pagination-info {
@@ -1605,11 +1592,11 @@ button {
   color: var(--color-text-muted);
 }
 
-/* Last breadcrumb item = semantic H1 */
+/* Last breadcrumb item = semantic H1 (same size/color as links) */
 .brand-breadcrumb-title {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-medium);
-  color: var(--color-text-main);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-text-muted);
 }
 
 .brand-page-title {
@@ -1625,8 +1612,8 @@ button {
 }
 
 .brand-logo-large img {
-  max-width: 420px;
-  max-height: 180px;
+  max-width: 560px;
+  max-height: 240px;
   width: auto;
   height: auto;
 }
@@ -1650,7 +1637,7 @@ button {
    ============================================ */
 
 .brand-hero-gallery {
-  margin-bottom: var(--space-8);
+  margin-bottom: 0;
 }
 
 .brand-hero-main {
@@ -2692,33 +2679,6 @@ a.pdp__brand:hover {
   cursor: default;
 }
 
-/* Magnifying glass button - brand color, no background */
-.pdp-gallery__magnifier {
-  position: absolute;
-  top: var(--space-4);
-  right: var(--space-4);
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  z-index: 5;
-  transition: opacity var(--duration-normal) var(--ease-out);
-}
-
-.pdp-gallery__magnifier:hover {
-  opacity: 0.7;
-}
-
-.pdp-gallery__magnifier svg {
-  width: 24px;
-  height: 24px;
-  color: var(--color-accent-main);
-}
-
 /* Thumbnail Strip Wrapper */
 .pdp-gallery__thumbs-wrapper {
   position: relative;
@@ -2840,36 +2800,6 @@ a.pdp__brand:hover {
   opacity: 0.7;
 }
 
-.pdp-lightbox__nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: auto;
-  height: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: transparent;
-  color: var(--color-text-inverse);
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-light);
-  border: none;
-  cursor: pointer;
-  transition: opacity var(--duration-normal) var(--ease-out);
-}
-
-.pdp-lightbox__nav:hover {
-  opacity: 0.7;
-}
-
-.pdp-lightbox__nav--prev {
-  left: var(--space-5);
-}
-
-.pdp-lightbox__nav--next {
-  right: var(--space-5);
-}
-
 .pdp-lightbox__counter {
   position: absolute;
   bottom: var(--space-8);
@@ -2877,34 +2807,6 @@ a.pdp__brand:hover {
   transform: translateX(-50%);
   font-size: var(--font-size-sm);
   color: rgba(255, 255, 255, 0.8);
-}
-
-/* Lightbox Indicators */
-.pdp-lightbox__indicators {
-  position: absolute;
-  bottom: var(--space-5);
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: var(--space-2);
-}
-
-.pdp-lightbox__indicator {
-  width: 8px;
-  height: 8px;
-  padding: 0;
-  border: none;
-  background: rgba(255, 255, 255, 0.4);
-  cursor: pointer;
-  transition: background var(--duration-normal) var(--ease-out);
-}
-
-.pdp-lightbox__indicator:hover {
-  background: rgba(255, 255, 255, 0.7);
-}
-
-.pdp-lightbox__indicator.active {
-  background: rgba(255, 255, 255, 0.9);
 }
 
 /* PDP Responsive */
@@ -2946,10 +2848,6 @@ a.pdp__brand:hover {
   .pdp__related-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--grid-gap-sm);
-  }
-  
-  .pdp-lightbox__nav {
-    display: none;
   }
 }
 
@@ -4381,21 +4279,26 @@ a.pdp__brand:hover {
   }
   
   .bentley-cinema-section {
-    padding: 0 var(--container-padding);
+    padding: 0;
   }
 
   .bentley-cinema-row,
   .bentley-cinema-row--reverse {
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
   }
   
   .bentley-cinema-col {
-    flex: 0 0 100%;
+    flex: none;
     width: 100%;
+  }
+
+  .bentley-cinema-col--image {
+    aspect-ratio: 4 / 3;
   }
   
   .bentley-cinema-col--text {
-    padding: var(--space-6) 0;
+    padding: var(--space-6) var(--container-padding);
   }
   
   .bentley-cinema-hero-title {
@@ -4409,7 +4312,7 @@ a.pdp__brand:hover {
   width: 100%;
   height: 350px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   overflow: hidden;
   margin-bottom: var(--space-8);
@@ -4419,7 +4322,7 @@ a.pdp__brand:hover {
 .bentley-booking-hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.6) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.7) 100%);
   z-index: 1;
 }
 
@@ -4427,7 +4330,7 @@ a.pdp__brand:hover {
   position: relative;
   z-index: 2;
   text-align: center;
-  padding: var(--space-8) var(--container-padding);
+  padding: var(--space-8) var(--container-padding) var(--space-6);
 }
 
 .bentley-booking-hero-label {
@@ -5128,6 +5031,7 @@ a.pdp__brand:hover {
   flex-direction: column;
   justify-content: center;
   padding: 0;
+  margin: 0;
 }
 
 .about-hero__label {
@@ -5346,7 +5250,7 @@ a.pdp__brand:hover {
     padding: var(--space-8) var(--container-padding);
   }
   
-  /* Edge Tab Handle - Mobile visible, trapezium shape */
+  /* Edge Tab Handle - Mobile visible, notched shape */
   .filter-edge-tab {
     display: flex;
     position: fixed;
@@ -5358,7 +5262,7 @@ a.pdp__brand:hover {
     background: var(--color-text-inverse);
     color: var(--color-text-main);
     border: none;
-    border-radius: 0;
+    border-radius: 8px 0 0 8px;
     cursor: pointer;
     writing-mode: vertical-lr;
     text-orientation: mixed;
@@ -5372,8 +5276,6 @@ a.pdp__brand:hover {
     touch-action: pan-y;
     user-select: none;
     transition: transform var(--duration-slow) cubic-bezier(0.1, 0.9, 0.2, 1);
-    /* Trapezium: shorter left, longer right */
-    clip-path: polygon(8px 0%, 100% 0%, 100% 100%, 0% 100%);
   }
 
   /* Concave inner corner at top — where tab meets screen/menu edge */
@@ -5658,6 +5560,7 @@ a.pdp__brand:hover {
   .about-hero {
     grid-template-columns: 1fr;
     min-height: auto;
+    padding: 0 var(--container-padding);
   }
 
   .about-hero__image {
@@ -5665,11 +5568,12 @@ a.pdp__brand:hover {
     aspect-ratio: 1 / 1;
     min-height: auto;
     max-height: none;
-    margin: 0 var(--container-padding);
+    margin: 0;
   }
 
   .about-hero__content {
-    padding: var(--space-4) var(--container-padding);
+    padding: 0;
+    margin: 0;
   }
 
   /* Bentley Booking Mobile */

@@ -275,69 +275,25 @@ export function GalleryClient({
         {paginatedProducts.length > 0 ? (
           <>
             <ProductGrid products={paginatedProducts} locale={locale} />
-            {/* Pagination */}
+            {/* Pagination — window of 4 consecutive page numbers */}
             {totalPages > 1 && (
               <nav className="gallery-pagination" aria-label={t.common.pagination}>
-                <button
-                  type="button"
-                  className="pagination-arrow"
-                  disabled={currentPage <= 1}
-                  onClick={() => handlePageChange(1)}
-                  aria-label={t.common.firstPage}
-                >
-                  «
-                </button>
-                <button
-                  type="button"
-                  className="pagination-arrow"
-                  disabled={currentPage <= 1}
-                  onClick={() => handlePageChange(currentPage - 1)}
-                  aria-label={t.common.prevPage}
-                >
-                  ‹
-                </button>
-
-                {Array.from({ length: totalPages }, (_, i) => i + 1)
-                  .filter((page) => {
-                    if (totalPages <= 5) return true;
-                    if (page === 1 || page === totalPages) return true;
-                    return Math.abs(page - currentPage) <= 1;
-                  })
-                  .map((page, idx, arr) => {
-                    const showEllipsisBefore = idx > 0 && page - arr[idx - 1] > 1;
-                    return (
-                      <span key={page}>
-                        {showEllipsisBefore && <span className="pagination-ellipsis">…</span>}
-                        <button
-                          type="button"
-                          className={`pagination-page ${page === currentPage ? 'active' : ''}`}
-                          onClick={() => handlePageChange(page)}
-                          aria-current={page === currentPage ? 'page' : undefined}
-                        >
-                          {page}
-                        </button>
-                      </span>
-                    );
-                  })}
-
-                <button
-                  type="button"
-                  className="pagination-arrow"
-                  disabled={currentPage >= totalPages}
-                  onClick={() => handlePageChange(currentPage + 1)}
-                  aria-label={t.common.nextPage}
-                >
-                  ›
-                </button>
-                <button
-                  type="button"
-                  className="pagination-arrow"
-                  disabled={currentPage >= totalPages}
-                  onClick={() => handlePageChange(totalPages)}
-                  aria-label={t.common.lastPage}
-                >
-                  »
-                </button>
+                {(() => {
+                  const windowSize = Math.min(4, totalPages);
+                  let start = Math.max(1, currentPage - Math.floor(windowSize / 2));
+                  if (start + windowSize - 1 > totalPages) start = totalPages - windowSize + 1;
+                  return Array.from({ length: windowSize }, (_, i) => start + i).map((page) => (
+                    <button
+                      key={page}
+                      type="button"
+                      className={`pagination-page ${page === currentPage ? 'active' : ''}`}
+                      onClick={() => handlePageChange(page)}
+                      aria-current={page === currentPage ? 'page' : undefined}
+                    >
+                      {page}
+                    </button>
+                  ));
+                })()}
               </nav>
             )}
           </>
