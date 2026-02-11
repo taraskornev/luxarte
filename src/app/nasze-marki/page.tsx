@@ -34,6 +34,7 @@ export default function NaszeMarkiPage() {
                 key={brand.slug} 
                 href={`/brand/${brand.slug}`}
                 className="nasze-marki-card"
+                data-brand={brand.slug}
               >
                 <div className="nasze-marki-card-bg">
                   <Image
@@ -49,9 +50,9 @@ export default function NaszeMarkiPage() {
                   <Image
                     src={logoPath}
                     alt={brand.label}
-                    width={280}
-                    height={120}
-                    sizes="280px"
+                    width={420}
+                    height={180}
+                    sizes="420px"
                     style={{ objectFit: 'contain' }}
                   />
                 </div>

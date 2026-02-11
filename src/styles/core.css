@@ -1564,11 +1564,16 @@ button {
 }
 
 .nasze-marki-card-logo img {
-  width: 350px;
-  max-width: 80%;
-  max-height: 160px;
+  width: 100%;
+  max-width: 90%;
+  max-height: 200px;
   height: auto;
   filter: brightness(0) invert(1);
+}
+
+/* Bentley has a two-tone logo — use invert instead of white overlay */
+.nasze-marki-card[data-brand="bentley-home"] .nasze-marki-card-logo img {
+  filter: invert(1);
 }
 
 /* ============================================
@@ -5251,9 +5256,9 @@ a.pdp__brand:hover {
     position: fixed;
     right: 0;
     top: 25vh;
-    z-index: var(--z-overlay);
-    width: 24px;
-    height: 153px;
+    z-index: var(--z-drawer);
+    width: 36px;
+    height: 230px;
     background: url('/filter-tab.svg') no-repeat center / contain;
     color: var(--color-text-main);
     border: none;
@@ -5261,7 +5266,7 @@ a.pdp__brand:hover {
     writing-mode: vertical-lr;
     text-orientation: mixed;
     font-family: var(--font-family);
-    font-size: 11px;
+    font-size: var(--font-size-sm);
     font-weight: var(--font-weight-bold);
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-wide);
@@ -5270,7 +5275,7 @@ a.pdp__brand:hover {
     touch-action: pan-y;
     user-select: none;
     transition: transform var(--duration-slow) cubic-bezier(0.1, 0.9, 0.2, 1);
-    padding: 0 0 0 4px;
+    padding: 0 0 0 6px;
   }
 
   /* Tab stays white always - no color change on active/touch */
@@ -5318,9 +5323,9 @@ a.pdp__brand:hover {
   }
   
   .nasze-marki-card-logo img {
-    width: 350px;
-    max-width: 80%;
-    max-height: 160px;
+    width: 100%;
+    max-width: 90%;
+    max-height: 200px;
   }
   
   /* Brand page */
