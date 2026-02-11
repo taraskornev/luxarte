@@ -1377,6 +1377,17 @@ button {
   font-weight: var(--font-weight-bold);
 }
 
+.pagination-page:disabled {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+.pagination-arrow {
+  font-size: var(--font-size-md);
+  line-height: 1;
+}
+
 .pagination-info {
   font-family: var(--font-family);
   font-size: var(--font-size-sm);
@@ -1608,12 +1619,12 @@ button {
 .brand-logo-large {
   display: flex;
   justify-content: center;
-  margin-bottom: var(--space-8);
+  margin-bottom: var(--space-4);
 }
 
 .brand-logo-large img {
-  max-width: 560px;
-  max-height: 240px;
+  max-width: 840px;
+  max-height: 200px;
   width: auto;
   height: auto;
 }
@@ -3677,7 +3688,7 @@ a.pdp__brand:hover {
 
 .outlet-hero-subtitle {
   font-family: var(--font-family);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-md);
   font-weight: var(--font-weight-light);
   letter-spacing: var(--letter-spacing-wide);
   color: var(--color-text-muted);
@@ -5232,23 +5243,23 @@ a.pdp__brand:hover {
     padding: var(--space-8) var(--container-padding);
   }
   
-  /* Edge Tab Handle - Mobile visible, trapezium with rounded left corners */
+  /* Edge Tab Handle - Mobile visible, SVG shape */
   .filter-edge-tab {
     display: flex;
     position: fixed;
     right: 0;
     top: 25vh;
-    z-index: 5000;
-    width: 36px;
-    height: 130px;
-    background: var(--color-text-inverse);
+    z-index: var(--z-overlay);
+    width: 24px;
+    height: 153px;
+    background: url('/filter-tab.svg') no-repeat center / contain;
     color: var(--color-text-main);
     border: none;
     cursor: pointer;
     writing-mode: vertical-lr;
     text-orientation: mixed;
     font-family: var(--font-family);
-    font-size: var(--font-size-sm);
+    font-size: 11px;
     font-weight: var(--font-weight-bold);
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-wide);
@@ -5257,9 +5268,7 @@ a.pdp__brand:hover {
     touch-action: pan-y;
     user-select: none;
     transition: transform var(--duration-slow) cubic-bezier(0.1, 0.9, 0.2, 1);
-    border-radius: 10px 0 0 10px;
-    clip-path: polygon(40% 0%, 100% 0%, 100% 100%, 40% 100%, 0% 85%, 0% 15%);
-    padding: 0;
+    padding: 0 0 0 4px;
   }
 
   /* Tab stays white always - no color change on active/touch */
@@ -5324,7 +5333,7 @@ a.pdp__brand:hover {
   }
   
   .brand-logo-large img {
-    max-width: 280px;
+    max-width: 420px;
     max-height: 120px;
   }
   

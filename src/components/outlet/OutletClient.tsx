@@ -301,11 +301,25 @@ export function OutletClient({ categories, initialCategory, locale = 'pl' }: Out
                 ))}
               </div>
 
-              {/* Pagination — window of 4 consecutive page numbers */}
+              {/* Pagination — 9 buttons: first, prev, 5 centered pages, next, last */}
               {totalPages > 1 && (
                 <nav className="outlet-pagination" aria-label={t.common.pagination}>
+                  <button
+                    type="button"
+                    className="pagination-page pagination-arrow"
+                    onClick={() => handlePageChange(1)}
+                    disabled={currentPage === 1}
+                    aria-label={t.common.firstPage}
+                  >«</button>
+                  <button
+                    type="button"
+                    className="pagination-page pagination-arrow"
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    aria-label={t.common.prevPage}
+                  >‹</button>
                   {(() => {
-                    const windowSize = Math.min(4, totalPages);
+                    const windowSize = Math.min(5, totalPages);
                     let start = Math.max(1, currentPage - Math.floor(windowSize / 2));
                     if (start + windowSize - 1 > totalPages) start = totalPages - windowSize + 1;
                     return Array.from({ length: windowSize }, (_, i) => start + i).map((page) => (
@@ -320,6 +334,20 @@ export function OutletClient({ categories, initialCategory, locale = 'pl' }: Out
                       </button>
                     ));
                   })()}
+                  <button
+                    type="button"
+                    className="pagination-page pagination-arrow"
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    aria-label={t.common.nextPage}
+                  >›</button>
+                  <button
+                    type="button"
+                    className="pagination-page pagination-arrow"
+                    onClick={() => handlePageChange(totalPages)}
+                    disabled={currentPage === totalPages}
+                    aria-label={t.common.lastPage}
+                  >»</button>
                 </nav>
               )}
             </>
