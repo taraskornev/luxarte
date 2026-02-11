@@ -275,38 +275,52 @@ export function GalleryClient({
         {paginatedProducts.length > 0 ? (
           <>
             <ProductGrid products={paginatedProducts} locale={locale} />
-            {/* Pagination — all pages */}
-            {totalPages > 1 && (
-              <nav className="gallery-pagination" aria-label={t.common.pagination}>
-                <button
-                  type="button"
-                  className="pagination-page pagination-arrow"
-                  onClick={() => handlePageChange(currentPage - 1)}
-                  disabled={currentPage === 1}
-                  aria-label={t.common.prevPage}
-                >‹</button>
-                <div className="pagination-pages">
-                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                    <button
-                      key={page}
-                      type="button"
-                      className={`pagination-page ${page === currentPage ? 'active' : ''}`}
-                      onClick={() => handlePageChange(page)}
-                      aria-current={page === currentPage ? 'page' : undefined}
-                    >
-                      {page}
-                    </button>
-                  ))}
-                </div>
-                <button
-                  type="button"
-                  className="pagination-page pagination-arrow"
-                  onClick={() => handlePageChange(currentPage + 1)}
-                  disabled={currentPage === totalPages}
-                  aria-label={t.common.nextPage}
-                >›</button>
-              </nav>
-            )}
+            {/* Pagination */}
+            {totalPages > 1 && (() => {
+              // Calculate visible page window (max 5)
+              let startPage: number, endPage: number;
+              if (totalPages <= 5) {
+                startPage = 1;
+                endPage = totalPages;
+              } else {
+                startPage = Math.max(1, currentPage - 2);
+                endPage = startPage + 4;
+                if (endPage > totalPages) {
+                  endPage = totalPages;
+                  startPage = endPage - 4;
+                }
+              }
+              const pages = Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
+              return (
+                <nav className="gallery-pagination" aria-label={t.common.pagination}>
+                  {totalPages > 5 && (
+                    <>
+                      <button type="button" className="pagination-page pagination-arrow" onClick={() => handlePageChange(1)} disabled={currentPage === 1} aria-label="First page">«</button>
+                      <button type="button" className="pagination-page pagination-arrow" onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1} aria-label={t.common.prevPage}>‹</button>
+                    </>
+                  )}
+                  <div className="pagination-pages">
+                    {pages.map((page) => (
+                      <button
+                        key={page}
+                        type="button"
+                        className={`pagination-page ${page === currentPage ? 'active' : ''}`}
+                        onClick={() => handlePageChange(page)}
+                        aria-current={page === currentPage ? 'page' : undefined}
+                      >
+                        {page}
+                      </button>
+                    ))}
+                  </div>
+                  {totalPages > 5 && (
+                    <>
+                      <button type="button" className="pagination-page pagination-arrow" onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages} aria-label={t.common.nextPage}>›</button>
+                      <button type="button" className="pagination-page pagination-arrow" onClick={() => handlePageChange(totalPages)} disabled={currentPage === totalPages} aria-label="Last page">»</button>
+                    </>
+                  )}
+                </nav>
+              );
+            })()}
           </>
         ) : (
           <div className="gallery-empty">

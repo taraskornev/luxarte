@@ -111,6 +111,8 @@ export function getPreviewBrandLogo(brandSlug: string): string {
   
   const logoFile = logoMap[brandSlug] || `${brandSlug}.webp`;
   const path = `${BRAND_LOGOS_PATH}/${logoFile}`;
+  // Bentley logo is in local public/ — serve directly
+  if (brandSlug === 'bentley-home') return path;
   return resolveImagePath(path);
 }
 
