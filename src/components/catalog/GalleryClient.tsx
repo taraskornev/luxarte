@@ -56,6 +56,9 @@ export function GalleryClient({
   const [mobileBrandsExpanded, setMobileBrandsExpanded] = useState(true);
   const [mobileCategoriesExpanded, setMobileCategoriesExpanded] = useState(true);
   
+  // Ref for scroll-to-grid on pagination
+  const mainRef = useRef<HTMLDivElement>(null);
+
   // Refs for drag handling
   const drawerRef = useRef<HTMLDivElement>(null);
   const tabRef = useRef<HTMLButtonElement>(null);
@@ -182,7 +185,9 @@ export function GalleryClient({
   // Page change
   const handlePageChange = useCallback((page: number) => {
     setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (mainRef.current) {
+      mainRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
   }, []);
 
   // Mobile filter drawer - toggle
@@ -256,7 +261,7 @@ export function GalleryClient({
       </aside>
 
       {/* Main Content */}
-      <main className="gallery-main">
+      <main className="gallery-main" ref={mainRef}>
         {/* Results Header - count only, no clear button (clear is in sidebar) */}
         <div className="gallery-results-header">
           <span className="gallery-count">

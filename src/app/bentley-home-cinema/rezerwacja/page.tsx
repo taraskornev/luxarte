@@ -148,7 +148,7 @@ export default function BentleyRezerwacjaPage() {
                 value={formData.clientType}
                 onChange={(e) => handleChange('clientType', e.target.value)}
               >
-                <option value="">Kim jesteś</option>
+                <option value="">Typ klienta</option>
                 {clientTypes.slice(1).map((type) => (
                   <option key={type.value} value={type.value}>{type.label}</option>
                 ))}

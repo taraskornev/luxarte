@@ -435,7 +435,7 @@ button {
   background: var(--color-bg-main);
   z-index: var(--z-drawer);
   overflow-y: auto;
-  transition: right var(--motion-slow) var(--motion-zoom-curve);
+  transition: right var(--motion-normal) var(--motion-zoom-curve);
 }
 
 .mobile-menu-drawer.open {
@@ -1061,7 +1061,7 @@ button {
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  padding: var(--space-4) var(--space-5);
+  padding: var(--space-2) var(--space-5);
   background: var(--color-text-inverse);
   font-family: var(--font-family);
   font-size: var(--font-size-sm);
@@ -3854,7 +3854,7 @@ a.pdp__brand:hover {
 .outlet-hero-banner {
   position: relative;
   text-align: center;
-  padding: var(--space-20) var(--container-padding) var(--space-16);
+  padding: var(--space-9) var(--container-padding);
   background: linear-gradient(180deg, var(--color-background) 0%, var(--color-cream) 100%);
   overflow: hidden;
 }
@@ -5504,7 +5504,7 @@ a.pdp__brand:hover {
     position: fixed;
     right: 0;
     top: 25vh;
-    z-index: calc(var(--z-overlay) - 1);
+    z-index: calc(var(--z-overlay) + 1);
     width: var(--filter-tab-width);
     padding: var(--space-4) var(--space-2);
     background: var(--color-text-inverse);
@@ -5739,7 +5739,7 @@ a.pdp__brand:hover {
 
   .content-page-cta {
     padding: var(--space-8) var(--space-5);
-    margin-top: var(--space-8);
+    margin: var(--space-8) calc(-1 * var(--container-padding)) 0;
   }
 
   .content-page-cta h2 {
@@ -5862,7 +5862,7 @@ a.pdp__brand:hover {
   }
 
   .bentley-booking-hero-title {
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-md);
   }
 
   .bentley-booking-subtitle {
@@ -6533,8 +6533,8 @@ a.pdp__brand:hover {
 
 /* ============================================
    DESIGN TIMELINE (ETAPY WSPÓŁPRACY)
-   Centered alternating timeline.
-   Empty dots on line + expanding number→title pill.
+   Alternating text blocks with scroll-fade.
+   No vertical line. No pills. Clean text.
    ============================================ */
 
 .design-timeline-section {
@@ -6547,29 +6547,6 @@ a.pdp__brand:hover {
 
 .dtl { position: relative; }
 
-.dtl-line-wrap {
-  position: absolute;
-  left: var(--space-4);
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  pointer-events: none;
-}
-
-.dtl-line-bg,
-.dtl-line-fill {
-  position: absolute;
-  left: 0;
-  width: 2px;
-}
-
-.dtl-line-bg { background: var(--color-border); }
-
-.dtl-line-fill {
-  background: var(--color-accent-main);
-  transition: height var(--motion-slow) var(--ease-out);
-}
-
 .dtl-items {
   display: flex;
   flex-direction: column;
@@ -6580,99 +6557,33 @@ a.pdp__brand:hover {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
 }
 
-/* Diamond on the line (45° rotated square) */
-.dtl-bullet-anchor {
-  position: absolute;
-  left: var(--space-4);
-  top: 0;
-  width: 12px;
-  height: 12px;
-  transform: translateX(-50%);
-  z-index: 2;
-  pointer-events: none;
-}
-
-.dtl-dot {
-  position: absolute;
-  inset: 0;
-  background: var(--color-accent-main);
-  transform: rotate(45deg) scale(0.75);
-  transform-origin: center;
-  transition: transform var(--motion-slow) var(--ease-out),
-              box-shadow var(--motion-slow) var(--ease-out);
-}
-
-.dtl-dot--active {
-  transform: rotate(45deg) scale(1.25);
-  box-shadow: 0 0 0 3px rgba(150, 127, 101, 0.25);
-}
-
-/* Content */
 .dtl-content {
-  padding-left: var(--space-8);
   transition: opacity var(--motion-slow) var(--ease-out);
 }
 
-/* Expanding label: rectangle with number → number + title */
-.dtl-pill-wrap {
-  margin-bottom: var(--space-4);
-  height: 36px;
-}
-
-.dtl-pill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 36px;
-  min-width: 36px;
-  border-radius: 0;
-  background: var(--color-accent-main);
-  overflow: hidden;
-  padding: 0 10px;
-  transition: padding 400ms var(--ease-out);
-}
-
-.dtl-pill--active {
-  padding: 0 18px;
-}
-
-.dtl-pill-num {
-  font-size: var(--font-size-nav);
+.dtl-num {
+  font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
-  color: var(--color-text-inverse);
-  line-height: 1;
-  flex-shrink: 0;
+  color: var(--color-accent-main);
+  margin-bottom: var(--space-2);
 }
 
-.dtl-pill-label {
-  font-size: var(--font-size-nav);
+.dtl-title {
+  font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
   letter-spacing: var(--letter-spacing-wide);
   text-transform: uppercase;
-  color: var(--color-text-inverse);
-  white-space: nowrap;
-  overflow: hidden;
-  max-width: 0;
-  opacity: 0;
-  transition: opacity 200ms var(--ease-out),
-              max-width 400ms var(--ease-out),
-              margin 400ms var(--ease-out);
-  margin-left: 0;
+  color: var(--color-text-main);
+  margin-bottom: var(--space-3);
 }
 
-.dtl-pill--active .dtl-pill-label {
-  margin-left: 10px;
-}
-
-/* Description — matches content-page-body p */
 .dtl-desc {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-light);
   line-height: var(--line-height-loose);
-  color: var(--color-text-muted);
+  color: var(--color-text-main);
   max-width: 600px;
 }
 
@@ -6681,19 +6592,12 @@ a.pdp__brand:hover {
 @media (min-width: 1024px) {
   .dtl-items { gap: var(--space-10); }
 
-  .dtl-line-wrap {
-    left: 50%;
-    transform: translateX(-1px);
-  }
-
   .dtl-row {
     flex-direction: row;
     align-items: flex-start;
-    gap: var(--space-3);
   }
 
   .dtl-row--even { flex-direction: row-reverse; }
-  .dtl-bullet-anchor { left: 50%; }
 
   .dtl-content {
     width: 50%;
@@ -6713,11 +6617,8 @@ a.pdp__brand:hover {
 }
 
 @media (max-width: 768px) {
-  .dtl-pill-wrap { height: 30px; }
-  .dtl-pill { height: 30px; min-width: 30px; padding: 0 8px; }
-  .dtl-pill--active { padding: 0 14px; }
-  .dtl-pill-num { font-size: var(--font-size-sm); }
-  .dtl-pill-label { font-size: var(--font-size-sm); }
+  .dtl-num { font-size: var(--font-size-md); }
+  .dtl-title { font-size: var(--font-size-md); }
   .dtl-desc { font-size: var(--font-size-md); }
 }
 

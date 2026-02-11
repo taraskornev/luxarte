@@ -58,6 +58,9 @@ export function OutletClient({ categories, initialCategory, locale = 'pl' }: Out
   const [mobileFilterOpen, setMobileFilterOpen] = useState(false);
   const [categoriesExpanded, setCategoriesExpanded] = useState(true);
 
+  // Ref for scroll-to-grid on pagination
+  const mainRef = useRef<HTMLDivElement>(null);
+
   // Refs for drag handling
   const dragStartX = useRef<number>(0);
   const isDragging = useRef<boolean>(false);
@@ -137,7 +140,9 @@ export function OutletClient({ categories, initialCategory, locale = 'pl' }: Out
   // Page change
   const handlePageChange = useCallback((page: number) => {
     setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (mainRef.current) {
+      mainRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
   }, []);
 
   // Mobile filter drawer - toggle
@@ -253,7 +258,7 @@ export function OutletClient({ categories, initialCategory, locale = 'pl' }: Out
         </aside>
 
         {/* Main Content */}
-        <main className="outlet-main">
+        <main className="outlet-main" ref={mainRef}>
           {/* Mobile Category Buttons (visible only on mobile) */}
           <div className="outlet-mobile-categories">
             <button

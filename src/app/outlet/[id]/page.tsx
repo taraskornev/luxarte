@@ -72,6 +72,14 @@ export default async function OutletProductPage({ params }: Props) {
             
             {/* Title */}
             <h1 className="pdp__title">{product.name}</h1>
+
+            {/* Quantity */}
+            {product.quantity && (
+              <p className="pdp__quantity">
+                <span className="pdp__quantity-label">Ilość:</span>{' '}
+                <span className="pdp__quantity-value">{product.quantity}</span>
+              </p>
+            )}
             
             {/* Description */}
             {product.description && (
