@@ -14,9 +14,12 @@
 export const siteMetadata = {
   siteName: 'LuxArte - Fashion for Home',
   defaultTitle: 'LuxArte - Fashion for Home | Ekskluzywne Meble Włoskich Marek',
+  defaultTitleEn: 'LuxArte - Fashion for Home | Exclusive Italian Luxury Furniture',
   titleTemplate: '%s | LuxArte - Fashion for Home',
   defaultDescription:
     'Ekskluzywne meble, kuchnie i garderoby najlepszych włoskich marek. Doradztwo i wsparcie w projektowaniu wnętrz. Zapraszamy do współpracy!',
+  defaultDescriptionEn:
+    'Exclusive furniture, kitchens, and wardrobes from top Italian luxury brands. Interior design consultancy and support. We invite you to collaborate!',
   siteUrl: 'https://www.luxarte.pl',
   locale: 'pl_PL',
   language: 'pl',

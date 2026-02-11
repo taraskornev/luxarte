@@ -2,14 +2,17 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
+import { getDictionary, type Locale } from '@/i18n';
 
 interface BrandGalleryProps {
   images: string[];
   lightboxImages: string[];
   brandName: string;
+  locale?: Locale;
 }
 
-export function BrandGallery({ images, lightboxImages, brandName }: BrandGalleryProps) {
+export function BrandGallery({ images, lightboxImages, brandName, locale = 'pl' }: BrandGalleryProps) {
+  const t = getDictionary(locale);
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
 
@@ -84,7 +87,7 @@ export function BrandGallery({ images, lightboxImages, brandName }: BrandGallery
           >
             <Image
               src={src}
-              alt={`${brandName} - zdjęcie ${index + 1}`}
+              alt={`${brandName} - ${t.common.photoN} ${index + 1}`}
               width={400}
               height={400}
               loading="lazy"
@@ -101,7 +104,7 @@ export function BrandGallery({ images, lightboxImages, brandName }: BrandGallery
           <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
             <Image
               src={lightboxImages[lightboxIndex]}
-              alt={`${brandName} - zdjęcie ${lightboxIndex + 1}`}
+              alt={`${brandName} - ${t.common.photoN} ${lightboxIndex + 1}`}
               width={1600}
               height={1200}
               priority

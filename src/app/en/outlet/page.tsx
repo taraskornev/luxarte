@@ -12,7 +12,7 @@ interface OutletPageProps {
 
 export default async function OutletPageEN({ searchParams }: OutletPageProps) {
   const params = await searchParams;
-  const categories = getOutletCategories();
+  const categories = getOutletCategories('en');
   const initialCategory = params.category || undefined;
 
   return <OutletClient categories={categories} initialCategory={initialCategory} locale="en" />;

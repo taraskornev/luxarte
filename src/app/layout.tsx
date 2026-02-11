@@ -9,7 +9,7 @@ import '@/styles/globals.css';
 
 const jost = Jost({
   subsets: ['latin', 'latin-ext'],
-  weight: ['300', '400', '500', '600'],
+  weight: ['300', '400', '500'],
   display: 'swap',
   variable: '--font-jost',
 });

@@ -57,6 +57,8 @@ const nextConfig = {
   experimental: {
     // Optimize package imports
     optimizePackageImports: ['@/components'],
+    // Inline critical CSS, lazy-load the rest (requires critters)
+    optimizeCss: true,
   },
 
   // Environment variables

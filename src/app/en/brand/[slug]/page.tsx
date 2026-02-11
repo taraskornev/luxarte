@@ -3,9 +3,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { LEGACY_BRANDS, getBrandBySlug as getCanonicalBrand } from '@/canonical/legacyBrands';
 import { getProductsByBrand } from '@/lib/products';
-import { getBrandBySlug as getLegacyBrandContent } from '@/lib/brands';
 import { getBrandLogo } from '@/lib/images';
 import { getBrandGalleryImages, getBrandLightboxImages } from '@/lib/images-server';
+import { getBrandIntro } from '@/canonical/editorialBrandContent';
 import { ProductGrid } from '@/components/catalog/ProductGrid';
 import { BrandHeroGallery } from '@/components/brand';
 
@@ -42,7 +42,7 @@ export default async function BrandPageEN({ params }: BrandPageProps) {
   }
 
   const products = getProductsByBrand(slug);
-  const legacyContent = getLegacyBrandContent(slug);
+  const introParas = getBrandIntro(slug, 'en');
   const logoPath = getBrandLogo(slug);
   const galleryImages = getBrandGalleryImages(slug);
   const lightboxImages = getBrandLightboxImages(slug);
@@ -78,9 +78,9 @@ export default async function BrandPageEN({ params }: BrandPageProps) {
           />
         )}
 
-        {legacyContent?.intro && legacyContent.intro.length > 0 && (
+        {introParas.length > 0 && (
           <div className="brand-intro">
-            {legacyContent.intro.map((paragraph, index) => (
+            {introParas.map((paragraph, index) => (
               <p key={index}>{paragraph}</p>
             ))}
           </div>

@@ -339,11 +339,40 @@ const monthMap: Record<string, string> = {
   'PAŹDZIERNIKA': 'OCTOBER', 'LISTOPADA': 'NOVEMBER', 'GRUDNIA': 'DECEMBER',
 };
 
-/** Translate article metadata (category + date) to English */
+/** English titles and excerpts for the listing page */
+const articleTitleEn: Record<string, string> = {
+  'venicem-nowoczesne-oblicze-oswietlenia-z-murano': 'VENICEM – THE MODERN FACE OF MURANO LIGHTING',
+  'exteta-kolekcja-loro-piana-ponadczasowe-meble-ogrodowe': 'EXTETA – LORO PIANA COLLECTION – TIMELESS OUTDOOR FURNITURE',
+  'archigraphica-nowoczesna-kuchnia-bliska-naturze': 'ARCHIGRAPHICA – A MODERN KITCHEN CLOSE TO NATURE',
+  'trussardi-casa-nowa-kolekcja-2025': 'TRUSSARDI CASA – NEW 2025 COLLECTION',
+  'bentley-home-nowa-kolekcja-2025': 'BENTLEY HOME – NEW 2025 COLLECTION',
+  'zapraszamy-na-milan-design-week-2025': 'JOIN US AT MILAN DESIGN WEEK 2025!',
+  'moda-w-designie-kolekcji-mebli-versace-home': 'FASHION IN DESIGN: VERSACE HOME FURNITURE COLLECTION',
+  'maison-objet-2025-kolekcja-bugatti-home': 'MAISON & OBJET 2025 – BUGATTI HOME COLLECTION',
+  'odsluch-najnowszej-plyty-justyny-steczkowskiej-bentley-home-cinema': 'LISTENING SESSION AT BENTLEY HOME CINEMA',
+  'bentley-home-cinema-premiera': 'BENTLEY HOME CINEMA – PREMIERE',
+};
+
+const articleExcerptEn: Record<string, string> = {
+  'venicem-nowoczesne-oblicze-oswietlenia-z-murano': 'Venicem is more than a brand – it is the contemporary face of Venetian glass, where every lamp creates not just light but atmosphere.',
+  'exteta-kolekcja-loro-piana-ponadczasowe-meble-ogrodowe': 'The Delight Chairs collection is the fruit of collaboration between two Italian brands: Exteta, the master of outdoor furniture, and Loro Piana Interiors.',
+  'archigraphica-nowoczesna-kuchnia-bliska-naturze': 'Valcucine\'s modern kitchen design has been inspiring and setting trends in the exclusive kitchen market for years.',
+  'trussardi-casa-nowa-kolekcja-2025': 'Trussardi has consistently continued the idea of "quiet luxury", where design is an experience and style is an attitude.',
+  'bentley-home-nowa-kolekcja-2025': 'The latest collection was presented at the brand\'s Atelier on Corso Venezia.',
+  'zapraszamy-na-milan-design-week-2025': 'As every year, we can\'t wait for the greatest design celebration.',
+  'moda-w-designie-kolekcji-mebli-versace-home': 'Versace has always been known for strong motifs drawn from mythology, antiquity, and art history.',
+  'maison-objet-2025-kolekcja-bugatti-home': 'As part of Maison&Objet In The City, the Bugatti Home collection was presented in Paris for the first time.',
+  'odsluch-najnowszej-plyty-justyny-steczkowskiej-bentley-home-cinema': 'We are delighted that Bentley Home Cinema attracts the most discerning listeners.',
+  'bentley-home-cinema-premiera': 'We are excited to share a project we have been working on for months.',
+};
+
+/** Translate article metadata (category, date, title, excerpt) to English */
 export function localizeArticle(article: Article, locale: 'pl' | 'en'): Article {
   if (locale === 'pl') return article;
   return {
     ...article,
+    title: articleTitleEn[article.slug] ?? article.title,
+    excerpt: articleExcerptEn[article.slug] ?? article.excerpt,
     category: categoryMap[article.category] ?? article.category,
     date: Object.entries(monthMap).reduce(
       (d, [pl, en]) => d.replace(pl, en), article.date

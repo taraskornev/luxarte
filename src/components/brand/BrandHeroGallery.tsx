@@ -404,7 +404,7 @@ export function BrandHeroGallery({ images, brandName, lightboxImages, locale = '
               >
                 <Image
                   src={src}
-                  alt={`${brandName} - miniatura ${index + 1}`}
+                  alt={`${brandName} - ${t.common.thumbnailN} ${index + 1}`}
                   width={64}
                   height={64}
                   style={{ objectFit: 'cover' }}

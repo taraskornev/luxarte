@@ -43,7 +43,7 @@ export default async function ProductPageEN({ params }: ProductPageProps) {
   const brand = getCanonicalBrand(product.brandSlug);
   const galleryImages = getProductGalleryImages(product.slug);
   const lightboxImages = getProductLightboxImages(product.slug);
-  const description = getProductDescription(product.slug);
+  // Product descriptions are in Polish only — omit on EN pages
   const dimensions = getProductDimensions(product.slug);
 
   const relatedProducts = getProductsByBrand(product.brandSlug)
@@ -86,11 +86,9 @@ export default async function ProductPageEN({ params }: ProductPageProps) {
 
             <h1 className="pdp__title">{product.name}</h1>
 
-            {description && (
-              <div className="pdp__description">
-                <p>{description}</p>
-              </div>
-            )}
+            <div className="pdp__description">
+              <p>Contact us to learn more about this exclusive product by {brand?.label || product.brandName}.</p>
+            </div>
 
             {dimensions && (
               <div className="pdp__dimensions">

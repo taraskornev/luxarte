@@ -22,6 +22,7 @@ export interface EditorialBrand {
   readonly logoPath: string;
   readonly coverImage: string;
   readonly coverAlt: string;
+  readonly coverAltEn?: string;
 }
 
 /**
@@ -37,6 +38,7 @@ export const editorialBrands: readonly EditorialBrand[] = [
     logoPath: mediaUrl('/brands/logos-webp/versace.webp'),
     coverImage: mediaUrl('/media/marki/versace-home/gallery-04.jpeg'),
     coverAlt: 'Luksusowe wnętrze Versace Home',
+    coverAltEn: 'Luxury Versace Home interior',
   },
   {
     name: 'Trussardi Casa',
@@ -46,6 +48,7 @@ export const editorialBrands: readonly EditorialBrand[] = [
     logoPath: mediaUrl('/brands/logos-webp/trussardi.webp'),
     coverImage: mediaUrl('/media/marki/trussardi-casa/gallery-04.jpg'),
     coverAlt: 'Eleganckie meble Trussardi Casa',
+    coverAltEn: 'Elegant Trussardi Casa furniture',
   },
   {
     name: 'Bentley Home',
@@ -55,6 +58,7 @@ export const editorialBrands: readonly EditorialBrand[] = [
     logoPath: mediaUrl('/brands/logos-webp/bentley.webp'),
     coverImage: mediaUrl('/media/marki/bentley-home/gallery-04.png'),
     coverAlt: 'Ekskluzywne meble Bentley Home',
+    coverAltEn: 'Exclusive Bentley Home furniture',
   },
   {
     name: 'Bugatti Home',
@@ -64,6 +68,7 @@ export const editorialBrands: readonly EditorialBrand[] = [
     logoPath: mediaUrl('/brands/logos-webp/bugatti.webp'),
     coverImage: mediaUrl('/media/marki/bugatti-home/gallery-03.png'),
     coverAlt: 'Luksusowe wnętrze Bugatti Home',
+    coverAltEn: 'Luxury Bugatti Home interior',
   },
   {
     name: 'Dolce & Gabbana Casa',
@@ -73,6 +78,7 @@ export const editorialBrands: readonly EditorialBrand[] = [
     logoPath: mediaUrl('/brands/logos-webp/dolce-gabbana.webp'),
     coverImage: mediaUrl('/media/marki/dolce-gabbana-casa/gallery-04.jpg'),
     coverAlt: 'Włoskie meble Dolce & Gabbana Casa',
+    coverAltEn: 'Italian Dolce & Gabbana Casa furniture',
   },
   {
     name: 'Visionnaire',
@@ -82,6 +88,7 @@ export const editorialBrands: readonly EditorialBrand[] = [
     logoPath: mediaUrl('/brands/logos-webp/visionnaire.webp'),
     coverImage: mediaUrl('/media/marki/visionnaire/gallery-03.jpeg'),
     coverAlt: 'Luksusowe wnętrze Visionnaire',
+    coverAltEn: 'Luxury Visionnaire interior',
   },
   {
     name: 'MisuraEmme',
@@ -91,6 +98,7 @@ export const editorialBrands: readonly EditorialBrand[] = [
     logoPath: mediaUrl('/brands/logos-webp/misuraemme.webp'),
     coverImage: mediaUrl('/media/marki/misuraemme/gallery-03.jpeg'),
     coverAlt: 'Systemy garderobiane MisuraEmme',
+    coverAltEn: 'MisuraEmme wardrobe systems',
   },
   {
     name: 'SCIC Italia',
@@ -100,6 +108,7 @@ export const editorialBrands: readonly EditorialBrand[] = [
     logoPath: mediaUrl('/brands/logos-webp/scic-italia.webp'),
     coverImage: mediaUrl('/media/marki/scic-italia/gallery-03.jpg'),
     coverAlt: 'Luksusowe kuchnie SCIC Italia',
+    coverAltEn: 'Luxury SCIC Italia kitchens',
   },
   {
     name: 'Valcucine',
@@ -109,6 +118,7 @@ export const editorialBrands: readonly EditorialBrand[] = [
     logoPath: mediaUrl('/brands/logos-webp/valcucine.webp'),
     coverImage: mediaUrl('/media/marki/valcucine/gallery-03.webp'),
     coverAlt: 'Nowoczesne kuchnie Valcucine',
+    coverAltEn: 'Modern Valcucine kitchens',
   },
   {
     name: 'Exteta',
@@ -118,6 +128,7 @@ export const editorialBrands: readonly EditorialBrand[] = [
     logoPath: mediaUrl('/brands/logos-webp/exteta.webp'),
     coverImage: mediaUrl('/media/marki/exteta/gallery-03.webp'),
     coverAlt: 'Luksusowe meble ogrodowe Exteta',
+    coverAltEn: 'Luxury Exteta outdoor furniture',
   },
   {
     name: 'Gaggenau',
@@ -127,6 +138,7 @@ export const editorialBrands: readonly EditorialBrand[] = [
     logoPath: mediaUrl('/brands/logos-webp/gaggenau.webp'),
     coverImage: mediaUrl('/media/marki/gaggenau/gallery-03.webp'),
     coverAlt: 'Profesjonalny sprzęt AGD Gaggenau',
+    coverAltEn: 'Professional Gaggenau appliances',
   },
   {
     name: 'Roberto Cavalli Home Interiors',
@@ -136,6 +148,7 @@ export const editorialBrands: readonly EditorialBrand[] = [
     logoPath: mediaUrl('/brands/logos-webp/roberto-cavalli.webp'),
     coverImage: mediaUrl('/media/marki/roberto-cavalli/gallery-04.jpg'),
     coverAlt: 'Ekskluzywne meble Roberto Cavalli',
+    coverAltEn: 'Exclusive Roberto Cavalli furniture',
   },
   {
     name: 'Venicem',
@@ -145,6 +158,7 @@ export const editorialBrands: readonly EditorialBrand[] = [
     logoPath: mediaUrl('/brands/logos-webp/venicem.webp'),
     coverImage: mediaUrl('/media/marki/venicem/gallery-03.webp'),
     coverAlt: 'Oświetlenie Murano Venicem',
+    coverAltEn: 'Venicem Murano lighting',
   },
   {
     name: 'Vanory',
@@ -154,6 +168,7 @@ export const editorialBrands: readonly EditorialBrand[] = [
     logoPath: mediaUrl('/brands/logos-webp/vanroy.webp'),
     coverImage: mediaUrl('/media/marki/vanory/gallery-04.jpg'),
     coverAlt: 'Lampy designerskie Vanory',
+    coverAltEn: 'Vanory designer lamps',
   },
   {
     name: 'Flos',
@@ -163,6 +178,7 @@ export const editorialBrands: readonly EditorialBrand[] = [
     logoPath: mediaUrl('/brands/logos-webp/flos.webp'),
     coverImage: mediaUrl('/media/marki/flos/gallery-03.jpg'),
     coverAlt: 'Kultowe lampy Flos',
+    coverAltEn: 'Iconic Flos lamps',
   },
 ] as const;
 
@@ -171,6 +187,13 @@ export const editorialBrands: readonly EditorialBrand[] = [
  */
 export function getEditorialBrandBySlug(slug: string): EditorialBrand | undefined {
   return editorialBrands.find((brand) => brand.slug === slug);
+}
+
+/**
+ * Get localized cover alt text
+ */
+export function getBrandCoverAlt(brand: EditorialBrand, locale: 'pl' | 'en' = 'pl'): string {
+  return locale === 'en' && brand.coverAltEn ? brand.coverAltEn : brand.coverAlt;
 }
 
 /**

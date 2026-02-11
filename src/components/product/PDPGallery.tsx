@@ -350,7 +350,7 @@ export function PDPGallery({ images, lightboxImages, productName, locale = 'pl' 
                     e.stopPropagation();
                     setSelectedIndex(idx);
                   }}
-                  aria-label={`Zdjęcie ${idx + 1}`}
+                  aria-label={`${t.common.photoN} ${idx + 1}`}
                 />
               ))}
             </div>

@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function OutletProductPageEN({ params }: Props) {
   const { id } = await params;
-  const result = getOutletProductById(id);
+  const result = getOutletProductById(id, 'en');
   
   if (!result) {
     notFound();

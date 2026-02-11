@@ -3,14 +3,20 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { OutletProduct } from '@/lib/outlet';
+import { getDictionary, type Locale } from '@/i18n';
 
 interface OutletCategoryPageProps {
   title: string;
   description: string;
   products: OutletProduct[];
+  locale?: Locale;
 }
 
-export function OutletCategoryPage({ title, description, products }: OutletCategoryPageProps) {
+export function OutletCategoryPage({ title, description, products, locale = 'pl' }: OutletCategoryPageProps) {
+  const t = getDictionary(locale);
+  const outletHref = locale === 'en' ? '/en/outlet' : '/outlet';
+  const contactHref = locale === 'en' ? '/en/contact' : '/kontakt';
+
   return (
     <main className="outlet-category-page">
       <div className="outlet-category-container">
@@ -21,19 +27,20 @@ export function OutletCategoryPage({ title, description, products }: OutletCateg
 
         <div className="outlet-products-grid">
           {products.map((product) => (
-            <OutletProductCard key={product.id} product={product} />
+            <OutletProductCard key={product.id} product={product} locale={locale} contactHref={contactHref} />
           ))}
         </div>
         
-        <Link href="/outlet" className="outlet-back-link">
-          ← Wróć do Outlet
+        <Link href={outletHref} className="outlet-back-link">
+          {t.common.backToOutlet}
         </Link>
       </div>
     </main>
   );
 }
 
-function OutletProductCard({ product }: { product: OutletProduct }) {
+function OutletProductCard({ product, locale, contactHref }: { product: OutletProduct; locale: Locale; contactHref: string }) {
+  const t = getDictionary(locale);
   const hasImages = product.images.length > 0;
   const mainImage = hasImages ? product.images[0] : null;
   const secondImage = product.images.length > 1 ? product.images[1] : null;
@@ -58,7 +65,7 @@ function OutletProductCard({ product }: { product: OutletProduct }) {
             <div className="outlet-product-image-wrapper">
               <Image
                 src={secondImage}
-                alt={`${product.name} - zdjęcie 2`}
+                alt={`${product.name} - ${t.common.photo2}`}
                 width={600}
                 height={400}
                 className="outlet-product-image"
@@ -74,8 +81,8 @@ function OutletProductCard({ product }: { product: OutletProduct }) {
           {product.name} – {product.brand} / {product.quantity}
         </h2>
         <p className="outlet-product-description">{product.description}</p>
-        <Link href="/kontakt" className="outlet-product-cta">
-          ZAPYTAJ O CENĘ
+        <Link href={contactHref} className="outlet-product-cta">
+          {t.common.askAboutPrice}
         </Link>
       </div>
     </article>

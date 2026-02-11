@@ -76,6 +76,12 @@ export default async function ArticlePageEN({ params }: ArticlePageProps) {
       {/* Article Content */}
       <article className="article-content">
         <div className="article-container">
+          <p className="article-lang-notice" style={{ textAlign: 'center', padding: '1.5rem 0', color: '#888', fontStyle: 'italic', borderBottom: '1px solid #eee', marginBottom: '2rem' }}>
+            This article is available in Polish.{' '}
+            <Link href={`/aktualnosci/${slug}`} style={{ color: '#b8860b', textDecoration: 'underline' }}>
+              View original
+            </Link>
+          </p>
           {article.sections.map((section, index) => (
             <section key={index} className="article-section">
               {section.heading && (

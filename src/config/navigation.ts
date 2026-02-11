@@ -52,6 +52,11 @@ export interface ContactInfo {
     saturday: string;
     sunday: string;
   };
+  hoursEn?: {
+    weekdays: string;
+    saturday: string;
+    sunday: string;
+  };
 }
 
 // ============================================================================
@@ -115,25 +120,25 @@ export const SECONDARY_NAV: NavItem[] = [
 // ============================================================================
 
 export const FOOTER_NAV_CATEGORIES: NavItem[] = [
-  { id: 'sofas', label: 'Sofy', href: '/categories/sofas' },
-  { id: 'kitchens', label: 'Kuchnie', href: '/categories/kitchens' },
-  { id: 'wardrobes', label: 'Garderoby', href: '/categories/wardrobes' },
-  { id: 'bathrooms', label: 'Łazienki', href: '/categories/bathrooms' },
-  { id: 'chandeliers', label: 'Żyrandole', href: '/categories/chandeliers' },
-  { id: 'garden', label: 'Meble ogrodowe', href: '/categories/garden-furniture' },
+  { id: 'sofas', label: 'Sofy', labelEn: 'Sofas', href: '/categories/sofas' },
+  { id: 'kitchens', label: 'Kuchnie', labelEn: 'Kitchens', href: '/categories/kitchens' },
+  { id: 'wardrobes', label: 'Garderoby', labelEn: 'Wardrobes', href: '/categories/wardrobes' },
+  { id: 'bathrooms', label: 'Łazienki', labelEn: 'Bathrooms', href: '/categories/bathrooms' },
+  { id: 'chandeliers', label: 'Żyrandole', labelEn: 'Chandeliers', href: '/categories/chandeliers' },
+  { id: 'garden', label: 'Meble ogrodowe', labelEn: 'Outdoor furniture', href: '/categories/garden-furniture' },
 ];
 
 export const FOOTER_NAV_COMPANY: NavItem[] = [
-  { id: 'about', label: 'O nas', href: '/#about' },
+  { id: 'about', label: 'O nas', labelEn: 'About us', href: '/#about' },
   { id: 'showroom', label: 'Showroom', href: '/showroom' },
-  { id: 'projects', label: 'Realizacje', href: '/projects' },
-  { id: 'knowledge-base', label: 'Baza Wiedzy', href: '/knowledge-base' },
+  { id: 'projects', label: 'Realizacje', labelEn: 'Projects', href: '/projects' },
+  { id: 'knowledge-base', label: 'Baza Wiedzy', labelEn: 'Knowledge Base', href: '/knowledge-base' },
 ];
 
 export const FOOTER_NAV_LEGAL: NavItem[] = [
-  { id: 'privacy', label: 'Polityka Prywatności', href: '/privacy-policy' },
-  { id: 'terms', label: 'Regulamin', href: '/terms-of-service' },
-  { id: 'cookies', label: 'Polityka Cookies', href: '/cookie-policy' },
+  { id: 'privacy', label: 'Polityka Prywatności', labelEn: 'Privacy Policy', href: '/privacy-policy' },
+  { id: 'terms', label: 'Regulamin', labelEn: 'Terms of Service', href: '/terms-of-service' },
+  { id: 'cookies', label: 'Polityka Cookies', labelEn: 'Cookie Policy', href: '/cookie-policy' },
 ];
 
 // ============================================================================
@@ -190,6 +195,11 @@ export const CONTACT_INFO: ContactInfo = {
     saturday: 'Sob: 10:00 - 14:00',
     sunday: 'Nd: Zamknięte',
   },
+  hoursEn: {
+    weekdays: 'Mon-Fri: 10:00 - 18:00',
+    saturday: 'Sat: 10:00 - 14:00',
+    sunday: 'Sun: Closed',
+  },
 };
 
 // ============================================================================
@@ -220,12 +230,12 @@ export const DROPDOWN_BRANDS_PLACEHOLDER: NavItem[] = [
 ];
 
 export const DROPDOWN_CATEGORIES_PLACEHOLDER: NavItem[] = [
-  { id: 'sofas', label: 'Sofy', href: '/categories/sofas' },
-  { id: 'kitchens', label: 'Kuchnie', href: '/categories/kitchens' },
-  { id: 'wardrobes', label: 'Garderoby', href: '/categories/wardrobes' },
-  { id: 'bathrooms', label: 'Łazienki', href: '/categories/bathrooms' },
-  { id: 'chandeliers', label: 'Żyrandole', href: '/categories/chandeliers' },
-  { id: 'garden', label: 'Meble ogrodowe', href: '/categories/garden-furniture' },
+  { id: 'sofas', label: 'Sofy', labelEn: 'Sofas', href: '/categories/sofas' },
+  { id: 'kitchens', label: 'Kuchnie', labelEn: 'Kitchens', href: '/categories/kitchens' },
+  { id: 'wardrobes', label: 'Garderoby', labelEn: 'Wardrobes', href: '/categories/wardrobes' },
+  { id: 'bathrooms', label: 'Łazienki', labelEn: 'Bathrooms', href: '/categories/bathrooms' },
+  { id: 'chandeliers', label: 'Żyrandole', labelEn: 'Chandeliers', href: '/categories/chandeliers' },
+  { id: 'garden', label: 'Meble ogrodowe', labelEn: 'Outdoor furniture', href: '/categories/garden-furniture' },
 ];
 
 // ============================================================================
