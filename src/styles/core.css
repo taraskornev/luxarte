@@ -5266,7 +5266,7 @@ a.pdp__brand:hover {
     writing-mode: vertical-lr;
     text-orientation: mixed;
     font-family: var(--font-family);
-    font-size: var(--font-size-sm);
+    font-size: 18px;
     font-weight: var(--font-weight-bold);
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-wide);
