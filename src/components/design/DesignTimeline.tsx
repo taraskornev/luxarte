@@ -13,17 +13,12 @@ interface DesignTimelineProps {
 }
 
 /**
- * Vertical timeline with scroll-driven animation (adapted from Retcon pattern).
- * 
- * Animations:
- * 1. Central line fills bullet-to-bullet (milestone-driven, not continuous)
- * 2. Numbered circles scale up when crossing trigger point, fill with accent color
- * 3. Text transitions from 60% to 100% opacity on activation
- * 4. Numbers always visible in circles, even before activation
- * 
- * Trigger point: 55% of viewport height
- * Line starts at first bullet center, ends at last bullet center
- * All animations reverse when scrolling up.
+ * Vertical timeline with scroll-driven animation.
+ * Adapted from Retcon AnimatedTimeline pattern:
+ * - Desktop: centered line, content alternating left/right
+ * - Mobile: left-aligned line, content on the right
+ * - Numbered circles (always visible) instead of year pills
+ * - Milestone-driven fill, fully reversible on scroll-up
  */
 export function DesignTimeline({ steps }: DesignTimelineProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -101,56 +96,55 @@ export function DesignTimeline({ steps }: DesignTimelineProps) {
   }, [handleScroll, steps]);
 
   return (
-    <div ref={containerRef} className="design-timeline">
-      {/* Line container */}
-      <div ref={lineContainerRef} className="timeline-line-container">
-        {/* Background track */}
+    <div ref={containerRef} className="dtl">
+      {/* Line container — left on mobile, center on desktop */}
+      <div ref={lineContainerRef} className="dtl-line-wrap">
         <div
-          className="timeline-line-bg"
-          style={{
-            top: lineStyles.top,
-            height: Math.max(0, lineStyles.height),
-          }}
+          className="dtl-line-bg"
+          style={{ top: lineStyles.top, height: Math.max(0, lineStyles.height) }}
         />
-        {/* Fill line */}
         <div
-          className="timeline-line-fill"
-          style={{
-            top: lineStyles.top,
-            height: lineStyles.fillHeight,
-          }}
+          className="dtl-line-fill"
+          style={{ top: lineStyles.top, height: lineStyles.fillHeight }}
         />
       </div>
 
-      <div className="timeline-steps">
+      <div className="dtl-items">
         {steps.map((step, index) => {
           const isActivated = activatedIndices.has(index);
+          const isEven = index % 2 === 0;
 
           return (
-            <div key={step.number} className="timeline-step">
-              {/* Bullet / Circle */}
+            <div
+              key={step.number}
+              className={`dtl-row${isEven ? ' dtl-row--even' : ''}`}
+            >
+              {/* Numbered circle — absolutely positioned on the line */}
               <div
                 ref={(el) => { bulletRefs.current[index] = el; }}
-                className="timeline-bullet-anchor"
+                className="dtl-bullet-anchor"
               >
                 <div
-                  className={`timeline-circle${isActivated ? ' timeline-circle--active' : ''}`}
+                  className={`dtl-circle${isActivated ? ' dtl-circle--active' : ''}`}
                 >
-                  <span className="timeline-circle-number">{step.number}</span>
+                  <span className="dtl-circle-num">{step.number}</span>
                 </div>
               </div>
 
-              {/* Content */}
+              {/* Content side */}
               <div
-                className="timeline-content"
+                className={`dtl-content${isEven ? ' dtl-content--even' : ''}`}
                 style={{
                   opacity: isActivated ? 1 : 0.4,
-                  transform: isActivated ? 'translateX(0)' : 'translateX(16px)',
+                  transition: 'opacity 500ms ease-out',
                 }}
               >
-                <h3 className="timeline-step-title">{step.title}</h3>
-                <p className="timeline-step-desc">{step.description}</p>
+                <h3 className="dtl-title">{step.title}</h3>
+                <p className="dtl-desc">{step.description}</p>
               </div>
+
+              {/* Spacer for alternating — desktop only */}
+              <div className="dtl-spacer" />
             </div>
           );
         })}
