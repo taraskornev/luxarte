@@ -21,15 +21,13 @@ interface UnifiedLightboxProps {
  * - Keyboard: arrow keys navigate, ESC closes
  * - Counter: X / Y at bottom center
  */
-
 export function UnifiedLightbox({ images, currentIndex, onClose, onIndexChange, altPrefix = 'Photo' }: UnifiedLightboxProps) {
-  const [slideDirection, setSlideDirection] = useState<'none' | 'left' | 'right'>('none');
+  const [slideDirection, setSlideDirection] = useState<'none' | 'left' | 'right' | 'up' | 'down'>('none');
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
   const [showControls, setShowControls] = useState(true);
   const [dragOffset, setDragOffset] = useState(0);
-  const [dragY, setDragY] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
-  const [isClosing, setIsClosing] = useState(false);
 
   const hideTimer = useRef<ReturnType<typeof setTimeout>>();
   const touchStartX = useRef(0);
@@ -45,38 +43,28 @@ export function UnifiedLightbox({ images, currentIndex, onClose, onIndexChange, 
     hideTimer.current = setTimeout(() => setShowControls(false), 3000);
   }, []);
 
-  // Navigate with crossfade (arrows/keyboard)
-  const goTo = useCallback((newIndex: number) => {
-    if (isTransitioning || newIndex === currentIndex) return;
-    setSlideDirection('none');
-    setIsTransitioning(true);
-    // Short fade-out, swap, fade-in
-    setTimeout(() => {
-      onIndexChange(newIndex);
-      setTimeout(() => setIsTransitioning(false), 250);
-    }, 150);
-    resetHideTimer();
-  }, [currentIndex, isTransitioning, onIndexChange, resetHideTimer]);
-
-  const goNext = useCallback(() => {
-    goTo((currentIndex + 1) % totalImages);
-  }, [currentIndex, totalImages, goTo]);
-
-  const goPrev = useCallback(() => {
-    goTo((currentIndex - 1 + totalImages) % totalImages);
-  }, [currentIndex, totalImages, goTo]);
-
-  // Navigate with slide (swipe)
+  // Always use slide for navigation (legacy behavior)
   const slideToIndex = useCallback((newIndex: number, direction: 'left' | 'right') => {
-    if (isTransitioning) return;
+    if (isTransitioning || newIndex === currentIndex) return;
     setSlideDirection(direction);
     setIsTransitioning(true);
     setTimeout(() => {
       onIndexChange(newIndex);
-      setSlideDirection('none');
-      setTimeout(() => setIsTransitioning(false), 50);
-    }, 300);
-  }, [isTransitioning, onIndexChange]);
+      setTimeout(() => {
+        setIsTransitioning(false);
+        setSlideDirection('none');
+      }, 300);
+    }, 20);
+    resetHideTimer();
+  }, [currentIndex, isTransitioning, onIndexChange, resetHideTimer]);
+
+  const goNext = useCallback(() => {
+    slideToIndex((currentIndex + 1) % totalImages, 'left');
+  }, [currentIndex, totalImages, slideToIndex]);
+
+  const goPrev = useCallback(() => {
+    slideToIndex((currentIndex - 1 + totalImages) % totalImages, 'right');
+  }, [currentIndex, totalImages, slideToIndex]);
 
   // Keyboard
   useEffect(() => {
@@ -104,14 +92,12 @@ export function UnifiedLightbox({ images, currentIndex, onClose, onIndexChange, 
     };
   }, [resetHideTimer]);
 
-
   // Touch handlers for swipe with drag preview and up/down to close
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
     touchStartY.current = e.touches[0].clientY;
     setIsDragging(true);
     setDragOffset(0);
-    setDragY(0);
     resetHideTimer();
   }, [resetHideTimer]);
 
@@ -119,58 +105,59 @@ export function UnifiedLightbox({ images, currentIndex, onClose, onIndexChange, 
     if (!isDragging) return;
     const dx = e.touches[0].clientX - touchStartX.current;
     const dy = e.touches[0].clientY - touchStartY.current;
+    // Track whichever is greater
     if (Math.abs(dx) > Math.abs(dy)) {
       setDragOffset(dx);
-      setDragY(0);
     } else {
-      setDragY(dy);
-      setDragOffset(0);
+      setDragOffset(dy);
     }
   }, [isDragging]);
 
   const handleTouchEnd = useCallback(() => {
     setIsDragging(false);
     const dx = dragOffset;
-    const dy = dragY;
+    const dy = dragOffset;
     setDragOffset(0);
-    setDragY(0);
+    // Horizontal swipe
     if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) {
       if (dx < 0) {
-        // Swiped left → next
         slideToIndex((currentIndex + 1) % totalImages, 'left');
       } else {
-        // Swiped right → prev
         slideToIndex((currentIndex - 1 + totalImages) % totalImages, 'right');
       }
-    } else if (Math.abs(dy) > 60 && Math.abs(dy) > Math.abs(dx)) {
-      // Swiped up or down → close with animation
+    }
+    // Vertical swipe
+    else if (Math.abs(dy) > 60 && Math.abs(dy) > Math.abs(dx)) {
+      // Up or down
+      setSlideDirection(dy < 0 ? 'up' : 'down');
       setIsClosing(true);
       setTimeout(() => {
         setIsClosing(false);
+        setSlideDirection('none');
         onClose();
       }, 350);
     }
-  }, [dragOffset, dragY, currentIndex, totalImages, slideToIndex, onClose]);
+  }, [dragOffset, currentIndex, totalImages, slideToIndex, onClose]);
 
-  // Compute image transform and closing animation
+  // Compute image transform/animation
   const getImageStyle = (): React.CSSProperties => {
     if (isClosing) {
+      // Zoom out and fade
       return {
         opacity: 0,
         transform: 'scale(0.85)',
-        transition: 'opacity 0.35s, transform 0.35s cubic-bezier(0.4,0,0.2,1)',
+        transition: 'opacity 0.35s, transform 0.35s',
       };
     }
     if (isDragging && dragOffset !== 0) {
+      if (slideDirection === 'up' || slideDirection === 'down') {
+        return {
+          transform: `translateY(${dragOffset}px)`,
+          transition: 'none',
+        };
+      }
       return {
         transform: `translateX(${dragOffset}px)`,
-        transition: 'none',
-      };
-    }
-    if (isDragging && dragY !== 0) {
-      return {
-        transform: `translateY(${dragY}px)`,
-        opacity: 1 - Math.min(Math.abs(dragY) / 200, 0.7),
         transition: 'none',
       };
     }
@@ -186,15 +173,21 @@ export function UnifiedLightbox({ images, currentIndex, onClose, onIndexChange, 
         transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
       };
     }
-    // Crossfade for arrow navigation
+    if (slideDirection === 'up' || slideDirection === 'down') {
+      return {
+        opacity: 0,
+        transform: 'scale(0.85)',
+        transition: 'opacity 0.35s, transform 0.35s',
+      };
+    }
     return {
-      opacity: isTransitioning ? 0 : 1,
-      transition: 'opacity 0.25s ease',
+      opacity: 1,
       transform: 'translateX(0)',
+      transition: 'opacity 0.25s, transform 0.25s',
     };
   };
 
-  // Backdrop click closes with animation
+  // Close with animation on backdrop click
   const handleBackdropClick = useCallback(() => {
     setIsClosing(true);
     setTimeout(() => {
@@ -206,7 +199,7 @@ export function UnifiedLightbox({ images, currentIndex, onClose, onIndexChange, 
   return (
     <div
       ref={containerRef}
-      className="unified-lightbox"
+      className={`unified-lightbox${isClosing ? ' unified-lightbox--closing' : ''}`}
       onClick={handleBackdropClick}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
@@ -218,7 +211,7 @@ export function UnifiedLightbox({ images, currentIndex, onClose, onIndexChange, 
       <button
         type="button"
         className={`unified-lightbox__close ${showControls ? 'visible' : ''}`}
-        onClick={handleBackdropClick}
+        onClick={(e) => { e.stopPropagation(); handleBackdropClick(); }}
         aria-label="Close"
       >
         ×
@@ -232,7 +225,7 @@ export function UnifiedLightbox({ images, currentIndex, onClose, onIndexChange, 
           onClick={(e) => { e.stopPropagation(); goPrev(); }}
           aria-label="Previous"
         >
-          <span className="unified-lightbox__chevron">‹</span>
+          <span className="unified-lightbox__arrow-icon">&#x2039;</span>
         </button>
       )}
 
@@ -259,7 +252,7 @@ export function UnifiedLightbox({ images, currentIndex, onClose, onIndexChange, 
           onClick={(e) => { e.stopPropagation(); goNext(); }}
           aria-label="Next"
         >
-          <span className="unified-lightbox__chevron">›</span>
+          <span className="unified-lightbox__arrow-icon">&#x203A;</span>
         </button>
       )}
 

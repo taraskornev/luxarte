@@ -2947,15 +2947,14 @@ a.pdp__brand:hover {
   z-index: 2;
   background: none;
   border: none;
-  color: rgba(255, 255, 255, 0.85);
-  font-size: 38px;
+  color: #fff;
+  font-size: 36px;
   line-height: 1;
   text-align: center;
   cursor: pointer;
   opacity: 0;
   transition: opacity 0.35s ease, color 0.2s;
   pointer-events: none;
-  box-shadow: none;
   padding: 0 8px;
 }
 
@@ -2965,18 +2964,17 @@ a.pdp__brand:hover {
 }
 
 .unified-lightbox__arrow:hover {
-  color: #fff;
+  color: var(--color-accent-main, #ffe082);
 }
 
 .unified-lightbox__arrow--prev { left: var(--space-4, 16px); }
 .unified-lightbox__arrow--next { right: var(--space-4, 16px); }
 
-.unified-lightbox__chevron {
+.unified-lightbox__arrow-icon {
   display: inline-block;
-  font-size: inherit;
+  font-size: 36px;
   line-height: 1;
   font-weight: 400;
-  pointer-events: none;
 }
 
 /* Counter */
@@ -2994,18 +2992,18 @@ a.pdp__brand:hover {
 /* Mobile tweaks */
 @media (max-width: 768px) {
   .unified-lightbox__image-wrap img {
-    max-width: 90vw;
-    max-height: 88vh;
-    object-fit: contain;
-    pointer-events: none;
-    -webkit-user-drag: none;
-    will-change: transform, opacity;
-  }
-    height: 40px;
-    font-size: 18px;
-    line-height: 40px;
+    max-width: 100vw;
+    max-height: 80vh;
   }
 
+
+  .unified-lightbox__arrow {
+    font-size: 28px;
+    padding: 0 4px;
+  }
+  .unified-lightbox__arrow-icon {
+    font-size: 28px;
+  }
   .unified-lightbox__arrow--prev { left: var(--space-2, 8px); }
   .unified-lightbox__arrow--next { right: var(--space-2, 8px); }
 
