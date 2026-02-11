@@ -93,7 +93,7 @@ const BRAND_HEROES_PATH = '/media/brands';
 export function getPreviewBrandLogo(brandSlug: string): string {
   const logoMap: Record<string, string> = {
     'versace-home': 'versace.webp',
-    'bentley-home': '/logos/bentley.webp',
+    'bentley-home': 'bentley.webp',
     'dolce-gabbana-casa': 'dolce-gabbana.webp',
     'trussardi-casa': 'trussardi.webp',
     'visionnaire': 'visionnaire.webp',
@@ -110,7 +110,6 @@ export function getPreviewBrandLogo(brandSlug: string): string {
   };
   
   const logoFile = logoMap[brandSlug] || `${brandSlug}.webp`;
-  if (logoFile.startsWith('/')) return logoFile;
   const path = `${BRAND_LOGOS_PATH}/${logoFile}`;
   return resolveImagePath(path);
 }

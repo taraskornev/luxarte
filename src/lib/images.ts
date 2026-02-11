@@ -40,7 +40,7 @@ export function getProductImage(slug: string): string {
 export function getBrandLogo(brandSlug: string): string {
   const logoMap: Record<string, string> = {
     'versace-home': 'versace.webp',
-    'bentley-home': '/logos/bentley.webp',
+    'bentley-home': 'bentley.webp',
     'dolce-gabbana-casa': 'dolce-gabbana.webp',
     'trussardi-casa': 'trussardi.webp',
     'visionnaire': 'visionnaire.webp',
@@ -57,8 +57,6 @@ export function getBrandLogo(brandSlug: string): string {
   };
 
   const logoFile = logoMap[brandSlug] || `${brandSlug}.webp`;
-  // Absolute paths (starting with /) are served directly from Vercel public/
-  if (logoFile.startsWith('/')) return logoFile;
   return mediaUrl(`${BRAND_LOGOS_PATH}/${logoFile}`);
 }
 
