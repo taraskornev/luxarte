@@ -5256,8 +5256,8 @@ a.pdp__brand:hover {
     width: 36px;
     height: 230px;
     background: var(--color-text-inverse);
-    -webkit-mask: url('/filter-tab.svg') no-repeat center / contain;
-    mask: url('/filter-tab.svg') no-repeat center / contain;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 153'%3E%3Cpath d='M24 78.5V152.5V150.674C24 147.402 22.3994 144.337 19.7143 142.467L4.28516 131.724C1.60016 129.854 0 126.788 0 123.517V28.4834C0 25.2116 1.60016 22.146 4.28516 20.2764L19.7143 9.53302C22.3994 7.66336 24 4.59839 24 1.32647V0V28.4834V78.5Z' fill='white'/%3E%3C/svg%3E") no-repeat center / contain;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 153'%3E%3Cpath d='M24 78.5V152.5V150.674C24 147.402 22.3994 144.337 19.7143 142.467L4.28516 131.724C1.60016 129.854 0 126.788 0 123.517V28.4834C0 25.2116 1.60016 22.146 4.28516 20.2764L19.7143 9.53302C22.3994 7.66336 24 4.59839 24 1.32647V0V28.4834V78.5Z' fill='white'/%3E%3C/svg%3E") no-repeat center / contain;
     color: var(--color-text-main);
     border: none;
     cursor: pointer;
