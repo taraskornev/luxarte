@@ -109,7 +109,7 @@ const pl: UIDictionary = {
     buildingName: 'Budynek Opery Narodowej',
   },
   outlet: {
-    heroSubtitle: "ZOBACZ MEBLE NAJLEPSZYCH MAREK DOSTĘPNE OD RĘKI W SHOWROOM'ACH LUXARTE!",
+    heroSubtitle: "Zobacz meble najlepszych marek dostępne od ręki w showroom'ach LuxArte!",
     heroDiscount: 'CENY OBNIŻONE NAWET DO – 60 %',
   },
   common: {
@@ -179,7 +179,7 @@ const en: UIDictionary = {
     buildingName: 'National Opera Building',
   },
   outlet: {
-    heroSubtitle: 'DISCOVER PREMIUM FURNITURE AVAILABLE IMMEDIATELY AT LUXARTE SHOWROOMS!',
+    heroSubtitle: 'Discover premium furniture available immediately at LuxArte showrooms!',
     heroDiscount: 'PRICES REDUCED BY UP TO 60%',
   },
   common: {

@@ -3677,16 +3677,16 @@ a.pdp__brand:hover {
 
 .outlet-hero-subtitle {
   font-family: var(--font-family);
-  font-size: var(--font-size-md);
+  font-size: var(--font-size-sm);
   font-weight: var(--font-weight-light);
   letter-spacing: var(--letter-spacing-wide);
-  color: var(--color-text-main);
+  color: var(--color-text-muted);
   margin-bottom: var(--space-8);
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
   line-height: var(--line-height-normal);
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 .outlet-hero-discount {
@@ -4288,7 +4288,7 @@ a.pdp__brand:hover {
   width: 100%;
   height: 350px;
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
   overflow: hidden;
   margin-bottom: var(--space-8);
@@ -4306,7 +4306,7 @@ a.pdp__brand:hover {
   position: relative;
   z-index: 2;
   text-align: center;
-  padding: var(--space-8) var(--container-padding) var(--space-6);
+  padding: var(--space-8) var(--container-padding);
 }
 
 .bentley-booking-hero-label {
@@ -4981,7 +4981,13 @@ a.pdp__brand:hover {
 
 .about-page {
   min-height: 100vh;
-  padding: 0;
+  padding: 0 0 var(--space-10);
+}
+
+.about-page > .breadcrumb {
+  max-width: var(--container-content);
+  margin: 0 auto var(--space-7);
+  padding: var(--space-6) var(--container-padding) 0;
 }
 
 .about-hero {
@@ -5226,14 +5232,14 @@ a.pdp__brand:hover {
     padding: var(--space-8) var(--container-padding);
   }
   
-  /* Edge Tab Handle - Mobile visible, notched shape */
+  /* Edge Tab Handle - Mobile visible, trapezium with rounded left corners */
   .filter-edge-tab {
     display: flex;
     position: fixed;
     right: 0;
     top: 25vh;
     z-index: 5000;
-    width: var(--filter-tab-width);
+    width: 36px;
     height: 130px;
     background: var(--color-text-inverse);
     color: var(--color-text-main);
@@ -5251,7 +5257,9 @@ a.pdp__brand:hover {
     touch-action: pan-y;
     user-select: none;
     transition: transform var(--duration-slow) cubic-bezier(0.1, 0.9, 0.2, 1);
-    clip-path: path("M 0 0 H 32 V 130 H 0 V 90 A 3 3 0 0 1 3 87 H 6 A 3 3 0 0 1 9 84 V 46 A 3 3 0 0 1 6 43 H 3 A 3 3 0 0 1 0 40 Z");
+    border-radius: 10px 0 0 10px;
+    clip-path: polygon(40% 0%, 100% 0%, 100% 100%, 40% 100%, 0% 85%, 0% 15%);
+    padding: 0;
   }
 
   /* Tab stays white always - no color change on active/touch */
