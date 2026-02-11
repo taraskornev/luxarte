@@ -4081,15 +4081,18 @@ a.pdp__brand:hover {
 
 .bentley-cinema-page {
   background: var(--color-bg-main);
-  padding: 0;
+  max-width: var(--container-content);
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
 }
 
-/* Bentley Cinema Hero with Video — full container width, no side gaps */
+/* Bentley Cinema Hero with Video */
 .bentley-cinema-hero {
   position: relative;
   width: 100%;
-  max-width: var(--container-content);
-  margin: 0 auto;
   aspect-ratio: 16 / 7;
   display: flex;
   align-items: center;
@@ -4161,12 +4164,9 @@ a.pdp__brand:hover {
   color: var(--color-text-inverse);
 }
 
-/* Bentley Cinema Content Sections — no extra margins */
+/* Bentley Cinema Content Sections */
 .bentley-cinema-section {
-  max-width: var(--container-content);
-  margin: 0 auto;
-  padding: 0;
-  background-color: var(--color-bg-main);
+  width: 100%;
 }
 
 .bentley-cinema-row {
@@ -4228,19 +4228,11 @@ a.pdp__brand:hover {
 /* CTA Section */
 .bentley-cinema-cta-section {
   text-align: center;
-  padding: var(--space-8) 0;
-  max-width: var(--container-content);
-  margin: 0 auto;
-  background-color: var(--color-bg-main);
 }
 
 /* Partner Section */
 .bentley-cinema-partner-section {
   text-align: center;
-  padding: var(--space-8) var(--container-padding) var(--space-10);
-  max-width: var(--container-content);
-  margin: 0 auto;
-  background-color: var(--color-bg-main);
 }
 
 .bentley-cinema-partner-title {
@@ -4269,10 +4261,6 @@ a.pdp__brand:hover {
     aspect-ratio: 4 / 3;
   }
   
-  .bentley-cinema-section {
-    padding: 0;
-  }
-
   .bentley-cinema-row {
     grid-template-columns: 1fr;
   }
@@ -4286,7 +4274,7 @@ a.pdp__brand:hover {
   }
   
   .bentley-cinema-col--text {
-    padding: var(--space-6) var(--container-padding);
+    padding: var(--space-6) 0;
   }
   
   .bentley-cinema-hero-title {
