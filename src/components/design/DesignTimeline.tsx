@@ -57,15 +57,9 @@ export function DesignTimeline({ steps }: DesignTimelineProps) {
               ref={el => { itemRefs.current[i] = el; }}
               className="dtl-row"
             >
-              {/* Diamond with digit */}
-              <div className="dtl-diamond-wrap">
-                <div className={`dtl-diamond${on ? ' dtl-diamond--active' : ''}`}>
-                  <span className="dtl-diamond-num">{step.number}</span>
-                </div>
-              </div>
               {/* Text content */}
               <div className="dtl-content" style={{ opacity: on ? 1 : 0.3 }}>
-                <h3 className="dtl-title">{step.title}</h3>
+                <h3 className="dtl-title">{step.number}. {step.title}</h3>
                 <p className="dtl-desc">{step.description}</p>
               </div>
             </div>
