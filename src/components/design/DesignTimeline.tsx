@@ -51,21 +51,23 @@ export function DesignTimeline({ steps }: DesignTimelineProps) {
       <div className="dtl-items">
         {steps.map((step, i) => {
           const on = active.has(i);
-          const even = i % 2 === 0;
           return (
             <div
               key={step.number}
               ref={el => { itemRefs.current[i] = el; }}
-              className={`dtl-row${even ? ' dtl-row--even' : ''}`}
+              className="dtl-row"
             >
-              <div className={`dtl-content${even ? ' dtl-content--even' : ''}`}
-                style={{ opacity: on ? 1 : 0.3 }}
-              >
-                <div className="dtl-num">{step.number}.</div>
+              {/* Diamond with digit */}
+              <div className="dtl-diamond-wrap">
+                <div className={`dtl-diamond${on ? ' dtl-diamond--active' : ''}`}>
+                  <span className="dtl-diamond-num">{step.number}</span>
+                </div>
+              </div>
+              {/* Text content */}
+              <div className="dtl-content" style={{ opacity: on ? 1 : 0.3 }}>
                 <h3 className="dtl-title">{step.title}</h3>
                 <p className="dtl-desc">{step.description}</p>
               </div>
-              <div className="dtl-spacer" />
             </div>
           );
         })}

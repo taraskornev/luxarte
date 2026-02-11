@@ -156,8 +156,8 @@ export const editorialBrandContent: Record<string, EditorialBrandContent> = {
     intro: [],
     galleryImages: Array.from({ length: 12 }, (_, i) => mediaUrl(`/media/marki/gaggenau/gallery-${(i + 1).toString().padStart(2, '0')}.webp`)),
   },
-  'roberto-cavalli': {
-    slug: 'roberto-cavalli',
+  'roberto-cavalli-home-interiors': {
+    slug: 'roberto-cavalli-home-interiors',
     name: 'Roberto Cavalli Home Interiors',
     intro: [
       'Intensywne kolory, modowe detale i wpływy afrykańskie połączone z włoską finezją i bogatą tradycją. Roberto Cavalli Home Interiors przedstawia wizję wnętrz w stylu spójnym z modowym dziedzictwem marki, w której możemy odnaleźć odważne, a jednocześnie eleganckie formy. Dbałość o precyzję wykonania widoczna jest w każdym detalu połączeń najwyższej jakości materiałów.',

@@ -296,9 +296,30 @@ export function GalleryClient({
                 >
                   ‹
                 </button>
-                <span className="pagination-info">
-                  {currentPage} / {totalPages}
-                </span>
+
+                {Array.from({ length: totalPages }, (_, i) => i + 1)
+                  .filter((page) => {
+                    if (totalPages <= 5) return true;
+                    if (page === 1 || page === totalPages) return true;
+                    return Math.abs(page - currentPage) <= 1;
+                  })
+                  .map((page, idx, arr) => {
+                    const showEllipsisBefore = idx > 0 && page - arr[idx - 1] > 1;
+                    return (
+                      <span key={page}>
+                        {showEllipsisBefore && <span className="pagination-ellipsis">…</span>}
+                        <button
+                          type="button"
+                          className={`pagination-page ${page === currentPage ? 'active' : ''}`}
+                          onClick={() => handlePageChange(page)}
+                          aria-current={page === currentPage ? 'page' : undefined}
+                        >
+                          {page}
+                        </button>
+                      </span>
+                    );
+                  })}
+
                 <button
                   type="button"
                   className="pagination-arrow"

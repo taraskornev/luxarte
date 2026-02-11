@@ -26,13 +26,73 @@ export interface Product {
 }
 
 /**
+ * Polish singular product-name prefixes → English translations.
+ * Product names are formatted: "CategoryWord BrandName ProductModel"
+ * e.g. "Fotel Fendi Casa Venus" → "Armchair Fendi Casa Venus"
+ */
+const productNamePrefixEn: Record<string, string> = {
+  'Barek': 'Bar Cabinet',
+  'Biurko': 'Desk',
+  'Donica': 'Planter',
+  'Dywan': 'Rug',
+  'Ekskluzywna': 'Exclusive',
+  'Eksluzywna': 'Exclusive',
+  'Elegancka': 'Elegant',
+  'Fotel': 'Armchair',
+  'Garderoba': 'Wardrobe',
+  'Hoker': 'Bar Stool',
+  'Kinkiet': 'Wall Sconce',
+  'Komoda': 'Dresser',
+  'Komodsa': 'Dresser',
+  'Konsola': 'Console',
+  'Koszyk': 'Basket',
+  'Krzeslo': 'Chair',
+  'Kuchnia': 'Kitchen',
+  'Lampa': 'Lamp',
+  'Lampka': 'Table Lamp',
+  'Lawka': 'Bench',
+  'Lazienka': 'Bathroom',
+  'Legowisko': 'Pet Bed',
+  'Lezak': 'Lounger',
+  'Lezanka': 'Daybed',
+  'Lozko': 'Bed',
+  'Luksusowa': 'Luxury',
+  'Lustro': 'Mirror',
+  'Parawan': 'Screen',
+  'Polka': 'Shelf',
+  'Puf': 'Pouf',
+  'Reflektor': 'Spotlight',
+  'Regal': 'Bookcase',
+  'Sofa': 'Sofa',
+  'Stol': 'Table',
+  'Stolek': 'Stool',
+  'Stolik': 'Side Table',
+  'Szafka': 'Nightstand',
+  'Szezlong': 'Chaise Longue',
+  'Waza': 'Vase',
+  'Zyrandol': 'Chandelier',
+};
+
+/**
+ * Translate the first word of a product name to English.
+ */
+function translateProductName(name: string): string {
+  const spaceIdx = name.indexOf(' ');
+  if (spaceIdx === -1) return name;
+  const firstWord = name.slice(0, spaceIdx);
+  const rest = name.slice(spaceIdx);
+  const en = productNamePrefixEn[firstWord];
+  return en ? en + rest : name;
+}
+
+/**
  * Convert CatalogProduct to Product with resolved names
  */
 function toProduct(item: CatalogProduct, locale: string = 'pl'): Product {
   const names = locale === 'en' ? categoryNamesEn : categoryNames;
   return {
     id: item.id,
-    name: item.name,
+    name: locale === 'en' ? translateProductName(item.name) : item.name,
     slug: item.slug,
     brandSlug: item.brandSlug,
     brandName: brandNames[item.brandSlug] || item.brandSlug,
