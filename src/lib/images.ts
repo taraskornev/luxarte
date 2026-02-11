@@ -38,11 +38,9 @@ export function getProductImage(slug: string): string {
  * Get brand logo image
  */
 export function getBrandLogo(brandSlug: string): string {
-  // Logos served from Hetzner CDN via mediaUrl(), except Bentley
-  // which is served from local public/ (updated logo not on Hetzner)
   const logoMap: Record<string, string> = {
     'versace-home': 'versace.webp',
-    'bentley-home': 'bentley.webp',
+    'bentley-home': 'bentley-home.webp',
     'dolce-gabbana-casa': 'dolce-gabbana.webp',
     'trussardi-casa': 'trussardi.webp',
     'visionnaire': 'visionnaire.webp',
@@ -59,10 +57,8 @@ export function getBrandLogo(brandSlug: string): string {
   };
 
   const logoFile = logoMap[brandSlug] || `${brandSlug}.webp`;
-  const logoPath = `${BRAND_LOGOS_PATH}/${logoFile}`;
-  // Bentley logo is in local public/ — serve directly without CDN prefix
-  if (brandSlug === 'bentley-home') return logoPath;
-  return mediaUrl(logoPath);
+  // Relative path — Next.js serves public/ files first, rewrites to Hetzner for the rest
+  return `${BRAND_LOGOS_PATH}/${logoFile}`;
 }
 
 /**

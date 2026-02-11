@@ -93,7 +93,7 @@ const BRAND_HEROES_PATH = '/media/brands';
 export function getPreviewBrandLogo(brandSlug: string): string {
   const logoMap: Record<string, string> = {
     'versace-home': 'versace.webp',
-    'bentley-home': 'bentley.webp',
+    'bentley-home': 'bentley-home.webp',
     'dolce-gabbana-casa': 'dolce-gabbana.webp',
     'trussardi-casa': 'trussardi.webp',
     'visionnaire': 'visionnaire.webp',
@@ -110,10 +110,8 @@ export function getPreviewBrandLogo(brandSlug: string): string {
   };
   
   const logoFile = logoMap[brandSlug] || `${brandSlug}.webp`;
-  const path = `${BRAND_LOGOS_PATH}/${logoFile}`;
-  // Bentley logo is in local public/ — serve directly
-  if (brandSlug === 'bentley-home') return path;
-  return resolveImagePath(path);
+  // Relative path — same as production
+  return `${BRAND_LOGOS_PATH}/${logoFile}`;
 }
 
 /**

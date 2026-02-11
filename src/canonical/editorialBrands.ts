@@ -55,7 +55,7 @@ export const editorialBrands: readonly EditorialBrand[] = [
     slug: 'bentley-home',
     order: 3,
     legacyUrl: 'https://www.luxarte.pl/bentley-home/',
-    logoPath: '/brands/logos-webp/bentley.webp',
+    logoPath: '/brands/logos-webp/bentley-home.webp',
     coverImage: mediaUrl('/media/marki/bentley-home/gallery-04.png'),
     coverAlt: 'Ekskluzywne meble Bentley Home',
     coverAltEn: 'Exclusive Bentley Home furniture',
