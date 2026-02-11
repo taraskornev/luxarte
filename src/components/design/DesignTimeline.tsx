@@ -12,138 +12,89 @@ interface DesignTimelineProps {
   steps: TimelineStep[];
 }
 
-/**
- * Vertical timeline with scroll-driven animation.
- * Adapted from Retcon AnimatedTimeline pattern:
- * - Desktop: centered line, content alternating left/right
- * - Mobile: left-aligned line, content on the right
- * - Numbered circles (always visible) instead of year pills
- * - Milestone-driven fill, fully reversible on scroll-up
- */
+const TRIGGER = 0.55; // fraction of viewport height
+
 export function DesignTimeline({ steps }: DesignTimelineProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const lineContainerRef = useRef<HTMLDivElement>(null);
+  const lineRef = useRef<HTMLDivElement>(null);
   const bulletRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const [activatedIndices, setActivatedIndices] = useState<Set<number>>(new Set());
-  const [lineStyles, setLineStyles] = useState({ top: 0, height: 0, fillHeight: 0 });
+  const [active, setActive] = useState<Set<number>>(new Set());
+  const [line, setLine] = useState({ top: 0, height: 0, fill: 0 });
 
-  const handleScroll = useCallback(() => {
-    if (!containerRef.current || !lineContainerRef.current) return;
-    if (bulletRefs.current.length === 0) return;
+  const recalc = useCallback(() => {
+    if (!containerRef.current || !lineRef.current || !bulletRefs.current.length) return;
 
-    const triggerPoint = window.innerHeight * 0.55;
-    const newActivated = new Set<number>();
+    const trigger = window.innerHeight * TRIGGER;
+    const next = new Set<number>();
 
-    bulletRefs.current.forEach((bullet, index) => {
-      if (!bullet) return;
-      const rect = bullet.getBoundingClientRect();
-      const bulletCenter = rect.top + rect.height / 2;
-      if (bulletCenter <= triggerPoint) {
-        newActivated.add(index);
-      }
+    bulletRefs.current.forEach((el, i) => {
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      if (r.top + r.height / 2 <= trigger) next.add(i);
     });
 
-    setActivatedIndices(newActivated);
+    setActive(next);
 
-    const firstBullet = bulletRefs.current[0];
-    const lastBullet = bulletRefs.current[bulletRefs.current.length - 1];
+    const first = bulletRefs.current[0];
+    const last = bulletRefs.current[bulletRefs.current.length - 1];
+    if (!first || !last) return;
 
-    if (firstBullet && lastBullet && lineContainerRef.current) {
-      const containerRect = lineContainerRef.current.getBoundingClientRect();
-      const firstRect = firstBullet.getBoundingClientRect();
-      const lastRect = lastBullet.getBoundingClientRect();
+    const base = lineRef.current.getBoundingClientRect().top;
+    const y = (el: HTMLDivElement) => {
+      const r = el.getBoundingClientRect();
+      return r.top + r.height / 2 - base;
+    };
 
-      const firstCenter = firstRect.top + firstRect.height / 2 - containerRect.top;
-      const lastCenter = lastRect.top + lastRect.height / 2 - containerRect.top;
-      const totalHeight = lastCenter - firstCenter;
+    const firstY = y(first);
+    const lastY = y(last);
+    const maxIdx = Math.max(...Array.from(next), -1);
+    const fillTarget = maxIdx >= 0 && bulletRefs.current[maxIdx]
+      ? y(bulletRefs.current[maxIdx]!) - firstY
+      : 0;
 
-      const lastActivatedIndex = Math.max(...Array.from(newActivated), -1);
-      let fillHeight = 0;
-
-      if (lastActivatedIndex >= 0 && lastActivatedIndex < bulletRefs.current.length) {
-        const lastActivatedBullet = bulletRefs.current[lastActivatedIndex];
-        if (lastActivatedBullet) {
-          const activatedRect = lastActivatedBullet.getBoundingClientRect();
-          const activatedCenter = activatedRect.top + activatedRect.height / 2 - containerRect.top;
-          fillHeight = activatedCenter - firstCenter;
-        }
-      }
-
-      setLineStyles({
-        top: firstCenter,
-        height: totalHeight,
-        fillHeight: Math.max(0, fillHeight),
-      });
-    }
+    setLine({ top: firstY, height: lastY - firstY, fill: Math.max(0, fillTarget) });
   }, []);
 
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-      setActivatedIndices(new Set(steps.map((_, i) => i)));
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setActive(new Set(steps.map((_, i) => i)));
       return;
     }
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll, { passive: true });
-    const timeoutId = setTimeout(handleScroll, 50);
-
+    window.addEventListener('scroll', recalc, { passive: true });
+    window.addEventListener('resize', recalc, { passive: true });
+    const id = setTimeout(recalc, 50);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
-      clearTimeout(timeoutId);
+      window.removeEventListener('scroll', recalc);
+      window.removeEventListener('resize', recalc);
+      clearTimeout(id);
     };
-  }, [handleScroll, steps]);
+  }, [recalc, steps]);
 
   return (
     <div ref={containerRef} className="dtl">
-      {/* Line container — left on mobile, center on desktop */}
-      <div ref={lineContainerRef} className="dtl-line-wrap">
-        <div
-          className="dtl-line-bg"
-          style={{ top: lineStyles.top, height: Math.max(0, lineStyles.height) }}
-        />
-        <div
-          className="dtl-line-fill"
-          style={{ top: lineStyles.top, height: lineStyles.fillHeight }}
-        />
+      <div ref={lineRef} className="dtl-line-wrap">
+        <div className="dtl-line-bg" style={{ top: line.top, height: Math.max(0, line.height) }} />
+        <div className="dtl-line-fill" style={{ top: line.top, height: line.fill }} />
       </div>
 
       <div className="dtl-items">
-        {steps.map((step, index) => {
-          const isActivated = activatedIndices.has(index);
-          const isEven = index % 2 === 0;
-
+        {steps.map((step, i) => {
+          const on = active.has(i);
+          const even = i % 2 === 0;
           return (
-            <div
-              key={step.number}
-              className={`dtl-row${isEven ? ' dtl-row--even' : ''}`}
-            >
-              {/* Numbered circle — absolutely positioned on the line */}
-              <div
-                ref={(el) => { bulletRefs.current[index] = el; }}
-                className="dtl-bullet-anchor"
-              >
-                <div
-                  className={`dtl-circle${isActivated ? ' dtl-circle--active' : ''}`}
-                >
+            <div key={step.number} className={`dtl-row${even ? ' dtl-row--even' : ''}`}>
+              <div ref={el => { bulletRefs.current[i] = el; }} className="dtl-bullet-anchor">
+                <div className={`dtl-circle${on ? ' dtl-circle--active' : ''}`}>
                   <span className="dtl-circle-num">{step.number}</span>
                 </div>
               </div>
-
-              {/* Content side */}
               <div
-                className={`dtl-content${isEven ? ' dtl-content--even' : ''}`}
-                style={{
-                  opacity: isActivated ? 1 : 0.4,
-                  transition: 'opacity 500ms ease-out',
-                }}
+                className={`dtl-content${even ? ' dtl-content--even' : ''}`}
+                style={{ opacity: on ? 1 : 0.4 }}
               >
                 <h3 className="dtl-title">{step.title}</h3>
                 <p className="dtl-desc">{step.description}</p>
               </div>
-
-              {/* Spacer for alternating — desktop only */}
               <div className="dtl-spacer" />
             </div>
           );
