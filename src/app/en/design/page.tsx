@@ -2,6 +2,35 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { mediaUrl } from '@/lib/buildMode';
 import { Breadcrumb } from '@/components/layout/Breadcrumb';
+import { DesignTimeline } from '@/components/design/DesignTimeline';
+
+const COLLABORATION_STAGES = [
+  {
+    number: 1,
+    title: 'SITE VISIT',
+    description: 'We conduct a site visit to gather as much data about the interior as possible. We take into account the investor\'s guidelines and create a framework for further project development.',
+  },
+  {
+    number: 2,
+    title: 'FUNCTIONAL LAYOUT',
+    description: 'The appropriate functional layout is created in consultation with the client, resulting in several layout proposals.',
+  },
+  {
+    number: 3,
+    title: '3D VISUALIZATIONS',
+    description: 'Visualizations are a tool that helps present our interior concept to you. In addition to visualizations, we also present a moodboard with suggested color palettes and a selection of finishing materials.',
+  },
+  {
+    number: 4,
+    title: 'TECHNICAL DRAWINGS',
+    description: 'The culmination of the creative stage is a technical specification containing the project\'s execution details. An important element is a detailed list of all finishing materials, including furnishing and decorative elements.',
+  },
+  {
+    number: 5,
+    title: 'SUPERVISION',
+    description: 'We offer you the opportunity to benefit from our years of experience through design supervision. This includes overseeing contractors on site to ensure compliance with the project.',
+  },
+];
 
 export const metadata = {
   title: 'Interior Design - LuxArte - Fashion for Home',
@@ -77,29 +106,10 @@ export default function DesignPageEN() {
           </div>
         </section>
 
-        <article className="content-page-body">
+        <section className="design-timeline-section">
           <h2 className="content-page-section-title">COLLABORATION STAGES</h2>
-
-          <p>
-            <strong>1. SITE VISIT</strong> — We conduct a site visit to gather as much data about the interior as possible. We take into account the investor&apos;s guidelines and create a framework for further project development.
-          </p>
-
-          <p>
-            <strong>2. FUNCTIONAL LAYOUT</strong> — The appropriate functional layout is created in consultation with the client, resulting in several layout proposals.
-          </p>
-
-          <p>
-            <strong>3. 3D VISUALIZATIONS</strong> — Visualizations are a tool that helps present our interior concept to you. In addition to visualizations, we also present a moodboard with suggested color palettes and a selection of finishing materials.
-          </p>
-
-          <p>
-            <strong>4. TECHNICAL DRAWINGS</strong> — The culmination of the creative stage is a technical specification containing the project&apos;s execution details. An important element is a detailed list of all finishing materials, including furnishing and decorative elements.
-          </p>
-
-          <p>
-            <strong>5. SUPERVISION</strong> — We offer you the opportunity to benefit from our years of experience through design supervision. This includes overseeing contractors on site to ensure compliance with the project.
-          </p>
-        </article>
+          <DesignTimeline steps={COLLABORATION_STAGES} />
+        </section>
 
         <section className="content-page-cta" data-scroll-animate>
           <h2>Let&apos;s talk about your project</h2>

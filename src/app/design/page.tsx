@@ -2,6 +2,35 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { mediaUrl } from '@/lib/buildMode';
 import { Breadcrumb } from '@/components/layout/Breadcrumb';
+import { DesignTimeline } from '@/components/design/DesignTimeline';
+
+const ETAPY_WSPOLPRACY = [
+  {
+    number: 1,
+    title: 'WIZJA LOKALNA',
+    description: 'Przeprowadzamy wizję lokalną, by zebrać jak najwięcej danych dotyczących wnętrza. Bierzemy pod uwagę wytyczne od Inwestora i tworzymy ramy do dalszej pracy nad projektem.',
+  },
+  {
+    number: 2,
+    title: 'UKŁAD FUNKCJONALNY',
+    description: 'Stworzenie odpowiedniego układu funkcjonalnego powstaje w konsultacji z Klientem, czego efektem będzie kilka propozycji układów funkcjonalnych.',
+  },
+  {
+    number: 3,
+    title: 'WIZUALIZACJE 3D',
+    description: 'Wizualizacje to narzędzie, które pomaga przedstawić Państwu naszą koncepcję wnętrza. Oprócz wizualizacji prezentujemy również moodboard z sugerowaną kolorystyką i selekcją materiałów wykończeniowych.',
+  },
+  {
+    number: 4,
+    title: 'RYSUNKI WYKONAWCZE',
+    description: 'Podsumowaniem etapu kreacji będzie stworzenie specyfikacji technicznej zawierającej szczegóły wykonawcze projektu. Ważnym elementem jest szczegółowy wykaz wszystkich materiałów wykończeniowych z uwzględnieniem elementów wyposażenia i dekoracji.',
+  },
+  {
+    number: 5,
+    title: 'NADZÓR',
+    description: 'Dajemy Państwu możliwość czerpania z naszego wieloletniego doświadczenia oferując opcję Nadzoru autorskiego. Obejmuje on kontrolę nad wykonawcami prac wykończeniowych na terenie inwestycji, by zachować zgodność z projektem.',
+  },
+];
 
 export const metadata = {
   title: 'Projektowanie wnętrz - LuxArte - Fashion for Home',
@@ -77,29 +106,10 @@ export default function DesignPage() {
           </div>
         </section>
 
-        <article className="content-page-body">
+        <section className="design-timeline-section">
           <h2 className="content-page-section-title">ETAPY WSPÓŁPRACY</h2>
-
-          <p>
-            <strong>1. WIZJA LOKALNA</strong> — Przeprowadzamy wizję lokalną, by zebrać jak najwięcej danych dotyczących wnętrza. Bierzemy pod uwagę wytyczne od Inwestora i tworzymy ramy do dalszej pracy nad projektem.
-          </p>
-
-          <p>
-            <strong>2. UKŁAD FUNKCJONALNY</strong> — Stworzenie odpowiedniego układu funkcjonalnego powstaje w konsultacji z Klientem, czego efektem będzie kilka propozycji układów funkcjonalnych.
-          </p>
-
-          <p>
-            <strong>3. WIZUALIZACJE 3D</strong> — Wizualizacje to narzędzie, które pomaga przedstawić Państwu naszą koncepcję wnętrza. Oprócz wizualizacji prezentujemy również moodboard z sugerowaną kolorystyką i selekcją materiałów wykończeniowych.
-          </p>
-
-          <p>
-            <strong>4. RYSUNKI WYKONAWCZE</strong> — Podsumowaniem etapu kreacji będzie stworzenie specyfikacji technicznej zawierającej szczegóły wykonawcze projektu. Ważnym elementem jest szczegółowy wykaz wszystkich materiałów wykończeniowych z uwzględnieniem elementów wyposażenia i dekoracji.
-          </p>
-
-          <p>
-            <strong>5. NADZÓR</strong> — Dajemy Państwu możliwość czerpania z naszego wieloletniego doświadczenia oferując opcję Nadzoru autorskiego. Obejmuje on kontrolę nad wykonawcami prac wykończeniowych na terenie inwestycji, by zachować zgodność z projektem.
-          </p>
-        </article>
+          <DesignTimeline steps={ETAPY_WSPOLPRACY} />
+        </section>
 
         <section className="content-page-cta" data-scroll-animate>
           <h2>Porozmawiajmy o Twoim projekcie</h2>
