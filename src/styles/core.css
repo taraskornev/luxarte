@@ -1,4 +1,31 @@
-﻿/* ============================================
+﻿.unified-lightbox__icons {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 11;
+  display: flex;
+  gap: 10px;
+}
+.unified-lightbox__icon {
+  background: none;
+  border: none;
+  color: #fff;
+  padding: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: opacity 0.2s, color 0.2s;
+  outline: none;
+}
+.unified-lightbox__icon:hover {
+  opacity: 1;
+  color: var(--color-accent-main, #ffe082);
+}
+/* ============================================
    LUXARTE CORE STYLES
    Step 9: UI Cohesion Pass
    ============================================
