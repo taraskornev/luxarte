@@ -1,4 +1,4 @@
-/* ============================================
+﻿/* ============================================
    LUXARTE CORE STYLES
    Step 9: UI Cohesion Pass
    ============================================
@@ -89,8 +89,8 @@ button {
 .site-container {
   max-width: var(--container-content);
   margin: 0 auto;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 .container {
@@ -149,7 +149,7 @@ button {
 .header-container {
   max-width: var(--container-content);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -571,7 +571,7 @@ button {
 .footer-logo-container {
   max-width: var(--container-content);
   margin: 0 auto var(--space-4);
-  padding: 0 24px;
+  padding: 0 16px;
 }
 
 .footer-logo {
@@ -586,7 +586,7 @@ button {
 .footer-container {
   max-width: var(--container-content);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 16px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: var(--space-6);
@@ -775,7 +775,7 @@ button {
 .gallery-container {
   max-width: var(--container-content);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 16px;
 }
 
 .gallery-header {
@@ -1470,7 +1470,7 @@ button {
 .nasze-marki-container {
   max-width: var(--container-content);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 16px;
 }
 
 .nasze-marki-title {
@@ -1546,7 +1546,7 @@ button {
   transition: var(--transition-opacity);
 }
 
-/* Logo goes from 100% → 50% on hover */
+/* Logo goes from 100% â†’ 50% on hover */
 .nasze-marki-card:hover .nasze-marki-card-logo {
   opacity: 0.5;
 }
@@ -1572,7 +1572,7 @@ button {
 .brand-page-container {
   max-width: var(--container-content);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 16px;
 }
 
 .brand-breadcrumb {
@@ -1930,7 +1930,7 @@ button {
 .pdp-container {
   max-width: var(--container-content);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 16px;
 }
 
 .pdp-breadcrumb {
@@ -2871,7 +2871,7 @@ a.pdp__brand:hover {
 
 /* ============================================
    LEGACY CONTENT PAGES
-   O nas, Aktualności, Bentley Home Cinema, Outlet, Kontakt
+   O nas, AktualnoÅ›ci, Bentley Home Cinema, Outlet, Kontakt
    ============================================ */
 
 .legacy-page {
@@ -3059,7 +3059,7 @@ a.pdp__brand:hover {
 }
 
 /* ============================================
-   AKTUALNOŚCI / NEWS GRID
+   AKTUALNOÅšCI / NEWS GRID
    ============================================ */
 
 .aktualnosci-page .legacy-page-content {
@@ -3561,7 +3561,7 @@ a.pdp__brand:hover {
 .content-page-container {
   max-width: var(--container-content);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 16px;
 }
 
 .content-page--wide .content-page-container {
@@ -4083,7 +4083,7 @@ a.pdp__brand:hover {
   background: var(--color-bg-main);
   max-width: var(--container-content);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 16px;
   display: flex;
   flex-direction: column;
   gap: var(--space-8);
@@ -5605,9 +5605,9 @@ a.pdp__brand:hover {
    Step 14: Homepage + Hero + Premium Visual Composition
    ============================================ */
 
-/* ────────────────────────────────────────────
-   A — HERO BLOCK
-   ──────────────────────────────────────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   A â€” HERO BLOCK
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .home-page {
   width: 100%;
 }
@@ -5652,7 +5652,7 @@ a.pdp__brand:hover {
   gap: var(--space-5);
   width: 100%;
   max-width: var(--container-content);
-  padding: 0 24px;
+  padding: 0 16px;
   margin-bottom: var(--space-10);
 }
 
@@ -5690,9 +5690,9 @@ a.pdp__brand:hover {
   text-transform: none;
 }
 
-/* ────────────────────────────────────────────
-   B — THREE ENTRY BLOCKS (Legacy - kept for reference)
-   ──────────────────────────────────────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   B â€” THREE ENTRY BLOCKS (Legacy - kept for reference)
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .home-entries {
   padding: var(--space-11) 0;
   background: var(--color-text-inverse);
@@ -5704,7 +5704,7 @@ a.pdp__brand:hover {
   gap: var(--space-5);
   max-width: var(--container-content);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 16px;
 }
 
 .home-entry-tile {
@@ -5772,9 +5772,9 @@ a.pdp__brand:hover {
   margin: 0;
 }
 
-/* ────────────────────────────────────────────
-   B2 — THREE CTA BLOCKS (STEP 16 Legacy Parity)
-   ──────────────────────────────────────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   B2 â€” THREE CTA BLOCKS (STEP 16 Legacy Parity)
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .home-cta-section {
   padding: var(--space-11) 0;
   background: var(--color-text-inverse);
@@ -5786,7 +5786,7 @@ a.pdp__brand:hover {
   gap: var(--space-5);
   max-width: var(--container-content);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 16px;
 }
 
 .home-cta-tile {
@@ -5878,9 +5878,9 @@ a.pdp__brand:hover {
   color: var(--color-text-main);
 }
 
-/* ────────────────────────────────────────────
-   C — BRAND STRIP
-   ──────────────────────────────────────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   C â€” BRAND STRIP
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .home-brand-strip {
   padding: var(--space-10) 0;
   background: var(--color-bg-main);
@@ -5918,9 +5918,9 @@ a.pdp__brand:hover {
   width: auto;
 }
 
-/* ────────────────────────────────────────────
-   D — FEATURED PRODUCTS
-   ──────────────────────────────────────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   D â€” FEATURED PRODUCTS
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .home-featured {
   padding: var(--space-11) 0;
   background: var(--color-text-inverse);
@@ -5968,9 +5968,9 @@ a.pdp__brand:hover {
   padding: 0 var(--space-8);
 }
 
-/* ────────────────────────────────────────────
-   E — INTERIOR / DESIGN BLOCK
-   ──────────────────────────────────────────── */
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+   E â€” INTERIOR / DESIGN BLOCK
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .home-interior {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -6031,9 +6031,9 @@ a.pdp__brand:hover {
   color: var(--color-text-main);
 }
 
-/* ────────────────────────────────────────────
+/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
    HOMEPAGE RESPONSIVE
-   ──────────────────────────────────────────── */
+   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 @media (max-width: 1024px) {
   .home-hero {
     height: 80vh;
@@ -6202,7 +6202,7 @@ a.pdp__brand:hover {
 .max-width-container {
   max-width: 1300px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 16px;
 }
 
 /* ============================================
@@ -6262,7 +6262,7 @@ a.pdp__brand:hover {
 }
 
 /* ============================================
-   DESIGN TIMELINE (ETAPY WSPÓŁPRACY)
+   DESIGN TIMELINE (ETAPY WSPÃ“ÅPRACY)
    Numbered titles + text.
    Scroll-driven opacity animation.
    ============================================ */
