@@ -12,7 +12,7 @@ interface DesignTimelineProps {
   steps: TimelineStep[];
 }
 
-const TRIGGER = 0.55; // fraction of viewport height
+const TRIGGER = 0.55;
 
 export function DesignTimeline({ steps }: DesignTimelineProps) {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -83,16 +83,36 @@ export function DesignTimeline({ steps }: DesignTimelineProps) {
           const even = i % 2 === 0;
           return (
             <div key={step.number} className={`dtl-row${even ? ' dtl-row--even' : ''}`}>
-              <div ref={el => { bulletRefs.current[i] = el; }} className="dtl-bullet-anchor">
-                <div className={`dtl-circle${on ? ' dtl-circle--active' : ''}`}>
-                  <span className="dtl-circle-num">{step.number}</span>
-                </div>
+              {/* Empty dot on the line */}
+              <div
+                ref={el => { bulletRefs.current[i] = el; }}
+                className="dtl-bullet-anchor"
+                style={{ marginTop: '0.5rem' }}
+              >
+                <div className={`dtl-dot${on ? ' dtl-dot--active' : ''}`} />
               </div>
+
+              {/* Content */}
               <div
                 className={`dtl-content${even ? ' dtl-content--even' : ''}`}
                 style={{ opacity: on ? 1 : 0.4 }}
               >
-                <h3 className="dtl-title">{step.title}</h3>
+                {/* Pill: number → expands to show title on activation */}
+                <div className="dtl-pill-wrap">
+                  <div className={`dtl-pill${on ? ' dtl-pill--active' : ''}`}>
+                    <span className="dtl-pill-num">{step.number}</span>
+                    <span
+                      className="dtl-pill-label"
+                      style={{
+                        opacity: on ? 1 : 0,
+                        maxWidth: on ? '300px' : '0px',
+                      }}
+                    >
+                      {step.title}
+                    </span>
+                  </div>
+                </div>
+
                 <p className="dtl-desc">{step.description}</p>
               </div>
               <div className="dtl-spacer" />
