@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { getDictionary, type Locale } from '@/i18n';
+import { UnifiedLightbox } from '@/components/lightbox/UnifiedLightbox';
 
 interface ProductGalleryProps {
   heroImage: string | null;
@@ -61,28 +62,12 @@ export function ProductGallery({ heroImage, galleryImages, lightboxImages, produ
     return () => clearInterval(interval);
   }, [allImages.length, lightboxOpen]);
 
-  // Keyboard navigation: ESC closes, arrows navigate
+  // Lock scroll when lightbox is open (keyboard nav handled by UnifiedLightbox)
   useEffect(() => {
     if (!lightboxOpen) return;
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setLightboxOpen(false);
-      } else if (e.key === 'ArrowLeft') {
-        setLightboxIndex((prev) => (prev - 1 + lightboxImages.length) % lightboxImages.length);
-      } else if (e.key === 'ArrowRight') {
-        setLightboxIndex((prev) => (prev + 1) % lightboxImages.length);
-      }
-    };
-
     document.body.style.overflow = 'hidden';
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      document.body.style.overflow = '';
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [lightboxOpen, lightboxImages.length]);
+    return () => { document.body.style.overflow = ''; };
+  }, [lightboxOpen]);
 
   const openLightbox = useCallback((index: number) => {
     setLightboxIndex(index);
@@ -92,16 +77,6 @@ export function ProductGallery({ heroImage, galleryImages, lightboxImages, produ
   const closeLightbox = useCallback(() => {
     setLightboxOpen(false);
   }, []);
-
-  const goToPrev = useCallback((e: React.MouseEvent) => {
-    e.stopPropagation();
-    setLightboxIndex((prev) => (prev - 1 + lightboxImages.length) % lightboxImages.length);
-  }, [lightboxImages.length]);
-
-  const goToNext = useCallback((e: React.MouseEvent) => {
-    e.stopPropagation();
-    setLightboxIndex((prev) => (prev + 1) % lightboxImages.length);
-  }, [lightboxImages.length]);
 
   // No images at all
   if (allImages.length === 0) {
@@ -113,10 +88,6 @@ export function ProductGallery({ heroImage, galleryImages, lightboxImages, produ
       </div>
     );
   }
-
-  // Get side preview indices for lightbox
-  const prevIdx = (lightboxIndex - 1 + lightboxImages.length) % lightboxImages.length;
-  const nextIdx = (lightboxIndex + 1) % lightboxImages.length;
 
   return (
     <>
@@ -166,67 +137,15 @@ export function ProductGallery({ heroImage, galleryImages, lightboxImages, produ
         )}
       </div>
 
-      {/* Lightbox - images loaded on demand (not in DOM until open) */}
+      {/* Lightbox */}
       {lightboxOpen && (
-        <div className="lightbox" onClick={closeLightbox} role="dialog" aria-modal="true">
-          {/* Side preview - previous (click to navigate) */}
-          {lightboxImages.length > 2 && (
-            <button
-              type="button"
-              className="lightbox-preview lightbox-preview-prev"
-              onClick={goToPrev}
-              aria-label={t.common.prevPhoto}
-            >
-              <Image
-                src={lightboxImages[prevIdx]}
-                alt={t.common.prevPhoto}
-                width={100}
-                height={100}
-                sizes="100px"
-                loading="lazy"
-                style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-              />
-            </button>
-          )}
-
-          {/* Main lightbox image (lightbox-tier, loaded on demand) */}
-          <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-            <Image
-              src={lightboxImages[lightboxIndex]}
-              alt={`${productName} - ${t.common.photoN} ${lightboxIndex + 1}`}
-              width={1600}
-              height={1200}
-              sizes="90vw"
-              priority
-              style={{ objectFit: 'contain', maxHeight: '85vh', width: 'auto', height: 'auto' }}
-            />
-          </div>
-
-          {/* Side preview - next (click to navigate) */}
-          {lightboxImages.length > 2 && (
-            <button
-              type="button"
-              className="lightbox-preview lightbox-preview-next"
-              onClick={goToNext}
-              aria-label={t.common.nextPhoto}
-            >
-              <Image
-                src={lightboxImages[nextIdx]}
-                alt={t.common.nextPhoto}
-                width={100}
-                height={100}
-                sizes="100px"
-                loading="lazy"
-                style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-              />
-            </button>
-          )}
-
-          {/* Counter */}
-          <div className="lightbox-counter">
-            {lightboxIndex + 1} / {lightboxImages.length}
-          </div>
-        </div>
+        <UnifiedLightbox
+          images={lightboxImages}
+          currentIndex={lightboxIndex}
+          onClose={closeLightbox}
+          onIndexChange={setLightboxIndex}
+          altPrefix={productName}
+        />
       )}
     </>
   );

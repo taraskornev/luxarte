@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
 import { getDictionary, type Locale } from '@/i18n';
+import { UnifiedLightbox } from '@/components/lightbox/UnifiedLightbox';
 
 interface BrandHeroGalleryProps {
   images: string[];
@@ -182,38 +183,13 @@ export function BrandHeroGallery({ images, brandName, lightboxImages, locale = '
 
       {/* Fullscreen Lightbox */}
       {isLightboxOpen && (
-        <div
-          className="brand-lightbox"
-          onClick={() => setIsLightboxOpen(false)}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={handleSwipeEnd}
-        >
-          <button
-            className="brand-lightbox-close"
-            onClick={() => setIsLightboxOpen(false)}
-            aria-label={t.common.closeLabel}
-          >
-            ×
-          </button>
-
-          <div className="brand-lightbox-image" onClick={(e) => e.stopPropagation()}>
-            <Image
-              src={fullResImages[activeIndex] || images[activeIndex]}
-              alt={`${brandName} - ${activeIndex + 1}`}
-              fill
-              sizes="100vw"
-              style={{ objectFit: 'contain' }}
-            />
-          </div>
-
-          {/* Counter */}
-          {images.length > 1 && (
-            <div className="brand-lightbox-counter">
-              {activeIndex + 1} / {images.length}
-            </div>
-          )}
-        </div>
+        <UnifiedLightbox
+          images={fullResImages}
+          currentIndex={activeIndex}
+          onClose={() => setIsLightboxOpen(false)}
+          onIndexChange={setActiveIndex}
+          altPrefix={brandName}
+        />
       )}
     </>
   );

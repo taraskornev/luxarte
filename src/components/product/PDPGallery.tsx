@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
 import { getDictionary, type Locale } from '@/i18n';
+import { UnifiedLightbox } from '@/components/lightbox/UnifiedLightbox';
 
 interface PDPGalleryProps {
   images: string[];
@@ -192,44 +193,13 @@ export function PDPGallery({ images, lightboxImages, productName, locale = 'pl' 
 
       {/* Fullscreen Lightbox */}
       {isLightboxOpen && (
-        <div
-          className="pdp-lightbox"
-          onClick={() => setIsLightboxOpen(false)}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={() => {
-            const diff = touchStartX.current - touchEndX.current;
-            if (Math.abs(diff) > 50) {
-              diff > 0
-                ? setSelectedIndex((prev) => (prev + 1) % fullResImages.length)
-                : setSelectedIndex((prev) => (prev - 1 + fullResImages.length) % fullResImages.length);
-            }
-          }}
-        >
-          <button
-            type="button"
-            className="pdp-lightbox__close"
-            onClick={() => setIsLightboxOpen(false)}
-            aria-label={t.common.closeLabel}
-          >
-            ×
-          </button>
-
-          <div className="pdp-lightbox__content" onClick={(e) => e.stopPropagation()}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={fullResImages[selectedIndex]}
-              alt={`${productName} - ${t.common.photoN} ${selectedIndex + 1}`}
-            />
-          </div>
-
-          {/* Counter */}
-          {fullResImages.length > 1 && (
-            <div className="pdp-lightbox__counter">
-              {selectedIndex + 1} / {fullResImages.length}
-            </div>
-          )}
-        </div>
+        <UnifiedLightbox
+          images={fullResImages}
+          currentIndex={selectedIndex}
+          onClose={() => setIsLightboxOpen(false)}
+          onIndexChange={setSelectedIndex}
+          altPrefix={productName}
+        />
       )}
     </>
   );

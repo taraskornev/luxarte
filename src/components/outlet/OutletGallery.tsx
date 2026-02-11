@@ -2,6 +2,7 @@
 
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { getDictionary, type Locale } from '@/i18n';
+import { UnifiedLightbox } from '@/components/lightbox/UnifiedLightbox';
 
 interface OutletGalleryProps {
   images: string[];
@@ -181,44 +182,13 @@ export function OutletGallery({ images, productName, locale = 'pl' }: OutletGall
 
       {/* Fullscreen Lightbox */}
       {isLightboxOpen && (
-        <div
-          className="pdp-lightbox"
-          onClick={() => setIsLightboxOpen(false)}
-          onTouchStart={handleTouchStart}
-          onTouchMove={handleTouchMove}
-          onTouchEnd={() => {
-            const diff = touchStartX.current - touchEndX.current;
-            if (Math.abs(diff) > 50) {
-              diff > 0
-                ? setSelectedIndex((prev) => (prev + 1) % images.length)
-                : setSelectedIndex((prev) => (prev - 1 + images.length) % images.length);
-            }
-          }}
-        >
-          <button
-            type="button"
-            className="pdp-lightbox__close"
-            onClick={() => setIsLightboxOpen(false)}
-            aria-label={t.common.closeLabel}
-          >
-            ×
-          </button>
-
-          <div className="pdp-lightbox__content" onClick={(e) => e.stopPropagation()}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={images[selectedIndex]}
-              alt={`${productName} - ${t.common.photoN} ${selectedIndex + 1}`}
-            />
-          </div>
-
-          {/* Counter */}
-          {images.length > 1 && (
-            <div className="pdp-lightbox__counter">
-              {selectedIndex + 1} / {images.length}
-            </div>
-          )}
-        </div>
+        <UnifiedLightbox
+          images={images}
+          currentIndex={selectedIndex}
+          onClose={() => setIsLightboxOpen(false)}
+          onIndexChange={setSelectedIndex}
+          altPrefix={productName}
+        />
       )}
     </>
   );
