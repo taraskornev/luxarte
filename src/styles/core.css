@@ -1005,9 +1005,20 @@ button {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  border-bottom: var(--border-light);
+  border-bottom: none;
+  position: relative;
   min-height: 0;
   transition: flex var(--duration-normal) var(--ease-out);
+}
+
+.mobile-filter-section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: var(--space-5);
+  right: var(--space-5);
+  height: 1px;
+  background: var(--color-border);
 }
 
 /* When section is expanded */
@@ -1023,6 +1034,10 @@ button {
 
 .mobile-filter-section:last-child {
   border-bottom: none;
+}
+
+.mobile-filter-section:last-child::after {
+  display: none;
 }
 
 /* Section content wrapper for smooth height animation */
@@ -1049,14 +1064,26 @@ button {
 
 /* Mobile filter footer for clear button */
 .mobile-filter-footer {
+  position: relative;
   flex-shrink: 0;
   padding: var(--space-4) var(--space-5);
-  border-top: var(--border-light);
+  border-top: none;
   background: var(--color-text-inverse);
+}
+
+.mobile-filter-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: var(--space-5);
+  right: var(--space-5);
+  height: 1px;
+  background: var(--color-border);
 }
 
 /* Section header - clickable button with +/- toggle */
 .mobile-filter-section-header {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1070,9 +1097,19 @@ button {
   letter-spacing: var(--letter-spacing-normal);
   color: var(--color-text-main);
   border: none;
-  border-bottom: var(--border-light);
+  border-bottom: none;
   cursor: pointer;
   text-align: left;
+}
+
+.mobile-filter-section-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: var(--space-5);
+  right: var(--space-5);
+  height: 1px;
+  background: var(--color-border);
 }
 
 .mobile-filter-section-toggle {
@@ -5253,8 +5290,8 @@ a.pdp__brand:hover {
     right: 0;
     top: 25vh;
     z-index: var(--z-drawer);
-    width: 36px;
-    height: 230px;
+    width: 24px;
+    height: 153px;
     background: var(--color-text-inverse);
     -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 153'%3E%3Cpath d='M24 78.5V152.5V150.674C24 147.402 22.3994 144.337 19.7143 142.467L4.28516 131.724C1.60016 129.854 0 126.788 0 123.517V28.4834C0 25.2116 1.60016 22.146 4.28516 20.2764L19.7143 9.53302C22.3994 7.66336 24 4.59839 24 1.32647V0V28.4834V78.5Z' fill='white'/%3E%3C/svg%3E") no-repeat center / contain;
     mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 153'%3E%3Cpath d='M24 78.5V152.5V150.674C24 147.402 22.3994 144.337 19.7143 142.467L4.28516 131.724C1.60016 129.854 0 126.788 0 123.517V28.4834C0 25.2116 1.60016 22.146 4.28516 20.2764L19.7143 9.53302C22.3994 7.66336 24 4.59839 24 1.32647V0V28.4834V78.5Z' fill='white'/%3E%3C/svg%3E") no-repeat center / contain;
@@ -5264,7 +5301,7 @@ a.pdp__brand:hover {
     writing-mode: vertical-lr;
     text-orientation: mixed;
     font-family: var(--font-family);
-    font-size: 18px;
+    font-size: 12px;
     font-weight: var(--font-weight-bold);
     text-transform: uppercase;
     letter-spacing: var(--letter-spacing-wide);
@@ -5273,7 +5310,9 @@ a.pdp__brand:hover {
     touch-action: pan-y;
     user-select: none;
     transition: transform var(--duration-slow) cubic-bezier(0.1, 0.9, 0.2, 1);
-    padding: 0 0 0 6px;
+    padding: 0;
+    margin: 0;
+    line-height: 1;
   }
 
   /* Tab stays white always - no color change on active/touch */
