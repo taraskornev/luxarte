@@ -26,7 +26,7 @@ export function UnifiedLightbox({ images, currentIndex, onClose, onIndexChange, 
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [showControls, setShowControls] = useState(true);
-  const [dragOffset, setDragOffset] = useState(0);
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
 
   const hideTimer = useRef<ReturnType<typeof setTimeout>>();
@@ -97,7 +97,7 @@ export function UnifiedLightbox({ images, currentIndex, onClose, onIndexChange, 
     touchStartX.current = e.touches[0].clientX;
     touchStartY.current = e.touches[0].clientY;
     setIsDragging(true);
-    setDragOffset(0);
+    setDragOffset({ x: 0, y: 0 });
     resetHideTimer();
   }, [resetHideTimer]);
 
@@ -105,19 +105,14 @@ export function UnifiedLightbox({ images, currentIndex, onClose, onIndexChange, 
     if (!isDragging) return;
     const dx = e.touches[0].clientX - touchStartX.current;
     const dy = e.touches[0].clientY - touchStartY.current;
-    // Track whichever is greater
-    if (Math.abs(dx) > Math.abs(dy)) {
-      setDragOffset(dx);
-    } else {
-      setDragOffset(dy);
-    }
+    setDragOffset({ x: dx, y: dy });
   }, [isDragging]);
 
   const handleTouchEnd = useCallback(() => {
+    if (!isDragging) return;
     setIsDragging(false);
-    const dx = dragOffset;
-    const dy = dragOffset;
-    setDragOffset(0);
+    const { x: dx, y: dy } = dragOffset;
+    setDragOffset({ x: 0, y: 0 });
     // Horizontal swipe
     if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) {
       if (dx < 0) {
@@ -128,7 +123,6 @@ export function UnifiedLightbox({ images, currentIndex, onClose, onIndexChange, 
     }
     // Vertical swipe
     else if (Math.abs(dy) > 60 && Math.abs(dy) > Math.abs(dx)) {
-      // Up or down
       setSlideDirection(dy < 0 ? 'up' : 'down');
       setIsClosing(true);
       setTimeout(() => {
@@ -137,7 +131,7 @@ export function UnifiedLightbox({ images, currentIndex, onClose, onIndexChange, 
         onClose();
       }, 350);
     }
-  }, [dragOffset, currentIndex, totalImages, slideToIndex, onClose]);
+  }, [isDragging, dragOffset, currentIndex, totalImages, slideToIndex, onClose]);
 
   // Compute image transform/animation
   const getImageStyle = (): React.CSSProperties => {
@@ -149,17 +143,18 @@ export function UnifiedLightbox({ images, currentIndex, onClose, onIndexChange, 
         transition: 'opacity 0.35s, transform 0.35s',
       };
     }
-    if (isDragging && dragOffset !== 0) {
-      if (slideDirection === 'up' || slideDirection === 'down') {
+    if (isDragging && (dragOffset.x !== 0 || dragOffset.y !== 0)) {
+      if (Math.abs(dragOffset.x) > Math.abs(dragOffset.y)) {
         return {
-          transform: `translateY(${dragOffset}px)`,
+          transform: `translateX(${dragOffset.x}px)`,
+          transition: 'none',
+        };
+      } else {
+        return {
+          transform: `translateY(${dragOffset.y}px)`,
           transition: 'none',
         };
       }
-      return {
-        transform: `translateX(${dragOffset}px)`,
-        transition: 'none',
-      };
     }
     if (slideDirection === 'left') {
       return {
@@ -222,7 +217,10 @@ export function UnifiedLightbox({ images, currentIndex, onClose, onIndexChange, 
         <button
           type="button"
           className={`unified-lightbox__arrow unified-lightbox__arrow--prev ${showControls ? 'visible' : ''}`}
-          onClick={(e) => { e.stopPropagation(); goPrev(); }}
+          onClick={(e) => {
+            e.stopPropagation();
+            if (!isTransitioning && !isDragging) goPrev();
+          }}
           aria-label="Previous"
         >
           <span className="unified-lightbox__arrow-icon">&#x2039;</span>
@@ -249,7 +247,10 @@ export function UnifiedLightbox({ images, currentIndex, onClose, onIndexChange, 
         <button
           type="button"
           className={`unified-lightbox__arrow unified-lightbox__arrow--next ${showControls ? 'visible' : ''}`}
-          onClick={(e) => { e.stopPropagation(); goNext(); }}
+          onClick={(e) => {
+            e.stopPropagation();
+            if (!isTransitioning && !isDragging) goNext();
+          }}
           aria-label="Next"
         >
           <span className="unified-lightbox__arrow-icon">&#x203A;</span>
