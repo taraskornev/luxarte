@@ -1553,7 +1553,8 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--space-5);
+  width: 100%;
+  padding: var(--space-4);
   opacity: 1;
   transition: var(--transition-opacity);
 }
@@ -1569,11 +1570,6 @@ button {
   max-height: 200px;
   height: auto;
   filter: brightness(0) invert(1);
-}
-
-/* Bentley has a two-tone logo — use invert instead of white overlay */
-.nasze-marki-card[data-brand="bentley-home"] .nasze-marki-card-logo img {
-  filter: invert(1);
 }
 
 /* ============================================
@@ -5259,7 +5255,9 @@ a.pdp__brand:hover {
     z-index: var(--z-drawer);
     width: 36px;
     height: 230px;
-    background: url('/filter-tab.svg') no-repeat center / contain;
+    background: var(--color-text-inverse);
+    -webkit-mask: url('/filter-tab.svg') no-repeat center / contain;
+    mask: url('/filter-tab.svg') no-repeat center / contain;
     color: var(--color-text-main);
     border: none;
     cursor: pointer;
