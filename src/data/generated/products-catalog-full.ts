@@ -77,6 +77,43 @@ export const categoryNames: Record<ProductCategorySlug, string> = {
 };
 
 /**
+ * Category display names (English)
+ */
+export const categoryNamesEn: Record<ProductCategorySlug, string> = {
+  "akcesoria": "Accessories",
+  "biuro": "Office",
+  "dywany": "Rugs",
+  "fotele": "Armchairs",
+  "hokery": "Bar stools",
+  "komody": "Dressers",
+  "konsole": "Console tables",
+  "krzesla": "Chairs",
+  "lustra": "Mirrors",
+  "lozka": "Beds",
+  "pufy": "Poufs",
+  "regaly": "Shelves",
+  "sofy": "Sofas",
+  "stoliki-boczne": "Side tables",
+  "stoliki-kawowe": "Coffee tables",
+  "stoly": "Dining tables",
+  "szafki-nocne": "Nightstands",
+  "szezlongi": "Chaise longues",
+  "kinkiety": "Wall sconces",
+  "lampy-podlogowe": "Floor lamps",
+  "lampy-stolowe": "Table lamps",
+  "lampy-wiszace": "Pendant lamps",
+  "oswietlenie": "Lighting",
+  "plafony": "Ceiling lights",
+  "zyrandole": "Chandeliers",
+  "kuchnie": "Kitchens",
+  "garderoby": "Wardrobes",
+  "lazienki": "Bathrooms",
+  "donice": "Planters",
+  "meble-ogrodowe": "Outdoor furniture",
+  "unknown": "Unknown category"
+};
+
+/**
  * Catalog Product Entry
  */
 export interface CatalogProduct {

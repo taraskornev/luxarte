@@ -106,6 +106,37 @@ button {
 }
 
 /* ============================================
+   SCROLL ANIMATIONS
+   Fade-in with slight upward motion on scroll
+   ============================================ */
+
+[data-scroll-animate] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+[data-scroll-animate].scroll-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger delays for sequential elements */
+[data-scroll-animate][data-scroll-delay="1"] { transition-delay: 0.1s; }
+[data-scroll-animate][data-scroll-delay="2"] { transition-delay: 0.2s; }
+[data-scroll-animate][data-scroll-delay="3"] { transition-delay: 0.3s; }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  [data-scroll-animate] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ============================================
    HEADER
    ============================================ */
 
@@ -157,14 +188,16 @@ button {
 }
 
 /* Bentley Home Cinema button - outlined accent style */
-.main-nav a[href="/bentley-home-cinema"] {
+.main-nav a[href="/bentley-home-cinema"],
+.main-nav a[href="/en/bentley-home-cinema"] {
   padding: 8px 16px;
   border: 1px solid var(--color-accent-main);
   color: var(--color-accent-main);
   transition: all var(--duration-fast) var(--ease-out);
 }
 
-.main-nav a[href="/bentley-home-cinema"]:hover {
+.main-nav a[href="/bentley-home-cinema"]:hover,
+.main-nav a[href="/en/bentley-home-cinema"]:hover {
   background: var(--color-accent-main);
   color: var(--color-text-inverse);
 }
@@ -382,8 +415,14 @@ button {
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--overlay-menu);
+  background: var(--overlay-dark);
   z-index: var(--z-overlay);
+  animation: overlayFadeIn var(--duration-fast) var(--ease-out);
+}
+
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* Mobile Menu Drawer - RIGHT SLIDE */
@@ -396,8 +435,7 @@ button {
   background: var(--color-bg-main);
   z-index: var(--z-drawer);
   overflow-y: auto;
-  /* shadow removed */
-  transition: right var(--duration-normal) var(--ease-out);
+  transition: right var(--motion-slow) var(--motion-zoom-curve);
 }
 
 .mobile-menu-drawer.open {
@@ -405,26 +443,7 @@ button {
 }
 
 .mobile-menu-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--space-5);
-  border-bottom: var(--border-light);
-}
-
-.mobile-menu-title {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-bold);
-}
-
-.mobile-menu-close {
-  background: transparent;
-  border: none;
-  font-size: var(--font-size-lg);
-  cursor: pointer;
-  padding: 0;
-  line-height: 1;
-  color: var(--color-text-main);
+  display: none;
 }
 
 /* Mobile nav panels */
@@ -543,7 +562,7 @@ button {
 .site-footer {
   background: var(--color-text-inverse);
   color: var(--color-text-main);
-  padding: var(--space-6) 0 var(--space-4);
+  padding: var(--space-6) 0 0;
   margin-top: auto;
   border-top: var(--border-light);
 }
@@ -676,7 +695,7 @@ button {
 .footer-bottom {
   max-width: var(--container-content);
   margin: var(--space-8) auto 0;
-  padding: var(--space-5) 24px;
+  padding: var(--space-5) 24px 0;
   border-top: 1px solid var(--color-border);
   text-align: center;
   font-size: var(--font-size-sm);
@@ -722,12 +741,24 @@ button {
    ============================================ */
 
 .breadcrumb {
+  font-family: var(--font-family);
   font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-light);
   color: var(--color-text-muted);
   margin-bottom: var(--space-7);
 }
 
+.breadcrumb a {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: var(--transition-color);
+}
+
 .breadcrumb a:hover {
+  color: var(--color-text-main);
+}
+
+.breadcrumb-current {
   color: var(--color-text-main);
 }
 
@@ -924,6 +955,7 @@ button {
   flex-shrink: 0;
   padding-top: var(--space-4);
   margin-top: auto;
+  margin-bottom: 0;
 }
 
 /* Overlay for closing drawer */
@@ -933,8 +965,9 @@ button {
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--overlay-menu);
+  background: var(--overlay-dark);
   z-index: var(--z-overlay);
+  animation: fade-in var(--duration-normal) var(--ease-out);
 }
 
 /* Mobile Filter Drawer - RIGHT SLIDE PANEL */
@@ -1087,7 +1120,7 @@ button {
   display: block;
   width: 100%;
   padding: var(--space-3) var(--space-4);
-  margin-bottom: var(--space-5);
+  margin-bottom: 0;
   font-family: var(--font-family);
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
@@ -1096,6 +1129,12 @@ button {
   cursor: pointer;
   text-align: center;
   transition: var(--transition-color);
+}
+
+.sidebar-clear-all--disabled {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
 }
 
 .sidebar-clear-all:hover {
@@ -1179,24 +1218,22 @@ button {
 .filter-checkbox input[type="checkbox"]:checked + .filter-checkbox-box::after {
   content: '';
   position: absolute;
-  left: 5px;
-  top: 1px;
-  width: 5px;
-  height: 10px;
-  border: solid var(--color-text-main);
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-  animation: checkmark-draw 0.2s ease-out forwards;
+  left: 3px;
+  top: 3px;
+  right: 3px;
+  bottom: 3px;
+  background: var(--color-text-main);
+  animation: square-fill 0.2s ease-out forwards;
 }
 
-@keyframes checkmark-draw {
+@keyframes square-fill {
   0% {
     opacity: 0;
-    transform: rotate(45deg) scale(0.5);
+    transform: scale(0.5);
   }
   100% {
     opacity: 1;
-    transform: rotate(45deg) scale(1);
+    transform: scale(1);
   }
 }
 
@@ -1394,7 +1431,7 @@ button {
 
 .gallery-card-brand {
   display: block;
-  font-size: var(--font-size-sm);
+  font-size: 10px;
   font-weight: var(--font-weight-bold);
   text-transform: uppercase;
   letter-spacing: var(--letter-spacing-normal);
@@ -2756,11 +2793,6 @@ a.pdp__brand:hover {
   background: var(--color-background);
   overflow: hidden;
   cursor: zoom-in;
-  transition: opacity 0.3s ease-out;
-}
-
-.pdp-gallery__main--fading {
-  opacity: 0.7;
 }
 
 .pdp-gallery__main.magnifier-active {
@@ -2854,17 +2886,9 @@ a.pdp__brand:hover {
   object-fit: cover;
 }
 
-/* PDP Gallery Thumb Indicator - sliding border */
+/* PDP Gallery Thumb Indicator - hidden, using border on active thumb instead */
 .pdp-gallery__thumb-indicator {
-  position: absolute;
-  top: 4px;
-  left: -4px;
-  width: 72px;
-  height: 72px;
-  border: 1px solid var(--color-accent-main);
-  pointer-events: none;
-  z-index: 1;
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  display: none;
 }
 
 /* Outlet Gallery Indicator - dynamic width sliding border */
@@ -3462,11 +3486,21 @@ a.pdp__brand:hover {
   grid-template-columns: 1fr;
 }
 
+/* Single image in a section: 2:1 on desktop */
+.article-section-gallery--single .article-section-gallery-item {
+  aspect-ratio: 2 / 1;
+}
+
 .article-section-gallery-item {
   aspect-ratio: 1 / 1;
   border-radius: var(--radius-md);
   overflow: hidden;
   background: var(--color-bg-main);
+}
+
+.article-section-gallery-item--wide {
+  grid-column: 1 / -1;
+  aspect-ratio: 2 / 1;
 }
 
 .article-section-gallery-item img {
@@ -3513,8 +3547,25 @@ a.pdp__brand:hover {
 }
 
 @media (max-width: 768px) {
+  .article-hero {
+    height: auto;
+    min-height: auto;
+    max-height: none;
+    aspect-ratio: 1 / 1;
+  }
+
+  .article-title {
+    font-size: var(--font-size-lg);
+  }
+
   .article-section-gallery {
     grid-template-columns: 1fr;
+  }
+
+  /* On mobile: single images revert to square crop */
+  .article-section-gallery--single .article-section-gallery-item,
+  .article-section-gallery-item--wide {
+    aspect-ratio: 1 / 1;
   }
   
   .article-gallery-grid {
@@ -3738,11 +3789,21 @@ a.pdp__brand:hover {
 .content-page-title {
   font-family: var(--font-family);
   font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-light);
   letter-spacing: var(--letter-spacing-normal);
   color: var(--color-accent-main);
   text-align: center;
   margin: 0 0 var(--space-9);
+}
+
+.content-page-section-title {
+  font-family: var(--font-family);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-light);
+  letter-spacing: var(--letter-spacing-wide);
+  color: var(--color-accent-main);
+  margin-bottom: var(--space-6);
+  margin-top: var(--space-10);
 }
 
 /* Content Page Hero - 2:1 aspect ratio */
@@ -3824,7 +3885,7 @@ a.pdp__brand:hover {
 .outlet-hero-title {
   font-family: var(--font-family);
   font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-light);
   letter-spacing: var(--letter-spacing-wide);
   color: var(--color-text-main);
   margin-bottom: var(--space-6);
@@ -3834,7 +3895,7 @@ a.pdp__brand:hover {
 
 .outlet-hero-subtitle {
   font-family: var(--font-family);
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-md);
   font-weight: var(--font-weight-light);
   letter-spacing: var(--letter-spacing-wide);
   color: var(--color-text-main);
@@ -3842,7 +3903,7 @@ a.pdp__brand:hover {
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
-  line-height: var(--line-height-loose);
+  line-height: var(--line-height-normal);
   text-transform: uppercase;
 }
 
@@ -4270,29 +4331,29 @@ a.pdp__brand:hover {
 
 /* ============================================
    BENTLEY HOME CINEMA PAGE
+   Content width matches header/footer (--container-content)
    ============================================ */
 
 .bentley-cinema-page {
   background: var(--color-bg-main);
+  padding: 0;
 }
 
 .bentley-cinema-page .content-page-container {
   padding-top: 0;
 }
 
-/* Bentley Cinema Hero with Video */
+/* Bentley Cinema Hero with Video — full container width, no side gaps */
 .bentley-cinema-hero {
   position: relative;
   width: 100%;
-  min-height: 500px;
-  height: auto;
   max-width: var(--container-content);
   margin: 0 auto;
+  aspect-ratio: 16 / 7;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  padding: 144px var(--container-padding);
   background-color: var(--color-bg-main);
 }
 
@@ -4316,7 +4377,7 @@ a.pdp__brand:hover {
   position: relative;
   z-index: 2;
   text-align: center;
-  padding: var(--space-6) 0;
+  padding: var(--space-6) var(--container-padding);
 }
 
 .bentley-cinema-showroom-label {
@@ -4325,7 +4386,7 @@ a.pdp__brand:hover {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
   letter-spacing: 2px;
-  color: var(--color-text-muted);
+  color: var(--color-accent-main);
   margin-bottom: var(--space-4);
   text-transform: uppercase;
 }
@@ -4334,6 +4395,7 @@ a.pdp__brand:hover {
   font-family: var(--font-family);
   letter-spacing: var(--letter-spacing-normal);
   margin-bottom: var(--space-6);
+  color: var(--color-text-inverse);
 }
 
 .bentley-cinema-cta-btn {
@@ -4349,7 +4411,6 @@ a.pdp__brand:hover {
   background: var(--color-accent-main);
   border: none;
   border-radius: 0;
-  /* shadow removed */
   cursor: pointer;
   transition: all var(--duration-normal) var(--ease-out);
 }
@@ -4359,9 +4420,11 @@ a.pdp__brand:hover {
   color: var(--color-text-inverse);
 }
 
-/* Bentley Cinema Content Sections */
+/* Bentley Cinema Content Sections — no extra margins */
 .bentley-cinema-section {
-  padding: 0 var(--container-padding);
+  max-width: var(--container-content);
+  margin: 0 auto;
+  padding: 0;
   background-color: var(--color-bg-main);
 }
 
@@ -4369,8 +4432,7 @@ a.pdp__brand:hover {
   display: flex;
   align-items: stretch;
   min-height: 400px;
-  max-width: var(--container-content);
-  margin: 0 auto;
+  gap: 0;
 }
 
 .bentley-cinema-row--reverse {
@@ -4385,7 +4447,6 @@ a.pdp__brand:hover {
 .bentley-cinema-col--image {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 1 / 1;
 }
 
 .bentley-cinema-col--image img {
@@ -4404,11 +4465,11 @@ a.pdp__brand:hover {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 89px;
+  padding: var(--space-8) var(--space-10);
 }
 
 .bentley-cinema-text-inner {
-  max-width: 600px;
+  max-width: 520px;
 }
 
 .bentley-cinema-text-inner p {
@@ -4431,7 +4492,7 @@ a.pdp__brand:hover {
 /* CTA Section */
 .bentley-cinema-cta-section {
   text-align: center;
-  padding: 0 var(--container-padding) var(--space-4);
+  padding: var(--space-8) 0;
   max-width: var(--container-content);
   margin: 0 auto;
   background-color: var(--color-bg-main);
@@ -4440,7 +4501,7 @@ a.pdp__brand:hover {
 /* Partner Section */
 .bentley-cinema-partner-section {
   text-align: center;
-  padding: var(--space-8) var(--container-padding);
+  padding: var(--space-8) var(--container-padding) var(--space-10);
   max-width: var(--container-content);
   margin: 0 auto;
   background-color: var(--color-bg-main);
@@ -4469,10 +4530,13 @@ a.pdp__brand:hover {
 /* Mobile responsive */
 @media (max-width: 999px) {
   .bentley-cinema-hero {
-    padding: 89px var(--container-padding);
-    min-height: auto;
+    aspect-ratio: 4 / 3;
   }
   
+  .bentley-cinema-section {
+    padding: 0 var(--container-padding);
+  }
+
   .bentley-cinema-row,
   .bentley-cinema-row--reverse {
     flex-direction: column;
@@ -4484,7 +4548,7 @@ a.pdp__brand:hover {
   }
   
   .bentley-cinema-col--text {
-    padding: 55px 34px;
+    padding: var(--space-6) 0;
   }
   
   .bentley-cinema-hero-title {
@@ -4525,14 +4589,14 @@ a.pdp__brand:hover {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-bold);
   letter-spacing: 2px;
-  color: var(--color-text-muted);
+  color: var(--color-text-inverse);
   margin-bottom: var(--space-4);
   text-transform: uppercase;
 }
 
 .bentley-booking-hero-title {
   font-family: var(--font-family);
-  font-size: var(--font-size-xl);
+  font-size: var(--font-size-lg);
   font-weight: var(--font-weight-light);
   letter-spacing: var(--letter-spacing-wide);
   color: var(--color-text-inverse);
@@ -4628,8 +4692,13 @@ a.pdp__brand:hover {
   padding-right: var(--space-8);
   cursor: pointer;
   color: var(--color-text-muted);
+  font-size: inherit;
   font-weight: var(--font-weight-light);
   border: none;
+}
+
+.form-select:focus {
+  color: var(--color-text-main);
 }
 
 .form-select option {
@@ -4661,7 +4730,7 @@ a.pdp__brand:hover {
   font-family: var(--font-family);
   font-size: var(--font-size-sm);
   color: var(--color-text-muted);
-  line-height: var(--line-height-loose);
+  line-height: var(--line-height-normal);
   margin: 0;
 }
 
@@ -5081,7 +5150,7 @@ a.pdp__brand:hover {
   color: var(--color-text-main);
   background: var(--color-text-inverse);
   border: 1px solid var(--color-border);
-  padding: var(--space-4);
+  padding: var(--space-3) var(--space-4);
   width: 100%;
   transition: border-color var(--duration-normal) var(--ease-out);
 }
@@ -5090,6 +5159,7 @@ a.pdp__brand:hover {
 .form-textarea::placeholder {
   color: var(--color-text-muted);
   opacity: 0.7;
+  font-size: var(--font-size-sm);
   font-weight: var(--font-weight-light);
 }
 
@@ -5106,7 +5176,7 @@ a.pdp__brand:hover {
 
 .form-textarea {
   resize: vertical;
-  min-height: 150px;
+  min-height: 100px;
 }
 
 .form-error {
@@ -5114,6 +5184,20 @@ a.pdp__brand:hover {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-light);
   color: #c00;
+  animation: form-error-appear var(--duration-normal) var(--ease-out);
+}
+
+@keyframes form-error-appear {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    max-height: 40px;
+  }
 }
 
 .form-submit {
@@ -5171,7 +5255,7 @@ a.pdp__brand:hover {
 
 .about-page {
   min-height: 100vh;
-  padding: var(--space-8) var(--container-padding) var(--space-10);
+  padding: 0;
 }
 
 .about-hero {
@@ -5195,7 +5279,7 @@ a.pdp__brand:hover {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: var(--space-6);
+  padding: 0;
 }
 
 .about-hero__label {
@@ -5420,7 +5504,7 @@ a.pdp__brand:hover {
     position: fixed;
     right: 0;
     top: 25vh;
-    z-index: calc(var(--z-drawer) - 1);
+    z-index: calc(var(--z-overlay) - 1);
     width: var(--filter-tab-width);
     padding: var(--space-4) var(--space-2);
     background: var(--color-text-inverse);
@@ -5460,6 +5544,14 @@ a.pdp__brand:hover {
     --gallery-cols: var(--gallery-cols-mobile);
     gap: var(--grid-gap-mobile);
   }
+
+  .gallery-card-brand {
+    font-size: var(--font-size-xs);
+  }
+
+  .gallery-card-image {
+    margin-bottom: var(--space-2);
+  }
   
   .gallery-title {
   font-family: var(--font-family);
@@ -5482,8 +5574,8 @@ a.pdp__brand:hover {
   }
   
   .nasze-marki-card-logo img {
-    max-width: 220px;
-    max-height: 100px;
+    max-width: 350px;
+    max-height: 160px;
   }
   
   /* Brand page */
@@ -5696,7 +5788,7 @@ a.pdp__brand:hover {
   }
 
   .about-hero__content {
-    padding: var(--space-8) var(--container-padding);
+    padding: var(--space-4) var(--container-padding);
   }
 
   /* Bentley Booking Mobile */
@@ -6470,7 +6562,7 @@ a.pdp__brand:hover {
 }
 
 .oferta-service-text {
-  font-size: var(--font-size-lg);
+  font-size: var(--font-size-md);
   line-height: var(--line-height-loose);
   color: var(--color-text-muted);
 }
@@ -6506,6 +6598,43 @@ a.pdp__brand:hover {
   aspect-ratio: 4 / 3;
   overflow: hidden;
   background: var(--color-bg-main);
+}
+
+.oferta-cta-image img {
+  transition: transform var(--motion-slow) var(--motion-zoom-curve);
+}
+
+.oferta-cta-image:hover img {
+  transform: scale(1.05);
+}
+
+.oferta-cta-image-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--space-6) var(--space-5) var(--space-5);
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.oferta-cta-image-overlay h3 {
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-wide);
+  color: var(--color-text-inverse);
+  margin-bottom: var(--space-1);
+}
+
+.oferta-cta-image-overlay address {
+  font-family: var(--font-family);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-light);
+  font-style: normal;
+  color: rgba(255,255,255,0.8);
+  line-height: var(--line-height-normal);
 }
 
 @media (max-width: 768px) {
@@ -6551,7 +6680,7 @@ a.pdp__brand:hover {
 }
 
 .footer-brands-list a:hover {
-  color: var(--color-text-inverse);
+  color: var(--color-accent-main);
 }
 
 /* ============================================

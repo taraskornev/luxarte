@@ -15,7 +15,7 @@ export default function AktualnosciPage() {
 
         <div className="news-grid">
           {articles.map((article, index) => (
-            <article key={index} className="news-card">
+            <article key={index} className="news-card" data-scroll-animate>
               <Link href={`/aktualnosci/${article.slug}`} className="news-card-link">
                 <div className="news-card-image">
                   <Image

@@ -9,6 +9,7 @@ import {
   catalogProducts,
   brandNames,
   categoryNames,
+  categoryNamesEn,
   type CatalogProduct,
   type BrandSlug,
   type ProductCategorySlug,
@@ -27,7 +28,8 @@ export interface Product {
 /**
  * Convert CatalogProduct to Product with resolved names
  */
-function toProduct(item: CatalogProduct): Product {
+function toProduct(item: CatalogProduct, locale: string = 'pl'): Product {
+  const names = locale === 'en' ? categoryNamesEn : categoryNames;
   return {
     id: item.id,
     name: item.name,
@@ -35,41 +37,41 @@ function toProduct(item: CatalogProduct): Product {
     brandSlug: item.brandSlug,
     brandName: brandNames[item.brandSlug] || item.brandSlug,
     categorySlug: item.categorySlug,
-    categoryName: categoryNames[item.categorySlug] || item.categorySlug,
+    categoryName: names[item.categorySlug] || item.categorySlug,
   };
 }
 
 /**
  * Get all products from catalog
  */
-export function getAllProducts(): Product[] {
-  return catalogProducts.map(toProduct);
+export function getAllProducts(locale: string = 'pl'): Product[] {
+  return catalogProducts.map(p => toProduct(p, locale));
 }
 
 /**
  * Get product by slug
  */
-export function getProductBySlug(slug: string): Product | undefined {
+export function getProductBySlug(slug: string, locale: string = 'pl'): Product | undefined {
   const item = catalogProducts.find((p) => p.slug === slug);
-  return item ? toProduct(item) : undefined;
+  return item ? toProduct(item, locale) : undefined;
 }
 
 /**
  * Get products by brand
  */
-export function getProductsByBrand(brandSlug: string): Product[] {
+export function getProductsByBrand(brandSlug: string, locale: string = 'pl'): Product[] {
   return catalogProducts
     .filter((p) => p.brandSlug === brandSlug)
-    .map(toProduct);
+    .map(p => toProduct(p, locale));
 }
 
 /**
  * Get products by category
  */
-export function getProductsByCategory(categorySlug: string): Product[] {
+export function getProductsByCategory(categorySlug: string, locale: string = 'pl'): Product[] {
   return catalogProducts
     .filter((p) => p.categorySlug === categorySlug)
-    .map(toProduct);
+    .map(p => toProduct(p, locale));
 }
 
 /**

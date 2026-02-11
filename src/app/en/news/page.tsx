@@ -17,7 +17,7 @@ export default function NewsPageEN() {
 
         <div className="news-grid">
           {enArticles.map((article, index) => (
-            <article key={index} className="news-card">
+            <article key={index} className="news-card" data-scroll-animate>
               <Link href={`/en/news/${article.slug}`} className="news-card-link">
                 <div className="news-card-image">
                   <Image

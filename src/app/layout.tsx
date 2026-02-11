@@ -33,6 +33,9 @@ export async function generateMetadata(): Promise<Metadata> {
         'en': `${baseUrl}${locale === 'en' ? pathname : alternate}`,
       },
     },
+    icons: {
+      icon: '/favicon.ico',
+    },
   };
 }
 

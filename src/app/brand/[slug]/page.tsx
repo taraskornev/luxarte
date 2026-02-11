@@ -96,17 +96,23 @@ export default async function BrandPage({ params }: BrandPageProps) {
 
         {/* CTA Button */}
         <div className="brand-cta">
-          <Link href="/kontakt" className="brand-cta-btn">
+          <Link href="/kontakt#contact-form" className="brand-cta-btn">
             Zapytaj o produkty {brand.label}
           </Link>
         </div>
 
-        {/* Brand Product Gallery Grid - only if products exist */}
+        {/* Brand Product Gallery Grid - show first 3 products */}
         {products.length > 0 && (
           <section className="brand-products-section">
             <h2 className="brand-products-title">Produkty {brand.label}</h2>
-            <p className="brand-product-count">{products.length} produktów</p>
-            <ProductGrid products={products} />
+            <ProductGrid products={products.slice(0, 3)} />
+            {products.length > 3 && (
+              <div className="brand-cta" style={{ marginTop: 'var(--space-6)' }}>
+                <Link href={`/gallery?brand=${slug}`} className="brand-cta-btn">
+                  Zobacz wszystkie produkty ({products.length})
+                </Link>
+              </div>
+            )}
           </section>
         )}
       </div>

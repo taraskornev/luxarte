@@ -206,13 +206,6 @@ export function OutletClient({ categories, initialCategory, locale = 'pl' }: Out
         {/* Desktop Sidebar */}
         <aside className="outlet-sidebar">
           <div className="sidebar-filters">
-            {/* Clear All */}
-            {hasFilters && (
-              <button type="button" className="sidebar-clear-all" onClick={handleClearFilters}>
-                {t.common.clearFilters}
-              </button>
-            )}
-
             {/* Categories Section */}
             <div className={`filter-group ${categoriesExpanded ? 'expanded' : 'collapsed'}`}>
               <button
@@ -248,6 +241,13 @@ export function OutletClient({ categories, initialCategory, locale = 'pl' }: Out
                   })}
                 </ul>
               </div>
+            </div>
+
+            {/* Clear All - always visible */}
+            <div className="sidebar-clear-all-wrapper">
+              <button type="button" className={`sidebar-clear-all${!hasFilters ? ' sidebar-clear-all--disabled' : ''}`} onClick={handleClearFilters} disabled={!hasFilters}>
+                {t.common.clearFilters}
+              </button>
             </div>
           </div>
         </aside>

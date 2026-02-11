@@ -76,40 +76,44 @@ export default async function ArticlePageEN({ params }: ArticlePageProps) {
       {/* Article Content */}
       <article className="article-content">
         <div className="article-container">
-          <p className="article-lang-notice" style={{ textAlign: 'center', padding: '1.5rem 0', color: '#888', fontStyle: 'italic', borderBottom: '1px solid #eee', marginBottom: '2rem' }}>
-            This article is available in Polish.{' '}
-            <Link href={`/aktualnosci/${slug}`} style={{ color: '#b8860b', textDecoration: 'underline' }}>
-              View original
-            </Link>
-          </p>
-          {article.sections.map((section, index) => (
-            <section key={index} className="article-section">
-              {section.heading && (
-                <h2 className="article-section-heading">{section.heading}</h2>
-              )}
-              {section.content.split('\n\n').map((paragraph, pIndex) => (
-                <p key={pIndex} className="article-paragraph">
-                  {paragraph}
-                </p>
-              ))}
-              {section.images && section.images.length > 0 && (
-                <div className={`article-section-gallery${section.images.length === 1 ? ' article-section-gallery--single' : ''}`}>
-                  {section.images.map((img, imgIndex) => (
-                    <div key={imgIndex} className="article-section-gallery-item">
-                      <Image
-                        src={img}
-                        alt={section.heading || article.title}
-                        width={800}
-                        height={600}
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
-            </section>
-          ))}
+          {(() => {
+            const totalImages = article.sections.reduce((sum, s) => sum + (s.images?.length || 0), 0);
+            const isOddTotal = totalImages % 2 === 1;
+            let imageCounter = 0;
+
+            return article.sections.map((section, index) => (
+              <section key={index} className="article-section" data-scroll-animate>
+                {section.heading && (
+                  <h2 className="article-section-heading">{section.heading}</h2>
+                )}
+                {section.content.split('\n\n').map((paragraph, pIndex) => (
+                  <p key={pIndex} className="article-paragraph">
+                    {paragraph}
+                  </p>
+                ))}
+                {section.images && section.images.length > 0 && (
+                  <div className={`article-section-gallery${section.images.length === 1 ? ' article-section-gallery--single' : ''}`}>
+                    {section.images.map((img, imgIndex) => {
+                      imageCounter++;
+                      const isLastOdd = isOddTotal && imageCounter === totalImages && section.images!.length > 1;
+                      return (
+                        <div key={imgIndex} className={`article-section-gallery-item${isLastOdd ? ' article-section-gallery-item--wide' : ''}`}>
+                          <Image
+                            src={img}
+                            alt={section.heading || article.title}
+                            width={800}
+                            height={600}
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                            style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </section>
+            ));
+          })()}
 
           {/* Article Gallery */}
           {article.gallery && article.gallery.length > 0 && (
@@ -133,7 +137,7 @@ export default async function ArticlePageEN({ params }: ArticlePageProps) {
 
           {/* CTA Button */}
           <div className="article-cta">
-            <Link href="/en/contact" className="article-cta-button">
+            <Link href="/en/contact#contact-form" className="article-cta-button">
               Contact us
             </Link>
           </div>

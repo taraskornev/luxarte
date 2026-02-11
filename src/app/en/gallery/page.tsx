@@ -14,7 +14,7 @@ interface PageProps {
 }
 
 async function GalleryContent({ searchParams }: { searchParams: PageProps['searchParams'] }) {
-  const products = getAllProducts();
+  const products = getAllProducts('en');
   const params = await searchParams;
   
   const brands = [...LEGACY_BRANDS].sort((a, b) => a.sortOrder - b.sortOrder);

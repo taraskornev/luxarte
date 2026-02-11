@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { mediaUrl } from '@/lib/buildMode';
+import { Breadcrumb } from '@/components/layout/Breadcrumb';
 
 export const metadata = {
   title: 'About Us - LuxArte - Fashion for Home',
@@ -9,6 +10,7 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <main className="about-page">
+      <Breadcrumb items={[{ label: 'Home', href: '/en' }, { label: 'About us' }]} />
       <section className="about-hero">
         <div className="about-hero__image">
           <Image

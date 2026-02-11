@@ -3,6 +3,7 @@
 import { useState, FormEvent } from 'react';
 import Image from 'next/image';
 import { mediaUrl } from '@/lib/buildMode';
+import { Breadcrumb } from '@/components/layout/Breadcrumb';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -53,7 +54,8 @@ export default function ContactPage() {
   return (
     <main className="content-page">
       <div className="content-page-container">
-        <h1 className="content-page-title">WRITE, CALL, OR VISIT US</h1>
+        <Breadcrumb items={[{ label: 'Home', href: '/en' }, { label: 'Contact' }]} />
+        <h1 className="content-page-title">WE&apos;D LOVE TO HEAR FROM YOU</h1>
 
         {/* Location 1: Warsaw */}
         <section className="contact-location-block">
@@ -115,9 +117,7 @@ export default function ContactPage() {
         </section>
 
         {/* Contact Form */}
-        <section className="contact-form-section">
-          <h2 className="contact-form-title">Send a message</h2>
-          
+        <section id="contact-form" className="contact-form-section">
           {submitted ? (
             <div className="contact-form-success">
               <p>Thank you for your message. We will respond as soon as possible.</p>
@@ -125,12 +125,10 @@ export default function ContactPage() {
           ) : (
             <form className="contact-form" onSubmit={handleSubmit} noValidate>
               <div className="form-field">
-                <label htmlFor="name" className="form-label">
-                  Full name <span className="form-required">*</span>
-                </label>
                 <input
                   type="text"
                   id="name"
+                  placeholder="Full name"
                   className={`form-input ${errors.name ? 'form-input-error' : ''}`}
                   value={formData.name}
                   onChange={(e) => handleChange('name', e.target.value)}
@@ -139,12 +137,10 @@ export default function ContactPage() {
               </div>
 
               <div className="form-field">
-                <label htmlFor="email" className="form-label">
-                  Email address <span className="form-required">*</span>
-                </label>
                 <input
                   type="email"
                   id="email"
+                  placeholder="Email address"
                   className={`form-input ${errors.email ? 'form-input-error' : ''}`}
                   value={formData.email}
                   onChange={(e) => handleChange('email', e.target.value)}
@@ -153,12 +149,10 @@ export default function ContactPage() {
               </div>
 
               <div className="form-field">
-                <label htmlFor="phone" className="form-label">
-                  Phone
-                </label>
                 <input
                   type="tel"
                   id="phone"
+                  placeholder="Phone"
                   className="form-input"
                   value={formData.phone}
                   onChange={(e) => handleChange('phone', e.target.value)}
@@ -166,12 +160,10 @@ export default function ContactPage() {
               </div>
 
               <div className="form-field">
-                <label htmlFor="message" className="form-label">
-                  Message <span className="form-required">*</span>
-                </label>
                 <textarea
                   id="message"
-                  rows={6}
+                  rows={4}
+                  placeholder="Message"
                   className={`form-textarea ${errors.message ? 'form-input-error' : ''}`}
                   value={formData.message}
                   onChange={(e) => handleChange('message', e.target.value)}

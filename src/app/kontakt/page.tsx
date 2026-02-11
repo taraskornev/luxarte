@@ -3,6 +3,7 @@
 import { useState, FormEvent } from 'react';
 import Image from 'next/image';
 import { mediaUrl } from '@/lib/buildMode';
+import { Breadcrumb } from '@/components/layout/Breadcrumb';
 
 export default function KontaktPage() {
   const [formData, setFormData] = useState({
@@ -53,7 +54,8 @@ export default function KontaktPage() {
   return (
     <main className="content-page">
       <div className="content-page-container">
-        <h1 className="content-page-title">NAPISZ, ZADZWOŃ, ODWIEDŹ NAS</h1>
+        <Breadcrumb items={[{ label: 'Strona główna', href: '/' }, { label: 'Kontakt' }]} />
+        <h1 className="content-page-title">ZAPRASZAMY DO KONTAKTU</h1>
 
         {/* Location 1: Warsaw - Image left, Info right */}
         <section className="contact-location-block">
@@ -115,9 +117,7 @@ export default function KontaktPage() {
         </section>
 
         {/* Contact Form */}
-        <section className="contact-form-section">
-          <h2 className="contact-form-title">Wyślij wiadomość</h2>
-          
+        <section id="contact-form" className="contact-form-section">
           {submitted ? (
             <div className="contact-form-success">
               <p>Dziękujemy za wiadomość. Odpowiemy najszybciej jak to możliwe.</p>
@@ -125,12 +125,10 @@ export default function KontaktPage() {
           ) : (
             <form className="contact-form" onSubmit={handleSubmit} noValidate>
               <div className="form-field">
-                <label htmlFor="name" className="form-label">
-                  Imię i nazwisko <span className="form-required">*</span>
-                </label>
                 <input
                   type="text"
                   id="name"
+                  placeholder="Imię i nazwisko"
                   className={`form-input ${errors.name ? 'form-input-error' : ''}`}
                   value={formData.name}
                   onChange={(e) => handleChange('name', e.target.value)}
@@ -139,12 +137,10 @@ export default function KontaktPage() {
               </div>
 
               <div className="form-field">
-                <label htmlFor="email" className="form-label">
-                  Adres e-mail <span className="form-required">*</span>
-                </label>
                 <input
                   type="email"
                   id="email"
+                  placeholder="Adres e-mail"
                   className={`form-input ${errors.email ? 'form-input-error' : ''}`}
                   value={formData.email}
                   onChange={(e) => handleChange('email', e.target.value)}
@@ -153,12 +149,10 @@ export default function KontaktPage() {
               </div>
 
               <div className="form-field">
-                <label htmlFor="phone" className="form-label">
-                  Telefon
-                </label>
                 <input
                   type="tel"
                   id="phone"
+                  placeholder="Telefon"
                   className="form-input"
                   value={formData.phone}
                   onChange={(e) => handleChange('phone', e.target.value)}
@@ -166,12 +160,10 @@ export default function KontaktPage() {
               </div>
 
               <div className="form-field">
-                <label htmlFor="message" className="form-label">
-                  Wiadomość <span className="form-required">*</span>
-                </label>
                 <textarea
                   id="message"
-                  rows={6}
+                  rows={4}
+                  placeholder="Wiadomość"
                   className={`form-textarea ${errors.message ? 'form-input-error' : ''}`}
                   value={formData.message}
                   onChange={(e) => handleChange('message', e.target.value)}

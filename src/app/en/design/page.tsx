@@ -1,23 +1,24 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { mediaUrl } from '@/lib/buildMode';
+import { Breadcrumb } from '@/components/layout/Breadcrumb';
 
 export const metadata = {
-  title: 'Design - LuxArte - Fashion for Home',
-  description: 'DESIGN WEARS FASHION – An artistic interpretation of the boundaries between fashion and design. Trussardi Casa Milan Design Week.',
+  title: 'Interior Design - LuxArte - Fashion for Home',
+  description: 'The Art of Interior Design – LuxArte. Comprehensive luxury interior design and furnishing services.',
 };
 
 export default function DesignPageEN() {
   return (
     <main className="content-page">
       <div className="content-page-container">
-        <h1 className="content-page-title">DESIGN WEARS FASHION</h1>
-        <p className="content-page-subtitle">An artistic interpretation of the boundaries between fashion and design</p>
+        <Breadcrumb items={[{ label: 'Home', href: '/en' }, { label: 'Interior Design' }]} />
+        <h1 className="content-page-title">THE ART OF INTERIOR DESIGN</h1>
 
-        <div className="design-hero">
+        <div className="design-hero" data-scroll-animate>
           <Image
             src={mediaUrl('/media/design/moodboard-1.webp')}
-            alt="Design Wears Fashion - Trussardi Casa"
+            alt="LuxArte Interior Design"
             fill
             priority
             sizes="100vw"
@@ -26,23 +27,21 @@ export default function DesignPageEN() {
         </div>
 
         <article className="content-page-body">
-          <p className="design-date">APRIL 28, 2023</p>
-          
           <p>
-            The Nebula armchair, designed by Francesca Lanzavecchia for the 2023 collection, was reinterpreted as part of a joint project between the designer and Trussardi Casa. The unique furniture pieces were presented in a special installation at Palazzo Trussardi during Milan Design Week.
+            LuxArte began its journey as a design studio. Today, it is a place where we comprehensively create luxury interiors for the most discerning clients. Working with brands such as Versace Home, Dolce&amp;Gabbana Casa, Roberto Cavalli, and Trussardi Casa, our atelier creates interiors inspired by the world of fashion, bearing the logos of the greatest Italian fashion houses.
           </p>
 
           <p>
-            Design Wears Fashion creates a juxtaposition and interaction between two distinct yet connected disciplines – design and fashion – through a joint exploration of their respective creative processes, techniques, and material research. Four special objects were developed through a shared approach of deconstruction, building, blending, reinterpretation, and rediscovery of both fashion and design criteria.
+            Drawing on our experience and expertise, we provide comprehensive interior design and arrangement services, including construction supervision. Client meetings take place in our showroom, where you can immerse yourself in the atmosphere of Italian design and high fashion. Our exhibition and wide range of finishing materials help us showcase the potential we can bring to your interior.
           </p>
         </article>
 
-        <section className="design-gallery">
+        <section className="design-gallery" data-scroll-animate>
           <div className="design-gallery-grid">
             <div className="design-gallery-item">
               <Image
                 src={mediaUrl('/media/design/moodboard-2.webp')}
-                alt="Design Wears Fashion"
+                alt="LuxArte Interior Projects"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 style={{ objectFit: 'cover' }}
@@ -51,7 +50,7 @@ export default function DesignPageEN() {
             <div className="design-gallery-item">
               <Image
                 src={mediaUrl('/media/design/moodboard-3.webp')}
-                alt="Design Wears Fashion"
+                alt="LuxArte Interior Projects"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 style={{ objectFit: 'cover' }}
@@ -78,10 +77,34 @@ export default function DesignPageEN() {
           </div>
         </section>
 
-        <section className="content-page-cta">
-          <h2>Interested in our projects?</h2>
-          <p>Contact us to discuss your interior vision.</p>
-          <Link href="/en/contact" className="content-cta-button">Contact</Link>
+        <article className="content-page-body">
+          <h2 className="content-page-section-title">COLLABORATION STAGES</h2>
+
+          <p>
+            <strong>1. SITE VISIT</strong> — We conduct a site visit to gather as much data about the interior as possible. We take into account the investor&apos;s guidelines and create a framework for further project development.
+          </p>
+
+          <p>
+            <strong>2. FUNCTIONAL LAYOUT</strong> — The appropriate functional layout is created in consultation with the client, resulting in several layout proposals.
+          </p>
+
+          <p>
+            <strong>3. 3D VISUALIZATIONS</strong> — Visualizations are a tool that helps present our interior concept to you. In addition to visualizations, we also present a moodboard with suggested color palettes and a selection of finishing materials.
+          </p>
+
+          <p>
+            <strong>4. TECHNICAL DRAWINGS</strong> — The culmination of the creative stage is a technical specification containing the project&apos;s execution details. An important element is a detailed list of all finishing materials, including furnishing and decorative elements.
+          </p>
+
+          <p>
+            <strong>5. SUPERVISION</strong> — We offer you the opportunity to benefit from our years of experience through design supervision. This includes overseeing contractors on site to ensure compliance with the project.
+          </p>
+        </article>
+
+        <section className="content-page-cta" data-scroll-animate>
+          <h2>Let&apos;s talk about your project</h2>
+          <p>Our experience and holistic approach guarantee high quality and refined solutions tailored to the needs and expectations of our clients.</p>
+          <Link href="/en/contact#contact-form" className="content-cta-button">Ask about our offer</Link>
         </section>
       </div>
     </main>

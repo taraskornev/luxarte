@@ -423,7 +423,7 @@ export function GalleryClient({
                           disabled={count === 0 && !isSelected}
                         />
                         <span className="filter-checkbox-box" />
-                        <span className="filter-item-name">{category.label}</span>
+                        <span className="filter-item-name">{locale === 'en' ? category.labelEn : category.label}</span>
                         <span className="filter-count">({count})</span>
                       </label>
                     </li>
@@ -434,18 +434,17 @@ export function GalleryClient({
           </div>
         </div>
         
-        {/* Clear filters button - sticky at bottom */}
-        {hasFilters && (
-          <div className="mobile-filter-footer">
-            <button
-              type="button"
-              className="sidebar-clear-all"
-              onClick={handleClearFilters}
-            >
-              {t.common.clearAllFilters}
-            </button>
-          </div>
-        )}
+        {/* Clear filters button - always visible */}
+        <div className="mobile-filter-footer">
+          <button
+            type="button"
+            className={`sidebar-clear-all${!hasFilters ? ' sidebar-clear-all--disabled' : ''}`}
+            onClick={handleClearFilters}
+            disabled={!hasFilters}
+          >
+            {t.common.clearAllFilters}
+          </button>
+        </div>
       </div>
     </div>
   );

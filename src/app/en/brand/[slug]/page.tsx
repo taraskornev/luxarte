@@ -41,7 +41,7 @@ export default async function BrandPageEN({ params }: BrandPageProps) {
     notFound();
   }
 
-  const products = getProductsByBrand(slug);
+  const products = getProductsByBrand(slug, 'en');
   const introParas = getBrandIntro(slug, 'en');
   const logoPath = getBrandLogo(slug);
   const galleryImages = getBrandGalleryImages(slug);
@@ -87,7 +87,7 @@ export default async function BrandPageEN({ params }: BrandPageProps) {
         )}
 
         <div className="brand-cta">
-          <Link href="/en/contact" className="brand-cta-btn">
+          <Link href="/en/contact#contact-form" className="brand-cta-btn">
             Ask about {brand.label} products
           </Link>
         </div>
@@ -95,8 +95,14 @@ export default async function BrandPageEN({ params }: BrandPageProps) {
         {products.length > 0 && (
           <section className="brand-products-section">
             <h2 className="brand-products-title">{brand.label} Products</h2>
-            <p className="brand-product-count">{products.length} products</p>
-            <ProductGrid products={products} locale="en" />
+            <ProductGrid products={products.slice(0, 3)} locale="en" />
+            {products.length > 3 && (
+              <div className="brand-cta" style={{ marginTop: 'var(--space-6)' }}>
+                <Link href={`/en/gallery?brand=${slug}`} className="brand-cta-btn">
+                  See all products ({products.length})
+                </Link>
+              </div>
+            )}
           </section>
         )}
       </div>

@@ -12,7 +12,7 @@ interface ProductPageProps {
 }
 
 export async function generateStaticParams() {
-  const products = getAllProducts();
+  const products = getAllProducts('en');
   return products.map((product) => ({
     slug: product.slug,
   }));
@@ -20,7 +20,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: ProductPageProps) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = getProductBySlug(slug, 'en');
   
   if (!product) {
     return { title: 'Product not found | LuxArte' };
@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: ProductPageProps) {
 
 export default async function ProductPageEN({ params }: ProductPageProps) {
   const { slug } = await params;
-  const product = getProductBySlug(slug);
+  const product = getProductBySlug(slug, 'en');
 
   if (!product) {
     notFound();
@@ -46,7 +46,7 @@ export default async function ProductPageEN({ params }: ProductPageProps) {
   // Product descriptions are in Polish only — omit on EN pages
   const dimensions = getProductDimensions(product.slug);
 
-  const relatedProducts = getProductsByBrand(product.brandSlug)
+  const relatedProducts = getProductsByBrand(product.brandSlug, 'en')
     .filter(p => p.slug !== product.slug)
     .slice(0, 3);
 

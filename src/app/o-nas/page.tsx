@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { mediaUrl } from '@/lib/buildMode';
+import { Breadcrumb } from '@/components/layout/Breadcrumb';
 
 export const metadata = {
   title: 'O nas - LuxArte - Fashion for Home',
@@ -9,6 +10,7 @@ export const metadata = {
 export default function ONasPage() {
   return (
     <main className="about-page">
+      <Breadcrumb items={[{ label: 'Strona główna', href: '/' }, { label: 'O nas' }]} />
       {/* Full-height split: Image left, Text right - matches legacy layout */}
       <section className="about-hero">
         {/* Left: Full-height background image */}

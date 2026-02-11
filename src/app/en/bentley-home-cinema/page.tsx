@@ -33,7 +33,7 @@ export default function BentleyHomeCinemaPageEN() {
       </div>
 
       {/* Section 1: Image left + Text right */}
-      <section className="bentley-cinema-section">
+      <section className="bentley-cinema-section" data-scroll-animate>
         <div className="bentley-cinema-row">
           <div className="bentley-cinema-col bentley-cinema-col--image">
             <Image
@@ -65,7 +65,7 @@ export default function BentleyHomeCinemaPageEN() {
       </section>
 
       {/* Section 2: Text left + Image right */}
-      <section className="bentley-cinema-section">
+      <section className="bentley-cinema-section" data-scroll-animate>
         <div className="bentley-cinema-row bentley-cinema-row--reverse">
           <div className="bentley-cinema-col bentley-cinema-col--text">
             <div className="bentley-cinema-text-inner">
@@ -93,7 +93,7 @@ export default function BentleyHomeCinemaPageEN() {
       </section>
 
       {/* Section 3: Image left + Text right */}
-      <section className="bentley-cinema-section">
+      <section className="bentley-cinema-section" data-scroll-animate>
         <div className="bentley-cinema-row">
           <div className="bentley-cinema-col bentley-cinema-col--image">
             <Image
@@ -118,14 +118,14 @@ export default function BentleyHomeCinemaPageEN() {
       </section>
 
       {/* CTA Button */}
-      <section className="bentley-cinema-cta-section">
+      <section className="bentley-cinema-cta-section" data-scroll-animate>
         <Link href="/en/bentley-home-cinema/reservation" className="bentley-cinema-cta-btn">
           BOOK AN APPOINTMENT
         </Link>
       </section>
 
       {/* Partner Section */}
-      <section className="bentley-cinema-partner-section">
+      <section className="bentley-cinema-partner-section" data-scroll-animate>
         <h2 className="bentley-cinema-partner-title">THE PROJECT PARTNER IS</h2>
         <a href="https://cinematic.pl/showroom-kino/" target="_blank" rel="noopener noreferrer" className="bentley-cinema-partner-logo">
           <Image

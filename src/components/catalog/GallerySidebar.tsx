@@ -56,17 +56,6 @@ export function GallerySidebar({
 
   return (
     <div className="sidebar-filters">
-      {/* Clear All */}
-      {hasFilters && (
-        <button
-          type="button"
-          className="sidebar-clear-all"
-          onClick={onClearFilters}
-        >
-          {t.common.clearAllFilters}
-        </button>
-      )}
-
       {/* Brands Section - accordion behavior */}
       <div className={`filter-group ${brandsExpanded ? 'expanded' : 'collapsed'}`}>
         <button
@@ -127,7 +116,7 @@ export function GallerySidebar({
                       disabled={count === 0 && !isSelected}
                     />
                     <span className="filter-checkbox-box" />
-                    <span className="filter-item-name">{category.label}</span>
+                    <span className="filter-item-name">{locale === 'en' ? category.labelEn : category.label}</span>
                     <span className="filter-count">({count})</span>
                   </label>
                 </li>
@@ -135,6 +124,18 @@ export function GallerySidebar({
             })}
           </ul>
         </div>
+      </div>
+
+      {/* Clear All - always visible, disabled when no filters */}
+      <div className="sidebar-clear-all-wrapper">
+        <button
+          type="button"
+          className={`sidebar-clear-all${!hasFilters ? ' sidebar-clear-all--disabled' : ''}`}
+          onClick={onClearFilters}
+          disabled={!hasFilters}
+        >
+          {t.common.clearAllFilters}
+        </button>
       </div>
     </div>
   );

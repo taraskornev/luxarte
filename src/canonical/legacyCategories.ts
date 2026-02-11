@@ -25,6 +25,8 @@
 export interface LegacyCategory {
   /** Display label in Polish */
   label: string;
+  /** Display label in English */
+  labelEn: string;
   /** URL slug for routing */
   slug: string;
   /** Parent category slug (null for top-level) */
@@ -52,6 +54,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   // ═══════════════════════════════════════════════════════════════════════════
   {
     label: 'Akcesoria',
+    labelEn: 'Accessories',
     slug: 'akcesoria',
     parent: null,
     navGroup: 'meble',
@@ -61,6 +64,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   },
   {
     label: 'Biuro',
+    labelEn: 'Office',
     slug: 'biuro',
     parent: null,
     navGroup: 'meble',
@@ -70,6 +74,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   },
   {
     label: 'Dywany',
+    labelEn: 'Rugs',
     slug: 'dywany',
     parent: null,
     navGroup: 'meble',
@@ -79,6 +84,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   },
   {
     label: 'Fotele',
+    labelEn: 'Armchairs',
     slug: 'fotele',
     parent: null,
     navGroup: 'meble',
@@ -88,6 +94,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   },
   {
     label: 'Hokery',
+    labelEn: 'Bar stools',
     slug: 'hokery',
     parent: null,
     navGroup: 'meble',
@@ -97,6 +104,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   },
   {
     label: 'Komody',
+    labelEn: 'Dressers',
     slug: 'komody',
     parent: null,
     navGroup: 'meble',
@@ -106,6 +114,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   },
   {
     label: 'Konsole',
+    labelEn: 'Console tables',
     slug: 'konsole',
     parent: null,
     navGroup: 'meble',
@@ -115,6 +124,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   },
   {
     label: 'Krzesła',
+    labelEn: 'Chairs',
     slug: 'krzesla',
     parent: null,
     navGroup: 'meble',
@@ -124,6 +134,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   },
   {
     label: 'Lustra',
+    labelEn: 'Mirrors',
     slug: 'lustra',
     parent: null,
     navGroup: 'meble',
@@ -133,6 +144,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   },
   {
     label: 'Łóżka',
+    labelEn: 'Beds',
     slug: 'lozka',
     parent: null,
     navGroup: 'meble',
@@ -142,6 +154,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   },
   {
     label: 'Pufy',
+    labelEn: 'Poufs',
     slug: 'pufy',
     parent: null,
     navGroup: 'meble',
@@ -151,6 +164,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   },
   {
     label: 'Regały',
+    labelEn: 'Shelves',
     slug: 'regaly',
     parent: null,
     navGroup: 'meble',
@@ -160,6 +174,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   },
   {
     label: 'Sofy',
+    labelEn: 'Sofas',
     slug: 'sofy',
     parent: null,
     navGroup: 'meble',
@@ -169,6 +184,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   },
   {
     label: 'Stoliki boczne',
+    labelEn: 'Side tables',
     slug: 'stoliki-boczne',
     parent: null,
     navGroup: 'meble',
@@ -178,6 +194,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   },
   {
     label: 'Stoliki kawowe',
+    labelEn: 'Coffee tables',
     slug: 'stoliki-kawowe',
     parent: null,
     navGroup: 'meble',
@@ -187,6 +204,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   },
   {
     label: 'Stoły',
+    labelEn: 'Dining tables',
     slug: 'stoly',
     parent: null,
     navGroup: 'meble',
@@ -196,6 +214,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   },
   {
     label: 'Szafki nocne',
+    labelEn: 'Nightstands',
     slug: 'szafki-nocne',
     parent: null,
     navGroup: 'meble',
@@ -205,6 +224,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   },
   {
     label: 'Szezlongi',
+    labelEn: 'Chaise longues',
     slug: 'szezlongi',
     parent: null,
     navGroup: 'meble',
@@ -218,6 +238,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   // ═══════════════════════════════════════════════════════════════════════════
   {
     label: 'Kinkiety',
+    labelEn: 'Wall sconces',
     slug: 'kinkiety',
     parent: null,
     navGroup: 'oswietlenie',
@@ -227,6 +248,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   },
   {
     label: 'Lampy podłogowe',
+    labelEn: 'Floor lamps',
     slug: 'lampy-podlogowe',
     parent: null,
     navGroup: 'oswietlenie',
@@ -236,6 +258,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   },
   {
     label: 'Lampy stołowe',
+    labelEn: 'Table lamps',
     slug: 'lampy-stolowe',
     parent: null,
     navGroup: 'oswietlenie',
@@ -245,6 +268,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   },
   {
     label: 'Lampy wiszące',
+    labelEn: 'Pendant lamps',
     slug: 'lampy-wiszace',
     parent: null,
     navGroup: 'oswietlenie',
@@ -254,6 +278,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   },
   {
     label: 'Oświetlenie',
+    labelEn: 'Lighting',
     slug: 'oswietlenie',
     parent: null,
     navGroup: 'oswietlenie',
@@ -263,6 +288,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   },
   {
     label: 'Plafony',
+    labelEn: 'Ceiling lights',
     slug: 'plafony',
     parent: null,
     navGroup: 'oswietlenie',
@@ -272,6 +298,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   },
   {
     label: 'Żyrandole',
+    labelEn: 'Chandeliers',
     slug: 'zyrandole',
     parent: null,
     navGroup: 'oswietlenie',
@@ -285,6 +312,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   // ═══════════════════════════════════════════════════════════════════════════
   {
     label: 'Kuchnie',
+    labelEn: 'Kitchens',
     slug: 'kuchnie',
     parent: null,
     navGroup: 'kuchnie',
@@ -298,6 +326,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   // ═══════════════════════════════════════════════════════════════════════════
   {
     label: 'Garderoby',
+    labelEn: 'Wardrobes',
     slug: 'garderoby',
     parent: null,
     navGroup: 'garderoby',
@@ -311,6 +340,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   // ═══════════════════════════════════════════════════════════════════════════
   {
     label: 'Łazienki',
+    labelEn: 'Bathrooms',
     slug: 'lazienki',
     parent: null,
     navGroup: 'lazienki',
@@ -324,6 +354,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   // ═══════════════════════════════════════════════════════════════════════════
   {
     label: 'Donice',
+    labelEn: 'Planters',
     slug: 'donice',
     parent: null,
     navGroup: 'ogrod',
@@ -333,6 +364,7 @@ export const LEGACY_CATEGORIES: LegacyCategory[] = [
   },
   {
     label: 'Meble ogrodowe',
+    labelEn: 'Outdoor furniture',
     slug: 'meble-ogrodowe',
     parent: null,
     navGroup: 'ogrod',
@@ -363,6 +395,16 @@ export const NAV_GROUP_LABELS: Record<LegacyCategory['navGroup'], string> = {
   garderoby: 'Garderoby',
   lazienki: 'Łazienki',
   ogrod: 'Ogród i SPA',
+};
+
+/** Nav group labels for UI (English) */
+export const NAV_GROUP_LABELS_EN: Record<LegacyCategory['navGroup'], string> = {
+  meble: 'Furniture',
+  oswietlenie: 'Lighting',
+  kuchnie: 'Kitchens',
+  garderoby: 'Wardrobes',
+  lazienki: 'Bathrooms',
+  ogrod: 'Garden & SPA',
 };
 
 /** Nav group order for menu rendering */
@@ -422,9 +464,10 @@ export function isValidCategorySlug(slug: string): slug is LegacyCategorySlug {
 /**
  * Get category label by slug
  */
-export function getCategoryLabel(slug: string): string {
+export function getCategoryLabel(slug: string, locale: string = 'pl'): string {
   const category = getCategoryBySlug(slug);
-  return category?.label ?? slug;
+  if (!category) return slug;
+  return locale === 'en' ? category.labelEn : category.label;
 }
 
 /**
@@ -448,10 +491,11 @@ export function getCategoriesAlphabetically(): LegacyCategory[] {
  * Returns ALL categories — do not filter by current products
  * DO NOT DERIVE — CANONICAL SOURCE ONLY
  */
-export function getCategoriesForFilter(): Array<{ slug: string; label: string; count: number }> {
+export function getCategoriesForFilter(): Array<{ slug: string; label: string; labelEn: string; count: number }> {
   return LEGACY_CATEGORIES.map(c => ({
     slug: c.slug,
     label: c.label,
+    labelEn: c.labelEn,
     count: c.productCount,
   })).sort((a, b) => a.label.localeCompare(b.label, 'pl'));
 }

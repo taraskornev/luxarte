@@ -21,7 +21,7 @@ const navItems = {
     { href: '/en/bentley-home-cinema', label: 'BENTLEY\u00A0HOME CINEMA' },
     { href: '/en/outlet', label: 'OUTLET' },
     { href: '/en/news', label: 'NEWS' },
-    { href: '/en/about', label: 'ABOUT' },
+    { href: '/en/about', label: 'ABOUT\u00A0US' },
     { href: '/en/contact', label: 'CONTACT' },
   ],
 };

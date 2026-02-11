@@ -366,9 +366,151 @@ const articleExcerptEn: Record<string, string> = {
   'bentley-home-cinema-premiera': 'We are excited to share a project we have been working on for months.',
 };
 
-/** Translate article metadata (category, date, title, excerpt) to English */
+/** English section content for each article */
+const articleSectionsEn: Record<string, { heading?: string; content: string }[]> = {
+  'venicem-nowoczesne-oblicze-oswietlenia-z-murano': [
+    {
+      heading: 'A Legacy with a Future',
+      content: 'Venicem is more than a brand – it is the contemporary face of Venetian glass, where every lamp creates not just light but atmosphere. Geometry, material, brilliance – everything comes together in a timeless language of form. In this way, Venicem redefines how we think about glass craftsmanship, combining the rich heritage of Murano tradition with contemporary design.',
+    },
+    {
+      heading: 'Craftsmanship Meets Design – Materials and Processes',
+      content: 'The key to Venicem\'s uniqueness lies in the subtle balance between handcraft and the precision of modern form. Traditional Murano glass, shaped "by eye" using ancient techniques, combines with metal of a distinctly modern character in a wide palette of finishes. Each element is created in close collaboration with artisans who give every fixture an individual character. The result is lamps that not only illuminate a space but define it.\n\nThe process of creating Venicem lighting begins with precisely selected materials – Murano glass and high-grade metals, primarily brass. The glass is hand-formed using the traditional "a soffio" technique – hot-blowing that requires not only physical strength but years of experience working with molten material. At the same time, the metal undergoes mechanical and manual processing: cutting, bending, grinding, and then finishing through oxidation, brushing or polishing, depending on the design. Every detail – from the curvature of the glass to the texture of the metal surface – passes through human hands, giving each piece a unique character and an unrepeatable rhythm of form.',
+    },
+    {
+      heading: 'A Bridge Between Murano Tradition and Modern Design',
+      content: 'Venicem, founded in 2013 by Massimo Tonetto and Melissa Lunardi, is a brand born from a deep connection to the craft of Murano – the cradle of Italian glass – and a passionate pursuit of contemporary elegance. Its headquarters in Treviso, close to Venice and the island of Murano, provides ideal conditions for drawing on the masterful glass-forming techniques while bringing them into a new dimension through a modern design perspective. Venicem\'s designers draw from the historical heritage not only forms but also the emotions embedded in glass. Their aim is to create objects that are timeless – rooted in the past yet ahead of their time.',
+    },
+    {
+      heading: 'Venicem Collection Available at LuxArte',
+      content: 'We are delighted to share the offering of the finest Italian brands with you. Please contact us at info@luxarte.pl or arrange a meeting at our showroom if you would like to learn more about the Venicem brand.',
+    },
+  ],
+  'exteta-kolekcja-loro-piana-ponadczasowe-meble-ogrodowe': [
+    {
+      heading: 'A Meeting of Two Icons of Luxury',
+      content: 'The Delight Chairs collection is the fruit of collaboration between two Italian brands: Exteta, the master of outdoor furniture, and Loro Piana Interiors, specialising in exclusive fabrics. The project was born from the need to reinterpret the classic director\'s chair – a symbol of carefree relaxation – in a luxurious, elegant and functional version. Together with designer Paola Navone, the brands created a collection that combines craftsmanship tradition with a modern lifestyle.',
+    },
+    {
+      heading: 'Exteta\'s Philosophy of Hybrid Spaces',
+      content: 'Exteta has long promoted the idea of boundless spaces, where interior flows seamlessly into exterior. The Delight Chairs collection perfectly embodies this philosophy – the furniture was designed for use on yachts, terraces and in elegant interiors alike. Thanks to weather-resistant materials such as Sapelli mahogany wood and Loro Piana fabrics with Storm System\u00AE technology, the chairs are durable, stylish and versatile.',
+    },
+    {
+      heading: 'Design Inspired by Nature and Fashion',
+      content: 'The success of the collection allowed for its expansion, and each element – the folding chair, armchair and stool – is handcrafted with meticulous attention to detail. The summer version delights with striped and solid-colour fabrics, while the winter St. Moritz edition offers Cashfur cashmere covers that add softness and warmth. The inspiration came not only from classic forms but also from the world of yachts and mountain resorts, giving the collection an exceptional character.',
+    },
+    {
+      heading: 'Craftsmanship and Sustainable Luxury',
+      content: 'Both Exteta and Loro Piana Interiors place emphasis on ethical sourcing of materials and environmental care. The products are created in the spirit of "Made in Italy", using local resources and traditional techniques. Delight Chairs are not just furniture – they are a manifesto of quality, style and responsibility that redefines the concept of luxury in outdoor spaces.',
+    },
+    {
+      heading: 'Exteta Collection Available at LuxArte',
+      content: 'We are delighted to share the offering of the finest Italian brands with you. Please contact us at info@luxarte.pl or arrange a meeting at our showroom if you would like to learn more about the collection.',
+    },
+  ],
+  'archigraphica-nowoczesna-kuchnia-bliska-naturze': [
+    {
+      heading: 'The Essence of Wood',
+      content: 'Valcucine\'s modern kitchen design has been inspiring and setting trends in the exclusive kitchen market for years. The latest capsule collection, Archigraphica, is a proposition that bridges the modern and the primal. The kitchen base, finished in natural walnut, is equipped with solid handles that trace the perspective lines of the form. The elongated handles create an individual pattern for each kitchen, serving as an external expression of the functional layout tailored to the individual project. Natural walnut, with its pleasant texture and warm colour, introduces a cosy atmosphere into the interior. Combined with minimalist glass fronts, it adds lightness and a contemporary character to the kitchen.',
+    },
+    {
+      heading: 'A Combination of Materials',
+      content: 'A constant element of the Archigraphica kitchen is the wooden profile, which – depending on the functional layout – determines the kitchen\'s visual pattern. Fronts can be finished in wood or glass. The contrast between these materials produces a modern kitchen with a warm, cosy character. The third element is the countertop, encasing the lower cabinets, which can be made from marble, sandstone or finished in lacquer.\n\nThe spectrum of possibilities allows the kitchen to integrate with the character of the interior and express individual needs.',
+    },
+    {
+      heading: 'A Tradition of Innovation',
+      content: 'Gabriele Centazzo, the brand\'s founder and lead designer, earned recognition from the outset thanks to his unconventional approach and innovative solutions.\n\n"I have always worked with pure forms; in the case of Archigraphica I wanted to add a graphic design made from natural matter to the surface of the furniture. In a society that increasingly detaches itself from nature and adapts to synthetic materials, I felt it was important to propose wood not merely as a surface veneer, but as mass, as natural matter, to satisfy tactile sensations and restore the ancestral memory that made wood a friendly material for humanity for thousands of years. The graphic design, which can be freely composed, offers designers exceptional freedom of expression, allowing them to design the materiality and architecture of their kitchen facade."\n\nGabriele Centazzo',
+    },
+    {
+      heading: 'Valcucine Exclusively at LuxArte',
+      content: 'We are proud to be the sole representative in Poland offering the luxury kitchens of the Valcucine brand. The exhibition is located in our Warsaw showroom at Plac Pi\u0142sudskiego 9. Our team will advise you in choosing the most optimal model for your interior.\n\nPlease contact us at: warszawa@luxarte.pl',
+    },
+  ],
+  'trussardi-casa-nowa-kolekcja-2025': [
+    {
+      heading: 'The World of Trussardi',
+      content: 'Trussardi has consistently continued the idea of "quiet luxury", where design is an experience, style is an attitude, and home is a place where one can intimately express oneself. During Milan Design Week, we had the opportunity to see how the world of fashion influences furniture design, as the new collection was presented at the Trussardi headquarters, Miroglio, a Milanese palazzo on Via Burlamacchi 4.\n\nDesign, born in fashion, transcends its boundaries and permeates interiors. Trussardi pioneered the interpretation of luxury in a way far from ostentation, going beyond conventional patterns to make it more inclusive and conscious; luxury based on quality, authenticity and awareness.\n\nModern design demands maximum precision and the finest quality materials. The furniture is accompanied by a collection of accessories that bring life to the interior while adding an intimate character.',
+    },
+  ],
+  'bentley-home-nowa-kolekcja-2025': [
+    {
+      heading: 'Premiere of the New Bentley Home Collection at Milan Design Week 2025',
+      content: 'The latest collection was presented at the brand\'s Atelier on Corso Venezia, whose patio set the mood inspired by the atmosphere of an English garden through an abundance of lush vegetation in its natural forms and colours, providing an extraordinary sensory experience. Among the greenery, in a breathtaking setting, the outdoor furniture and accessories found their natural home.',
+    },
+    {
+      heading: 'Bespoke Luxury',
+      content: 'The new collection continues the established design direction of Bentley Home through an elevated, innovative approach to the material palette. This year\'s collection centres around the brand\'s DNA, which is characteristic of car interiors. This naturally refers to wood, whose veneers have been expanded with matte finishes with open pores, offering a new level of sensory depth.\n\nThe stone palette has also been enriched with this year\'s selection: Verde Belvedere marble – a striking green stone with earthy tones and exquisite details that strengthens surfaces with its natural elegance and depth. Another novelty is brushed Ivory Onyx, adding a refined interplay of texture and light.\n\nBentley Home elevates the experience of private living spaces, offering unparalleled craftsmanship and the brand\'s design ethos. Every element is fully configurable, raising the level of individuality. This level of personalisation allows for a carefully curated selection of exquisite materials, designed for the most exclusive interiors.',
+    },
+  ],
+  'zapraszamy-na-milan-design-week-2025': [
+    {
+      heading: 'Join Us at Milan Design Week 2025',
+      content: 'As every year, we can\'t wait for the greatest design celebration. The Salone del Mobile fair is accompanied by a week of intensive events throughout Milan. Exhibitions, new launches, evening banquets – all of this makes anyone who personally experiences this extraordinary atmosphere understand why the Italians lead the way and set global standards of luxury and design.\n\nWe invite you to arrange a meeting in Milan during the fair, particularly at the stands of the leading brands from our portfolio, which can be seen on the map below.\n\nPlease send a message to: info@luxarte.pl',
+    },
+  ],
+  'moda-w-designie-kolekcji-mebli-versace-home': [
+    {
+      heading: 'The Motifs of the Versace Home Furniture Collection',
+      content: 'Versace has always been known for its strong motifs, drawn by its creator, Gianni Versace, from the worlds of mythology, antiquity and art history. Donatella Versace, who was personally involved in creating the Home collection, made available a range of motifs characteristic of the Italian fashion house, so that enthusiasts could find them in the details of the furniture as well. Fans of the Versace fashion house undoubtedly recognise the inspirations that guided the designers in creating the furniture collection, and we would like to present the most important of them to you.',
+    },
+    {
+      heading: 'Venus Armchair',
+      content: 'The Venus Armchair is an exceptional example in the Versace furniture collection, as the inspiration for its creation was an entire styling and the woman as a muse in herself. The black dress, whose shape was transferred into the design line of the armchair, was designed by Gianni Versace with Naomi Campbell in mind – who is hard not to recognise as a contemporary Venus, goddess of the runway and an icon of femininity. The asymmetric form with rounded shapes rests on a slender base that reminds us of a high heel. Added to this is a golden zipper detail at the back of the backrest, making the piece of furniture evoke a true evening gown.',
+    },
+    {
+      heading: 'Biker Jacket and the Stiletto Armchair',
+      content: 'The distinctive backrest of Stiletto sofas and armchairs was inspired by the evergreen jacket of the fashion world. The biker jacket – a black leather jacket with a rock character – is why, in our opinion, the Stiletto collection fully reveals its DNA when finished in black leather. The characteristic collar of the jacket served as the foundational design line for the entire furniture range in the Versace Home collection.',
+    },
+    {
+      heading: 'La Medusa',
+      content: 'The brand\'s logo, the most recognisable symbol of the Versace fashion house. Medusa, the mythical primal goddess, at whose sight everything living turned to stone. It was precisely this effect of astonishment that guided Gianni Versace, who wanted to capture the gaze of everyone who looked at a woman wearing his clothes. The expressiveness of the fashion collection is also visible in the Home collection. Versace Home furniture certainly will not leave anyone indifferent.',
+    },
+    {
+      heading: 'La Greca',
+      content: 'The meander, a characteristic decorative motif from antiquity, was adopted by Gianni Versace from his native Sicily, where he grew up surrounded by the omnipresent traces of ancient culture. Particularly visible in handbag hardware, it has also been transferred to the metal fittings in the latest furniture collection.',
+    },
+    {
+      heading: 'Barocco',
+      content: 'The richest period in art history, full of splendour, focused on the senses and emotions, the Baroque era inevitably left its mark on Gianni Versace, who sought to liberate feminine beauty and evoke unbridled admiration. The Barocco ornament, whose name is a tribute to the epoch, is the flagship fabric motif of the Versace brand. Naturally, it could not be absent from the Home collection, where it appears across the full colour palette – from the characteristic gold and black to monochromatic jacquards.',
+    },
+    {
+      heading: 'V-Logo',
+      content: 'Versace\'s characteristic quilting on handbags is always accompanied by a decorative metallic V-logo monogram. This combination has been transferred to the V-marble collection. The dining table and coffee tables with marble tops feature a quilted base crowned with the characteristic monogram.\n\nThe heritage of the Versace fashion house and its translation into the world of design is a continuation of the path charted by Gianni Versace. The characteristic motifs maintain continuity and coherence of a design that has intrigued millions over the years. The Versace Home collection offers the chance to create an extraordinary, original interior that will pulse with the Italian way of life.',
+    },
+  ],
+  'maison-objet-2025-kolekcja-bugatti-home': [
+    {
+      content: 'As part of Maison&Objet In The City, the Bugatti Home collection was presented in Paris for the first time, in the exclusive showroom space of Luxury Living on the legendary Avenue George V.\n\nOn the day of the Parisian premiere, guests arriving at the three-level exhibition were greeted by the presence of a one-of-a-kind Bugatti car, the legendary La Voiture Noire. This iconic masterpiece, prized for its unparalleled design and engineering, is the embodiment of Bugatti\'s commitment to pushing boundaries and creating timeless works of art.',
+    },
+    {
+      content: 'During the design celebration in Paris, iconic elements of the furniture collection were presented, such as the TYPE_3 sofa, TYPE_1 sofa, TYPE_5 chair, TYPE_4 table and TYPE_9 mirror, which reflect Bugatti\'s pursuit of innovation.\n\nBugatti Home, a true testament to the rich heritage of the Bugatti brand, reinterprets the values and vision of its founder, Ettore Bugatti, in its new Parisian home. As a tribute to this event, guests were also able to discover a rare Bugatti Baby II – a 75% scale replica of the iconic Type 35 model, Ettore\'s creation and the most successful racing car in history – in collaboration with Hedley Studios. This collector\'s item, produced in only 500 units worldwide, commemorates the centenary of the legendary Type 35 model and its legacy for the brand, one hundred years later. The presence of this masterpiece underscores Bugatti\'s enduring heritage and its influence across generations.',
+    },
+    {
+      content: 'The collection combines natural and technologically advanced materials, such as smooth aluminium and open-pore oak, highlighting the craftsmanship that is an integral part of Bugatti Home\'s identity. The narrative is enriched by new lighting solutions, such as the TYPE_13 lamp collection, and expressive elements like the TYPE_6 credenza and the TYPE_10 coffee table.\n\nThe Paris exhibition not only celebrates Bugatti\'s heritage but also opens a new chapter in the company\'s history. During its Parisian debut, Bugatti Home invites guests into a world where automotive performance and luxury design converge. The next presentation of new collection pieces awaits us in Milan at Milano Design Week 2025. We simply cannot wait!',
+    },
+  ],
+  'odsluch-najnowszej-plyty-justyny-steczkowskiej-bentley-home-cinema': [
+    {
+      content: 'We are delighted that Bentley Home Cinema attracts the most discerning listeners. Our cinema space was chosen by Justyna Steczkowska for the pre-release listening session of her latest album "Witch Tarohoro".\n\nThe artist was looking for a venue that ensures the best sound thanks to the Dolby Atmos 7.1 system. The ideal technical conditions along with the atmosphere and design of the space proved perfect for inviting selected guests to an exclusive, shared listening of the latest album and sharing impressions with the author. Our system, consisting of 22 speakers, brought out the most subtle details of "Witch Tarohoro", a monumental album with rich arrangements.\n\nAfter the listening session, we all had the opportunity to share our impressions with Ms Justyna and talk with her about her work and inspirations. Congratulations on a beautiful album and thank you for choosing Bentley Home Cinema!',
+    },
+  ],
+  'bentley-home-cinema-premiera': [
+    {
+      content: 'We are excited to share a project we have been working on for months. Our Warsaw showroom has expanded its exhibition with a unique space – Bentley Home Cinema.\n\nIn September, a grand premiere took place, during which we presented our guests with films and concert excerpts in the highest audio-video quality. The presentations were accompanied by a Macallan whisky tasting, and Witek Iwa\u0144ski from HUB Praga took perfect care of the live cooking. The magical evening was further enhanced by the presence of a Bentley Motors partner, thanks to whom we can offer our clients the full brand experience.',
+    },
+    {
+      content: 'LuxArte, as the first showroom in Poland dedicated to interior furnishings, showcases the possibilities of equipping audio-video rooms at the highest level.\n\nThe interior has been furnished with Bentley Home furniture. The automotive references in the furniture collection reveal details transferred from the characteristic patterns and forms well known to fans of the Bentley brand. The original atmosphere and the highest craftsmanship will also impress those who appreciate the finest quality and timeless design. The audio-video side was handled by our partner, Cinematic, with over 20 years of experience in designing AV systems for private spaces.',
+    },
+    {
+      content: 'We will endeavour to recreate the magic of that evening during individual presentations of the Bentley Home Cinema space. To ensure the highest quality of service, all presentations and meetings at our showroom take place exclusively by prior appointment. We want to guarantee full attention and professional preparation, tailored to your needs and expectations. We invite you to book a meeting.',
+    },
+  ],
+};
+
+/** Translate article metadata (category, date, title, excerpt) and sections to English */
 export function localizeArticle(article: Article, locale: 'pl' | 'en'): Article {
   if (locale === 'pl') return article;
+  const enSections = articleSectionsEn[article.slug];
   return {
     ...article,
     title: articleTitleEn[article.slug] ?? article.title,
@@ -377,5 +519,12 @@ export function localizeArticle(article: Article, locale: 'pl' | 'en'): Article 
     date: Object.entries(monthMap).reduce(
       (d, [pl, en]) => d.replace(pl, en), article.date
     ),
+    sections: enSections
+      ? article.sections.map((section, i) => ({
+          ...section,
+          heading: enSections[i]?.heading ?? section.heading,
+          content: enSections[i]?.content ?? section.content,
+        }))
+      : article.sections,
   };
 }

@@ -17,7 +17,6 @@ interface OutletGalleryProps {
 export function OutletGallery({ images, productName, locale = 'pl' }: OutletGalleryProps) {
   const t = getDictionary(locale);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
   const [isMagnifierActive, setIsMagnifierActive] = useState(false);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
@@ -34,23 +33,19 @@ export function OutletGallery({ images, productName, locale = 'pl' }: OutletGall
   const thumbScrollStart = useRef(0);
   const isDragging = useRef(false);
 
-  // Animated image change
+  // Direct image change
   const changeImage = useCallback((newIndex: number) => {
-    if (newIndex === selectedIndex || isAnimating) return;
-    setIsAnimating(true);
-    setTimeout(() => {
-      setSelectedIndex(newIndex);
-      setTimeout(() => setIsAnimating(false), 300);
-    }, 150);
-  }, [selectedIndex, isAnimating]);
+    if (newIndex === selectedIndex) return;
+    setSelectedIndex(newIndex);
+  }, [selectedIndex]);
 
-  // Auto-advance carousel every 5 seconds (paused when magnifier/lightbox active or hovering)
+  // Auto-advance carousel every 4 seconds (paused when magnifier/lightbox active or hovering)
   useEffect(() => {
     if (isPaused || images.length <= 1 || isMagnifierActive || isLightboxOpen) return;
     
     const interval = setInterval(() => {
       setSelectedIndex((prev) => (prev + 1) % images.length);
-    }, 5000);
+    }, 4000);
     
     return () => clearInterval(interval);
   }, [isPaused, images.length, isMagnifierActive, isLightboxOpen]);
@@ -199,10 +194,10 @@ export function OutletGallery({ images, productName, locale = 'pl' }: OutletGall
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
       >
-        {/* Main Image with soft animation */}
+        {/* Main Image */}
         <div
           ref={mainRef}
-          className={`pdp-gallery__main ${isMagnifierActive ? 'magnifier-active' : ''} ${isAnimating ? 'pdp-gallery__main--fading' : ''}`}
+          className={`pdp-gallery__main ${isMagnifierActive ? 'magnifier-active' : ''}`}
           onClick={handleMainClick}
           onMouseMove={handleMouseMove}
           onMouseLeave={() => isMagnifierActive && setIsMagnifierActive(false)}
@@ -249,11 +244,6 @@ export function OutletGallery({ images, productName, locale = 'pl' }: OutletGall
         {/* Thumbnails Strip */}
         {images.length > 1 && (
           <div className="pdp-gallery__thumbs-wrapper">
-            {/* Sliding indicator */}
-            <div 
-              className="pdp-gallery__thumb-indicator"
-              style={{ transform: `translateX(${selectedIndex * (64 + 8)}px)` }}
-            />
             <div
               ref={thumbsRef}
               className="pdp-gallery__thumbs"
@@ -261,6 +251,12 @@ export function OutletGallery({ images, productName, locale = 'pl' }: OutletGall
               onMouseMove={handleThumbMouseMove}
               onMouseUp={handleThumbMouseUp}
               onMouseLeave={handleThumbMouseLeave}
+              onWheel={(e) => {
+                if (thumbsRef.current) {
+                  e.preventDefault();
+                  thumbsRef.current.scrollLeft += e.deltaY;
+                }
+              }}
             >
               {images.map((img, idx) => (
                 <button
@@ -287,7 +283,18 @@ export function OutletGallery({ images, productName, locale = 'pl' }: OutletGall
       {isLightboxOpen && images.length > 0 && (
         <div 
           className="pdp-lightbox" 
-          onClick={closeLightbox}
+          onClick={(e) => {
+            const rect = (e.target as HTMLElement).getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const width = rect.width;
+            if (clickX < width * 0.35) {
+              goToPrev();
+            } else if (clickX > width * 0.65) {
+              goToNext();
+            } else {
+              closeLightbox();
+            }
+          }}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={() => {

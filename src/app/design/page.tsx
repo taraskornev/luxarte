@@ -1,23 +1,24 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { mediaUrl } from '@/lib/buildMode';
+import { Breadcrumb } from '@/components/layout/Breadcrumb';
 
 export const metadata = {
-  title: 'Design - LuxArte - Fashion for Home',
-  description: 'DESIGN WEARS FASHION – Artystyczna interpretacja granic mody i designu. Trussardi Casa Milan Design Week.',
+  title: 'Projektowanie wnętrz - LuxArte - Fashion for Home',
+  description: 'Sztuka projektowania wnętrz – LuxArte. Kompleksowe usługi projektowania i aranżacji luksusowych wnętrz.',
 };
 
 export default function DesignPage() {
   return (
     <main className="content-page">
       <div className="content-page-container">
-        <h1 className="content-page-title">DESIGN WEARS FASHION</h1>
-        <p className="content-page-subtitle">Artystyczna interpretacja granic mody i designu</p>
+        <Breadcrumb items={[{ label: 'Strona główna', href: '/' }, { label: 'Projektowanie wnętrz' }]} />
+        <h1 className="content-page-title">SZTUKA PROJEKTOWANIA WNĘTRZ</h1>
 
-        <div className="design-hero">
+        <div className="design-hero" data-scroll-animate>
           <Image
             src={mediaUrl('/media/design/moodboard-1.webp')}
-            alt="Design Wears Fashion - Trussardi Casa"
+            alt="Projektowanie wnętrz LuxArte"
             fill
             priority
             sizes="100vw"
@@ -26,23 +27,21 @@ export default function DesignPage() {
         </div>
 
         <article className="content-page-body">
-          <p className="design-date">28 KWIETNIA 2023</p>
-          
           <p>
-            Fotel Nebula, zaprojektowany przez Francescę Lanzavecchia do kolekcji 2023, został ponownie zinterpretowany w ramach wspólnego projektu projektantki i marki Trussardi Casa. Unikatowe meble zostały zaprezentowane w specjalnej instalacji w Palazzo Trussardi podczas Milan Design Week.
+            Firma LuxArte rozpoczęła swoją działalność jako studio projektowe. Obecnie jest to miejsce, w którym kompleksowo kreujemy luksusowe wnętrza dla najbardziej wymagających Klientów. Pracując z takimi markami jak Versace Home, Dolce&amp;Gabbana Casa, Roberto Cavalli czy Trussardi Casa, w naszym atelier możemy tworzyć wnętrza czerpiące ze świata mody i sygnowane logo największych włoskich domów mody.
           </p>
 
           <p>
-            Design Wears Fashion tworzy zestawienie i interakcję między dwiema oddzielnymi, ale połączonymi dziedzinami – projektowaniem i modą – poprzez łączną eksplorację ich odpowiednich procesów twórczych, technik i badań materiałowych. Cztery specjalne obiekty zostały opracowane dzięki wspólnemu podejściu polegającemu na demontażu, budowaniu, mieszaniu, reinterpretacji i odkrywaniu na nowo zarówno mody, jak i kryteriów projektowych.
+            Bazując na naszym doświadczeniu i wiedzy świadczymy kompleksowe usługi w zakresie projektowania i aranżacji wnętrz oferując również pomoc w zakresie nadzoru wykonawczego. Spotkania z klientami odbywają się w przestrzeni naszego showroomu, gdzie można zanurzyć się w atmosferze włoskiego designu i high fashion. Nasza ekspozycja oraz szeroka paleta materiałów wykończeniowych pomaga nam przedstawić potencjał, jaki możemy przenieść do Państwa wnętrza.
           </p>
         </article>
 
-        <section className="design-gallery">
+        <section className="design-gallery" data-scroll-animate>
           <div className="design-gallery-grid">
             <div className="design-gallery-item">
               <Image
                 src={mediaUrl('/media/design/moodboard-2.webp')}
-                alt="Design Wears Fashion"
+                alt="Projekty wnętrz LuxArte"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 style={{ objectFit: 'cover' }}
@@ -51,7 +50,7 @@ export default function DesignPage() {
             <div className="design-gallery-item">
               <Image
                 src={mediaUrl('/media/design/moodboard-3.webp')}
-                alt="Design Wears Fashion"
+                alt="Projekty wnętrz LuxArte"
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 style={{ objectFit: 'cover' }}
@@ -78,10 +77,34 @@ export default function DesignPage() {
           </div>
         </section>
 
-        <section className="content-page-cta">
-          <h2>Zainteresowany naszymi projektami?</h2>
-          <p>Skontaktuj się z nami, aby omówić Twoją wizję wnętrza.</p>
-          <Link href="/kontakt" className="content-cta-button">Kontakt</Link>
+        <article className="content-page-body">
+          <h2 className="content-page-section-title">ETAPY WSPÓŁPRACY</h2>
+
+          <p>
+            <strong>1. WIZJA LOKALNA</strong> — Przeprowadzamy wizję lokalną, by zebrać jak najwięcej danych dotyczących wnętrza. Bierzemy pod uwagę wytyczne od Inwestora i tworzymy ramy do dalszej pracy nad projektem.
+          </p>
+
+          <p>
+            <strong>2. UKŁAD FUNKCJONALNY</strong> — Stworzenie odpowiedniego układu funkcjonalnego powstaje w konsultacji z Klientem, czego efektem będzie kilka propozycji układów funkcjonalnych.
+          </p>
+
+          <p>
+            <strong>3. WIZUALIZACJE 3D</strong> — Wizualizacje to narzędzie, które pomaga przedstawić Państwu naszą koncepcję wnętrza. Oprócz wizualizacji prezentujemy również moodboard z sugerowaną kolorystyką i selekcją materiałów wykończeniowych.
+          </p>
+
+          <p>
+            <strong>4. RYSUNKI WYKONAWCZE</strong> — Podsumowaniem etapu kreacji będzie stworzenie specyfikacji technicznej zawierającej szczegóły wykonawcze projektu. Ważnym elementem jest szczegółowy wykaz wszystkich materiałów wykończeniowych z uwzględnieniem elementów wyposażenia i dekoracji.
+          </p>
+
+          <p>
+            <strong>5. NADZÓR</strong> — Dajemy Państwu możliwość czerpania z naszego wieloletniego doświadczenia oferując opcję Nadzoru autorskiego. Obejmuje on kontrolę nad wykonawcami prac wykończeniowych na terenie inwestycji, by zachować zgodność z projektem.
+          </p>
+        </article>
+
+        <section className="content-page-cta" data-scroll-animate>
+          <h2>Porozmawiajmy o Twoim projekcie</h2>
+          <p>Nasze doświadczenie i podejście holistyczne gwarantują wysoką jakość oraz dopracowane rozwiązania dopasowane do potrzeb i oczekiwań klientów.</p>
+          <Link href="/kontakt#contact-form" className="content-cta-button">Zapytaj o ofertę</Link>
         </section>
       </div>
     </main>

@@ -105,7 +105,7 @@ export default function BentleyReservationPageEN() {
               <input
                 type="text"
                 id="name"
-                placeholder="Full name (required)"
+                placeholder="Full name"
                 className={`form-input ${errors.name ? 'form-input-error' : ''}`}
                 value={formData.name}
                 onChange={(e) => handleChange('name', e.target.value)}
@@ -117,7 +117,7 @@ export default function BentleyReservationPageEN() {
               <input
                 type="email"
                 id="email"
-                placeholder="Email address (required)"
+                placeholder="Email address"
                 className={`form-input ${errors.email ? 'form-input-error' : ''}`}
                 value={formData.email}
                 onChange={(e) => handleChange('email', e.target.value)}
@@ -129,7 +129,7 @@ export default function BentleyReservationPageEN() {
               <input
                 type="tel"
                 id="phone"
-                placeholder="Phone number (required)"
+                placeholder="Phone number"
                 className={`form-input ${errors.phone ? 'form-input-error' : ''}`}
                 value={formData.phone}
                 onChange={(e) => handleChange('phone', e.target.value)}
@@ -144,7 +144,7 @@ export default function BentleyReservationPageEN() {
                 value={formData.clientType}
                 onChange={(e) => handleChange('clientType', e.target.value)}
               >
-                <option value="">Who are you (required)</option>
+                <option value="">Who are you</option>
                 {clientTypes.slice(1).map((type) => (
                   <option key={type.value} value={type.value}>{type.label}</option>
                 ))}

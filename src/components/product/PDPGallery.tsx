@@ -14,28 +14,22 @@ interface PDPGalleryProps {
 /**
  * PDPGallery Component - Premium Product Gallery (Brand-style)
  * 
- * Layout:
- * - Large main image with 4:3 aspect ratio
- * - Magnifying glass icon (top-right) → opens lightbox
- * - Click on image → opens lightbox
- * - Horizontal thumbnail strip below (scrollable, no visible scrollbar)
- * - Desktop: Click toggles magnifier mode (pan to zoom)
- * - Mobile: Tap opens fullscreen lightbox
- * 
- * Lightbox:
- * - Dark overlay with navigation arrows
- * - Keyboard navigation (arrows, ESC)
- * - Swipe support on mobile
+ * - Auto-rotating images (every 4s, paused on hover/interaction)
+ * - Square main image
+ * - Thumbnail strip with outline border on active, horizontal scroll on desktop
+ * - Magnifier mode (desktop) and lightbox (mobile tap / magnifier button)
+ * - Lightbox: tap left half = prev, right half = next
  */
 export function PDPGallery({ images, lightboxImages, productName, locale = 'pl' }: PDPGalleryProps) {
   const t = getDictionary(locale);
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
   const [isMagnifierActive, setIsMagnifierActive] = useState(false);
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
   const [zoomPosition, setZoomPosition] = useState({ x: 50, y: 50 });
+  const [isPaused, setIsPaused] = useState(false);
   const mainRef = useRef<HTMLDivElement>(null);
   const thumbsRef = useRef<HTMLDivElement>(null);
+  const autoPlayRef = useRef<ReturnType<typeof setInterval> | null>(null);
   
   // Touch state for swipe
   const touchStartX = useRef(0);
@@ -49,15 +43,18 @@ export function PDPGallery({ images, lightboxImages, productName, locale = 'pl' 
   // Use lightbox images if available
   const fullResImages = lightboxImages && lightboxImages.length > 0 ? lightboxImages : images;
 
-  // Animated image change
-  const changeImage = useCallback((newIndex: number) => {
-    if (newIndex === selectedIndex || isAnimating) return;
-    setIsAnimating(true);
-    setTimeout(() => {
-      setSelectedIndex(newIndex);
-      setTimeout(() => setIsAnimating(false), 300);
-    }, 150);
-  }, [selectedIndex, isAnimating]);
+  // Auto-rotate images
+  useEffect(() => {
+    if (isPaused || isMagnifierActive || isLightboxOpen || images.length <= 1) return;
+    
+    autoPlayRef.current = setInterval(() => {
+      setSelectedIndex((prev) => (prev + 1) % images.length);
+    }, 4000);
+
+    return () => {
+      if (autoPlayRef.current) clearInterval(autoPlayRef.current);
+    };
+  }, [isPaused, isMagnifierActive, isLightboxOpen, images.length]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -168,6 +165,16 @@ export function PDPGallery({ images, lightboxImages, productName, locale = 'pl' 
     if (thumbsRef.current) thumbsRef.current.style.cursor = 'grab';
   }, []);
 
+  // Desktop: horizontal wheel scroll on thumbnail strip
+  const handleThumbWheel = useCallback((e: React.WheelEvent) => {
+    if (!thumbsRef.current) return;
+    // Only intercept if thumbnails overflow
+    const el = thumbsRef.current;
+    if (el.scrollWidth <= el.clientWidth) return;
+    e.preventDefault();
+    el.scrollLeft += e.deltaY;
+  }, []);
+
   // Lightbox navigation
   const goToPrev = useCallback((e?: React.MouseEvent) => {
     e?.stopPropagation();
@@ -182,6 +189,17 @@ export function PDPGallery({ images, lightboxImages, productName, locale = 'pl' 
   const closeLightbox = useCallback(() => {
     setIsLightboxOpen(false);
   }, []);
+
+  // Lightbox tap navigation: left half = prev, right half = next
+  const handleLightboxTap = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    if (x < rect.width / 2) {
+      setSelectedIndex((prev) => (prev - 1 + fullResImages.length) % fullResImages.length);
+    } else {
+      setSelectedIndex((prev) => (prev + 1) % fullResImages.length);
+    }
+  }, [fullResImages.length]);
 
   // No images fallback
   if (images.length === 0) {
@@ -199,11 +217,15 @@ export function PDPGallery({ images, lightboxImages, productName, locale = 'pl' 
 
   return (
     <>
-      <div className="pdp-gallery">
+      <div 
+        className="pdp-gallery"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
         {/* Main Image */}
         <div
           ref={mainRef}
-          className={`pdp-gallery__main ${isMagnifierActive ? 'magnifier-active' : ''} ${isAnimating ? 'pdp-gallery__main--fading' : ''}`}
+          className={`pdp-gallery__main ${isMagnifierActive ? 'magnifier-active' : ''}`}
           onClick={handleMainClick}
           onMouseMove={handleMouseMove}
           onMouseLeave={() => isMagnifierActive && setIsMagnifierActive(false)}
@@ -247,11 +269,6 @@ export function PDPGallery({ images, lightboxImages, productName, locale = 'pl' 
         {/* Thumbnails Strip */}
         {images.length > 1 && (
           <div className="pdp-gallery__thumbs-wrapper">
-            {/* Sliding indicator - outside scroll container to prevent clipping */}
-            <div 
-              className="pdp-gallery__thumb-indicator"
-              style={{ transform: `translateX(${selectedIndex * (64 + 8)}px)` }}
-            />
             <div
               ref={thumbsRef}
               className="pdp-gallery__thumbs"
@@ -259,13 +276,19 @@ export function PDPGallery({ images, lightboxImages, productName, locale = 'pl' 
               onMouseMove={handleThumbMouseMove}
               onMouseUp={handleThumbMouseUp}
               onMouseLeave={handleThumbMouseLeave}
+              onWheel={handleThumbWheel}
             >
               {images.map((img, idx) => (
                 <button
                   key={img}
                   type="button"
                   className={`pdp-gallery__thumb ${idx === selectedIndex ? 'active' : ''}`}
-                  onClick={() => !isDragging.current && changeImage(idx)}
+                  onClick={() => {
+                    if (!isDragging.current) {
+                      setSelectedIndex(idx);
+                      setIsPaused(true);
+                    }
+                  }}
                   aria-label={`${t.common.photoN} ${idx + 1}`}
                 >
                   <Image
@@ -304,29 +327,11 @@ export function PDPGallery({ images, lightboxImages, productName, locale = 'pl' 
           >
             ×
           </button>
-          
-          {fullResImages.length > 1 && (
-            <>
-              <button
-                type="button"
-                className="pdp-lightbox__nav pdp-lightbox__nav--prev"
-                onClick={goToPrev}
-                aria-label={t.common.prevPhoto}
-              >
-                ‹
-              </button>
-              <button
-                type="button"
-                className="pdp-lightbox__nav pdp-lightbox__nav--next"
-                onClick={goToNext}
-                aria-label={t.common.nextPhoto}
-              >
-                ›
-              </button>
-            </>
-          )}
 
-          <div className="pdp-lightbox__content" onClick={(e) => e.stopPropagation()}>
+          <div className="pdp-lightbox__content" onClick={(e) => {
+            e.stopPropagation();
+            handleLightboxTap(e);
+          }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={fullResImages[selectedIndex]}
