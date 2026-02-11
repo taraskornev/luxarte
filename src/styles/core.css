@@ -6583,13 +6583,13 @@ a.pdp__brand:hover {
   gap: var(--space-3);
 }
 
-/* Empty dot on the line */
+/* Diamond on the line (45° rotated square) */
 .dtl-bullet-anchor {
   position: absolute;
   left: var(--space-4);
   top: 0;
-  width: 1rem;
-  height: 1rem;
+  width: 12px;
+  height: 12px;
   transform: translateX(-50%);
   z-index: 2;
   pointer-events: none;
@@ -6598,16 +6598,15 @@ a.pdp__brand:hover {
 .dtl-dot {
   position: absolute;
   inset: 0;
-  border-radius: 50%;
   background: var(--color-accent-main);
-  transform: scale(0.75);
+  transform: rotate(45deg) scale(0.75);
   transform-origin: center;
   transition: transform var(--motion-slow) var(--ease-out),
               box-shadow var(--motion-slow) var(--ease-out);
 }
 
 .dtl-dot--active {
-  transform: scale(1.25);
+  transform: rotate(45deg) scale(1.25);
   box-shadow: 0 0 0 3px rgba(150, 127, 101, 0.25);
 }
 
@@ -6617,31 +6616,31 @@ a.pdp__brand:hover {
   transition: opacity var(--motion-slow) var(--ease-out);
 }
 
-/* Pill: circle with number → expands to show title */
+/* Expanding label: rectangle with number → number + title */
 .dtl-pill-wrap {
-  margin-bottom: var(--space-3);
-  height: 32px;
+  margin-bottom: var(--space-4);
+  height: 36px;
 }
 
 .dtl-pill {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 32px;
-  min-width: 32px;
-  border-radius: 9999px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 0;
   background: var(--color-accent-main);
   overflow: hidden;
-  padding: 0;
+  padding: 0 10px;
   transition: padding 400ms var(--ease-out);
 }
 
 .dtl-pill--active {
-  padding: 0 14px;
+  padding: 0 18px;
 }
 
 .dtl-pill-num {
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-nav);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-inverse);
   line-height: 1;
@@ -6649,8 +6648,10 @@ a.pdp__brand:hover {
 }
 
 .dtl-pill-label {
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-nav);
   font-weight: var(--font-weight-bold);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
   color: var(--color-text-inverse);
   white-space: nowrap;
   overflow: hidden;
@@ -6663,15 +6664,15 @@ a.pdp__brand:hover {
 }
 
 .dtl-pill--active .dtl-pill-label {
-  margin-left: 8px;
+  margin-left: 10px;
 }
 
-/* Description — matches article paragraph size */
+/* Description — matches content-page-body p */
 .dtl-desc {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-light);
   line-height: var(--line-height-loose);
-  color: var(--color-text-main);
+  color: var(--color-text-muted);
   max-width: 600px;
 }
 
@@ -6709,6 +6710,15 @@ a.pdp__brand:hover {
 
   .dtl-content--even .dtl-desc { margin-left: auto; }
   .dtl-spacer { display: block; width: 50%; }
+}
+
+@media (max-width: 768px) {
+  .dtl-pill-wrap { height: 30px; }
+  .dtl-pill { height: 30px; min-width: 30px; padding: 0 8px; }
+  .dtl-pill--active { padding: 0 14px; }
+  .dtl-pill-num { font-size: var(--font-size-sm); }
+  .dtl-pill-label { font-size: var(--font-size-sm); }
+  .dtl-desc { font-size: var(--font-size-md); }
 }
 
 /* ============================================
