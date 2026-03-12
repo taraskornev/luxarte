@@ -17,8 +17,13 @@ const nextConfig = {
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048],
     // Image sizes for smaller images
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-    // Allow remote images from Hetzner media server
+    // Allow remote images from Hetzner media server and WordPress source
     remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'www.luxarte.pl',
+        pathname: '/wp-content/**',
+      },
       {
         protocol: 'http',
         hostname: '95.216.162.38',

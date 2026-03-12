@@ -37,25 +37,21 @@ const BRAND_MARKI_PATH = IS_PREVIEW_BUILD ? '/preview/media/marki' : '/media/mar
  * In PREVIEW mode: Returns only first card image
  */
 export function getProductGalleryImages(slug: string): string[] {
-  // In preview mode, return only the card image
+  // In preview mode, return only the first image
   if (IS_PREVIEW_BUILD) {
-    return [mediaUrl(`${CATALOG_PATH}/${slug}/01-card.webp`)];
+    return [mediaUrl(`${CATALOG_PATH}/${slug}/01.webp`)];
   }
-  
+
   const files = manifest.catalog[slug] || [];
-  
-  // Filter for gallery images only, sort by index
+
+  // All webp files sorted numerically (01.webp, 02.webp, ...)
   const galleryImages = files
     .map(f => f.name)
-    .filter((f) => f.endsWith('-gallery.webp'))
-    .sort((a, b) => {
-      const numA = parseInt(a.split('-')[0], 10);
-      const numB = parseInt(b.split('-')[0], 10);
-      return numA - numB;
-    })
+    .filter((f) => f.endsWith('.webp'))
+    .sort((a, b) => parseInt(a, 10) - parseInt(b, 10))
     .map((f) => mediaUrl(`${CATALOG_PATH}/${slug}/${f}`));
 
-  return galleryImages.length > 0 ? galleryImages : [mediaUrl(`${CATALOG_PATH}/${slug}/01-gallery.webp`)];
+  return galleryImages.length > 0 ? galleryImages : [mediaUrl(`${CATALOG_PATH}/${slug}/01.webp`)];
 }
 
 /**
@@ -65,25 +61,8 @@ export function getProductGalleryImages(slug: string): string[] {
  * In PREVIEW mode: Returns only first card image
  */
 export function getProductLightboxImages(slug: string): string[] {
-  // In preview mode, return only the card image
-  if (IS_PREVIEW_BUILD) {
-    return [mediaUrl(`${CATALOG_PATH}/${slug}/01-card.webp`)];
-  }
-  
-  const files = manifest.catalog[slug] || [];
-  
-  const lightboxImages = files
-    .map(f => f.name)
-    .filter((f) => f.endsWith('-lightbox.webp'))
-    .sort((a, b) => {
-      const numA = parseInt(a.split('-')[0], 10);
-      const numB = parseInt(b.split('-')[0], 10);
-      return numA - numB;
-    })
-    .map((f) => mediaUrl(`${CATALOG_PATH}/${slug}/${f}`));
-
-    // Fallback to gallery images if no lightbox images
-    return lightboxImages.length > 0 ? lightboxImages : getProductGalleryImages(slug);
+  // Lightbox uses same images as gallery
+  return getProductGalleryImages(slug);
 }
 
 /**

@@ -31,7 +31,7 @@ const FALLBACK_IMAGE = `${PREFIX}/catalog/fallback.svg`;
  * Uses 01-card.webp pattern
  */
 export function getProductImage(slug: string): string {
-  return mediaUrl(`${CATALOG_PATH}/${slug}/01-card.webp`);
+  return mediaUrl(`${CATALOG_PATH}/${slug}/01.webp`);
 }
 
 /**
