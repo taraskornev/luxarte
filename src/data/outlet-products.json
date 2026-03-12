@@ -175,7 +175,10 @@
           "brand": "FENDI CASA",
           "quantity": "1 szt.",
           "description": "Wykończenie: New Zeland Wool + Bamboo silk, blue/white/black",
-          "images": []
+          "images": [
+            "https://www.luxarte.pl/wp-content/uploads/2024/05/21_FENDI-CASA_Side-to-Side-rug-A.jpg",
+            "https://www.luxarte.pl/wp-content/uploads/2024/05/21_FENDI-CASA_Side-to-Side-rug-A-1.jpg"
+          ]
         }
       ]
     },
@@ -211,7 +214,9 @@
           "brand": "ROBERTO CAVALLI HOME INTERIORS",
           "quantity": "1 szt.",
           "description": "Wykończenie: VELVET WILD JAGUAR LAMPSHADE.",
-          "images": []
+          "images": [
+            "https://www.luxarte.pl/wp-content/uploads/2024/10/13746-RCHI_WILD_table-lamp_WIL.631.BM1_2021_01.jpg"
+          ]
         },
         {
           "id": "outlet-lampa-coordinates-floor",
@@ -229,7 +234,10 @@
           "brand": "FLOS",
           "quantity": "4 szt.",
           "description": "Wykończenie: Champagne anodized aluminium.",
-          "images": []
+          "images": [
+            "https://www.luxarte.pl/wp-content/uploads/2024/10/Coordinates-suspension-flos-R-22.jpg",
+            "https://www.luxarte.pl/wp-content/uploads/2025/08/flos_coordinates_luxarte.jpg"
+          ]
         }
       ]
     },

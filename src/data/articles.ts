@@ -48,8 +48,8 @@ export const articles: Article[] = [
         heading: 'Rzemiosło spotyka design – materiały i procesy',
         content: 'Kluczem do wyjątkowości Venicem jest subtelne balansowanie między ręcznym rzemiosłem a precyzją nowoczesnej formy. Tradycyjne szkło Murano, obrabiane „na oko" i według pradawnych technik, łączy się z nowoczesnym w charakterze metalem o szerokiej palecie wykończeń. Każdy element powstaje w ścisłej współpracy z rzemieślnikami, którzy nadają każdej oprawie indywidualny charakter. W efekcie powstają lampy, które nie tylko oświetlają przestrzeń, ale ją definiują.\n\nProces tworzenia oświetlenia Venicem rozpoczyna się od precyzyjnie wyselekcjonowanych materiałów – szkła z Murano i wysokogatunkowych metali, głównie mosiądzu. Szkło formowane jest ręcznie, tradycyjną techniką „a soffio" – dmuchania na gorąco, która wymaga nie tylko siły fizycznej, ale i wieloletniego doświadczenia w pracy z płynnym materiałem. W tym samym czasie metal poddawany jest obróbce mechanicznej i ręcznej: cięciu, gięciu, szlifowaniu, a następnie wykańczany przez oksydację, szczotkowanie lub polerowanie, zależnie od projektu. Każdy detal – od krzywizny szkła po strukturę powierzchni metalu – przechodzi przez ludzkie ręce, co nadaje każdemu egzemplarzowi unikalny charakter i niepowtarzalny rytm formy.',
         images: [
-          mediaUrl('/media/pages/aktualnosci/venicem/image-04.jpg'),
-          mediaUrl('/media/pages/aktualnosci/venicem/image-05.jpg')
+          'https://www.luxarte.pl/wp-content/uploads/2025/09/lampa-stolowa-venicem-vcm-luxarte-luksusowe-oswietlenie.jpeg',
+          'https://www.luxarte.pl/wp-content/uploads/2025/09/lampa-stolowa-venicem-vcm-luxarte-luksusowe-oswietlenie2.jpeg'
         ]
       },
       {
@@ -57,7 +57,7 @@ export const articles: Article[] = [
         content: 'Venicem, założony w 2013 roku przez Massimo Tonetto i Melissę Lunardi, to marka, która rodzi się z głębokiego związku z rzemiosłem Murano – kolebki szkła włoskiego – i z żarliwym dążeniem do współczesnej elegancji. Siedziba w Treviso, tuż obok Wenecji i wyspy Murano, stwarza idealne warunki do czerpania z mistrzowskich technik formowania szkła, a jednocześnie wprowadza je w nowy wymiar dzięki nowoczesnemu spojrzeniu na design. Projektanci Venicem czerpią z historycznego dziedzictwa nie tylko formy, ale i emocje zaklęte w szkle. Ich celem jest tworzenie obiektów, które są ponadczasowe – zakorzenione w przeszłości, a jednocześnie wyprzedzające swoje czasy.',
         images: [
           mediaUrl('/media/pages/aktualnosci/venicem/image-06.jpg'),
-          mediaUrl('/media/pages/aktualnosci/venicem/image-07.jpg')
+          'https://www.luxarte.pl/wp-content/uploads/2025/09/lampa-sufitowa-venicem-utmost-luxarte-luksusowe-oswietlenie.jpeg'
         ]
       },
       {
@@ -73,14 +73,14 @@ export const articles: Article[] = [
     title: 'EXTETA – KOLEKCJA LORO PIANA – PONADCZASOWE MEBLE OGRODOWE',
     date: '10 LIPCA 2025',
     category: 'NOWA KOLEKCJA',
-    image: mediaUrl('/media/pages/aktualnosci/exteta/image-01.jpg'),
-    heroImage: mediaUrl('/media/pages/aktualnosci/exteta/image-01.jpg'),
+    image: 'https://www.luxarte.pl/wp-content/uploads/2025/07/luxarte_luksusowe_meble_ogrodowe_exteta_loro_piana.jpg',
+    heroImage: 'https://www.luxarte.pl/wp-content/uploads/2025/07/luxarte_luksusowe_meble_ogrodowe_exteta_loro_piana.jpg',
     excerpt: 'Kolekcja The Delight Chairs to owoc współpracy dwóch włoskich marek: Exteta, mistrza mebli outdoorowych, oraz Loro Piana Interiors.',
     sections: [
       {
         heading: 'Spotkanie dwóch ikon luksusu',
         content: 'Kolekcja The Delight Chairs to owoc współpracy dwóch włoskich marek: Exteta, mistrza mebli outdoorowych, oraz Loro Piana Interiors, specjalizującej się w ekskluzywnych tkaninach. Projekt powstał z potrzeby reinterpretacji klasycznego krzesła reżyserskiego – symbolu beztroskiego wypoczynku – w wersji luksusowej, eleganckiej i funkcjonalnej. Wspólnie z projektantką Paolą Navone, marki stworzyły kolekcję, która łączy tradycję rzemiosła z nowoczesnym stylem życia.',
-        images: [mediaUrl('/media/pages/aktualnosci/exteta/image-02.jpg'), mediaUrl('/media/pages/aktualnosci/exteta/image-03.webp')]
+        images: ['https://www.luxarte.pl/wp-content/uploads/2025/07/luxarte_luksusowe_meble_ogrodowe_exteta_loro_piana_2.jpg', mediaUrl('/media/pages/aktualnosci/exteta/image-03.webp')]
       },
       {
         heading: 'Filozofia hybrydowej przestrzeni Exteta',
@@ -90,7 +90,7 @@ export const articles: Article[] = [
       {
         heading: 'Design inspirowany naturą i modą',
         content: 'Sukces kolekcji pozwolił na poszerzenie kolekcji, a każdy element – składane krzesło, fotel i stołek – został wykonany ręcznie z dbałością o detale. Letnia wersja zachwyca tkaninami w paski i jednolitych kolorach, natomiast zimowa odsłona St. Moritz oferuje kaszmirowe pokrowce Cashfur, które dodają miękkości i ciepła. Inspiracją były nie tylko klasyczne formy, ale też świat jachtów i górskich kurortów, co nadaje kolekcji wyjątkowy charakter.',
-        images: [mediaUrl('/media/pages/aktualnosci/exteta/image-05.jpg'), mediaUrl('/media/pages/aktualnosci/exteta/image-06.webp')]
+        images: [mediaUrl('/media/pages/aktualnosci/exteta/image-05.jpg'), 'https://www.luxarte.pl/wp-content/uploads/2025/07/ExtetaXrivaArmchairBlue3qtiFront-Luxarte-luksusowe-meble-ogrodowe.jpg']
       },
       {
         heading: 'Rzemiosło i zrównoważony luksus',
@@ -99,7 +99,7 @@ export const articles: Article[] = [
       {
         heading: 'Oferta marki Exteta dostępna w LuxArte',
         content: 'Cieszymy się, że możemy dzielić się z Państwem oferta najlepszych włoskich marek. Zapraszamy do kontaktu pod adresem info@luxarte.pl lub umówienia spotkania w naszym showroomie, jeśli chcieliby Państwo dowiedzieć się więcej na temat kolekcji.',
-        images: [mediaUrl('/media/pages/aktualnosci/exteta/image-07.webp')]
+        images: ['https://www.luxarte.pl/wp-content/uploads/2025/07/ExtetaXrivaArmchairBlue3qtiBack-luxarte-luksusowe-meble-ogrodowe.jpg']
       }
     ],
     tags: ['Loro Piana', 'Luksusowe Meble Ogrodowe', 'Meble Exteta']
@@ -109,19 +109,19 @@ export const articles: Article[] = [
     title: 'ARCHIGRAPHICA – NOWOCZESNA KUCHNIA BLISKA NATURZE',
     date: '29 KWIETNIA 2025',
     category: 'NOWA KOLEKCJA',
-    image: mediaUrl('/media/pages/aktualnosci/archigraphica/image-01.webp'),
-    heroImage: mediaUrl('/media/pages/aktualnosci/archigraphica/image-01.webp'),
+    image: 'https://www.luxarte.pl/wp-content/uploads/2025/03/ekskluzywne-kuchnie-luxarte-valcucine-archigraphica.webp',
+    heroImage: 'https://www.luxarte.pl/wp-content/uploads/2025/03/ekskluzywne-kuchnie-luxarte-valcucine-archigraphica.webp',
     excerpt: 'Nowoczesny design kuchni Valcucine od lat inspiruje i wyznacza trendy na rynku ekskluzywnych kuchni.',
     sections: [
       {
         heading: 'Esencja drewna',
         content: 'Nowoczesny design kuchni Valcucine od lat inspiruje i wyznacza trendy na rynku eksluzywnych kuchni. Najnowsza kapsułowa kolekcja, Archigraphica, jest propozycją, która łączy świat nowoczesny i pierwotny. Baza kuchni, wykończona w naturalnym orzechu, została wyposażona w lite uchwyty, które rysują perspektywiczny rysunek bryły. Wydłużone uchwyty tworzą indywidualny rysunek kuchni, który będzie zewnętrznym wyrazem układu funkcjonalnego, dobranego pod indywidualny projekt. Naturalny orzech, przyjemna faktura i ciepły kolor, wprowadzają przytulną atmosferę we wnętrzu. Zestawienie z minimalistycznymi frontami ze szkła, dodaje kuchni lekkości i nowoczesnego charakteru.',
-        images: [mediaUrl('/media/pages/aktualnosci/archigraphica/image-02.webp')]
+        images: ['https://www.luxarte.pl/wp-content/uploads/2025/03/ekskluzywne-kuchnie-luxarte-valcucine-archigraphica-.webp']
       },
       {
         heading: 'Połączenie materiałów',
         content: 'Niezmiennym elementem kuchni Archigraphica jest drewniany profil, który w zależności od układu funkcjonalnego, determinuje rysunek kuchni. Fronty mogą zostać wykończone drewnem lub szkłem. Kontrast charakteru tych materiałów sprawia, że otrzymujemy kuchnię nowoczesną o ciepłym, przytulnym charakterze. Trzecim elementem jest matał blatu, obejmujący dolne korpusy, który może zostać wykonany z marmuru, piaskowca, czy wykończony w lakierze.\n\nSpektrum możliwości pozwala na integrację kuchni z charakterem wnętrza i ekspresję indywidualnych potrzeb.',
-        images: [mediaUrl('/media/pages/aktualnosci/archigraphica/image-03.jpeg'), mediaUrl('/media/pages/aktualnosci/archigraphica/image-04.jpeg')]
+        images: [mediaUrl('/media/pages/aktualnosci/archigraphica/image-03.jpeg'), 'https://www.luxarte.pl/wp-content/uploads/2025/03/ekskluzywne-kuchnie-luxarte-valcucine-archigraphica-2.jpeg']
       },
       {
         heading: 'Tradycja innowacji',
@@ -130,7 +130,7 @@ export const articles: Article[] = [
       {
         heading: 'Valcucine tylko w LuxArte',
         content: 'Cieszymy się, że jako jedyni w Polsce, możemy zaoferować Państwu luksusowe kuchnie marki Valcucine. Ekspozycja znajduje się w naszym warszawskim shworoom\'ie przy Placu Piłsudskiego 9. Nasz zespół doradzi w wyborze najbardziej optymalnego modelu dla potrzeb wnętrza.\n\nZapraszamy do kontaktu pod adresem: warszawa@luxarte.pl',
-        images: [mediaUrl('/media/pages/aktualnosci/archigraphica/image-05.jpeg')]
+        images: ['https://www.luxarte.pl/wp-content/uploads/2025/03/ekskluzywne-kuchnie-luxarte-valcucine-archigraphica-3.jpeg']
       }
     ],
     tags: ['Ekskluzywna Kuchnia', 'Kuchnie Valcucine', 'Nowoczesna Kuchnia']
