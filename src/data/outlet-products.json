@@ -314,7 +314,11 @@
           "brand": "VERSACE HOME",
           "quantity": "1 szt.",
           "description": "Wykończenie: EXTERNAL FRAME FINISHING SATIN GREY; DOORS COVER MEDUSA AMPLIFIED TOP 002 WHITE-GOLD ; INTERNAL FRAME FINISHING SATIN GREY ; INTERNAL WITH 2 SHELVES AND 2 DRAWERS",
-          "images": []
+          "images": [
+            "https://www.luxarte.pl/wp-content/uploads/2025/05/VE-Stiletto-tall-cabinet-Medusa-Amplified-02-meble-versace-luxarte.webp",
+            "https://www.luxarte.pl/wp-content/uploads/2025/05/01_VersaceHome_tallcabinet_Stiletto-meble-versace-luxarte.webp",
+            "https://www.luxarte.pl/wp-content/uploads/2025/05/VE-Stiletto-tall-cabinet-with-leather-meble-versace-luxarte.webp"
+          ]
         }
       ]
     },
@@ -328,7 +332,9 @@
           "brand": "FENDI CASA",
           "quantity": "1 szt.",
           "description": "Wykończenie: Natural Leather Glove + Fox Fur.",
-          "images": []
+          "images": [
+            "https://www.luxarte.pl/wp-content/uploads/2024/07/luxarte_CS-418P30_and_CS-48230_02.jpeg"
+          ]
         },
         {
           "id": "outlet-poduszka-cs418p50",
@@ -336,7 +342,10 @@
           "brand": "FENDI CASA",
           "quantity": "1 szt.",
           "description": "Wykończenie: Velvet Bisanzio C 212 + Velvet Bisanzio C 058 + Fox Fur.",
-          "images": []
+          "images": [
+            "https://www.luxarte.pl/wp-content/uploads/2024/07/luxarte_CS_418P50.jpg",
+            "https://www.luxarte.pl/wp-content/uploads/2024/07/CS-418P50-detail.jpg"
+          ]
         },
         {
           "id": "outlet-poduszka-cs41750",
@@ -344,7 +353,10 @@
           "brand": "FENDI CASA",
           "quantity": "1 szt.",
           "description": "Wykończenie: LUX Leather Maryland 351 + Leather Maryland 341.",
-          "images": []
+          "images": [
+            "https://www.luxarte.pl/wp-content/uploads/2024/07/luxarte_CS_41750_and_CS_41730.jpg",
+            "https://www.luxarte.pl/wp-content/uploads/2024/07/CS-41750-detail.png"
+          ]
         },
         {
           "id": "outlet-poduszka-cs48340",
@@ -352,7 +364,10 @@
           "brand": "FENDI CASA",
           "quantity": "1 szt.",
           "description": "Wykończenie: LEATHER S.LUX 002 MINK/RIGA LAVA (front) VELVET LUX 002 MINK (back).",
-          "images": []
+          "images": [
+            "https://www.luxarte.pl/wp-content/uploads/2024/07/luxarte_CS-48340-1.jpg",
+            "https://www.luxarte.pl/wp-content/uploads/2024/07/CS-48340.jpg"
+          ]
         },
         {
           "id": "outlet-poduszka-cs48230",
@@ -360,7 +375,9 @@
           "brand": "FENDI CASA",
           "quantity": "1 szt.",
           "description": "Wykończenie: LEATHER VELVET LUX 017 BLUE, FF LOGO EMBOSED.",
-          "images": []
+          "images": [
+            "https://www.luxarte.pl/wp-content/uploads/2024/07/luxarte_CS-48230_01.jpeg"
+          ]
         },
         {
           "id": "outlet-poduszka-cs48650",
@@ -368,7 +385,10 @@
           "brand": "FENDI CASA",
           "quantity": "1 szt.",
           "description": "Wykończenie: Leather Utah Lux 017 + Leather 765 + Leather 763 + 766.",
-          "images": []
+          "images": [
+            "https://www.luxarte.pl/wp-content/uploads/2024/07/LUXARTE_CS_48650.jpg",
+            "https://www.luxarte.pl/wp-content/uploads/2024/07/CS-48650.jpg"
+          ]
         },
         {
           "id": "outlet-poduszka-cs41730",
@@ -376,7 +396,10 @@
           "brand": "FENDI CASA",
           "quantity": "1 szt.",
           "description": "Wykończenie: Leather Glove 456.",
-          "images": []
+          "images": [
+            "https://www.luxarte.pl/wp-content/uploads/2024/07/CS-41730.jpg",
+            "https://www.luxarte.pl/wp-content/uploads/2024/07/CS-41730-back.jpg"
+          ]
         }
       ]
     },
@@ -390,7 +413,10 @@
           "brand": "FENDI CASA",
           "quantity": "1 szt.",
           "description": "Wykończenie: ORANGE MURANO GLASS + METAL COVER IN BRONZE SHADOW FINISHING.",
-          "images": []
+          "images": [
+            "https://www.luxarte.pl/wp-content/uploads/2024/10/garden_vase_fendi_casa_luxarte.png",
+            "https://www.luxarte.pl/wp-content/uploads/2024/10/garden_vase_fendi_casa_luxarte_2.png"
+          ]
         },
         {
           "id": "outlet-waza-garden-square",
@@ -398,7 +424,10 @@
           "brand": "FENDI CASA",
           "quantity": "1 szt.",
           "description": "Wykończenie: ORANGE MURANO GLASS + METAL COVER IN BRONZE SHADOW FINISHING.",
-          "images": []
+          "images": [
+            "https://www.luxarte.pl/wp-content/uploads/2024/10/garden_vase_fendi_casa_square_luxarte.png",
+            "https://www.luxarte.pl/wp-content/uploads/2024/10/garden_vase_fendi_casa_square_luxarte_2.png"
+          ]
         },
         {
           "id": "outlet-patera-ff",
