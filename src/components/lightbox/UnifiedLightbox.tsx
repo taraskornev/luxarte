@@ -10,244 +10,330 @@ interface UnifiedLightboxProps {
   altPrefix?: string;
 }
 
-/**
- * Unified Lightbox Component
- * 
- * Matches luxarte.pl gallery behavior:
- * - Swipe: image slides in swipe direction
- * - Arrow click: smooth crossfade (no slide)
- * - Arrows auto-hide after 3s of no mouse/touch activity
- * - Close: click backdrop, ESC, or × button
- * - Keyboard: arrow keys navigate, ESC closes
- * - Counter: X / Y at bottom center
- */
 export function UnifiedLightbox({ images, currentIndex, onClose, onIndexChange, altPrefix = 'Photo' }: UnifiedLightboxProps) {
-  const [slideDirection, setSlideDirection] = useState<'none' | 'left' | 'right' | 'up' | 'down'>('none');
-  const [zoom, setZoom] = useState(1);
-  const [pan, setPan] = useState({x: 0, y: 0});
-  const [isPanning, setIsPanning] = useState(false);
-  const lastTouch = useRef<{x: number, y: number} | null>(null);
-  const lastDistance = useRef<number | null>(null);
-  const doubleTapTimer = useRef<NodeJS.Timeout | null>(null);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const [isClosing, setIsClosing] = useState(false);
-  const [showControls, setShowControls] = useState(true);
-  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
-  const [isDragging, setIsDragging] = useState(false);
+  const totalImages = images.length;
 
+  // --- UI state ---
+  const [showControls, setShowControls] = useState(true);
+  const [isClosing, setIsClosing] = useState(false);
+
+  // --- Zoom / pan state ---
+  const [zoomScale, setZoomScale] = useState(1);
+  const [panX, setPanX] = useState(0);
+  const [panY, setPanY] = useState(0);
+
+  // --- Strip swipe state ---
+  // dragX: live pixel offset of the strip while finger is down
+  // settling: after release, animate strip to final position then commit
+  const [dragX, setDragX] = useState(0);
+  const [dragY, setDragY] = useState(0);
+  const [settling, setSettling] = useState<{ targetIndex: number; direction: 'left' | 'right' } | null>(null);
+
+  // --- Axis lock ---
+  const axisLock = useRef<'none' | 'h' | 'v'>('none');
+
+  // --- Refs ---
+  const containerRef = useRef<HTMLDivElement>(null);
   const hideTimer = useRef<ReturnType<typeof setTimeout>>();
   const touchStartX = useRef(0);
   const touchStartY = useRef(0);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const isDragging = useRef(false);
+  const isPinching = useRef(false);
+  const pinchStartDist = useRef(0);
+  const pinchStartScale = useRef(1);
+  const pinchMidX = useRef(0);
+  const pinchMidY = useRef(0);
+  const pinchStartPanX = useRef(0);
+  const pinchStartPanY = useRef(0);
+  const panStartX = useRef(0);
+  const panStartY = useRef(0);
+  const panStartPX = useRef(0);
+  const panStartPY = useRef(0);
+  const lastTapTime = useRef(0);
+  const doubleTapFired = useRef(false);
+  const justSettled = useRef(false);
 
-  const totalImages = images.length;
+  // --- Neighbors ---
+  const prevIndex = (currentIndex - 1 + totalImages) % totalImages;
+  const nextIndex = (currentIndex + 1) % totalImages;
 
-  // Reset controls timer
+  // Reset zoom on image change
+  useEffect(() => {
+    setZoomScale(1);
+    setPanX(0);
+    setPanY(0);
+  }, [currentIndex]);
+
+  // ─── Controls auto-hide ───
   const resetHideTimer = useCallback(() => {
     setShowControls(true);
     if (hideTimer.current) clearTimeout(hideTimer.current);
     hideTimer.current = setTimeout(() => setShowControls(false), 3000);
   }, []);
 
-  // Slide: swipe left means next image comes from right (legacy)
-  const slideToIndex = useCallback((newIndex: number, direction: 'left' | 'right') => {
-    if (isTransitioning || newIndex === currentIndex) return;
-    // For swipe left, next image slides in from right (so animate current to left, new from right)
-    setSlideDirection(direction);
-    setIsTransitioning(true);
-    setTimeout(() => {
-      onIndexChange(newIndex);
-      setTimeout(() => {
-        setIsTransitioning(false);
-        setSlideDirection('none');
-      }, 300);
-    }, 20);
-    resetHideTimer();
-  }, [currentIndex, isTransitioning, onIndexChange, resetHideTimer]);
-
-  const goNext = useCallback(() => {
-    slideToIndex((currentIndex + 1) % totalImages, 'left');
-  }, [currentIndex, totalImages, slideToIndex]);
-
-  const goPrev = useCallback(() => {
-    slideToIndex((currentIndex - 1 + totalImages) % totalImages, 'right');
-  }, [currentIndex, totalImages, slideToIndex]);
-
-  // Keyboard
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-      else if (e.key === 'ArrowRight') goNext();
-      else if (e.key === 'ArrowLeft') goPrev();
-    };
-    document.body.style.overflow = 'hidden';
-    window.addEventListener('keydown', handleKeyDown);
-    return () => {
-      document.body.style.overflow = '';
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, [onClose, goNext, goPrev]);
-
-  // Mouse movement shows controls
-  useEffect(() => {
-    const handleMouseMove = () => resetHideTimer();
-    window.addEventListener('mousemove', handleMouseMove);
+    const onMove = () => resetHideTimer();
+    window.addEventListener('mousemove', onMove);
     resetHideTimer();
     return () => {
-      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mousemove', onMove);
       if (hideTimer.current) clearTimeout(hideTimer.current);
     };
   }, [resetHideTimer]);
 
-  // Touch handlers for swipe with drag preview and up/down to close
+  // ─── Close: zoom IN + fade out ───
+  const handleClose = useCallback(() => {
+    if (isClosing) return;
+    setIsClosing(true);
+    setTimeout(() => { setIsClosing(false); onClose(); }, 350);
+  }, [isClosing, onClose]);
+
+  // ─── Navigate via button/keyboard: animate the strip ───
+  const goTo = useCallback((direction: 'left' | 'right') => {
+    if (settling || zoomScale > 1) return;
+    const target = direction === 'left' ? nextIndex : prevIndex;
+    setSettling({ targetIndex: target, direction });
+    resetHideTimer();
+  }, [settling, zoomScale, nextIndex, prevIndex, resetHideTimer]);
+
+  // When settle transition ends, commit the index
+  const onSettleEnd = useCallback(() => {
+    if (!settling) return;
+    const idx = settling.targetIndex;
+    justSettled.current = true;
+    setSettling(null);
+    setDragX(0);
+    onIndexChange(idx);
+  }, [settling, onIndexChange]);
+
+  // ─── Keyboard ───
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') handleClose();
+      else if (e.key === 'ArrowRight') goTo('left');
+      else if (e.key === 'ArrowLeft') goTo('right');
+    };
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', onKey);
+    return () => { document.body.style.overflow = ''; window.removeEventListener('keydown', onKey); };
+  }, [goTo, handleClose]);
+
+  // ─── Touch ───
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    resetHideTimer();
+
+    // Pinch
     if (e.touches.length === 2) {
-      setIsPanning(true);
-      lastTouch.current = {
-        x: (e.touches[0].clientX + e.touches[1].clientX) / 2,
-        y: (e.touches[0].clientY + e.touches[1].clientY) / 2,
-      };
-      const dx = e.touches[0].clientX - e.touches[1].clientX;
-      const dy = e.touches[0].clientY - e.touches[1].clientY;
-      lastDistance.current = Math.sqrt(dx * dx + dy * dy);
-    } else if (e.touches.length === 1) {
-      touchStartX.current = e.touches[0].clientX;
-      touchStartY.current = e.touches[0].clientY;
-      setIsDragging(true);
-      setDragOffset({ x: 0, y: 0 });
-      resetHideTimer();
-    }
-  }, [resetHideTimer]);
-
-  const handleTouchMove = useCallback((e: React.TouchEvent) => {
-    if (e.touches.length === 2 && isPanning) {
-      // Pinch zoom
-      const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
-      const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
-      const dx = e.touches[0].clientX - e.touches[1].clientX;
-      const dy = e.touches[0].clientY - e.touches[1].clientY;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (lastDistance.current) {
-        let newZoom = Math.max(1, Math.min(zoom * (dist / lastDistance.current), 4));
-        setZoom(newZoom);
-        // Pan follows midpoint
-        if (lastTouch.current) {
-          setPan({
-            x: pan.x + (midX - lastTouch.current.x),
-            y: pan.y + (midY - lastTouch.current.y),
-          });
-        }
-      }
-      lastTouch.current = { x: midX, y: midY };
-      lastDistance.current = dist;
-    } else if (e.touches.length === 1 && isDragging) {
-      const dx = e.touches[0].clientX - touchStartX.current;
-      const dy = e.touches[0].clientY - touchStartY.current;
-      setDragOffset({ x: dx, y: dy });
-    }
-  }, [isDragging, isPanning, pan.x, pan.y, zoom]);
-
-  const handleTouchEnd = useCallback((e: React.TouchEvent) => {
-    if (isPanning && e.touches.length < 2) {
-      setIsPanning(false);
-      lastTouch.current = null;
-      lastDistance.current = null;
+      isPinching.current = true;
+      doubleTapFired.current = false;
+      const dx = e.touches[1].clientX - e.touches[0].clientX;
+      const dy = e.touches[1].clientY - e.touches[0].clientY;
+      pinchStartDist.current = Math.sqrt(dx * dx + dy * dy);
+      pinchStartScale.current = zoomScale;
+      pinchMidX.current = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+      pinchMidY.current = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+      pinchStartPanX.current = panX;
+      pinchStartPanY.current = panY;
       return;
     }
-    if (isDragging && e.touches.length === 0) {
-      setIsDragging(false);
-      const { x: dx, y: dy } = dragOffset;
-      setDragOffset({ x: 0, y: 0 });
-      // Horizontal swipe
-      if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) {
-        if (dx < 0) {
-          slideToIndex((currentIndex + 1) % totalImages, 'left');
-        } else {
-          slideToIndex((currentIndex - 1 + totalImages) % totalImages, 'right');
-        }
-      }
-      // Vertical swipe
-      else if (Math.abs(dy) > 60 && Math.abs(dy) > Math.abs(dx)) {
-        setSlideDirection(dy < 0 ? 'up' : 'down');
-        setIsClosing(true);
-        setTimeout(() => {
-          setIsClosing(false);
-          setSlideDirection('none');
-          onClose();
-        }, 350);
-      }
-    }
-  }, [isDragging, isPanning, dragOffset, currentIndex, totalImages, slideToIndex, onClose]);
 
-  // Compute image transform/animation
-  const getImageStyle = (): React.CSSProperties => {
-    if (isClosing) {
-      // Zoom in and fade out (on close)
-      return {
-        opacity: 0,
-        transform: 'scale(1.15)',
-        transition: 'opacity 0.35s, transform 0.35s',
-      };
+    if (e.touches.length !== 1) return;
+
+    // Double-tap → reset zoom
+    const now = Date.now();
+    if (now - lastTapTime.current < 300) {
+      doubleTapFired.current = true;
+      lastTapTime.current = 0;
+      setZoomScale(1); setPanX(0); setPanY(0);
+      return;
     }
-    if (isDragging && (dragOffset.x !== 0 || dragOffset.y !== 0)) {
-      if (Math.abs(dragOffset.x) > Math.abs(dragOffset.y)) {
-        return {
-          transform: `translateX(${dragOffset.x}px) scale(${zoom})`,
-          transition: 'none',
-        };
-      } else {
-        return {
-          transform: `translateY(${dragOffset.y}px) scale(${zoom})`,
-          transition: 'none',
-        };
+    lastTapTime.current = now;
+    doubleTapFired.current = false;
+
+    if (zoomScale > 1) {
+      // Pan mode
+      panStartX.current = e.touches[0].clientX;
+      panStartY.current = e.touches[0].clientY;
+      panStartPX.current = panX;
+      panStartPY.current = panY;
+    } else {
+      // Swipe mode
+      isDragging.current = true;
+      axisLock.current = 'none';
+      touchStartX.current = e.touches[0].clientX;
+      touchStartY.current = e.touches[0].clientY;
+      setDragX(0);
+      setDragY(0);
+    }
+  }, [resetHideTimer, zoomScale, panX, panY]);
+
+  const handleTouchMove = useCallback((e: React.TouchEvent) => {
+    // Pinch + pan
+    if (isPinching.current && e.touches.length === 2) {
+      const dx = e.touches[1].clientX - e.touches[0].clientX;
+      const dy = e.touches[1].clientY - e.touches[0].clientY;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      setZoomScale(Math.max(0.5, Math.min(8, pinchStartScale.current * (dist / pinchStartDist.current))));
+      const mx = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+      const my = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+      setPanX(pinchStartPanX.current + (mx - pinchMidX.current));
+      setPanY(pinchStartPanY.current + (my - pinchMidY.current));
+      return;
+    }
+
+    if (e.touches.length !== 1) return;
+
+    if (zoomScale > 1) {
+      setPanX(panStartPX.current + (e.touches[0].clientX - panStartX.current));
+      setPanY(panStartPY.current + (e.touches[0].clientY - panStartY.current));
+    } else if (isDragging.current) {
+      const rawX = e.touches[0].clientX - touchStartX.current;
+      const rawY = e.touches[0].clientY - touchStartY.current;
+
+      // Lock axis after initial movement (>8px)
+      if (axisLock.current === 'none' && (Math.abs(rawX) > 8 || Math.abs(rawY) > 8)) {
+        axisLock.current = Math.abs(rawX) >= Math.abs(rawY) ? 'h' : 'v';
+      }
+
+      if (axisLock.current === 'h') {
+        setDragX(rawX);
+        setDragY(0);
+      } else if (axisLock.current === 'v') {
+        setDragX(0);
+        setDragY(rawY);
       }
     }
-    if (zoom !== 1 || isPanning) {
+  }, [zoomScale]);
+
+  const handleTouchEnd = useCallback(() => {
+    if (isPinching.current) {
+      isPinching.current = false;
+      if (zoomScale < 1) { setZoomScale(1); setPanX(0); setPanY(0); }
+      return;
+    }
+    if (doubleTapFired.current) { doubleTapFired.current = false; return; }
+    if (!isDragging.current) return;
+    isDragging.current = false;
+
+    const axis = axisLock.current;
+    axisLock.current = 'none';
+
+    // Vertical swipe → close
+    if (axis === 'v' && Math.abs(dragY) > 80) {
+      setDragX(0);
+      setDragY(0);
+      handleClose();
+      return;
+    }
+
+    // Horizontal swipe → navigate
+    if (axis === 'h' && totalImages > 1) {
+      if (dragX < -50) {
+        // Swiped left → show next: strip will animate from current dragX to -100%
+        setSettling({ targetIndex: nextIndex, direction: 'left' });
+        return;
+      }
+      if (dragX > 50) {
+        // Swiped right → show prev: strip will animate from current dragX to +100%
+        setSettling({ targetIndex: prevIndex, direction: 'right' });
+        return;
+      }
+    }
+
+    // Snap back (not enough distance)
+    setDragX(0);
+    setDragY(0);
+  }, [dragX, dragY, totalImages, nextIndex, prevIndex, handleClose, zoomScale]);
+
+  // ─── Fullscreen ───
+  const handleFullscreen = useCallback(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    if (!document.fullscreenElement) el.requestFullscreen?.().catch(() => {});
+    else document.exitFullscreen?.().catch(() => {});
+  }, []);
+
+  // ─── Magnifier ───
+  const handleMagnifier = useCallback(() => {
+    if (zoomScale > 1) { setZoomScale(1); setPanX(0); setPanY(0); }
+    else setZoomScale(3);
+  }, [zoomScale]);
+
+  // ─── Backdrop click = close ───
+  const handleBackdropClick = useCallback((e: React.MouseEvent) => {
+    if (e.target === e.currentTarget) handleClose();
+  }, [handleClose]);
+
+  // ─── Strip transform ───
+  // The strip has 3 panels: [prev | current | next] each 100% wide.
+  // Default: translateX(0) shows the center (current). -100% = next, +100% = prev.
+  const getStripStyle = (): React.CSSProperties => {
+    // Closing animation on the center image is handled separately
+    if (isClosing) return {};
+
+    // While settling (after finger release, completing the slide)
+    if (settling) {
+      const target = settling.direction === 'left' ? '-100%' : '100%';
+      // If we have a dragX from the swipe, we need transition from current position
       return {
-        transform: `scale(${zoom}) translate(${pan.x}px, ${pan.y}px)`,
-        transition: isPanning ? 'none' : 'transform 0.3s',
-        cursor: zoom > 1 ? 'grab' : 'auto',
+        transform: `translateX(${target})`,
+        transition: 'transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1)',
       };
     }
-    if (slideDirection === 'left') {
+
+    // Live dragging (horizontal)
+    if (dragX !== 0) {
       return {
-        transform: isTransitioning ? 'translateX(-100%)' : 'translateX(0)',
-        transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+        transform: `translateX(${dragX}px)`,
+        transition: 'none',
       };
     }
-    if (slideDirection === 'right') {
-      return {
-        transform: isTransitioning ? 'translateX(100%)' : 'translateX(0)',
-        transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-      };
+
+    // After settling, skip transition so new images don't slide backwards
+    if (justSettled.current) {
+      justSettled.current = false;
+      return { transform: 'translateX(0)', transition: 'none' };
     }
-    if (slideDirection === 'up' || slideDirection === 'down') {
-      return {
-        opacity: 0,
-        transform: 'scale(1.15)',
-        transition: 'opacity 0.35s, transform 0.35s',
-      };
-    }
+
+    // Snap back with animation if needed
     return {
-      opacity: 1,
-      transform: 'translateX(0) scale(1)',
-      transition: 'opacity 0.25s, transform 0.25s',
+      transform: 'translateX(0)',
+      transition: 'transform 0.25s ease',
     };
   };
 
-  // Close with animation on backdrop click (zoom in and fade out)
-  const handleBackdropClick = useCallback(() => {
-    setIsClosing(true);
-    setTimeout(() => {
-      setIsClosing(false);
-      onClose();
-    }, 350);
-  }, [onClose]);
+  // ─── Image style for zoom/pan and close animation ───
+  const getCenterImageStyle = (): React.CSSProperties => {
+    if (isClosing) {
+      return {
+        transform: 'scale(1.3)',
+        opacity: 0,
+        transition: 'transform 0.35s ease, opacity 0.35s ease',
+      };
+    }
+    // Vertical drag → the center image moves vertically + fades slightly
+    if (dragY !== 0) {
+      return {
+        transform: `translateY(${dragY}px)`,
+        opacity: Math.max(0.3, 1 - Math.abs(dragY) / 400),
+        transition: 'none',
+      };
+    }
+    // Zoom + pan
+    if (zoomScale !== 1 || panX !== 0 || panY !== 0) {
+      return {
+        transform: `scale(${zoomScale}) translate(${panX / zoomScale}px, ${panY / zoomScale}px)`,
+        transition: 'none',
+      };
+    }
+    return {};
+  };
 
   return (
     <div
       ref={containerRef}
-      className={`unified-lightbox${isClosing ? ' unified-lightbox--closing' : ''}`}
+      className="unified-lightbox"
+      style={isClosing ? { background: 'rgba(0,0,0,0)', transition: 'background 0.35s ease' } : undefined}
       onClick={handleBackdropClick}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
@@ -255,90 +341,82 @@ export function UnifiedLightbox({ images, currentIndex, onClose, onIndexChange, 
       role="dialog"
       aria-modal="true"
     >
-      {/* Top-right icons: fullscreen, magnifier, close */}
-      <div className="unified-lightbox__icons">
-        <button
-          type="button"
-          className="unified-lightbox__icon"
-          aria-label="Fullscreen"
-          tabIndex={0}
-        >
-          <svg width="22" height="22" viewBox="0 0 22 22"><path d="M3 9V3h6M13 3h6v6M19 13v6h-6M9 19H3v-6" stroke="currentColor" strokeWidth="2" fill="none"/></svg>
+      {/* Top-right icons */}
+      <div className={`unified-lightbox__icons${showControls ? ' visible' : ''}`}>
+        <button type="button" className="unified-lightbox__icon" aria-label="Fullscreen"
+          onClick={(e) => { e.stopPropagation(); handleFullscreen(); }}>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M3 7V3h4M13 3h4v4M17 13v4h-4M7 17H3v-4"/>
+          </svg>
         </button>
-        <button
-          type="button"
-          className="unified-lightbox__icon"
-          aria-label="Zoom"
-          tabIndex={0}
-        >
-          <svg width="22" height="22" viewBox="0 0 22 22"><circle cx="10" cy="10" r="7" stroke="currentColor" strokeWidth="2" fill="none"/><path d="M15 15l4 4" stroke="currentColor" strokeWidth="2"/></svg>
+        <button type="button" className="unified-lightbox__icon" aria-label="Zoom"
+          onClick={(e) => { e.stopPropagation(); handleMagnifier(); }}>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="9" cy="9" r="6"/><path d="M13.5 13.5L18 18"/><path d="M9 6.5v5M6.5 9h5"/>
+          </svg>
         </button>
-        <button
-          type="button"
-          className="unified-lightbox__icon"
-          aria-label="Close"
-          tabIndex={0}
-          onClick={(e) => { e.stopPropagation(); handleBackdropClick(); }}
-        >
-          <svg width="22" height="22" viewBox="0 0 22 22"><path d="M6 6l10 10M16 6L6 16" stroke="currentColor" strokeWidth="2"/></svg>
+        <button type="button" className="unified-lightbox__icon" aria-label="Close"
+          onClick={(e) => { e.stopPropagation(); handleClose(); }}>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M5 5l10 10M15 5L5 15"/>
+          </svg>
         </button>
       </div>
 
-      {/* Left arrow */}
+      {/* Prev arrow */}
       {totalImages > 1 && (
-        <button
-          type="button"
-          className={`unified-lightbox__arrow unified-lightbox__arrow--prev ${showControls ? 'visible' : ''}`}
-          onClick={(e) => {
-            e.stopPropagation();
-            if (!isTransitioning && !isDragging) goPrev();
-          }}
-          aria-label="Previous"
-        >
+        <button type="button"
+          className={`unified-lightbox__arrow unified-lightbox__arrow--prev${showControls ? ' visible' : ''}`}
+          onClick={(e) => { e.stopPropagation(); goTo('right'); }}
+          aria-label="Previous">
           <span className="unified-lightbox__arrow-icon">&#x2039;</span>
         </button>
       )}
 
-      {/* Image container */}
+      {/* ─── Image strip: [prev | current | next] ─── */}
       <div
-        className="unified-lightbox__image-wrap"
+        className="unified-lightbox__strip"
+        style={getStripStyle()}
+        onTransitionEnd={settling ? onSettleEnd : undefined}
         onClick={(e) => e.stopPropagation()}
-        style={getImageStyle()}
-        onDoubleClick={() => {
-          setZoom(zoom === 1 ? 2 : 1);
-          setPan({x: 0, y: 0});
-        }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={images[currentIndex]}
-          alt={`${altPrefix} ${currentIndex + 1}`}
-          className="unified-lightbox__image"
-          draggable={false}
-          style={{ touchAction: 'none', userSelect: 'none' }}
-        />
+        {/* Prev image (left of center) */}
+        {totalImages > 1 && (
+          <div className="unified-lightbox__panel unified-lightbox__panel--prev">
+            <img src={images[prevIndex]} alt={`${altPrefix} ${prevIndex + 1}`}
+              className="unified-lightbox__img" draggable={false} />
+          </div>
+        )}
+
+        {/* Current image (center) */}
+        <div className="unified-lightbox__panel unified-lightbox__panel--center">
+          <img src={images[currentIndex]} alt={`${altPrefix} ${currentIndex + 1}`}
+            className="unified-lightbox__img" draggable={false}
+            style={getCenterImageStyle()} />
+        </div>
+
+        {/* Next image (right of center) */}
+        {totalImages > 1 && (
+          <div className="unified-lightbox__panel unified-lightbox__panel--next">
+            <img src={images[nextIndex]} alt={`${altPrefix} ${nextIndex + 1}`}
+              className="unified-lightbox__img" draggable={false} />
+          </div>
+        )}
       </div>
 
-      {/* Right arrow */}
+      {/* Next arrow */}
       {totalImages > 1 && (
-        <button
-          type="button"
-          className={`unified-lightbox__arrow unified-lightbox__arrow--next ${showControls ? 'visible' : ''}`}
-          onClick={(e) => {
-            e.stopPropagation();
-            if (!isTransitioning && !isDragging) goNext();
-          }}
-          aria-label="Next"
-        >
+        <button type="button"
+          className={`unified-lightbox__arrow unified-lightbox__arrow--next${showControls ? ' visible' : ''}`}
+          onClick={(e) => { e.stopPropagation(); goTo('left'); }}
+          aria-label="Next">
           <span className="unified-lightbox__arrow-icon">&#x203A;</span>
         </button>
       )}
 
       {/* Counter */}
       {totalImages > 1 && (
-        <div className="unified-lightbox__counter">
-          {currentIndex + 1} / {totalImages}
-        </div>
+        <div className="unified-lightbox__counter">{currentIndex + 1} / {totalImages}</div>
       )}
     </div>
   );
