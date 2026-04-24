@@ -26,27 +26,27 @@ const nextConfig = {
       },
       {
         protocol: 'http',
-        hostname: '95.216.162.38',
+        hostname: '89.167.13.229',
         pathname: '/media/**',
       },
       {
         protocol: 'http',
-        hostname: '95.216.162.38',
+        hostname: '89.167.13.229',
         pathname: '/catalog/**',
       },
       {
         protocol: 'http',
-        hostname: '95.216.162.38',
+        hostname: '89.167.13.229',
         pathname: '/brands/**',
       },
       {
         protocol: 'http',
-        hostname: '95.216.162.38',
+        hostname: '89.167.13.229',
         pathname: '/preview/**',
       },
       {
         protocol: 'http',
-        hostname: '95.216.162.38',
+        hostname: '89.167.13.229',
         pathname: '/videos/**',
       },
     ],
@@ -74,10 +74,10 @@ const nextConfig = {
   // Proxy media through Vercel HTTPS to avoid mixed-content blocking
   async rewrites() {
     return [
-      { source: '/media/:path*', destination: 'http://95.216.162.38/media/:path*' },
-      { source: '/catalog/:path*', destination: 'http://95.216.162.38/catalog/:path*' },
-      { source: '/brands/:path*', destination: 'http://95.216.162.38/brands/:path*' },
-      { source: '/preview/:path*', destination: 'http://95.216.162.38/preview/:path*' },
+      { source: '/media/:path*', destination: 'http://89.167.13.229/media/:path*' },
+      { source: '/catalog/:path*', destination: 'http://89.167.13.229/catalog/:path*' },
+      { source: '/brands/:path*', destination: 'http://89.167.13.229/brands/:path*' },
+      { source: '/preview/:path*', destination: 'http://89.167.13.229/preview/:path*' },
     ];
   },
 
