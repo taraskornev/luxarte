@@ -130,8 +130,8 @@ export function getBrandGalleryImages(brandSlug: string): string[] {
     .filter((f) => {
       const lower = f.name.toLowerCase();
       
-      // Must be gallery webp
-      if (!f.name.endsWith('-gallery.webp')) {
+      // Must be gallery webp (gallery-XX.webp naming convention)
+      if (!f.name.match(/^gallery-\d+\.webp$/)) {
         return false;
       }
       
@@ -152,9 +152,9 @@ export function getBrandGalleryImages(brandSlug: string): string[] {
       return true;
     })
     .sort((a, b) => {
-      // Extract number: gallery-01-gallery.webp → 01
-      const numA = parseInt(a.name.replace('gallery-', '').split('-')[0], 10);
-      const numB = parseInt(b.name.replace('gallery-', '').split('-')[0], 10);
+      // Extract number: gallery-01.webp → 01
+      const numA = parseInt(a.name.replace('gallery-', '').replace('.webp', ''), 10);
+      const numB = parseInt(b.name.replace('gallery-', '').replace('.webp', ''), 10);
       return numA - numB;
     })
     .map((f) => mediaUrl(`${BRAND_MARKI_PATH}/${folderName}/${f.name}`));
@@ -202,8 +202,8 @@ export function getBrandLightboxImages(brandSlug: string): string[] {
   const lightboxImages = files
     .filter((f) => {
       const lower = f.name.toLowerCase();
-      if (!f.name.endsWith('-lightbox.webp')) return false;
-      
+      if (!f.name.match(/^gallery-\d+\.webp$/)) return false;
+
       // Check against exclude patterns
       for (const pattern of BRAND_IMAGE_EXCLUDE_PATTERNS) {
         if (lower.includes(pattern)) {
@@ -211,18 +211,18 @@ export function getBrandLightboxImages(brandSlug: string): string[] {
           return false;
         }
       }
-      
+
       // Check file size from manifest - reject small files (logos/placeholders)
       if (f.size < MIN_PHOTO_SIZE_BYTES) {
         debugLogRejectedImage(f.name, `file size ${f.size} < ${MIN_PHOTO_SIZE_BYTES} (logo/placeholder)`);
         return false;
       }
-      
+
       return true;
     })
     .sort((a, b) => {
-      const numA = parseInt(a.name.replace('gallery-', '').split('-')[0], 10);
-      const numB = parseInt(b.name.replace('gallery-', '').split('-')[0], 10);
+      const numA = parseInt(a.name.replace('gallery-', '').replace('.webp', ''), 10);
+      const numB = parseInt(b.name.replace('gallery-', '').replace('.webp', ''), 10);
       return numA - numB;
     })
     .map((f) => mediaUrl(`${BRAND_MARKI_PATH}/${folderName}/${f.name}`));
