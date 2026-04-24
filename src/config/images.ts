@@ -33,12 +33,12 @@ export const siteAssets = {
  * Hero Section Image
  */
 export const heroImage = {
-  src: mediaUrl('/media/design/projektowanie-luxarte-hero.webp'),
+  src: mediaUrl('/media/design/projektowanie-luxarte.webp'),
   alt: 'Luksusowe wnętrze zaprojektowane przez LuxArte',
   width: 1920,
   height: 1080,
   srcset: [
-    { src: mediaUrl('/media/design/projektowanie-luxarte-hero.webp'), width: 1920 },
+    { src: mediaUrl('/media/design/projektowanie-luxarte.webp'), width: 1920 },
   ],
 } as const;
 
@@ -47,29 +47,29 @@ export const heroImage = {
  */
 export const interiorDesignImages = {
   moodboard: {
-    src: mediaUrl('/media/design/moodboard-1-hero.webp'),
+    src: mediaUrl('/media/design/moodboard-1.webp'),
     alt: 'LuxArte Interior Design Moodboard',
     width: 1266,
     height: 1328,
     srcset: [
-      { src: mediaUrl('/media/design/moodboard-1-hero.webp'), width: 1266 },
-      { src: mediaUrl('/media/design/moodboard-1-gallery.webp'), width: 976 },
-      { src: mediaUrl('/media/design/moodboard-1-card.webp'), width: 600 },
+      { src: mediaUrl('/media/design/moodboard-1.webp'), width: 1266 },
+      { src: mediaUrl('/media/design/moodboard-1.webp'), width: 976 },
+      { src: mediaUrl('/media/design/moodboard-1.webp'), width: 600 },
     ],
   },
   project: {
-    src: mediaUrl('/media/design/projektowanie-3-hero.webp'),
+    src: mediaUrl('/media/design/projektowanie-3.webp'),
     alt: 'Projektowanie wnętrz LuxArte',
     width: 1900,
     height: 1060,
     srcset: [
-      { src: mediaUrl('/media/design/projektowanie-3-hero.webp'), width: 1900 },
-      { src: mediaUrl('/media/design/projektowanie-3-gallery.webp'), width: 1024 },
-      { src: mediaUrl('/media/design/projektowanie-3-card.webp'), width: 600 },
+      { src: mediaUrl('/media/design/projektowanie-3.webp'), width: 1900 },
+      { src: mediaUrl('/media/design/projektowanie-3.webp'), width: 1024 },
+      { src: mediaUrl('/media/design/projektowanie-3.webp'), width: 600 },
     ],
   },
   background: {
-    src: mediaUrl('/media/design/villa-01-hero.webp'),
+    src: mediaUrl('/media/design/villa-01.jpg'),
     alt: 'Interior Design Background',
   },
 } as const;
@@ -137,42 +137,42 @@ export const categoryImages = [
     id: 'sofy',
     name: 'Sofy',
     slug: 'kategoria-produktu/sofy',
-    image: mediaUrl('/media/design/projektowanie-3-hero.webp'),
+    image: mediaUrl('/media/design/projektowanie-3.webp'),
     description: 'Ekskluzywne sofy włoskich marek',
   },
   {
     id: 'kuchnie',
     name: 'Kuchnie',
     slug: 'kategoria-produktu/kuchnie',
-    image: mediaUrl('/media/brands/scic-hero-hero.webp'),
+    image: mediaUrl('/media/brands/scic-hero.webp'),
     description: 'Luksusowe kuchnie na wymiar',
   },
   {
     id: 'garderoby',
     name: 'Garderoby',
     slug: 'kategoria-produktu/garderoby',
-    image: mediaUrl('/media/design/villa-01-hero.webp'),
+    image: mediaUrl('/media/design/villa-01.jpg'),
     description: 'Garderoby szyte na miarę',
   },
   {
     id: 'lazienki',
     name: 'Łazienki',
     slug: 'kategoria-produktu/lazienki',
-    image: mediaUrl('/media/design/moodboard-1-hero.webp'),
+    image: mediaUrl('/media/design/moodboard-1.webp'),
     description: 'Luksusowe wyposażenie łazienek',
   },
   {
     id: 'oswietlenie',
     name: 'Oświetlenie',
     slug: 'kategoria-produktu/zyrandole',
-    image: mediaUrl('/media/brands/flos-hero-hero.webp'),
+    image: mediaUrl('/media/brands/flos-hero.jpg'),
     description: 'Ekskluzywne lampy i żyrandole',
   },
   {
     id: 'meble-ogrodowe',
     name: 'Ogród & Spa',
     slug: 'kategoria-produktu/meble-ogrodowe',
-    image: mediaUrl('/media/brands/exteta-hero-hero.webp'),
+    image: mediaUrl('/media/brands/exteta-hero.webp'),
     description: 'Luksusowe meble ogrodowe',
   },
 ] as const;
@@ -185,21 +185,21 @@ export const featuredProjects = [
     id: 'projekt-1',
     title: 'Apartament Warszawa',
     category: 'Projektowanie wnętrz',
-    image: mediaUrl('/media/design/projektowanie-luxarte-hero.webp'),
+    image: mediaUrl('/media/design/projektowanie-luxarte.webp'),
     slug: 'realizacje/apartament-warszawa',
   },
   {
     id: 'projekt-2',
     title: 'Rezydencja Wrocław',
     category: 'Kompleksowa realizacja',
-    image: mediaUrl('/media/design/bulwar-drobnera-hero.webp'),
+    image: mediaUrl('/media/design/bulwar-drobnera.jpg'),
     slug: 'realizacje/rezydencja-wroclaw',
   },
   {
     id: 'projekt-3',
     title: 'Penthouse Kraków',
     category: 'Design & Meble',
-    image: mediaUrl('/media/design/villa-02-hero.webp'),
+    image: mediaUrl('/media/design/villa-02.jpg'),
     slug: 'realizacje/penthouse-krakow',
   },
 ] as const;
@@ -208,7 +208,7 @@ export const featuredProjects = [
  * Showroom Image
  */
 export const showroomImage = {
-  src: mediaUrl('/media/oferta/warszawa-adres-hero.webp'),
+  src: mediaUrl('/media/oferta/warszawa-adres.jpg'),
   alt: 'LuxArte Showroom Warszawa - Budynek Opery Narodowej',
   width: 1920,
   height: 1080,
