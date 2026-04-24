@@ -16,10 +16,11 @@ export default function ONasPage() {
         {/* Left: Full-height background image */}
         <div className="about-hero__image">
           <Image
-            src={mediaUrl('/media/pages/o-nas/showroom.jpg')}
+            src={mediaUrl('/media/pages/o-nas/showroom-b07.jpg')}
             alt="LuxArte - showroom Bentley Home"
             fill
             priority
+            unoptimized
             sizes="50vw"
             style={{ objectFit: 'cover', objectPosition: 'center top' }}
           />
